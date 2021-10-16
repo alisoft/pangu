@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 importScripts(
-  "precache-manifest.c5085300c63e3d28231d64b02a584365.js"
+  "precache-manifest.6a8abb4b7eb28d4b1272164297917112.js"
 );
 
 workbox.core.setCacheNameDetails({prefix: "vue3-vant-node-boilerplate"});
