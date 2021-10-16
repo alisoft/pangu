@@ -1,15 +1,6 @@
 # Vue3 Vant Node Boilerplate
 
-[![.github/workflows/node.js.yml](https://github.com/gitterapp/gitter-node/actions/workflows/node.js.yml/badge.svg?branch=master)](https://github.com/gitterapp/gitter-node/actions/workflows/node.js.yml)
-[Status](https://stats.uptimerobot.com/GWJMDFJ5WP)
-
-`https://github.gitterapp.com/api/contributions?username=realkimmy&from=2021-01-01&to=2021-12-31`
-
-`https://github.gitterapp.com/api/v2/contributions?username=realkimmy&from=2021-01-01&to=2021-12-31`
-
-`https://github.gitterapp.com/api/pinned?username=realkimmy`
-
-`https://github.gitterapp.com/api/readme?owner=realkimmy&repo=realkimmy`
+[![.github/workflows/node.js.yml](https://github.com/realkimmy/vue3-vant-node-boilerplate/actions/workflows/node.js.yml/badge.svg?branch=master)](https://github.com/realkimmy/vue3-vant-node-boilerplate/actions/workflows/node.js.yml)
 
 ## TODO
 - [X] 国际化
