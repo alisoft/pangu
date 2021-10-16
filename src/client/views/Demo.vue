@@ -1,43 +1,28 @@
 <template>
-  <div v-if="!loading" ref="readmeRef" class="readme" v-html="readmeBody" />
+  <div
+    v-if="!loading"
+    ref="readmeRef"
+    class="readme"
+    v-html="readmeBody"
+    :style="{ color: color }"
+  />
   <loading v-else class="loading" />
-  <van-button
-    round
-    type="primary"
-    icon="down"
-    :color="color"
-    v-if="!loading && showReadMore"
-    ref="readMoreRef"
-    @click="readMore"
-    class="read-more"
-  >
-    {{ t("readMore") }}
-  </van-button>
 </template>
 
 <script>
-import {
-  defineComponent,
-  onMounted,
-  onBeforeUnmount,
-  ref,
-  watch,
-  nextTick,
-} from "vue";
-import { Button } from "vant";
+import { defineComponent, onMounted, onBeforeUnmount, ref } from "vue";
 import { useI18n } from "vue-i18n";
 import { fetchDemoData } from "@/apis/demo";
 import Loading from "@/components/loading";
 
 export default defineComponent({
   name: "Demo",
-  components: { Loading, VanButton: Button },
+  components: { Loading },
   setup() {
     const readmeBody = ref(null);
     const readmeRef = ref(null);
     const readMoreRef = ref(null);
     const loading = ref(false);
-    const showReadMore = ref(false);
     const color = ref(null);
     let media = window.matchMedia("(prefers-color-scheme: dark)");
     const { t, locale, availableLocales } = useI18n();
@@ -102,20 +87,6 @@ export default defineComponent({
       }
     };
 
-    const readMore = () => {
-      if (window.flutter_inappwebview) {
-        const { height } = readmeRef.value.getBoundingClientRect();
-        const args = [height];
-        window.flutter_inappwebview
-          .callHandler("expandReadme", ...args)
-          .then((result) => {
-            if (result.result) {
-              showReadMore.value = false;
-            }
-          });
-      }
-    };
-
     const addAutoChangedEventListener = (event) => {
       const prefersDarkMode = event && event.matches;
       document.body.setAttribute(
@@ -128,7 +99,6 @@ export default defineComponent({
       media &&
         media.addEventListener("change", addAutoChangedEventListener, false);
       window.addEventListener("message", addMessageEventListener, false);
-      showReadMore.value = !!window.flutter_inappwebview;
       loading.value = true;
       try {
         readmeBody.value = await fetchData();
@@ -145,49 +115,12 @@ export default defineComponent({
       window.removeEventListener("message", addMessageEventListener, false);
     });
 
-    const addOnLoadEventListener = (event, img) => {
-      const { width: containerWidth } = readmeRef.value.getBoundingClientRect();
-      const { width: imgWidth } = img.getBoundingClientRect();
-      if (imgWidth > containerWidth) {
-        img.style.width = `${containerWidth}px`;
-      }
-
-      if (window.flutter_inappwebview && !showReadMore.value) {
-        const { height } = readmeRef.value.getBoundingClientRect();
-        const args = [height];
-        window.flutter_inappwebview.callHandler("expandReadme", ...args);
-      }
-    };
-
-    const addResizeEventListener = () => {
-      const imgs = document.getElementsByTagName("img");
-      if (imgs && imgs.length > 0) {
-        const length = imgs.length;
-        [...new Array(length)].forEach((_, idx) => {
-          const img = imgs.item(idx);
-          img.addEventListener("load", (event) =>
-            addOnLoadEventListener(event, img)
-          );
-        });
-      }
-    };
-
-    watch(readmeBody, (newReadmeBody) => {
-      if (newReadmeBody) {
-        nextTick(() => {
-          addResizeEventListener();
-        });
-      }
-    });
-
     return {
       readmeRef,
       readmeBody,
       t,
       loading,
-      readMore,
       readMoreRef,
-      showReadMore,
       color,
     };
   },
