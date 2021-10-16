@@ -1,0 +1,20 @@
+@import 'mixin';
+
+:root, [data-theme="light"] {
+  // color contrasts
+  @include defineColorHSL(--color-bg, 180, 11%, 91%);
+  @include defineColorHSL(--color, 0, 0%, 0%);
+}
+
+[data-theme] {
+  background-color: var(--color-bg);
+  color: var(--color);
+}
+
+@supports(--css: variables) {
+  [data-theme="dark"] {
+    // color contrasts
+    @include defineColorHSL(--color-bg, 260, 23%, 15%);
+    @include defineColorHSL(--color, 0, 0%, 100%);
+  }
+}
