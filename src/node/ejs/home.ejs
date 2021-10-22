@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title><%=title%></title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <link rel="icon" href="example.png">
+    <style rel="stylesheet">
+      html, body {
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+        color: #2c3e50;
+      }
+
+      body {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 0 30px;
+      }
+
+      body.dark {
+        background-color: black;
+        color: #c2ccd0;
+      }
+
+      .btn {
+        align-self: flex-end;
+        position: absolute;
+        top: 20px;
+        right: 20px;
+      }
+
+      ul {
+        line-height: 2em;
+        padding-left: 2em;
+      }
+
+      li {
+        font-size: 16px;
+      }
+
+      a {
+        color: #7f8c8d;
+        text-decoration: none;
+      }
+
+      a:hover {
+        color: #1296db;
+      }
+    </style>
+</head>
+
+<body id="body">
+<h1><%=title%></h1>
+<ul>
+    <% for(var i=0; i < apis.length; i++) { %>
+        <li><a href="<%= apis[i] %>"><%= apis[i] %></a></li>
+    <% } %>
+</ul>
+<span class="btn"><button onclick="toggleTheme()" id="btn">黑暗模式</button></span>
+</body>
+<script src="/js/theme.js"></script>
+</html>
