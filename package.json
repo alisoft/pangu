@@ -5,23 +5,47 @@
   "scripts": {
     "start": "vue-cli-service serve",
     "build": "vue-cli-service build",
-    "server": "vercel dev",
+    "server:prod": "pm2 start ecosystem.config.json --no-daemon",
+    "server:dev": "cross-env NODE_ENV=development nodemon src/node/index.js",
     "test:unit": "vue-cli-service test:unit",
     "test:e2e": "vue-cli-service test:e2e",
     "lint": "vue-cli-service lint"
   },
   "dependencies": {
     "axios": "^0.21.4",
+    "bcryptjs": "^2.4.3",
+    "compression": "^1.7.4",
     "core-js": "^3.6.5",
+    "cors": "^2.8.5",
+    "cross-env": "^7.0.0",
+    "dotenv": "^10.0.0",
     "ejs": "^3.1.6",
+    "express": "^4.17.1",
+    "express-mongo-sanitize": "^2.0.0",
+    "express-rate-limit": "^5.0.0",
+    "helmet": "^4.1.0",
+    "http-status": "^1.4.0",
+    "joi": "^17.3.0",
     "js-base64": "^3.7.2",
     "js-cookie": "^3.0.1",
+    "jsonwebtoken": "^8.5.1",
+    "moment": "^2.24.0",
+    "mongoose": "^5.7.7",
+    "morgan": "^1.9.1",
+    "nodemailer": "^6.3.1",
+    "passport": "^0.4.0",
+    "passport-jwt": "^4.0.0",
+    "pm2": "^5.1.0",
     "register-service-worker": "^1.7.1",
+    "swagger-jsdoc": "^6.0.8",
+    "swagger-ui-express": "^4.1.6",
+    "validator": "^13.0.0",
     "vant": "^3.2.5",
-    "vercel": "^23.1.2",
     "vue": "^3.0.0",
     "vue-i18n": "^9.2.0-beta.7",
-    "vuex": "^4.0.0-0"
+    "vuex": "^4.0.0-0",
+    "winston": "^3.2.1",
+    "xss-clean": "^0.1.1"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "~4.5.0",
@@ -40,11 +64,30 @@
     "eslint": "^6.7.2",
     "eslint-plugin-prettier": "^3.3.1",
     "eslint-plugin-vue": "^7.0.0",
+    "husky": "^7.0.4",
+    "lint-staged": "^11.2.6",
+    "nodemon": "^2.0.14",
     "prettier": "^2.2.1",
     "sass": "^1.26.5",
     "sass-loader": "^8.0.2",
+    "sort-package-json": "^1.52.0",
     "typescript": "~3.9.3",
     "vue-jest": "^5.0.0-0",
     "webpackbar": "^5.0.0-3"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "package.json": [
+      "sort-package-json",
+      "git add"
+    ],
+    "src/**/*.js": [
+      "prettier --write",
+      "git add"
+    ]
   }
 }
