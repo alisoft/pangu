@@ -1,6 +1,6 @@
 import request from "../utils/request";
 
-export function fetchDemoData() {
+export async function fetchDemoData() {
   return request({
     url: "/demo",
     method: "get",

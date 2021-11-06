@@ -1,127 +1,76 @@
 <template>
-  <div
-    v-if="!loading"
-    ref="readmeRef"
-    class="readme"
-    v-html="readmeBody"
-    :style="{ color: color }"
-  />
-  <loading v-else class="loading" />
+  <PullRefresh v-model="refreshing" @refresh="onRefresh"> </PullRefresh>
 </template>
 
 <script>
-import { defineComponent, onMounted, onBeforeUnmount, ref } from "vue";
-import { useI18n } from "vue-i18n";
-import { fetchDemoData } from "@/apis/demo";
-import Loading from "@/components/loading";
+import { defineComponent, watch, ref } from "vue";
+import { PullRefresh } from "vant";
+import {
+  withTheme,
+  withPullDown,
+  withLocale,
+  withDarkMode,
+  withDarkModeAutoChanged,
+} from "../utils/mixins";
 
 export default defineComponent({
   name: "Demo",
-  components: { Loading },
+  components: { PullRefresh },
   setup() {
-    const readmeBody = ref(null);
-    const readmeRef = ref(null);
-    const readMoreRef = ref(null);
+    withDarkModeAutoChanged();
+    withDarkMode();
+    const { color } = withTheme();
+    const { t } = withLocale();
+    const { refreshing } = withPullDown();
+    const list = ref([]);
     const loading = ref(false);
-    const color = ref(null);
-    let media = window.matchMedia("(prefers-color-scheme: dark)");
-    const { t, locale, availableLocales } = useI18n();
+    const finished = ref(false);
 
-    const fetchData = async () => {
-      return await fetchDemoData();
-    };
-
-    const addDarkModeEventListener = (event, darkMode) => {
-      if (["dark", "light"].includes(darkMode)) {
-        document.body.setAttribute("data-theme", darkMode);
-        // capture port2 coming from the Dart side
-        if (event.ports[0] != null) {
-          // the port is ready for communication,
-          // so you can use port.postMessage(message); wherever you want
-          const port = event.ports[0];
-          // To listen to messages coming from the Dart side, set the onmessage event listener
-          port.onmessage = function (event) {
-            // event.data contains the message data coming from the Dart side
-            console.log(event.data);
-          };
+    const onLoad = () => {
+      // 异步更新数据
+      // setTimeout 仅做示例，真实场景中一般为 ajax 请求
+      setTimeout(() => {
+        if (refreshing.value) {
+          list.value = [];
+          refreshing.value = false;
         }
-      }
-    };
 
-    const addLocaleEventListener = (event, l) => {
-      if (availableLocales.includes(l)) {
-        locale.value = l;
-        // capture port2 coming from the Dart side
-        if (event.ports[0] != null) {
-          // the port is ready for communication,
-          // so you can use port.postMessage(message); wherever you want
-          const port = event.ports[0];
-          // To listen to messages coming from the Dart side, set the onmessage event listener
-          port.onmessage = function (event) {
-            // event.data contains the message data coming from the Dart side
-            console.log(event.data);
-          };
+        for (let i = 0; i < 20; i++) {
+          list.value.push(list.value.length + 1);
         }
-      }
-    };
 
-    const addThemeEventListener = (event, c) => {
-      color.value = `#${Number(c).toString(16).substring(2)}`;
-    };
+        // 加载状态结束
+        loading.value = false;
 
-    const addMessageEventListener = (event) => {
-      if (typeof event.data !== "string") return;
-      try {
-        const data = JSON.parse(event.data);
-        if (data.darkMode) {
-          addDarkModeEventListener(event, data.darkMode);
+        // 数据全部加载完成
+        if (list.value.length >= 40) {
+          finished.value = true;
         }
-        if (data.locale) {
-          addLocaleEventListener(event, data.locale);
-        }
-        if (data.color) {
-          addThemeEventListener(event, data.color);
-        }
-      } catch (e) {
-        console.error(e);
-      }
+      }, 1000);
     };
 
-    const addAutoChangedEventListener = (event) => {
-      const prefersDarkMode = event && event.matches;
-      document.body.setAttribute(
-        "data-theme",
-        prefersDarkMode ? "dark" : "light"
-      );
-    };
+    const onRefresh = () => {
+      // 清空列表数据
+      finished.value = false;
 
-    onMounted(async () => {
-      media &&
-        media.addEventListener("change", addAutoChangedEventListener, false);
-      window.addEventListener("message", addMessageEventListener, false);
+      // 重新加载数据
+      // 将 loading 设置为 true，表示处于加载状态
       loading.value = true;
-      try {
-        readmeBody.value = await fetchData();
-        loading.value = false;
-      } catch (e) {
-        loading.value = false;
-        console.error(e);
-      }
-    });
+      onLoad();
+    };
 
-    onBeforeUnmount(() => {
-      media &&
-        media.removeEventListener("change", addAutoChangedEventListener, false);
-      window.removeEventListener("message", addMessageEventListener, false);
+    watch(refreshing, (newVal) => {
+      if (newVal) {
+        onRefresh();
+      }
     });
 
     return {
-      readmeRef,
-      readmeBody,
       t,
       loading,
-      readMoreRef,
       color,
+      refreshing,
+      onRefresh,
     };
   },
 });
@@ -138,23 +87,6 @@ body {
     position: relative;
     background-color: var(--color-bg);
     color: var(--color);
-    .loading {
-      height: 300px;
-    }
-    .read-more {
-      position: absolute;
-      top: 250px;
-      left: 50%;
-      width: 120px;
-      margin-left: -60px;
-      height: 32px;
-      line-height: 32px;
-      //border-radius: 16px;
-      //border: 1px solid #f2f2f2;
-      //color: var(--color);
-      //background-color: var(--color-bg);
-      //text-align: center;
-    }
   }
 }
 </style>
