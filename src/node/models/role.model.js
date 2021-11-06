@@ -50,6 +50,21 @@ const roleSchema = mongoose.Schema(
 roleSchema.plugin(toJSON);
 
 /**
+ * Check if role is taken
+ * @param {string} role - The role
+ * @param {ObjectId} [excludeRoleId] - The id of the role to be excluded
+ * @returns {Promise<boolean>}
+ */
+roleSchema.statics.isRoleTaken = async function (role, excludeRoleId) {
+  const roleData = await this.findOne({
+    role,
+    is_del: baseTypes.NORMAL,
+    _id: { $ne: excludeRoleId },
+  });
+  return !!roleData;
+};
+
+/**
  * @typedef Role
  */
 const Role = mongoose.model("Role", roleSchema);

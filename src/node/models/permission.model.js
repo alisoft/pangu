@@ -50,6 +50,24 @@ const permissionSchema = mongoose.Schema(
 permissionSchema.plugin(toJSON);
 
 /**
+ * Check if permission is taken
+ * @param {string} permission - The permission
+ * @param {ObjectId} [excludePermissionId] - The id of the user to be excluded
+ * @returns {Promise<boolean>}
+ */
+permissionSchema.statics.isPermissionTaken = async function (
+  permission,
+  excludePermissionId
+) {
+  const permissionData = await this.findOne({
+    permission,
+    is_del: baseTypes.NORMAL,
+    _id: { $ne: excludePermissionId },
+  });
+  return !!permissionData;
+};
+
+/**
  * @typedef Permission
  */
 const Permission = mongoose.model("Permission", permissionSchema);
