@@ -25,7 +25,7 @@ const createPermission = async (permissionBody) => {
  * @returns {Promise<QueryResult>}
  */
 const queryPermissions = async (filter, options) => {
-  Object.assign(filter, { is_del: baseTypes.NORMAL });
+  Object.assign(filter, { isDel: baseTypes.NORMAL });
   return await Permission.paginate(filter, options);
 };
 
@@ -35,7 +35,7 @@ const queryPermissions = async (filter, options) => {
  * @returns {Promise<Permission>}
  */
 const getPermissionById = async (id) => {
-  return Permission.findOne({ _id: id, is_del: baseTypes.NORMAL });
+  return Permission.findOne({ _id: id, isDel: baseTypes.NORMAL });
 };
 
 /**
@@ -44,7 +44,7 @@ const getPermissionById = async (id) => {
  * @returns {Promise<Permission>}
  */
 const getPermissionByPermission = async (permission) => {
-  return Permission.findOne({ permission, is_del: baseTypes.NORMAL });
+  return Permission.findOne({ permission, isDel: baseTypes.NORMAL });
 };
 
 /**
@@ -79,7 +79,7 @@ const deletePermissionById = async (permissionId) => {
   if (!permission) {
     throw new ApiError(httpStatus.NOT_FOUND, "Permission not found");
   }
-  Object.assign(permission, { is_del: baseTypes.IS_DEL });
+  Object.assign(permission, { isDel: baseTypes.IS_DEL });
   await permission.save();
   return permission;
 };

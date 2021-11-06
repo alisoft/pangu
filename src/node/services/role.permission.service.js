@@ -22,7 +22,7 @@ const createRolePermission = async (userRolePermissionBody) => {
  * @returns {Promise<QueryResult>}
  */
 const queryRolePermissions = async (filter, options) => {
-  Object.assign(filter, { is_del: baseTypes.NORMAL });
+  Object.assign(filter, { isDel: baseTypes.NORMAL });
   return await RolePermission.paginate(filter, options);
 };
 
@@ -32,7 +32,7 @@ const queryRolePermissions = async (filter, options) => {
  * @returns {Promise<RolePermission>}
  */
 const getRolePermissionById = async (id) => {
-  return RolePermission.findOne({ _id: id, is_del: baseTypes.NORMAL });
+  return RolePermission.findOne({ _id: id, isDel: baseTypes.NORMAL });
 };
 
 /**
@@ -46,7 +46,7 @@ const getRolePermissionById = async (id) => {
  */
 const queryRolePermissionsByRoleId = async (roleId, options) => {
   return await RolePermission.paginate(
-    { role: roleId, is_del: baseTypes.NORMAL },
+    { role: roleId, isDel: baseTypes.NORMAL },
     options
   );
 };
@@ -74,7 +74,7 @@ const updateRolePermissionById = async (rolePermissionId, updateBody) => {
  */
 const deleteRolePermissionById = async (rolePermissionId) => {
   return await updateRolePermissionById(rolePermissionId, {
-    is_del: baseTypes.IS_DEL,
+    isDel: baseTypes.IS_DEL,
   });
 };
 

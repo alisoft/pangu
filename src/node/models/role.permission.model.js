@@ -14,25 +14,17 @@ const rolePermissionSchema = mongoose.Schema(
       ref: "Permission",
       required: true,
     },
-    create_by: {
+    createBy: {
       type: mongoose.SchemaTypes.ObjectId,
       ref: "User",
       required: true,
     },
-    create_date: {
-      type: Date,
-      required: true,
-    },
-    update_by: {
+    updateBy: {
       type: mongoose.SchemaTypes.ObjectId,
       ref: "User",
       required: true,
     },
-    update_date: {
-      type: Date,
-      required: true,
-    },
-    is_del: {
+    isDel: {
       type: Number,
       enum: [baseTypes.IS_DEL, baseTypes.NORMAL],
       default: baseTypes.NORMAL,

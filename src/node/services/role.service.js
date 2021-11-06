@@ -25,7 +25,7 @@ const createRole = async (roleBody) => {
  * @returns {Promise<QueryResult>}
  */
 const queryRoles = async (filter, options) => {
-  Object.assign(filter, { is_del: baseTypes.NORMAL });
+  Object.assign(filter, { isDel: baseTypes.NORMAL });
   return await Role.paginate(filter, options);
 };
 
@@ -35,7 +35,7 @@ const queryRoles = async (filter, options) => {
  * @returns {Promise<Role>}
  */
 const getRoleById = async (id) => {
-  return Role.findOne({ _id: id, is_del: baseTypes.NORMAL });
+  return Role.findOne({ _id: id, isDel: baseTypes.NORMAL });
 };
 
 /**
@@ -44,7 +44,7 @@ const getRoleById = async (id) => {
  * @returns {Promise<Role>}
  */
 const getRoleByRole = async (role) => {
-  return Role.findOne({ role, is_del: baseTypes.NORMAL });
+  return Role.findOne({ role, isDel: baseTypes.NORMAL });
 };
 
 /**
@@ -76,7 +76,7 @@ const deleteRoleById = async (roleId) => {
   if (!role) {
     throw new ApiError(httpStatus.NOT_FOUND, "Role not found");
   }
-  Object.assign(role, { is_del: baseTypes.IS_DEL });
+  Object.assign(role, { isDel: baseTypes.IS_DEL });
   await role.save();
   return role;
 };
