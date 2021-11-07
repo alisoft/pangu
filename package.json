@@ -4,7 +4,9 @@
   "private": true,
   "scripts": {
     "start": "vue-cli-service serve",
-    "build": "vue-cli-service build",
+    "build:client": "vue-cli-service build --dest dist/client",
+    "build:server": "SSR=1 vue-cli-service build --dest dist/node",
+    "build": "rm -rf dist && npm run build:client && npm run build:server",
     "server:prod": "pm2 start ecosystem.config.json --no-daemon",
     "server:dev": "cross-env NODE_ENV=development nodemon src/node/index.js",
     "test:unit": "vue-cli-service test:unit",
@@ -45,6 +47,7 @@
     "vant": "^3.2.5",
     "vue": "^3.0.0",
     "vue-i18n": "^9.2.0-beta.7",
+    "vue-router": "^4.0.12",
     "vuex": "^4.0.0-0",
     "winston": "^3.2.1",
     "xss-clean": "^0.1.1"
@@ -61,7 +64,6 @@
     "@vue/eslint-config-prettier": "^6.0.0",
     "@vue/test-utils": "^2.0.0-0",
     "babel-eslint": "^10.1.0",
-    "babel-plugin-import": "^1.13.3",
     "compression-webpack-plugin": "^6.1.1",
     "eslint": "^6.7.2",
     "eslint-plugin-prettier": "^3.3.1",
@@ -73,12 +75,16 @@
     "node-mocks-http": "^1.11.0",
     "nodemon": "^2.0.14",
     "prettier": "^2.2.1",
+    "rimraf": "^3.0.2",
     "sass": "^1.26.5",
     "sass-loader": "^8.0.2",
     "sort-package-json": "^1.52.0",
     "supertest": "^6.1.6",
     "typescript": "~3.9.3",
     "vue-jest": "^5.0.0-0",
+    "webpack": "^4.46.0",
+    "webpack-manifest-plugin": "3.2.0",
+    "webpack-node-externals": "^3.0.0",
     "webpackbar": "^5.0.0-3"
   },
   "husky": {

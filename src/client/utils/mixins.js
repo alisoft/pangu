@@ -1,4 +1,4 @@
-import { ref, onBeforeMount, onBeforeUnmount } from "vue";
+import { ref, onMounted, onBeforeUnmount } from "vue";
 import { Locale } from "vant";
 import { useI18n } from "vue-i18n";
 
@@ -21,7 +21,7 @@ export function withTheme() {
     }
   };
 
-  onBeforeMount(() => {
+  onMounted(() => {
     window.addEventListener("message", addMessageEventListener, false);
   });
 
@@ -35,8 +35,6 @@ export function withTheme() {
 }
 
 export function withDarkModeAutoChanged() {
-  const media = window.matchMedia("(prefers-color-scheme: dark)");
-
   const addAutoChangedEventListener = (event) => {
     const prefersDarkMode = event && event.matches;
     document.body.setAttribute(
@@ -45,7 +43,9 @@ export function withDarkModeAutoChanged() {
     );
   };
 
-  onBeforeMount(async () => {
+  let media;
+  onMounted(async () => {
+    media = window.matchMedia("(prefers-color-scheme: dark)");
     media &&
       media.addEventListener("change", addAutoChangedEventListener, false);
   });
@@ -75,7 +75,7 @@ export function withDarkMode() {
     }
   };
 
-  onBeforeMount(() => {
+  onMounted(() => {
     window.addEventListener("message", addMessageEventListener, false);
   });
 
@@ -109,7 +109,7 @@ export function withLocale() {
     }
   };
 
-  onBeforeMount(() => {
+  onMounted(() => {
     window.addEventListener("message", addMessageEventListener, false);
   });
 
@@ -142,7 +142,7 @@ export function withPullDown() {
     }
   };
 
-  onBeforeMount(() => {
+  onMounted(() => {
     window.addEventListener("message", addMessageEventListener, false);
   });
 

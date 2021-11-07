@@ -1,4 +1,7 @@
 const express = require("express");
+const path = require("path");
+const fs = require("fs");
+const { renderToString } = require("vue/server-renderer");
 const helmet = require("helmet");
 const xss = require("xss-clean");
 const mongoSanitize = require("express-mongo-sanitize");
@@ -13,6 +16,9 @@ const { authLimiter } = require("./middlewares/rateLimiter");
 const routes = require("./routes/v1");
 const { errorConverter, errorHandler } = require("./middlewares/error");
 const ApiError = require("./utils/ApiError");
+const manifest = require("../../dist/node/ssr-manifest.json");
+const appPath = path.join(__dirname, "../../dist", "node", manifest["app.js"]);
+const createApp = require(appPath).default;
 
 const app = express();
 
@@ -41,6 +47,24 @@ app.use(compression());
 app.use(cors());
 app.options("*", cors());
 
+app.use(
+  "/img",
+  express.static(path.join(__dirname, "../../dist/client", "img"))
+);
+app.use("/js", express.static(path.join(__dirname, "../../dist/client", "js")));
+app.use(
+  "/css",
+  express.static(path.join(__dirname, "../../dist/client", "css"))
+);
+app.use(
+  "/favicon.ico",
+  express.static(path.join(__dirname, "../../dist/client", "favicon.ico"))
+);
+app.use(
+  "/manifest.json",
+  express.static(path.join(__dirname, "../../dist/client", "manifest.json"))
+);
+
 // jwt authentication
 app.use(passport.initialize());
 passport.use("jwt", jwtStrategy);
@@ -52,6 +76,27 @@ if (config.env === "production") {
 
 // v1 api routes
 app.use("/v1", routes);
+
+const indexTemplate = fs.readFileSync(
+  path.join(__dirname, "../../dist/client/index.html"),
+  "utf-8"
+);
+
+app.get("*", async (req, res) => {
+  const { app, router } = createApp();
+
+  await router.push(req.url);
+  await router.isReady();
+
+  const appContent = await renderToString(app);
+
+  const html = indexTemplate
+    .toString()
+    .replace('<div id="app">', `<div id="app">${appContent}`);
+
+  res.setHeader("Content-Type", "text/html");
+  res.send(html);
+});
 
 // send back a 404 error for any unknown api request
 app.use((req, res, next) => {

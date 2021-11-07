@@ -1,6 +1,6 @@
 <template>
   <PullRefresh v-model="refreshing" @refresh="onRefresh">
-    <div>Demo</div>
+    <div>About</div>
   </PullRefresh>
 </template>
 
@@ -16,7 +16,7 @@ import {
 } from "../utils/mixins";
 
 export default defineComponent({
-  name: "Demo",
+  name: "About",
   components: { PullRefresh },
   setup() {
     withDarkModeAutoChanged();
