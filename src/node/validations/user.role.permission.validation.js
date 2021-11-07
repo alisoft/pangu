@@ -1,6 +1,6 @@
 const Joi = require("joi");
 const { objectId } = require("./custom.validation");
-const { baseTypes, userRolePermissionTypes } = require("../config/base");
+const { userRolePermissionTypes } = require("../config/base");
 
 const createUserRolePermission = {
   body: Joi.object().keys({
@@ -10,9 +10,6 @@ const createUserRolePermission = {
     type: Joi.number()
       .required()
       .valid(userRolePermissionTypes.ROLE, userRolePermissionTypes.PERMISSION),
-    createBy: Joi.string().required(),
-    updateBy: Joi.string().required(),
-    isDel: Joi.number().required().valid(baseTypes.IS_DEL, baseTypes.NORMAL),
   }),
 };
 
@@ -55,7 +52,6 @@ const updateUserRolePermission = {
           userRolePermissionTypes.ROLE,
           userRolePermissionTypes.PERMISSION
         ),
-      updateBy: Joi.string().required(),
     })
     .min(1),
 };

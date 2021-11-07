@@ -3,9 +3,15 @@ const pick = require("../utils/pick");
 const ApiError = require("../utils/ApiError");
 const catchAsync = require("../utils/catchAsync");
 const { roleService } = require("../services");
+const { baseTypes } = require("../config/base");
 
 const createRole = catchAsync(async (req, res) => {
-  const role = await roleService.createRole(req.body);
+  const role = await roleService.createRole({
+    ...req.body,
+    createBy: req.user.id,
+    updateBy: req.user.id,
+    isDel: baseTypes.NORMAL,
+  });
   res.status(httpStatus.CREATED).send(role);
 });
 
@@ -24,12 +30,18 @@ const getRole = catchAsync(async (req, res) => {
 });
 
 const updateRole = catchAsync(async (req, res) => {
-  const role = await roleService.updateRoleById(req.params.roleId, req.body);
+  const role = await roleService.updateRoleById(req.params.roleId, {
+    ...req.body,
+    updateBy: req.user.id,
+  });
   res.send(role);
 });
 
 const deleteRole = catchAsync(async (req, res) => {
-  await roleService.deleteRoleById(req.params.roleId);
+  await roleService.updateRoleById(req.params.roleId, {
+    updateBy: req.user.id,
+    isDel: baseTypes.IS_DEL,
+  });
   res.status(httpStatus.NO_CONTENT).send();
 });
 

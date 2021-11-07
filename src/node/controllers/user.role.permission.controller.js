@@ -3,10 +3,16 @@ const pick = require("../utils/pick");
 const ApiError = require("../utils/ApiError");
 const catchAsync = require("../utils/catchAsync");
 const { userRolePermissionService } = require("../services");
+const { baseTypes } = require("../config/base");
 
 const createUserRolePermission = catchAsync(async (req, res) => {
   const userRolePermission =
-    await userRolePermissionService.createUserRolePermission(req.body);
+    await userRolePermissionService.createUserRolePermission({
+      ...req.body,
+      createBy: req.user.id,
+      updateBy: req.user.id,
+      isDel: baseTypes.NORMAL,
+    });
   res.status(httpStatus.CREATED).send(userRolePermission);
 });
 
@@ -44,14 +50,21 @@ const updateUserRolePermission = catchAsync(async (req, res) => {
   const userRolePermission =
     await userRolePermissionService.updateUserRolePermissionById(
       req.params.userRolePermissionId,
-      req.body
+      {
+        ...req.body,
+        updateBy: req.user.id,
+      }
     );
   res.send(userRolePermission);
 });
 
 const deleteUserRolePermission = catchAsync(async (req, res) => {
-  await userRolePermissionService.deleteUserRolePermissionById(
-    req.params.userRolePermissionId
+  await userRolePermissionService.updateUserRolePermissionById(
+    req.params.userRolePermissionId,
+    {
+      updateBy: req.user.id,
+      isDel: baseTypes.IS_DEL,
+    }
   );
   res.status(httpStatus.NO_CONTENT).send();
 });
