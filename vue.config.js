@@ -21,6 +21,15 @@ module.exports = {
       warnings: false,
       errors: true,
     },
+    before: require("./mock/mock-server.js"),
+  },
+  css: {
+    loaderOptions: {
+      //define global scss variable
+      scss: {
+        prependData: `@import "@/assets/style/variables.scss";`,
+      },
+    },
   },
   configureWebpack: () => {
     const config = {
@@ -29,6 +38,15 @@ module.exports = {
         alias: {
           "@": resolve("src/client"),
         },
+      },
+      module: {
+        rules: [
+          {
+            test: /\.mjs$/,
+            include: /node_modules/,
+            type: "javascript/auto",
+          },
+        ],
       },
     };
     if (process.env.NODE_ENV === "production") {
@@ -54,6 +72,22 @@ module.exports = {
     webpackConfig.module.rule("js").uses.delete("cache-loader");
     webpackConfig.module.rule("ts").uses.delete("cache-loader");
     webpackConfig.module.rule("tsx").uses.delete("cache-loader");
+    // set svg-sprite-loader
+    webpackConfig.module
+      .rule("svg")
+      .exclude.add(resolve("src/client/icons"))
+      .end();
+    webpackConfig.module
+      .rule("icons")
+      .test(/\.svg$/)
+      .include.add(resolve("src/client/icons"))
+      .end()
+      .use("svg-sprite-loader")
+      .loader("svg-sprite-loader")
+      .options({
+        symbolId: "icon-[name]",
+      })
+      .end();
 
     if (!process.env.SSR) {
       // 将入口指向应用的客户端入口文件
