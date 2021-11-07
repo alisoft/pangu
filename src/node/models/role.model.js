@@ -1,5 +1,5 @@
 const mongoose = require("mongoose");
-const { toJSON } = require("./plugins");
+const { toJSON, paginate } = require("./plugins");
 const { baseTypes } = require("../config/base");
 
 const roleSchema = mongoose.Schema(
@@ -40,6 +40,7 @@ const roleSchema = mongoose.Schema(
 
 // add plugin that converts mongoose to json
 roleSchema.plugin(toJSON);
+roleSchema.plugin(paginate);
 
 /**
  * Check if role is taken

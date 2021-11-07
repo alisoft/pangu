@@ -1,5 +1,5 @@
 const mongoose = require("mongoose");
-const { toJSON } = require("./plugins");
+const { toJSON, paginate } = require("./plugins");
 const { baseTypes, userRolePermissionTypes } = require("../config/base");
 
 const userRolePermissionSchema = mongoose.Schema(
@@ -47,6 +47,7 @@ const userRolePermissionSchema = mongoose.Schema(
 
 // add plugin that converts mongoose to json
 userRolePermissionSchema.plugin(toJSON);
+userRolePermissionSchema.plugin(paginate);
 
 userRolePermissionSchema.pre("save", async function (next) {
   const userRolePermission = this;

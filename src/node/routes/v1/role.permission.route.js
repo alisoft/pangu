@@ -24,7 +24,7 @@ router
   .get(
     auth("getUsers"),
     validate(rolePermissionValidation.getRolePermissionsByRoleId),
-    rolePermissionController.getRolePermissionsByRoleId
+    rolePermissionController.queryRolePermissionsByRoleId
   );
 
 router

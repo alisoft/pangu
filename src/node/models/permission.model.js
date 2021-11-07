@@ -1,5 +1,5 @@
 const mongoose = require("mongoose");
-const { toJSON } = require("./plugins");
+const { toJSON, paginate } = require("./plugins");
 const { baseTypes } = require("../config/base");
 
 const permissionSchema = mongoose.Schema(
@@ -40,6 +40,7 @@ const permissionSchema = mongoose.Schema(
 
 // add plugin that converts mongoose to json
 permissionSchema.plugin(toJSON);
+permissionSchema.plugin(paginate);
 
 /**
  * Check if permission is taken

@@ -1,5 +1,5 @@
 const mongoose = require("mongoose");
-const { toJSON } = require("./plugins");
+const { toJSON, paginate } = require("./plugins");
 const { baseTypes } = require("../config/base");
 
 const rolePermissionSchema = mongoose.Schema(
@@ -38,6 +38,7 @@ const rolePermissionSchema = mongoose.Schema(
 
 // add plugin that converts mongoose to json
 rolePermissionSchema.plugin(toJSON);
+rolePermissionSchema.plugin(paginate);
 
 /**
  * @typedef RolePermission
