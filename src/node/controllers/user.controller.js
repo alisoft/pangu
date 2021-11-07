@@ -3,9 +3,15 @@ const pick = require("../utils/pick");
 const ApiError = require("../utils/ApiError");
 const catchAsync = require("../utils/catchAsync");
 const { userService } = require("../services");
+const { baseTypes } = require("../config/base");
 
 const createUser = catchAsync(async (req, res) => {
-  const user = await userService.createUser(req.body);
+  const user = await userService.createUser({
+    ...req.body,
+    createBy: req.user.id,
+    updateBy: req.user.id,
+    isDel: baseTypes.NORMAL,
+  });
   res.status(httpStatus.CREATED).send(user);
 });
 
@@ -25,12 +31,18 @@ const getUser = catchAsync(async (req, res) => {
 });
 
 const updateUser = catchAsync(async (req, res) => {
-  const user = await userService.updateUserById(req.params.userId, req.body);
+  const user = await userService.updateUserById(req.params.userId, {
+    ...req.body,
+    updateBy: req.user.id,
+  });
   res.send(user);
 });
 
 const deleteUser = catchAsync(async (req, res) => {
-  await userService.deleteUserById(req.params.userId);
+  await userService.updateUserById(req.params.userId, {
+    updateBy: req.user.id,
+    isDel: baseTypes.IS_DEL,
+  });
   res.status(httpStatus.NO_CONTENT).send();
 });
 

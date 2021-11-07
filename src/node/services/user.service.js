@@ -1,6 +1,7 @@
 const httpStatus = require("http-status");
-const { User } = require("../models");
+const { User, Permission } = require("../models");
 const ApiError = require("../utils/ApiError");
+const { baseTypes } = require("../config/base");
 
 /**
  * Create a user
@@ -24,6 +25,7 @@ const createUser = async (userBody) => {
  * @returns {Promise<QueryResult>}
  */
 const queryUsers = async (filter, options) => {
+  Object.assign(filter, { isDel: baseTypes.NORMAL });
   return await User.paginate(filter, options);
 };
 
@@ -33,7 +35,7 @@ const queryUsers = async (filter, options) => {
  * @returns {Promise<User>}
  */
 const getUserById = async (id) => {
-  return User.findById(id);
+  return Permission.findOne({ _id: id, isDel: baseTypes.NORMAL });
 };
 
 /**
@@ -42,7 +44,7 @@ const getUserById = async (id) => {
  * @returns {Promise<User>}
  */
 const getUserByEmail = async (email) => {
-  return User.findOne({ email });
+  return User.findOne({ email, isDel: baseTypes.NORMAL });
 };
 
 /**
@@ -74,7 +76,8 @@ const deleteUserById = async (userId) => {
   if (!user) {
     throw new ApiError(httpStatus.NOT_FOUND, "User not found");
   }
-  await user.remove();
+  Object.assign(user, { isDel: baseTypes.IS_DEL });
+  await user.save();
   return user;
 };
 

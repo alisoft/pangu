@@ -3,6 +3,7 @@ const validator = require("validator");
 const bcrypt = require("bcryptjs");
 const { toJSON, paginate } = require("./plugins");
 const { roles } = require("../config/roles");
+const { baseTypes } = require("../config/base");
 
 const userSchema = mongoose.Schema(
   {
@@ -46,6 +47,22 @@ const userSchema = mongoose.Schema(
       type: Boolean,
       default: false,
     },
+    createBy: {
+      type: mongoose.SchemaTypes.ObjectId,
+      ref: "User",
+      required: true,
+    },
+    updateBy: {
+      type: mongoose.SchemaTypes.ObjectId,
+      ref: "User",
+      required: true,
+    },
+    isDel: {
+      type: Number,
+      enum: [baseTypes.IS_DEL, baseTypes.NORMAL],
+      default: baseTypes.NORMAL,
+      required: true,
+    },
   },
   {
     timestamps: true,
@@ -63,7 +80,11 @@ userSchema.plugin(paginate);
  * @returns {Promise<boolean>}
  */
 userSchema.statics.isEmailTaken = async function (email, excludeUserId) {
-  const user = await this.findOne({ email, _id: { $ne: excludeUserId } });
+  const user = await this.findOne({
+    email,
+    isDel: baseTypes.NORMAL,
+    _id: { $ne: excludeUserId },
+  });
   return !!user;
 };
 
