@@ -29,7 +29,7 @@ const queryUserRolePermissionsByUserId = catchAsync(async (req, res) => {
   res.send(result);
 });
 
-const getRolePermission = catchAsync(async (req, res) => {
+const getUserRolePermission = catchAsync(async (req, res) => {
   const userRolePermission =
     await userRolePermissionService.getUserRolePermissionById(
       req.params.userRolePermissionId
@@ -60,7 +60,7 @@ module.exports = {
   createUserRolePermission,
   queryUserRolePermissions,
   queryUserRolePermissionsByUserId,
-  getRolePermission,
+  getUserRolePermission,
   updateUserRolePermission,
   deleteUserRolePermission,
 };
