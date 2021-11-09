@@ -8,7 +8,7 @@ NProgress.configure({ showSpinner: false }); // NProgress Configuration
 import "nprogress/nprogress.css";
 import getPageTitle from "@/utils/getPageTitle";
 
-const whiteList = ["/login"]; // no redirect whitelist
+const whiteList = ["/client/login", "/mobile/*"]; // no redirect whitelist
 router.beforeEach(async (to, from, next) => {
   // start progress bar
   if (settings.isNeedNprogress) NProgress.start();
@@ -31,7 +31,7 @@ router.beforeEach(async (to, from, next) => {
         next();
       } else {
         try {
-          let accessRoutes = [];
+          let accessRoutes;
           if (settings.isNeedLogin) {
             // get user info
             // note: roles must be a object array! such as: ['admin'] or ,['developer','editor']

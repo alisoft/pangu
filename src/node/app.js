@@ -20,6 +20,14 @@ const manifest = require("../../dist/node/ssr-manifest.json");
 const appPath = path.join(__dirname, "../../dist", "node", manifest["app.js"]);
 const createApp = require(appPath).default;
 
+const mobilePath = path.join(
+  __dirname,
+  "../../dist",
+  "node",
+  manifest["mobile.js"]
+);
+const createMobileApp = require(mobilePath).default;
+
 const app = express();
 
 if (config.env !== "test") {
@@ -77,12 +85,17 @@ if (config.env === "production") {
 // v1 api routes
 app.use("/v1", routes);
 
-const indexTemplate = fs.readFileSync(
-  path.join(__dirname, "../../dist/client/index.html"),
+const appTemplate = fs.readFileSync(
+  path.join(__dirname, "../../dist/client/app.html"),
   "utf-8"
 );
 
-app.get("*", async (req, res) => {
+const mobileTemplate = fs.readFileSync(
+  path.join(__dirname, "../../dist/client/mobile.html"),
+  "utf-8"
+);
+
+app.get("/client/*", async (req, res) => {
   const { app, router } = createApp();
 
   await router.push(req.url);
@@ -90,7 +103,22 @@ app.get("*", async (req, res) => {
 
   const appContent = await renderToString(app);
 
-  const html = indexTemplate
+  const html = appTemplate
+    .toString()
+    .replace('<div id="app">', `<div id="app">${appContent}`);
+
+  res.setHeader("Content-Type", "text/html");
+  res.send(html);
+});
+app.get("/mobile/*", async (req, res) => {
+  const { app, router } = createMobileApp();
+
+  await router.push(req.url);
+  await router.isReady();
+
+  const appContent = await renderToString(app);
+
+  const html = mobileTemplate
     .toString()
     .replace('<div id="app">', `<div id="app">${appContent}`);
 

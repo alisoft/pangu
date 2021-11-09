@@ -5,14 +5,22 @@ const CompressionWebpackPlugin = require("compression-webpack-plugin");
 const { WebpackManifestPlugin } = require("webpack-manifest-plugin");
 const nodeExternals = require("webpack-node-externals");
 const webpack = require("webpack");
-const name = "Vue3 Vant Node Boilerplate"; // page title
+const name = "Vue3 Node Boilerplate"; // page title
 
 function resolve(dir) {
   return path.join(__dirname, dir);
 }
 
 module.exports = {
-  publicPath: "",
+  pages: process.env.SSR
+    ? {
+        app: "./src/client/main.server.js",
+        mobile: "./src/mobile/main.server.js",
+      }
+    : {
+        app: "./src/client/main.js",
+        mobile: "./src/mobile/main.js",
+      },
   lintOnSave: process.env.NODE_ENV !== "production",
   productionSourceMap: false,
   devServer: {
@@ -91,12 +99,14 @@ module.exports = {
 
     if (!process.env.SSR) {
       // 将入口指向应用的客户端入口文件
-      webpackConfig.entry("app").clear().add("./src/client/main.js");
+      // webpackConfig.entry("app").clear().add("./src/client/main.js");
+      // webpackConfig.entry("mobile").clear().add("./src/mobile/main.js");
       return;
     }
 
     // 将入口指向应用的服务端入口文件
-    webpackConfig.entry("app").clear().add("./src/client/main.server.js");
+    // webpackConfig.entry("app").clear().add("./src/client/main.server.js");
+    // webpackConfig.entry("mobile").clear().add("./src/mobile/main.server.js");
 
     // 这允许 webpack 以适合于 Node 的方式处理动态导入，
     // 同时也告诉 `vue-loader` 在编译 Vue 组件的时候抛出面向服务端的代码。

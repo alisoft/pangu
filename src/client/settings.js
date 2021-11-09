@@ -1,5 +1,5 @@
 const setting = {
-  title: "Vue3 Vant Node Boilerplate",
+  title: "Vue3 Node Boilerplate",
   /**
    * @type {boolean} true | false
    * @description Whether fix the header
