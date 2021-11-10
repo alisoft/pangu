@@ -32,7 +32,7 @@ import "./assets/style/index.scss";
 
 export default function () {
   const app = createSSRApp(App);
-  const router = createAppRouter(createMemoryHistory("/client/"));
+  const router = createAppRouter(createMemoryHistory("/admin/"));
 
   app.config.globalProperties.$momentMini = $momentMini;
   app.use(Vant);

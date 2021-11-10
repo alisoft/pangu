@@ -14,11 +14,11 @@ function resolve(dir) {
 module.exports = {
   pages: process.env.SSR
     ? {
-        app: "./src/client/main.server.js",
+        app: "./src/admin/main.server.js",
         mobile: "./src/mobile/main.server.js",
       }
     : {
-        app: "./src/client/main.js",
+        app: "./src/admin/main.js",
         mobile: "./src/mobile/main.js",
       },
   lintOnSave: process.env.NODE_ENV !== "production",
@@ -44,7 +44,7 @@ module.exports = {
       name,
       resolve: {
         alias: {
-          "@": resolve("src/client"),
+          "@": resolve("src/admin"),
         },
       },
       module: {
@@ -83,12 +83,12 @@ module.exports = {
     // set svg-sprite-loader
     webpackConfig.module
       .rule("svg")
-      .exclude.add(resolve("src/client/icons"))
+      .exclude.add(resolve("src/admin/icons"))
       .end();
     webpackConfig.module
       .rule("icons")
       .test(/\.svg$/)
-      .include.add(resolve("src/client/icons"))
+      .include.add(resolve("src/admin/icons"))
       .end()
       .use("svg-sprite-loader")
       .loader("svg-sprite-loader")
@@ -99,13 +99,13 @@ module.exports = {
 
     if (!process.env.SSR) {
       // 将入口指向应用的客户端入口文件
-      // webpackConfig.entry("app").clear().add("./src/client/main.js");
+      // webpackConfig.entry("app").clear().add("./src/admin/main.js");
       // webpackConfig.entry("mobile").clear().add("./src/mobile/main.js");
       return;
     }
 
     // 将入口指向应用的服务端入口文件
-    // webpackConfig.entry("app").clear().add("./src/client/main.server.js");
+    // webpackConfig.entry("app").clear().add("./src/admin/main.server.js");
     // webpackConfig.entry("mobile").clear().add("./src/mobile/main.server.js");
 
     // 这允许 webpack 以适合于 Node 的方式处理动态导入，

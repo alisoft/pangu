@@ -95,7 +95,7 @@ const mobileTemplate = fs.readFileSync(
   "utf-8"
 );
 
-app.get("/client/*", async (req, res) => {
+app.get("/admin/*", async (req, res) => {
   const { app, router } = createApp();
 
   await router.push(req.url);
