@@ -3,9 +3,7 @@
 </template>
 
 <script setup>
-import {
-  getCurrentInstance,
-} from "vue";
+import { getCurrentInstance } from "vue";
 //获取store和router
 // import {useRouter} from 'vue-router'
 // import {useStore} from 'vuex'
