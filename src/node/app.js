@@ -91,7 +91,7 @@ if (config.env === "production") {
 app.use("/v1", routes);
 
 const appTemplate = fs.readFileSync(
-  path.join(__dirname, "../../dist/client/app.html"),
+  path.join(__dirname, "../../dist/client/admin.html"),
   "utf-8"
 );
 
