@@ -17,7 +17,12 @@ const routes = require("./routes/v1");
 const { errorConverter, errorHandler } = require("./middlewares/error");
 const ApiError = require("./utils/ApiError");
 const manifest = require("../../dist/node/ssr-manifest.json");
-const appPath = path.join(__dirname, "../../dist", "node", manifest["app.js"]);
+const appPath = path.join(
+  __dirname,
+  "../../dist",
+  "node",
+  manifest["admin.js"]
+);
 const createApp = require(appPath).default;
 
 const mobilePath = path.join(

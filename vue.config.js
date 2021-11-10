@@ -14,11 +14,11 @@ function resolve(dir) {
 module.exports = {
   pages: process.env.SSR
     ? {
-        app: "./src/admin/main.server.js",
+        admin: "./src/admin/main.server.js",
         mobile: "./src/mobile/main.server.js",
       }
     : {
-        app: "./src/admin/main.js",
+        admin: "./src/admin/main.js",
         mobile: "./src/mobile/main.js",
       },
   lintOnSave: process.env.NODE_ENV !== "production",

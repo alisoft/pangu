@@ -1,7 +1,7 @@
 module.exports = [
   {
     url: "/v1/auth/login",
-    method: "POST",
+    type: "post",
     response: () => {
       return {
         code: 20000,
@@ -11,7 +11,7 @@ module.exports = [
   },
   {
     url: "/v1/users/getUserInfo",
-    method: "get",
+    type: "get",
     response: () => {
       return {
         code: 20000,

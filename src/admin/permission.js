@@ -8,7 +8,7 @@ NProgress.configure({ showSpinner: false }); // NProgress Configuration
 import "nprogress/nprogress.css";
 import getPageTitle from "@/utils/getPageTitle";
 
-const whiteList = ["/admin/login", "/mobile/*"]; // no redirect whitelist
+const whiteList = ["/login"]; // no redirect whitelist
 router.beforeEach(async (to, from, next) => {
   // start progress bar
   if (settings.isNeedNprogress) NProgress.start();
