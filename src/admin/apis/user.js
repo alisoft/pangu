@@ -8,13 +8,6 @@ export function loginReq(data) {
   });
 }
 
-export function getInfoReq() {
-  return request({
-    url: "/users/getUserInfo",
-    method: "get",
-  });
-}
-
 export function logoutReq() {
   return request({
     url: "/users/loginOut",

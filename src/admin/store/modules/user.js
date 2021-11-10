@@ -1,4 +1,4 @@
-import { loginReq, logoutReq, getInfoReq } from "@/apis/user";
+import { loginReq, logoutReq } from "@/apis/user";
 import { setToken, removeToken } from "@/utils/auth";
 
 const getDefaultState = () => {
@@ -32,35 +32,9 @@ const actions = {
       loginReq(data)
         .then((res) => {
           setToken(res.tokens?.access.token);
+          commit("M_username", res.user.name);
+          commit("M_roles", [res.user.role]);
           resolve();
-        })
-        .catch((error) => {
-          reject(error);
-        });
-    });
-  },
-  // get user info
-  getInfo({ commit }) {
-    return new Promise((resolve, reject) => {
-      getInfoReq()
-        .then((response) => {
-          const { data } = response;
-          if (!data) {
-            return reject("Verification failed, please Login again.");
-          }
-          //此处模拟数据
-          const rolesArr = localStorage.getItem("roles");
-          if (rolesArr) {
-            data.roles = JSON.parse(rolesArr);
-          } else {
-            data.roles = ["admin"];
-            localStorage.setItem("roles", JSON.stringify(data.roles));
-          }
-          const { roles, username } = data;
-          commit("M_username", username);
-          commit("M_roles", roles);
-          // commit('SET_AVATAR', avatar)
-          resolve(data);
         })
         .catch((error) => {
           reject(error);
