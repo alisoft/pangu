@@ -1,12 +1,6 @@
-# Vue3 Vant Node Boilerplate
+# Vue3 Node Boilerplate
 
-[![.github/workflows/node.js.yml](https://github.com/realkimmy/vue3-vant-node-boilerplate/actions/workflows/node.js.yml/badge.svg?branch=master)](https://github.com/realkimmy/vue3-vant-node-boilerplate/actions/workflows/node.js.yml)
-
-## TODO
-- [X] 国际化
-- [X] 黑暗模式
-- [X] 样式适配
-- [X] Loading组件
+[![.github/workflows/serverless-devs.yml](https://github.com/realkimmy/vue3-node-boilerplate/actions/workflows/serverless-devs.yml/badge.svg?branch=ssr-mpa)](https://github.com/realkimmy/vue3-node-boilerplate/actions/workflows/serverless-devs.yml)
 
 ## API Documentation
 
