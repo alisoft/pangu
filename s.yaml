@@ -1,9 +1,0 @@
-edition: 1.0.0
-name: Vue3NodeBoilerplate
-access: "vue3_node_boilerplate"
-
-services:
-  vue3NodeBoilerplate:
-    component: devsapp/fc
-    props:
-      region: cn-qingdao
