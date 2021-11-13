@@ -7,7 +7,7 @@
     "build:client": "vue-cli-service build --dest dist/client",
     "build:server": "SSR=1 vue-cli-service build --dest dist/node",
     "build": "rm -rf dist && npm run build:client && npm run build:server",
-    "server:prod": "pm2 start ecosystem.config.json --no-daemon",
+    "server:prod": "pm2 start ecosystem.config.json",
     "server:dev": "cross-env NODE_ENV=development nodemon src/node/index.js",
     "test:unit": "vue-cli-service test:unit",
     "test:e2e": "vue-cli-service test:e2e",
