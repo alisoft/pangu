@@ -1,7 +1,6 @@
 const express = require("express");
 const path = require("path");
 const fs = require("fs");
-const serverless = require("serverless-http");
 const { renderToString } = require("vue/server-renderer");
 const helmet = require("helmet");
 const xss = require("xss-clean");
@@ -144,4 +143,3 @@ app.use(errorConverter);
 app.use(errorHandler);
 
 module.exports = app;
-module.exports.handler = serverless(app);
