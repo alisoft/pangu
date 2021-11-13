@@ -1,11 +1,11 @@
 name: Deploy To Vercel
 
-on:
-  push:
-    branches: [ ssr-mpa ]
+#on:
+#  push:
+#    branches: [ ssr-mpa ]
 
 jobs:
-  serverless-devs-cd:
+  deploy-to-vercel:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
