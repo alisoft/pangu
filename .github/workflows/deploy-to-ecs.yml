@@ -1,0 +1,37 @@
+name: Deploy To ECS
+
+on:
+  push:
+    branches: [ ssr-mpa ]
+
+jobs:
+  deploy-to-ecs:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+
+#      - name: Setup Node
+#        uses: actions/setup-node@v2
+#        with:
+#          node-version: 12
+#          registry-url: https://registry.npmjs.org/
+
+      - name: Configure cert
+        run: |
+          - mkdir .cert
+          - echo "$CERT_KEY" | base64 --decode > .cert/.cert.key
+          - echo "$CERT_PEM" | base64 --decode > .cert/.cert.pem
+        env:
+          CERT_KEY: ${{ secrets.CERT_KEY }}
+          CERT_PEM: ${{ secrets.CERT_PEM }}
+
+      - name: Deploy to aliyun server
+        uses: easingthemes/ssh-deploy@main
+        env:
+          SSH_PRIVATE_KEY: ${{ secrets.ALIYUN_SERVER_ACCESS_TOKEN }}
+          ARGS: "-avzr --delete"
+          SOURCE: "./"
+          REMOTE_HOST: ${{ secrets.ALIYUN_SERVER_HOST }}
+          REMOTE_PORT: ${{ secrets.ALIYUN_SERVER_PORT }}
+          REMOTE_USER: ${{ secrets.ALIYUN_SERVER_USER }}
+          TARGET: ${{ secrets.ALIYUN_SERVER_TARGET }}

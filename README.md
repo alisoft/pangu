@@ -1,6 +1,6 @@
 # Vue3 Node Boilerplate
 
-[![.github/workflows/deploy-to-vercel.yml](https://github.com/realkimmy/vue3-node-boilerplate/actions/workflows/deploy-to-vercel.yml/badge.svg?branch=ssr-mpa)](https://github.com/realkimmy/vue3-node-boilerplate/actions/workflows/deploy-to-vercel.yml)
+[![.github/workflows/deploy-to-ecs.yml](https://github.com/realkimmy/vue3-node-boilerplate/actions/workflows/deploy-to-ecs.yml/badge.svg?branch=ssr-mpa)](https://github.com/realkimmy/vue3-node-boilerplate/actions/workflows/deploy-to-ecs.yml)
 
 ## API Documentation
 
