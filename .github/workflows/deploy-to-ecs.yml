@@ -44,3 +44,17 @@ jobs:
           REMOTE_USER: ${{ secrets.ALIYUN_SERVER_USER }}
           TARGET: ${{ secrets.ALIYUN_SERVER_TARGET }}
           EXCLUDE: ".git/, node_modules/"
+
+      - name: Install & Build
+        uses: tarunjangra/ssh-remote-cmd@v1
+        with:
+          command: |
+            cd /code/node-boilerplate
+            yarn install
+            yarn build
+            ./node_modules/.bin/pm2 kill
+            yarn server:prod
+          host: ${{ secrets.ALIYUN_SERVER_HOST }}
+          port: ${{ secrets.ALIYUN_SERVER_PORT }}
+          user: ${{ secrets.ALIYUN_SERVER_USER }}
+          key: ${{ secrets.ALIYUN_SERVER_ACCESS_TOKEN}}
