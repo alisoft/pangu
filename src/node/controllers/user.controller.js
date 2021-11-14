@@ -8,8 +8,6 @@ const { baseTypes } = require("../config/base");
 const createUser = catchAsync(async (req, res) => {
   const user = await userService.createUser({
     ...req.body,
-    createBy: req.user.id,
-    updateBy: req.user.id,
     isDel: baseTypes.NORMAL,
   });
   res.status(httpStatus.CREATED).send(user);
