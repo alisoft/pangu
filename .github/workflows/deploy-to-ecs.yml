@@ -25,8 +25,8 @@ jobs:
       - name: Configure cert
         run: |
           mkdir .cert
-          echo "$CERT_KEY" | base64 --decode > .cert/.cert.key
-          echo "$CERT_PEM" | base64 --decode > .cert/.cert.pem
+          echo "$CERT_KEY" | base64 --decode > .cert/cert.key
+          echo "$CERT_PEM" | base64 --decode > .cert/cert.pem
           echo "$PROD_ENV" | base64 --decode > .env
         env:
           CERT_KEY: ${{ secrets.CERT_KEY }}
