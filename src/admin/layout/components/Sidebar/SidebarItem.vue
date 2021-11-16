@@ -6,7 +6,7 @@
           :index="resolvePath(onlyOneChild.path)"
           :class="{ 'submenu-title-noDropdown': !isNest }"
         >
-          <item :icon="onlyOneChild.meta?.icon || item.meta?.icon" />
+          <item :meta="onlyOneChild.meta || item.meta" />
           <template #title>{{ onlyOneChild.meta?.title }}</template>
         </el-menu-item>
       </Link>
@@ -17,8 +17,8 @@
       :index="resolvePath(item.path)"
       popper-append-to-body
     >
-      <template #title>
-        <item v-if="item.meta" :icon="item.meta && item.meta.icon" />
+      <template #title v-if="item.meta">
+        <item :meta="item.meta" />
         <span>{{ item.meta.title }}</span>
       </template>
       <SidebarItem
@@ -36,7 +36,7 @@
 /*初始化参数比如引入组件，proxy,state等*/
 import { getCurrentInstance, onMounted } from "vue";
 import Link from "./Link";
-import Item from "./Item";
+import Item from "./Item.jsx";
 import { isExternal } from "@/utils/validate";
 import path from "path";
 let { proxy } = getCurrentInstance();
