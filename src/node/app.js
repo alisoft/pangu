@@ -1,4 +1,5 @@
 const express = require("express");
+const { graphqlHTTP } = require("express-graphql");
 const path = require("path");
 const fs = require("fs");
 const { renderToString } = require("vue/server-renderer");
@@ -16,6 +17,7 @@ const { authLimiter } = require("./middlewares/rateLimiter");
 const routes = require("./routes/v1");
 const { errorConverter, errorHandler } = require("./middlewares/error");
 const ApiError = require("./utils/ApiError");
+const schema = require("./schema");
 const manifest = require("../../dist/node/ssr-manifest.json");
 const appPath = path.join(
   __dirname,
@@ -59,6 +61,14 @@ app.use(compression());
 // enable cors
 app.use(cors());
 app.options("*", cors());
+
+app.use(
+  "/graphql",
+  graphqlHTTP({
+    schema: schema,
+    graphiql: true,
+  })
+);
 
 app.use(
   "/img",
