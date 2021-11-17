@@ -131,6 +131,15 @@ app.get("/mobile/*", async (req, res) => {
   res.send(html);
 });
 
+app.get("/admin", async (req, res, next) => {
+  res.status(301).redirect("/admin/");
+  next();
+});
+app.get("/mobile", async (req, res, next) => {
+  res.status(301).redirect("/mobile/");
+  next();
+});
+
 // send back a 404 error for any unknown api request
 app.use((req, res, next) => {
   next(new ApiError(httpStatus.NOT_FOUND, "Not found"));
