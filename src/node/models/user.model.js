@@ -50,12 +50,12 @@ const userSchema = mongoose.Schema(
     createBy: {
       type: mongoose.SchemaTypes.ObjectId,
       ref: "User",
-      required: true,
+      // required: true,
     },
     updateBy: {
       type: mongoose.SchemaTypes.ObjectId,
       ref: "User",
-      required: true,
+      // required: true,
     },
     isDel: {
       type: Number,
@@ -100,6 +100,10 @@ userSchema.methods.isPasswordMatch = async function (password) {
 
 userSchema.pre("save", async function (next) {
   const user = this;
+  if (user.id) {
+    user.createBy = user.id;
+    user.updateBy = user.id;
+  }
   if (user.isModified("password")) {
     user.password = await bcrypt.hash(user.password, 8);
   }

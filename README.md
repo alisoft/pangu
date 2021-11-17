@@ -1,6 +1,6 @@
 # Vue3 Node Boilerplate
 
-[![.github/workflows/serverless-devs.yml](https://github.com/realkimmy/vue3-node-boilerplate/actions/workflows/serverless-devs.yml/badge.svg?branch=ssr-mpa)](https://github.com/realkimmy/vue3-node-boilerplate/actions/workflows/serverless-devs.yml)
+[![.github/workflows/deploy-to-ecs.yml](https://github.com/realkimmy/vue3-node-boilerplate/actions/workflows/deploy-to-ecs.yml/badge.svg?branch=ssr-mpa)](https://github.com/realkimmy/vue3-node-boilerplate/actions/workflows/deploy-to-ecs.yml)
 
 ## API Documentation
 

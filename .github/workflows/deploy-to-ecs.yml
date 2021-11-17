@@ -1,0 +1,60 @@
+name: Deploy To ECS
+
+on:
+  push:
+    branches: [ ssr-mpa ]
+
+jobs:
+  deploy-to-ecs:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+
+#      - name: Setup Node
+#        uses: actions/setup-node@v2
+#        with:
+#          node-version: 12
+#          registry-url: https://registry.npmjs.org/
+#
+#      - name: Install deps
+#        run: yarn install
+#
+#      - name: Build deps
+#        run: yarn build
+
+      - name: Configure cert
+        run: |
+          mkdir .cert
+          echo "$CERT_KEY" | base64 --decode > .cert/cert.key
+          echo "$CERT_PEM" | base64 --decode > .cert/cert.pem
+          echo "$PROD_ENV" | base64 --decode > .env
+        env:
+          CERT_KEY: ${{ secrets.CERT_KEY }}
+          CERT_PEM: ${{ secrets.CERT_PEM }}
+          PROD_ENV: ${{ secrets.PROD_ENV }}
+
+      - name: Deploy to aliyun server
+        uses: easingthemes/ssh-deploy@main
+        env:
+          SSH_PRIVATE_KEY: ${{ secrets.ALIYUN_SERVER_ACCESS_TOKEN }}
+          ARGS: "-avzr --delete"
+          SOURCE: "./"
+          REMOTE_HOST: ${{ secrets.ALIYUN_SERVER_HOST }}
+          REMOTE_PORT: ${{ secrets.ALIYUN_SERVER_PORT }}
+          REMOTE_USER: ${{ secrets.ALIYUN_SERVER_USER }}
+          TARGET: ${{ secrets.ALIYUN_SERVER_TARGET }}
+          EXCLUDE: ".git/, node_modules/"
+
+      - name: Install & Build
+        uses: tarunjangra/ssh-remote-cmd@v1
+        with:
+          command: |
+            cd /code/node-boilerplate
+            yarn install
+            yarn build
+            ./node_modules/.bin/pm2 kill
+            yarn server:prod
+          host: ${{ secrets.ALIYUN_SERVER_HOST }}
+          port: ${{ secrets.ALIYUN_SERVER_PORT }}
+          user: ${{ secrets.ALIYUN_SERVER_USER }}
+          key: ${{ secrets.ALIYUN_SERVER_ACCESS_TOKEN}}

@@ -5,6 +5,7 @@
     <!--router nav-->
     <el-scrollbar>
       <el-menu
+        class="el-menu-vertical"
         :default-active="activeMenu"
         :collapse="!isCollapse"
         :unique-opened="false"
@@ -74,5 +75,9 @@ const activeMenu = computed(() => {
   .el-scrollbar__wrap {
     padding-bottom: 8vh;
   }
+}
+
+.el-menu-vertical {
+  width: $sideBarWidth;
 }
 </style>

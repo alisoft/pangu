@@ -37,7 +37,7 @@ export const constantRoutes = [
         path: "dashboard",
         name: "Dashboard",
         component: () => import("@/views/dashboard/index"),
-        meta: { title: "Dashboard", icon: "table" },
+        meta: { title: "Dashboard", elSvgIcon: "Fold" },
       },
     ],
   },
@@ -179,6 +179,18 @@ export const constantRoutes = [
       {
         path: "https://github.com/jzfai/vue3-admin-template.git",
         meta: { title: "External Link", icon: "link" },
+      },
+    ],
+  },
+  {
+    path: "/error-log",
+    component: Layout,
+    children: [
+      {
+        path: "log",
+        component: () => import("@/views/error-log/index"),
+        name: "ErrorLog",
+        meta: { title: "Error Log", icon: "bug" },
       },
     ],
   },
