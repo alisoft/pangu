@@ -19,6 +19,14 @@ const { errorConverter, errorHandler } = require("./middlewares/error");
 const ApiError = require("./utils/ApiError");
 const schema = require("./schema");
 const manifest = require("../../dist/node/ssr-manifest.json");
+const homePath = path.join(
+  __dirname,
+  "../../dist",
+  "node",
+  manifest["home.js"]
+);
+const createHomeApp = require(homePath).default;
+
 const appPath = path.join(
   __dirname,
   "../../dist",
@@ -100,6 +108,11 @@ if (config.env === "production") {
 // v1 api routes
 app.use("/v1", routes);
 
+const homeTemplate = fs.readFileSync(
+  path.join(__dirname, "../../dist/client/home.html"),
+  "utf-8"
+);
+
 const appTemplate = fs.readFileSync(
   path.join(__dirname, "../../dist/client/admin.html"),
   "utf-8"
@@ -110,6 +123,18 @@ const mobileTemplate = fs.readFileSync(
   "utf-8"
 );
 
+app.get("/", async (req, res) => {
+  const { app } = createHomeApp();
+
+  const appContent = await renderToString(app);
+
+  const html = homeTemplate
+    .toString()
+    .replace('<div id="app">', `<div id="app">${appContent}`);
+
+  res.setHeader("Content-Type", "text/html");
+  res.send(html);
+});
 app.get("/admin/*", async (req, res) => {
   const { app, router } = createApp();
 

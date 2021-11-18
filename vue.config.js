@@ -14,10 +14,12 @@ function resolve(dir) {
 module.exports = {
   pages: process.env.SSR
     ? {
+        home: "./src/index/main.server.js",
         admin: "./src/admin/main.server.js",
         mobile: "./src/mobile/main.server.js",
       }
     : {
+        home: "./src/index/main.js",
         admin: "./src/admin/main.js",
         mobile: "./src/mobile/main.js",
       },
