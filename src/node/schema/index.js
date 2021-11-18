@@ -1,14 +1,20 @@
 const {
-  GraphQLObjectType, GraphQLString, GraphQLBoolean,
-  GraphQLID, GraphQLInt, GraphQLSchema,
-  GraphQLList, GraphQLNonNull, GraphQLEnumType,
+  GraphQLObjectType,
+  GraphQLString,
+  GraphQLBoolean,
+  GraphQLID,
+  GraphQLInt,
+  GraphQLSchema,
+  GraphQLList,
+  GraphQLNonNull,
+  GraphQLEnumType,
 } = require("graphql");
 const { userService } = require("../services");
 const pick = require("../utils/pick");
 const { baseTypes } = require("../config/base");
 
 const RoleEnumType = new GraphQLEnumType({
-  name: 'RoleEnum',
+  name: "RoleEnum",
   values: {
     USER: {
       value: "user",
@@ -17,7 +23,7 @@ const RoleEnumType = new GraphQLEnumType({
       value: "admin",
     },
   },
-})
+});
 
 const PaginationType = (itemType) => {
   return new GraphQLObjectType({
@@ -27,9 +33,9 @@ const PaginationType = (itemType) => {
       page: { type: GraphQLInt },
       limit: { type: GraphQLInt },
       totalPages: { type: GraphQLInt },
-      totalResults: { type: GraphQLInt }
-    })
-  })
+      totalResults: { type: GraphQLInt },
+    }),
+  });
 };
 
 // 使用 GraphQL Schema Language 创建一个 schema
@@ -43,8 +49,8 @@ const UserType = new GraphQLObjectType({
     name: { type: GraphQLString },
     email: { type: GraphQLString },
     role: { type: RoleEnumType },
-    isEmailVerified: { type: GraphQLBoolean }
-  })
+    isEmailVerified: { type: GraphQLBoolean },
+  }),
 });
 
 //RootQuery describe how users can use the graph and grab data.
@@ -63,7 +69,7 @@ const RootQuery = new GraphQLObjectType({
         //this will return the book with id passed in argument
         //by the user
         return userService.getUserById(args.id);
-      }
+      },
     },
     users: {
       type: PaginationType(UserType),
@@ -72,15 +78,15 @@ const RootQuery = new GraphQLObjectType({
         role: { type: RoleEnumType },
         sortBy: { type: GraphQLString },
         limit: { type: GraphQLInt },
-        page: { type: GraphQLInt }
+        page: { type: GraphQLInt },
       },
       resolve(parent, args) {
         const filter = pick(args, ["name", "role"]);
         const options = pick(args, ["sortBy", "limit", "page"]);
         return userService.queryUsers(filter, options);
-      }
-    }
-  }
+      },
+    },
+  },
 });
 
 //Very similar to RootQuery helps user to add/update to the database.
@@ -94,14 +100,14 @@ const Mutation = new GraphQLObjectType({
         name: { type: new GraphQLNonNull(GraphQLString) },
         email: { type: new GraphQLNonNull(GraphQLString) },
         password: { type: new GraphQLNonNull(GraphQLString) },
-        role: { type: new GraphQLNonNull(RoleEnumType) }
+        role: { type: new GraphQLNonNull(RoleEnumType) },
       },
       resolve: async (parent, args) => {
         return await userService.createUser({
           ...args,
           isDel: baseTypes.NORMAL,
         });
-      }
+      },
     },
     updateUser: {
       type: UserType,
@@ -116,7 +122,7 @@ const Mutation = new GraphQLObjectType({
         return await userService.updateUserById(args.userId, {
           ...args,
         });
-      }
+      },
     },
     deleteUser: {
       type: UserType,
@@ -126,14 +132,14 @@ const Mutation = new GraphQLObjectType({
       },
       resolve: async (parent, args) => {
         return await userService.deleteUserById(args.userId);
-      }
+      },
     },
-  }
+  },
 });
 
 //Creating a new GraphQL Schema, with options query which defines query
 //we will allow users to use when they are making request.
 module.exports = new GraphQLSchema({
   query: RootQuery,
-  mutation: Mutation
+  mutation: Mutation,
 });
