@@ -16,7 +16,10 @@
           <span class="svg-container">
             <svg-icon icon-class="user" />
           </span>
-          <el-input v-model="formInline.email" placeholder="用户名(test@test.com)" />
+          <el-input
+            v-model="formInline.email"
+            placeholder="用户名(test@test.com)"
+          />
           <!--占位-->
           <div class="show-pwd" />
         </div>

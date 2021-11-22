@@ -84,6 +84,10 @@ app.use(
 );
 app.use("/js", express.static(path.join(__dirname, "../../dist/client", "js")));
 app.use(
+  "/video",
+  express.static(path.join(__dirname, "../../dist/client", "video"))
+);
+app.use(
   "/css",
   express.static(path.join(__dirname, "../../dist/client", "css"))
 );
