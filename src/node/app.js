@@ -18,6 +18,7 @@ const routes = require("./routes/v1");
 const { errorConverter, errorHandler } = require("./middlewares/error");
 const ApiError = require("./utils/ApiError");
 const schema = require("./schema");
+const grqphQlAuth = require("./middlewares/graphql-auth");
 const manifest = require("../../dist/node/ssr-manifest.json");
 const homePath = path.join(
   __dirname,
@@ -71,14 +72,6 @@ app.use(cors());
 app.options("*", cors());
 
 app.use(
-  "/graphql",
-  graphqlHTTP({
-    schema: schema,
-    graphiql: true,
-  })
-);
-
-app.use(
   "/img",
   express.static(path.join(__dirname, "../../dist/client", "img"))
 );
@@ -111,6 +104,15 @@ if (config.env === "production") {
 
 // v1 api routes
 app.use("/v1", routes);
+
+app.post(
+  "/graphql",
+  grqphQlAuth(),
+  graphqlHTTP({
+    schema: schema,
+    graphiql: true,
+  })
+);
 
 const homeTemplate = fs.readFileSync(
   path.join(__dirname, "../../dist/client/home.html"),

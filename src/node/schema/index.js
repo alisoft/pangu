@@ -9,9 +9,11 @@ const {
   GraphQLNonNull,
   GraphQLEnumType,
 } = require("graphql");
+const { applyMiddleware } = require("graphql-middleware");
 const { userService } = require("../services");
 const pick = require("../utils/pick");
 const { baseTypes } = require("../config/base");
+const permissions = require("../rules");
 
 const RoleEnumType = new GraphQLEnumType({
   name: "RoleEnum",
@@ -139,7 +141,10 @@ const Mutation = new GraphQLObjectType({
 
 //Creating a new GraphQL Schema, with options query which defines query
 //we will allow users to use when they are making request.
-module.exports = new GraphQLSchema({
-  query: RootQuery,
-  mutation: Mutation,
-});
+module.exports = applyMiddleware(
+  new GraphQLSchema({
+    query: RootQuery,
+    mutation: Mutation,
+  }),
+  permissions
+);

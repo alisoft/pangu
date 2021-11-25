@@ -1,5 +1,5 @@
 {
-  "name": "vue3-vant-node-boilerplate",
+  "name": "vue3-node-boilerplate",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -35,6 +35,8 @@
     "express-mongo-sanitize": "^2.0.0",
     "express-rate-limit": "^5.0.0",
     "graphql": "^16.0.1",
+    "graphql-middleware": "^6.1.12",
+    "graphql-shield": "^7.5.0",
     "helmet": "^4.1.0",
     "http-status": "^1.4.0",
     "joi": "^17.3.0",
