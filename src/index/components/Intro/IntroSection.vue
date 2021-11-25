@@ -1,6 +1,6 @@
 <template>
   <div class="main-content">
-    <h1>Flutter Boilerplate Store.</h1>
+    <h1>Vue3 Node Boilerplate.</h1>
     <h2>Welcome to here.</h2>
     <div class="btn-wrapper">
       <action-btn msg="Admin" href="/admin" />
@@ -47,10 +47,10 @@ h1 {
 
 .main-content {
   position: absolute;
-  left: 0px;
+  left: 0;
   top: 15%;
-  right: 0px;
-  bottom: 0px;
+  right: 0;
+  bottom: 0;
   display: block;
   width: 68%;
   margin-right: auto;
@@ -94,7 +94,7 @@ h1 {
 .btn-wrapper {
   display: block;
   width: 100%;
-  margin-top: 0px;
+  margin-top: 0;
   padding-top: 20px;
   padding-bottom: 5px;
 }
