@@ -2,7 +2,7 @@ name: Deploy To Heroku
 
 on:
   push:
-    branches: [ ssr ]
+    branches: [ ssr-mpa ]
 
 jobs:
   deploy-to-heroku:
