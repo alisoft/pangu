@@ -108,10 +108,13 @@ app.use("/v1", routes);
 app.post(
   "/graphql",
   grqphQlAuth(),
-  graphqlHTTP({
-    schema: schema,
+  graphqlHTTP((request) => ({
+    schema,
+    context: ((req) => ({
+      user: req.user,
+    }))(request),
     graphiql: true,
-  })
+  }))
 );
 
 const homeTemplate = fs.readFileSync(
