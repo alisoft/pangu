@@ -2,7 +2,7 @@ name: Deploy To Heroku
 
 on:
   push:
-    branches: [ ssr-mpa ]
+    branches: [ ssr-mpa-ts ]
 
 jobs:
   deploy-to-heroku:
@@ -25,7 +25,7 @@ jobs:
         uses: akhileshns/heroku-deploy@v3.12.12 # This is the action
         with:
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
-          heroku_app_name: ${{secrets.HEROKU_APP_NAME}} #Must be unique in Heroku
+          heroku_app_name: ${{secrets.HEROKU_APP_NAME_TS}} #Must be unique in Heroku
           heroku_email: ${{secrets.HEROKU_EMAIL}}
           procfile: ${{secrets.HEROKU_PROCFILE}}
           env_file: '.env'
