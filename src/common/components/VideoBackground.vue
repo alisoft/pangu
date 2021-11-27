@@ -1,8 +1,9 @@
 <template>
-  <section class="VideoBg">
-    <video autoplay playsinline loop :muted="muted" ref="video">
+  <section class="VideoBg" ref="bgRef">
+    <video autoplay playsinline loop :muted="muted" ref="videoRef">
       <source
         v-for="source in sources"
+        :key="source"
         :src="source"
         :type="getMediaType(source)"
       />
@@ -13,8 +14,11 @@
   </section>
 </template>
 
-<script>
-export default {
+<script lang="ts">
+import { defineComponent, onMounted, onBeforeUnmount, ref } from "vue";
+
+export default defineComponent({
+  name: "VideoBackground",
   props: {
     sources: {
       type: Array,
@@ -28,63 +32,72 @@ export default {
       default: true,
     },
   },
-  data() {
+  setup(props) {
+    const videoRatio = ref(0);
+    const videoRef = ref();
+    const bgRef = ref();
+
+    const resize = () => {
+      setContainerHeight();
+      if (videoCanPlay()) {
+        setVideoSize();
+      }
+    };
+    const videoCanPlay = () => {
+      return !!videoRef.value.canPlayType;
+    };
+    const setImageUrl = () => {
+      if (props.img) {
+        videoRef.value.style.backgroundImage = `url(${props.img})`;
+      }
+    };
+    const setContainerHeight = () => {
+      bgRef.value.style.height = `${window.innerHeight}px`;
+    };
+    const setVideoSize = () => {
+      let width,
+        height,
+        containerRatio = bgRef.value.offsetWidth / bgRef.value.offsetHeight;
+      if (containerRatio > videoRatio.value) {
+        width = bgRef.value.offsetWidth;
+      } else {
+        height = bgRef.value.offsetHeight;
+      }
+      videoRef.value.style.width = width ? `${width}px` : "auto";
+      videoRef.value.style.height = height ? `${height}px` : "auto";
+    };
+
+    const getMediaType = (src: string): string => {
+      return "video/" + src.split(".").pop();
+    };
+
+    onMounted(() => {
+      setImageUrl();
+      setContainerHeight();
+      if (videoCanPlay()) {
+        videoRef.value.oncanplay = () => {
+          if (!videoRef.value) return;
+          videoRatio.value =
+            videoRef.value.videoWidth / videoRef.value.videoHeight;
+          setVideoSize();
+          videoRef.value.style.visibility = "visible";
+        };
+      }
+      window.addEventListener("resize", resize);
+    });
+
+    onBeforeUnmount(() => {
+      window.removeEventListener("resize", resize);
+    });
+
     return {
-      videoRatio: null,
+      bgRef,
+      videoRef,
+      videoRatio,
+      getMediaType,
     };
   },
-  mounted() {
-    this.setImageUrl();
-    this.setContainerHeight();
-    if (this.videoCanPlay()) {
-      this.$refs.video.oncanplay = () => {
-        if (!this.$refs.video) return;
-        this.videoRatio =
-          this.$refs.video.videoWidth / this.$refs.video.videoHeight;
-        this.setVideoSize();
-        this.$refs.video.style.visibility = "visible";
-      };
-    }
-    window.addEventListener("resize", this.resize);
-  },
-  beforeUnmount() {
-    window.removeEventListener("resize", this.resize);
-  },
-  methods: {
-    resize() {
-      this.setContainerHeight();
-      if (this.videoCanPlay()) {
-        this.setVideoSize();
-      }
-    },
-    videoCanPlay() {
-      return !!this.$refs.video.canPlayType;
-    },
-    setImageUrl() {
-      if (this.img) {
-        this.$el.style.backgroundImage = `url(${this.img})`;
-      }
-    },
-    setContainerHeight() {
-      this.$el.style.height = `${window.innerHeight}px`;
-    },
-    setVideoSize() {
-      var width,
-        height,
-        containerRatio = this.$el.offsetWidth / this.$el.offsetHeight;
-      if (containerRatio > this.videoRatio) {
-        width = this.$el.offsetWidth;
-      } else {
-        height = this.$el.offsetHeight;
-      }
-      this.$refs.video.style.width = width ? `${width}px` : "auto";
-      this.$refs.video.style.height = height ? `${height}px` : "auto";
-    },
-    getMediaType(src) {
-      return "video/" + src.split(".").pop();
-    },
-  },
-};
+});
 </script>
 
 <style>
@@ -94,6 +107,7 @@ export default {
   background-position: center;
   overflow: hidden;
 }
+
 .VideoBg video {
   position: absolute;
   top: 50%;
@@ -101,6 +115,7 @@ export default {
   visibility: hidden;
   transform: translate(-50%, -50%);
 }
+
 .VideoBg__content {
   position: absolute;
   top: 0;

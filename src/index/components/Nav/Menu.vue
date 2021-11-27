@@ -33,14 +33,38 @@
   </div>
 </template>
 
-<script>
-// Import Font Awesome Icons
+<script lang="ts">
+import { defineComponent, ref } from "vue";
 import BGMask from "./../Mask.vue";
 
-export default {
+export default defineComponent({
+  setup() {
+    const isOpen = ref(false);
+
+    const open = () => {
+      isOpen.value = true;
+    };
+
+    const close = () => {
+      isOpen.value = false;
+    };
+
+    const toggle = () => {
+      // console.log('button clicked');
+      if (isOpen.value) {
+        close();
+      } else {
+        open();
+      }
+    };
+
+    return {
+      isOpen,
+      toggle,
+    };
+  },
   data: function () {
     return {
-      isOpen: false,
       menu: [
         "NEWS",
         "NEW INVENTORY",
@@ -56,23 +80,7 @@ export default {
   components: {
     BgMask: BGMask,
   },
-  methods: {
-    open() {
-      this.isOpen = true;
-    },
-    close() {
-      this.isOpen = false;
-    },
-    toggle() {
-      // console.log('button clicked');
-      if (this.isOpen) {
-        this.close();
-      } else {
-        this.open();
-      }
-    },
-  },
-};
+});
 </script>
 
 <style scoped>
@@ -95,7 +103,7 @@ export default {
 }
 @keyframes slide-in {
   from {
-    width: 0%;
+    width: 0;
   }
   to {
     width: 200px;
@@ -106,7 +114,7 @@ export default {
     width: 200px;
   }
   to {
-    width: 0%;
+    width: 0;
   }
 }
 

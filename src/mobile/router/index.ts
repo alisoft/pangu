@@ -1,4 +1,4 @@
-import { createRouter } from "vue-router";
+import { createRouter, RouterHistory } from "vue-router";
 
 const routes = [
   { path: "/", redirect: "/demo" },
@@ -6,7 +6,7 @@ const routes = [
   { path: "/demo", component: () => import("../views/Demo.vue") },
 ];
 
-export default function (history) {
+export default function (history: RouterHistory) {
   return createRouter({
     history,
     routes,

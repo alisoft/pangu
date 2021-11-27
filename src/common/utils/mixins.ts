@@ -3,9 +3,9 @@ import { Locale } from "vant";
 import { useI18n } from "vue-i18n";
 
 export function withTheme() {
-  const color = ref(null);
+  const color = ref();
 
-  const addThemeEventListener = (event, c) => {
+  const addThemeEventListener = (event, c: string) => {
     color.value = `#${Number(c).toString(16).substring(2)}`;
   };
 
@@ -124,7 +124,7 @@ export function withLocale() {
 export function withPullDown() {
   const refreshing = ref(false);
 
-  const addPullRefreshEventListener = (pullRefresh) => {
+  const addPullRefreshEventListener = (pullRefresh: boolean) => {
     if (pullRefresh) {
       refreshing.value = true;
     }

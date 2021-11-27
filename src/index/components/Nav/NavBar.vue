@@ -29,7 +29,7 @@
   </div>
 </template>
 
-<script>
+<script lang="ts">
 // Import Tesla Logo
 import teslaLogo from "./Logo.vue";
 import Hamburgermenu from "./Menu.vue";

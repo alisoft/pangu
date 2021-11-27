@@ -1,5 +1,5 @@
 module.exports = {
-  preset: "@vue/cli-plugin-unit-jest",
+  preset: "@vue/cli-plugin-unit-jest/presets/typescript",
   globals: {
     "vue-jest": {
       "vue-jest": {

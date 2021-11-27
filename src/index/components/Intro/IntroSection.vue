@@ -15,7 +15,7 @@
   </div>
 </template>
 
-<script>
+<script lang="ts">
 import ActionButton from "./ActionButton.vue";
 
 export default {

@@ -44,7 +44,7 @@ span {
 /* Icon */
 svg.fa-icon {
   fill: white;
-  padding: 6.5px 7px 0px 6px;
-  margin: 0em 0.2em;
+  padding: 6.5px 7px 0 6px;
+  margin: 0 0.2em;
 }
 </style>

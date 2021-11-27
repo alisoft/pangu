@@ -10,10 +10,6 @@
   </a>
 </template>
 
-<script>
-export default {};
-</script>
-
 <style scoped>
 @import "./../../assets/CSS/normalize.css";
 @import "./../../assets/CSS/webflow.css";

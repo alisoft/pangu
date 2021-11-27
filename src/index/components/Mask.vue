@@ -5,10 +5,6 @@
   </transition>
 </template>
 
-<script>
-export default {};
-</script>
-
 <style>
 /* BG Cover */
 /* Cover other screen content when Menu is clicked */
