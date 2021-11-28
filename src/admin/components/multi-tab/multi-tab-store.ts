@@ -18,7 +18,8 @@ import type {
 import { useRouter, useRoute } from "vue-router";
 import { message } from "ant-design-vue";
 import { flattenChildren } from "../../utils/vnode-util";
-import { findLast, omit } from "lodash-es";
+import findLast from "lodash.findlast";
+import omit from "lodash.omit";
 import { useStore } from "vuex";
 
 export type CacheKey = string;

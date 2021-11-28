@@ -9,7 +9,7 @@ import { defineComponent, watch, ref, onMounted, onUnmounted } from "vue";
 import { addListener, removeListener } from "resize-detector";
 import type { ECharts } from "echarts";
 import echarts from "echarts";
-import { debounce } from "lodash-es";
+import debounce from "lodash.debounce";
 import "echarts-wordcloud";
 
 export default defineComponent({

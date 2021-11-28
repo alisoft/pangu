@@ -1,5 +1,5 @@
-import "ant-design-vue/dist/antd.less";
 import { createApp } from "vue";
+import "ant-design-vue/dist/antd.less";
 import router from "./router/index.client";
 import store from "./store";
 import locale from "./locales";

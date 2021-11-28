@@ -40,6 +40,16 @@ module.exports = {
       }
     },
   },
+  transpileDependencies: [
+    "ant-design-vue/es/locale/en_US",
+    "ant-design-vue/es/locale/zh_CN",
+    "store/plugins/expire",
+    "ant-design-vue/es/_util/vue-types",
+    "ant-design-vue/es/form",
+    "moment/locale/eu",
+    "moment/locale/zh-cn",
+    "@ant-design/icons-vue",
+  ],
   css: {
     loaderOptions: {
       //define global scss variable

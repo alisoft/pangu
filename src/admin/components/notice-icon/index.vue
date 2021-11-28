@@ -53,7 +53,7 @@ import {
 import type { NoticeItem } from "../../api/user/notice";
 import { queryNotices } from "../../api/user/notice";
 import moment from "moment";
-import { groupBy } from "lodash-es";
+import groupBy from "lodash.groupby";
 import NoticeDropdown from "./notice-dropdown.vue";
 import NoticeList from "./notice-list.vue";
 import { message } from "ant-design-vue";

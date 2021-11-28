@@ -1,7 +1,7 @@
 import { createSSRApp } from "vue";
-import "ant-design-vue/dist/antd.less";
-import store from "./store";
 import { createAppRouter } from "./router";
+import store from "./store";
+import "ant-design-vue/lib/style";
 import locale from "./locales";
 import App from "./App.vue";
 
@@ -9,6 +9,7 @@ import { ProProvider, PageContainer, TransformVnode } from "./components";
 import { applyComponents } from "./component";
 import { useIcons } from "./icons";
 import Authority from "./utils/authority/authority.vue";
+
 import "./app.less";
 import "./router/router-guards";
 import { createMemoryHistory } from "vue-router";

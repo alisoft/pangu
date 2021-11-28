@@ -10,7 +10,6 @@
 
 <script lang="ts">
 import type { Permission, Role } from "../../store/modules/user/typing";
-import { isArray } from "lodash-es";
 import type { PropType, VNodeChild } from "vue";
 import { computed, ref, defineComponent } from "vue";
 import { useStore } from "vuex";
@@ -40,7 +39,7 @@ export default defineComponent({
     const auth = ref(false);
     if (role.value.permissions) {
       const permissions = role.value.permissions;
-      const isArr = isArray(props.authority);
+      const isArr = Array.isArray(props.authority);
 
       if (typeof props.authority === "string" || isArr) {
         auth.value = permissions.some((value) => {
