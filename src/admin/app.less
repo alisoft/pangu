@@ -1,0 +1,87 @@
+@import './components/header-dropdown.less';
+@import './components/table/pro-table.less';
+#app {
+  height: 100%;
+}
+.slide-fadein-up-enter-active,
+.slide-fadein-up-leave-active {
+  transition: opacity 0.3s, transform 0.4s;
+}
+
+.slide-fadein-up-enter-from {
+  transform: translateY(20px);
+  opacity: 0;
+}
+
+.slide-fadein-up-leave-to {
+  transform: translateY(-20px);
+  opacity: 0;
+}
+
+.slide-fadein-right-enter-active,
+.slide-fadein-right-leave-active {
+  transition: opacity 0.3s, transform 0.4s, -webkit-transform 0.4s;
+}
+
+.slide-fadein-right-enter-from {
+  transform: translateX(-20px);
+  opacity: 0;
+}
+
+.slide-fadein-right-leave-to {
+  transform: translateX(20px);
+  opacity: 0;
+}
+
+.zoom-fadein-enter-active,
+.zoom-fadein-leave-active {
+  transition: transform 0.3s, opacity 0.3s ease-in-out;
+}
+
+.zoom-fadein-enter-from {
+  transform: scale(0.99);
+  opacity: 0;
+}
+
+.zoom-fadein-leave-to {
+  transform: scale(1.01);
+  opacity: 0;
+}
+
+.fadein-enter-active,
+.fadein-leave-active {
+  transition: opacity 0.3s ease-in-out !important;
+}
+
+.fadein-enter-from,
+.fadein-leave-to {
+  opacity: 0 !important;
+}
+
+@media (max-width: 480px) {
+  .pro-components-header-dropdown-index-container {
+    width: 100% !important;
+  }
+  .ant-table {
+    width: 100%;
+    overflow-x: auto;
+  }
+
+  .ant-table-tbody > tr > td,
+  .ant-table-tbody > tr > th,
+  .ant-table-thead > tr > td,
+  .ant-table-thead > tr > th {
+    white-space: pre;
+  }
+
+  .ant-table-tbody > tr > td > span,
+  .ant-table-tbody > tr > th > span,
+  .ant-table-thead > tr > td > span,
+  .ant-table-thead > tr > th > span {
+    display: block;
+  }
+}
+
+.pb10 {
+  padding-bottom: 10px;
+}

@@ -1,10 +1,13 @@
 // vue.config.js
 const path = require("path");
 const WebpackBar = require("webpackbar");
+const createMockMiddleware = require("./mock/createMockMiddleware");
 const CompressionWebpackPlugin = require("compression-webpack-plugin");
 const { WebpackManifestPlugin } = require("webpack-manifest-plugin");
 const nodeExternals = require("webpack-node-externals");
 const webpack = require("webpack");
+const { getThemeVariables } = require("ant-design-vue/dist/theme");
+const { additionalData } = require("./themeConfig");
 const name = "Vue3 Node Boilerplate"; // page title
 
 function resolve(dir) {
@@ -15,12 +18,12 @@ module.exports = {
   pages: process.env.SSR
     ? {
         home: "./src/index/main.server.ts",
-        admin: "./src/admin/main.server.js",
+        admin: "./src/admin/main.server.ts",
         mobile: "./src/mobile/main.server.ts",
       }
     : {
         home: "./src/index/main.ts",
-        admin: "./src/admin/main.js",
+        admin: "./src/admin/main.ts",
         mobile: "./src/mobile/main.ts",
       },
   lintOnSave: process.env.NODE_ENV !== "production",
@@ -31,13 +34,26 @@ module.exports = {
       warnings: false,
       errors: true,
     },
-    before: require("./mock/mock-server.js"),
+    before: (app) => {
+      if (process.env.MOCK !== "none" && process.env.HTTP_MOCK !== "none") {
+        app.use(createMockMiddleware());
+      }
+    },
   },
   css: {
     loaderOptions: {
       //define global scss variable
       scss: {
-        prependData: `@import "@/assets/style/variables.scss";`,
+        // prependData: `@import "@/admin/assets/style/variables.scss";`,
+      },
+      less: {
+        lessOptions: {
+          modifyVars: { ...getThemeVariables() },
+          // DO NOT REMOVE THIS LINE
+          javascriptEnabled: true,
+        },
+        // 如果你不需要多主题，可以注释 additionalData
+        additionalData,
       },
     },
   },
@@ -46,7 +62,7 @@ module.exports = {
       name,
       resolve: {
         alias: {
-          "@": resolve("src/admin"),
+          "@": resolve("src"),
         },
       },
       module: {
@@ -82,22 +98,6 @@ module.exports = {
     webpackConfig.module.rule("js").uses.delete("cache-loader");
     webpackConfig.module.rule("ts").uses.delete("cache-loader");
     webpackConfig.module.rule("tsx").uses.delete("cache-loader");
-    // set svg-sprite-loader
-    webpackConfig.module
-      .rule("svg")
-      .exclude.add(resolve("src/admin/icons"))
-      .end();
-    webpackConfig.module
-      .rule("icons")
-      .test(/\.svg$/)
-      .include.add(resolve("src/admin/icons"))
-      .end()
-      .use("svg-sprite-loader")
-      .loader("svg-sprite-loader")
-      .options({
-        symbolId: "icon-[name]",
-      })
-      .end();
 
     if (!process.env.SSR) {
       // 将入口指向应用的客户端入口文件
