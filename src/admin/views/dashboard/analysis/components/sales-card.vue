@@ -112,7 +112,7 @@ import { defineComponent, reactive, watch, onMounted } from "vue";
 import { Bar } from "./charts";
 import { useI18n } from "vue-i18n";
 import numeral from "numeral";
-import type { SalesDataItem } from "../../../../api/dashboard/analysis";
+import type { SalesDataItem } from "@/admin/api/dashboard/analysis";
 
 export interface RankingDataItem {
   title: string;

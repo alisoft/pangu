@@ -45,8 +45,8 @@ import { useForm } from "ant-design-vue/es/form";
 import type { PropType } from "vue";
 import { defineComponent, ref, reactive, toRaw, watchEffect } from "vue";
 import { message } from "ant-design-vue";
-import { addPermission, updatePermission } from "../../api/user/role";
-import type { Action, Permission } from "../../store/modules/user/typing";
+import { addPermission, updatePermission } from "@/admin/api/user/role";
+import type { Action, Permission } from "@/admin/store/modules/user/typing";
 
 const formLayout = {
   labelCol: {

@@ -215,12 +215,12 @@ import {
 import {
   Container as DragContainer,
   Draggable,
-} from "../../../components/draggable";
-import { queryRule } from "../../../api/list/table-list";
-import type { Pagination, TableFilters, TableColumn } from "../../../typing";
-import { useFetchData } from "../../../utils/hooks/useFetchData";
-import { useFullscreen } from "../../../utils/hooks/useFullscreen";
-import { useTableDynamicColumns } from "../../../utils/hooks/useTableColumn";
+} from "@/admin/components/draggable";
+import { queryRule } from "@/admin/api/list/table-list";
+import type { Pagination, TableFilters, TableColumn } from "@/admin/typing";
+import { useFetchData } from "@/admin/utils/hooks/useFetchData";
+import { useFullscreen } from "@/admin/utils/hooks/useFullscreen";
+import { useTableDynamicColumns } from "@/admin/utils/hooks/useTableColumn";
 import DragIcon from "@/admin/components/table/drag-icon.vue";
 
 const statusMap = {

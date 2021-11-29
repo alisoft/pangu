@@ -116,8 +116,8 @@ import { computed, defineComponent, reactive } from "vue";
 import { useForm } from "ant-design-vue/es/form";
 import { message, notification } from "ant-design-vue";
 import { MailOutlined } from "@ant-design/icons-vue";
-import { getSmsCaptcha } from "../../api/user/login";
-import { postRegister } from "../../api/user/register";
+import { getSmsCaptcha } from "@/admin/api/user/login";
+import { postRegister } from "@/admin/api/user/register";
 import type { AxiosError } from "axios";
 import { useRouter } from "vue-router";
 

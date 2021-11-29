@@ -1,6 +1,6 @@
 import { createApp } from "vue";
 import "ant-design-vue/dist/antd.less";
-import router from "./router/index.client";
+import router from "@/admin/router";
 import store from "./store";
 import locale from "./locales";
 import App from "./App.vue";

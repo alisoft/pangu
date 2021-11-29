@@ -1,4 +1,4 @@
-import { withInstall } from "../../../utils/withInstall";
+import { withInstall } from "@/admin/utils/withInstall";
 import type {
   RenderFunction,
   App,

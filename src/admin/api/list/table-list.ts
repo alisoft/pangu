@@ -1,4 +1,4 @@
-import request from "../../utils/request";
+import request from "@/admin/utils/request";
 import { reactive } from "vue";
 
 export async function queryRule(params?: {

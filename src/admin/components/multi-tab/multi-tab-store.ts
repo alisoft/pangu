@@ -17,7 +17,7 @@ import type {
 } from "vue-router";
 import { useRouter, useRoute } from "vue-router";
 import { message } from "ant-design-vue";
-import { flattenChildren } from "../../utils/vnode-util";
+import { flattenChildren } from "@/admin/utils/vnode-util";
 import findLast from "lodash.findlast";
 import omit from "lodash.omit";
 import { useStore } from "vuex";

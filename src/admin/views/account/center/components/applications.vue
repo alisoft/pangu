@@ -78,9 +78,9 @@ import {
   EllipsisOutlined,
   ShareAltOutlined,
 } from "@ant-design/icons-vue";
-import { NumberFormat, FormatWan } from "../../../../utils/number-util";
-import { useFetchData } from "../../../../utils/hooks/useFetchData";
-import { queryFakeList } from "../../../../api/list/basic-list";
+import { NumberFormat, FormatWan } from "@/admin/utils/number-util";
+import { useFetchData } from "@/admin/utils/hooks/useFetchData";
+import { queryFakeList } from "@/admin/api/list/basic-list";
 
 export default defineComponent({
   name: "Applications",

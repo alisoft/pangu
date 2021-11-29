@@ -41,7 +41,7 @@ import { defineComponent } from "vue";
 import { useI18n } from "vue-i18n";
 import { TimelineChart } from "./charts";
 import NumberInfo from "./number-info/index.vue";
-import type { OfflineDataItem } from "../../../../api/dashboard/analysis";
+import type { OfflineDataItem } from "@/admin/api/dashboard/analysis";
 import type { TimelineItem } from "./charts/timeline-chart/index.vue";
 
 export default defineComponent({

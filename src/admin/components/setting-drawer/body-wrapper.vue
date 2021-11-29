@@ -6,7 +6,7 @@
 </template>
 
 <script lang="ts">
-import PropTypes from "ant-design-vue/es/_util/vue-types";
+import PropTypes from "ant-design-vue/lib/_util/vue-types";
 import { defineComponent } from "vue";
 import { useProProvider } from "../base-layouts/pro-provider";
 

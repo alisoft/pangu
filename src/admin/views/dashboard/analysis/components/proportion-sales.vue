@@ -38,7 +38,7 @@ import type { PropType } from "vue";
 import { defineComponent } from "vue";
 import { useI18n } from "vue-i18n";
 import { Pie } from "./charts";
-import type { SalesDataItem } from "../../../../api/dashboard/analysis";
+import type { SalesDataItem } from "@/admin/api/dashboard/analysis";
 
 export type SalesType = "all" | "online" | "stores" | string;
 

@@ -126,7 +126,7 @@
 
 <script lang="ts">
 import { defineComponent, reactive, toRefs } from "vue";
-import { getSmsCaptcha } from "../../api/user/login";
+import { getSmsCaptcha } from "@/admin/api/user/login";
 import { message, notification } from "ant-design-vue";
 import { useForm } from "ant-design-vue/es/form";
 import {
@@ -141,7 +141,7 @@ import {
 import type { AxiosError } from "axios";
 import { useRouter } from "vue-router";
 import { useStore } from "vuex";
-import { LOGIN } from "../../store/modules/user/actions";
+import { LOGIN } from "@/admin/store/modules/user/actions";
 
 export default defineComponent({
   name: "Login",

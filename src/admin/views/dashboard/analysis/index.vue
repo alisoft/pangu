@@ -80,7 +80,7 @@ import TopSearch from "./components/top-search.vue";
 import ProportionSales from "./components/proportion-sales.vue";
 import OfflineData from "./components/offline-data.vue";
 
-import { useAnalysisData } from "../../../api/dashboard/analysis";
+import { useAnalysisData } from "@/admin/api/dashboard/analysis";
 import type { Moment } from "moment";
 
 export default defineComponent({

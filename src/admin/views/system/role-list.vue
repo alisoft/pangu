@@ -213,15 +213,15 @@ import {
 import {
   Container as DragContainer,
   Draggable,
-} from "../../components/draggable";
-import { getRoles } from "../../api/user/role";
-import type { Pagination, TableFilters, TableColumn } from "../../typing";
-import { useFetchData } from "../../utils/hooks/useFetchData";
-import { useFullscreen } from "../../utils/hooks/useFullscreen";
-import { useTableDynamicColumns } from "../../utils/hooks/useTableColumn";
+} from "@/admin/components/draggable";
+import { getRoles } from "@/admin/api/user/role";
+import type { Pagination, TableFilters, TableColumn } from "@/admin/typing";
+import { useFetchData } from "@/admin/utils/hooks/useFetchData";
+import { useFullscreen } from "@/admin/utils/hooks/useFullscreen";
+import { useTableDynamicColumns } from "@/admin/utils/hooks/useTableColumn";
 import DragIcon from "@/admin/components/table/drag-icon.vue";
 import RoleModal from "./role-modal.vue";
-import type { Role } from "../../store/modules/user/typing";
+import type { Role } from "@/admin/store/modules/user/typing";
 
 const baseColumns: TableColumn[] = [
   {

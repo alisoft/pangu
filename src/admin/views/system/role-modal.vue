@@ -54,8 +54,8 @@
 import type { PropType } from "vue";
 import { defineComponent, reactive, ref, watchEffect, watch } from "vue";
 import { useForm } from "ant-design-vue/es/form";
-import type { Role, Permission, Action } from "../../store/modules/user/typing";
-import { getPermissions } from "../../api/user/role";
+import type { Role, Permission, Action } from "@/admin/store/modules/user/typing";
+import { getPermissions } from "@/admin/api/user/role";
 import { cloneDeep } from "lodash";
 
 type Tag = {

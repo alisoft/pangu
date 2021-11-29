@@ -14,7 +14,7 @@
 <script lang="ts">
 import type { InjectionKey, CSSProperties, PropType } from "vue";
 import { defineComponent, provide, reactive, ref, readonly } from "vue";
-import { filterEmpty } from "../../utils/vnode-util";
+import { filterEmpty } from "@/admin/utils/vnode-util";
 import type { SizeType } from "./typing";
 import AvatarListItem from "./item.vue";
 

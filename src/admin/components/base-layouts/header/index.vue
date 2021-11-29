@@ -52,7 +52,7 @@
 import type { PropType } from "vue";
 import { defineComponent, ref, computed, toRefs, inject } from "vue";
 import { useProProvider } from "../pro-provider";
-import { getMenuFirstChildren } from "../../../utils/menu-util";
+import { getMenuFirstChildren } from "@/admin/utils/menu-util";
 import TopNavHeader from "../top-nav-header/index.vue";
 import GlobalHeader from "../global-header/index.vue";
 import type { RouteProps } from "../typing";

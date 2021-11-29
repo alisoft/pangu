@@ -111,7 +111,7 @@ import {
 } from "@ant-design/icons-vue";
 import { useI18n } from "vue-i18n";
 import { injectMultiTabStore, useMultiTab } from "./multi-tab-store";
-import { injectMenuState } from "../../layouts/use-menu-state";
+import { injectMenuState } from "@/admin/layouts/use-menu-state";
 import { useRoute } from "vue-router";
 
 export default defineComponent({

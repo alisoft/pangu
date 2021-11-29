@@ -9,8 +9,8 @@
 <script lang="ts">
 import type { PropType } from "vue";
 import { computed, defineComponent, onMounted, ref, watch } from "vue";
-import type { SeriesDataItem } from "../../../../../../components";
-import { Chart } from "../../../../../../components";
+import type { SeriesDataItem } from "@/admin/components";
+import { Chart } from "@/admin/components";
 import type { EChartOption } from "echarts";
 
 type PieDataType = number[] | number[][] | EChartOption.SeriesPie.DataObject[];

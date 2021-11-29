@@ -28,13 +28,13 @@ const homePath = path.join(
 );
 const createHomeApp = require(homePath).default;
 
-const appPath = path.join(
+const adminPath = path.join(
   __dirname,
   "../../dist",
   "node",
   manifest["admin.js"]
 );
-const createApp = require(appPath).default;
+const createAdminApp = require(adminPath).default;
 
 const mobilePath = path.join(
   __dirname,
@@ -145,7 +145,7 @@ app.get("/", async (req, res) => {
   res.send(html);
 });
 app.get("/admin/*", async (req, res) => {
-  const { app, router } = createApp();
+  const { app, router } = createAdminApp();
 
   await router.push(req.url);
   await router.isReady();

@@ -29,7 +29,7 @@
 <script lang="ts">
 import { inject, defineComponent, computed, ref, watchEffect } from "vue";
 import type { CSSProperties } from "vue";
-import PropTypes from "ant-design-vue/es/_util/vue-types";
+import PropTypes from "ant-design-vue/lib/_util/vue-types";
 import { useProProvider } from "../base-layouts/pro-provider";
 
 export type WaterMarkProps = {

@@ -75,7 +75,7 @@
 </template>
 
 <script lang="ts">
-import PropTypes from "ant-design-vue/es/_util/vue-types";
+import PropTypes from "ant-design-vue/lib/_util/vue-types";
 import { defineComponent } from "vue";
 import { useI18n } from "vue-i18n";
 

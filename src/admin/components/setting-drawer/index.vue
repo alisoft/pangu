@@ -116,7 +116,7 @@
 </template>
 
 <script lang="ts">
-import PropTypes from "ant-design-vue/es/_util/vue-types";
+import PropTypes from "ant-design-vue/lib/_util/vue-types";
 import { defineComponent, computed, reactive, ref } from "vue";
 import { useProProvider } from "../base-layouts/pro-provider";
 import { CloseOutlined, SettingOutlined } from "@ant-design/icons-vue";
@@ -132,7 +132,7 @@ import {
   SET_FIXED_SIDEBAR,
   SET_MULTI_TAB,
   SET_FIXED_MULTI_TAB,
-} from "../../store/modules/app/mutations";
+} from "@/admin/store/modules/app/mutations";
 import BodyWrapper from "./body-wrapper.vue";
 import BlockCheckbox from "./block-checkbox.vue";
 import LayoutChange from "./layout-change.vue";

@@ -84,7 +84,7 @@ import { defineComponent, computed, toRefs } from "vue";
 import { useProProvider } from "../pro-provider/index";
 import BaseMenu, { BaseMenuProps } from "../base-menu/index.vue";
 import { MenuFoldOutlined, MenuUnfoldOutlined } from "@ant-design/icons-vue";
-import { findMenuChildren } from "../../../utils/menu-util";
+import { findMenuChildren } from "@/admin/utils/menu-util";
 import { useRoute } from "vue-router";
 import type { LayoutType } from "../typing";
 

@@ -104,14 +104,14 @@
 
 <script lang="ts">
 import { computed, defineComponent, reactive, toRefs } from "vue";
-import { GridContent } from "../../../components";
+import { GridContent } from "@/admin/components";
 import { useStore } from "vuex";
 import Info from "@/admin/views/list/basic-list/info.vue";
-import { useFetchData } from "../../../utils/hooks/useFetchData";
+import { useFetchData } from "@/admin/utils/hooks/useFetchData";
 import {
   queryActivities,
   queryProjectNotice,
-} from "../../../api/dashboard/workplace";
+} from "@/admin/api/dashboard/workplace";
 
 export default defineComponent({
   name: "Workplace2",

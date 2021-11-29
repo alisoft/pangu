@@ -39,8 +39,8 @@
 
 <script lang="ts">
 import { defineComponent } from "vue";
-import { useFetchData } from "../../../../utils/hooks/useFetchData";
-import { queryFakeList } from "../../../../api/list/basic-list";
+import { useFetchData } from "@/admin/utils/hooks/useFetchData";
+import { queryFakeList } from "@/admin/api/list/basic-list";
 import ArticleListContent from "./article-list-content.vue";
 import IconText from "./icon-text.vue";
 

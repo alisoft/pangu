@@ -98,8 +98,8 @@ import { defineComponent, inject, reactive, ref, toRefs } from "vue";
 import { PlusOutlined } from "@ant-design/icons-vue";
 import { useI18n } from "vue-i18n";
 import type { CardListItemDataType } from "./typing";
-import { useFetchData } from "../../../utils/hooks/useFetchData";
-import { queryFakeList } from "../../../api/list/card-list";
+import { useFetchData } from "@/admin/utils/hooks/useFetchData";
+import { queryFakeList } from "@/admin/api/list/card-list";
 
 export default defineComponent({
   name: "CardList",

@@ -170,12 +170,12 @@
 import { defineComponent, reactive, computed } from "vue";
 import { useI18n } from "vue-i18n";
 import { PlusOutlined } from "@ant-design/icons-vue";
-import { useFetchData } from "../../../utils/hooks/useFetchData";
+import { useFetchData } from "@/admin/utils/hooks/useFetchData";
 import {
   fakeChartData,
   queryActivities,
   queryProjectNotice,
-} from "../../../api/dashboard/workplace";
+} from "@/admin/api/dashboard/workplace";
 import Radar from "./components/radar/index.vue";
 import { useStore } from "vuex";
 

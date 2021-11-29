@@ -4,10 +4,13 @@ import type { RouteLocationNormalized } from "vue-router";
 import { useRoute, useRouter } from "vue-router";
 import { useStore } from "vuex";
 import { useI18n } from "vue-i18n";
-import type { LayoutType, MenuTheme } from "../components/base-layouts/typing";
+import type {
+  LayoutType,
+  MenuTheme,
+} from "@/admin/components/base-layouts/typing";
 import xor from "lodash.xor";
 import { genMenuInfo } from "../utils/menu-util";
-import type { MultiTabStore } from "../components/multi-tab";
+import type { MultiTabStore } from "@/admin/components/multi-tab";
 
 export interface MenuState {
   collapsed: boolean;

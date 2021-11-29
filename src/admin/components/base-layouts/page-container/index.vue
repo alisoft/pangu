@@ -58,7 +58,7 @@ import { defineComponent, h, ref, toRefs, withCtx, createTextVNode } from "vue";
 import { useProProvider } from "../pro-provider";
 import GridContent from "@/admin/components/base-layouts/grid-content/index.vue";
 import PageHeaderContent from "./page-header-content.vue";
-import { injectMenuState } from "../../../layouts/use-menu-state";
+import { injectMenuState } from "@/admin/layouts/use-menu-state";
 import { RouterLink } from "vue-router";
 
 export interface Tab {

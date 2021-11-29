@@ -122,10 +122,10 @@ import {
   nextTick,
 } from "vue";
 import { PlusOutlined } from "@ant-design/icons-vue";
-import { GridContent } from "../../../components";
+import { GridContent } from "@/admin/components";
 import { useStore } from "vuex";
-import { useFetchData } from "../../../utils/hooks/useFetchData";
-import { queryProjectNotice } from "../../../api/dashboard/workplace";
+import { useFetchData } from "@/admin/utils/hooks/useFetchData";
+import { queryProjectNotice } from "@/admin/api/dashboard/workplace";
 
 import Applications from "./components/applications.vue";
 import Articles from "./components/articles.vue";

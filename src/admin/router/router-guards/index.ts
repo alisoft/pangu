@@ -1,4 +1,4 @@
-import router from "../index.client";
+import router from "../index";
 import store from "../../store";
 import localStorage from "../../utils/local-storage";
 import { allowList, loginRoutePath } from "../define-meta";

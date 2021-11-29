@@ -39,9 +39,9 @@
 
 <script lang="ts">
 import { defineComponent } from "vue";
-import { useFetchData } from "../../../../utils/hooks/useFetchData";
-import { queryFakeList } from "../../../../api/list/basic-list";
-import { dateFormatNow } from "../../../../utils/date-util";
+import { useFetchData } from "@/admin/utils/hooks/useFetchData";
+import { queryFakeList } from "@/admin/api/list/basic-list";
+import { dateFormatNow } from "@/admin/utils/date-util";
 import AvatarList from "@/admin/components/avatar-list/list.vue";
 import AvatarListItem from "@/admin/components/avatar-list/item.vue";
 

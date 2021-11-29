@@ -34,8 +34,8 @@
 <script lang="ts">
 import { defineComponent, computed } from "vue";
 import { useStore } from "vuex";
-import type { AppState } from "../../store/modules/app/state";
-import { locales } from "../../locales";
+import type { AppState } from "@/admin/store/modules/app/state";
+import { locales } from "@/admin/locales";
 import { GlobalOutlined } from "@ant-design/icons-vue";
 
 const languageLabels = {

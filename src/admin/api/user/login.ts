@@ -1,4 +1,4 @@
-import request from "../../utils/request";
+import request from "@/admin/utils/request";
 
 export type LoginType = "account" | "telephone";
 export type LoginStatus = "ok" | "error";

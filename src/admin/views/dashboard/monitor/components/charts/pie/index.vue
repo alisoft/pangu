@@ -8,7 +8,7 @@
 
 <script lang="ts">
 import { computed, defineComponent } from "vue";
-import { Chart } from "../../../../../../components";
+import { Chart } from "@/admin/components";
 
 export default defineComponent({
   name: "Pie",

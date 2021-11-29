@@ -6,7 +6,7 @@
 
 <script lang="ts">
 import { computed, ref, defineComponent } from "vue";
-import { Chart } from "../../../../../../components";
+import { Chart } from "@/admin/components";
 import "../index.less";
 
 export default defineComponent({

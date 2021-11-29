@@ -17,7 +17,7 @@
 
 <script lang="ts">
 import { defineComponent } from "vue";
-import { dateFormat } from "../../../../utils/date-util";
+import { dateFormat } from "@/admin/utils/date-util";
 
 export default defineComponent({
   name: "ArticleListContent",

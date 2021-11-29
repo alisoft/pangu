@@ -110,7 +110,7 @@ import { ChartCard, Field, MiniProgress, MiniBar, MiniArea } from "./charts";
 import Yuan from "./yuan.vue";
 import Trend from "./trend/index.vue";
 import numeral from "numeral";
-import type { VisitDataItem } from "../../../../api/dashboard/analysis";
+import type { VisitDataItem } from "@/admin/api/dashboard/analysis";
 import { useI18n } from "vue-i18n";
 
 const gridLayout = {

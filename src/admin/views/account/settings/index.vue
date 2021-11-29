@@ -64,7 +64,7 @@ import {
   computed,
   onActivated,
 } from "vue";
-import { GridContent } from "../../../components";
+import { GridContent } from "@/admin/components";
 import { useI18n } from "vue-i18n";
 import { useRoute } from "vue-router";
 

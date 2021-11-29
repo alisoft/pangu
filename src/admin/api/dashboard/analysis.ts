@@ -1,5 +1,5 @@
 import { reactive } from "vue";
-import request from "../../utils/request";
+import request from "@/admin/utils/request";
 
 export interface VisitDataItem {
   x: string;

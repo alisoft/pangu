@@ -1,7 +1,8 @@
 import { createSSRApp } from "vue";
-import { createAppRouter } from "./router";
+import "ant-design-vue/lib/style/index.less";
+import { createMemoryHistory } from "vue-router";
+import { createAppRouter } from "./router/routers";
 import store from "./store";
-import "ant-design-vue/lib/style";
 import locale from "./locales";
 import App from "./App.vue";
 
@@ -12,7 +13,6 @@ import Authority from "./utils/authority/authority.vue";
 
 import "./app.less";
 import "./router/router-guards";
-import { createMemoryHistory } from "vue-router";
 
 export default function () {
   const app = createSSRApp(App);

@@ -1,4 +1,4 @@
-import request from "../../utils/request";
+import request from "@/admin/utils/request";
 import type { ResponseBody } from "../typing";
 
 export interface BasicFormData {

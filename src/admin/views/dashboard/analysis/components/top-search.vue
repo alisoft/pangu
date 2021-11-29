@@ -76,7 +76,7 @@ import Trend from "./trend/index.vue";
 import type {
   SearchDataItem,
   VisitDataItem,
-} from "../../../../api/dashboard/analysis";
+} from "@/admin/api/dashboard/analysis";
 
 import numeral from "numeral";
 

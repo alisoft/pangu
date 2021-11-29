@@ -15,8 +15,8 @@
 <script lang="ts">
 import type { PropType } from "vue";
 import { computed, defineComponent, ref, onMounted, watch, inject } from "vue";
-import type { RadarIndicatorItem } from "../../../../../components";
-import { Chart } from "../../../../../components";
+import type { RadarIndicatorItem } from "@/admin/components";
+import { Chart } from "@/admin/components";
 
 export interface RadarDataType {
   label: string;

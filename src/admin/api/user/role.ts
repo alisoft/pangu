@@ -1,6 +1,6 @@
-import request from "../../utils/request";
+import request from "@/admin/utils/request";
 import type { PageResult } from "../typing";
-import type { Permission, Role } from "../../store/modules/user/typing";
+import type { Permission, Role } from "@/admin/store/modules/user/typing";
 
 export async function getRoles() {
   return request.get<any, PageResult<Role>>("/roles");

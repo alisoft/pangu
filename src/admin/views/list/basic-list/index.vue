@@ -111,12 +111,12 @@
 <script lang="ts">
 import { defineComponent, reactive, toRefs } from "vue";
 import { PlusOutlined } from "@ant-design/icons-vue";
-import { queryFakeList } from "../../../api/list/basic-list";
+import { queryFakeList } from "@/admin/api/list/basic-list";
 import type { TableListItem } from "../typing";
 import Info from "./info.vue";
 import moment from "moment";
-import type { RequestParams } from "../../../utils/hooks/useFetchData";
-import { useFetchData } from "../../../utils/hooks/useFetchData";
+import type { RequestParams } from "@/admin/utils/hooks/useFetchData";
+import { useFetchData } from "@/admin/utils/hooks/useFetchData";
 
 export default defineComponent({
   setup() {

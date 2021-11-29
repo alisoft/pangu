@@ -9,8 +9,8 @@
 <script lang="ts">
 import type { PropType } from "vue";
 import { defineComponent, ref, computed, watch, onMounted } from "vue";
-import type { SeriesDataItem } from "../../../../../../components";
-import { Chart } from "../../../../../../components";
+import type { SeriesDataItem } from "@/admin/components";
+import { Chart } from "@/admin/components";
 import "../../index.less";
 
 export default defineComponent({

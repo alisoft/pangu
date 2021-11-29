@@ -1,4 +1,4 @@
-import router from "../index.client";
+import router from "../index";
 import NProgress from "nprogress"; // progress bar
 import "nprogress/nprogress.css";
 

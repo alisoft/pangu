@@ -1,4 +1,4 @@
-import request from "../../utils/request";
+import request from "@/admin/utils/request";
 
 // use request util will ignore `/api/` path
 

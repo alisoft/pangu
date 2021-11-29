@@ -40,16 +40,6 @@ module.exports = {
       }
     },
   },
-  transpileDependencies: [
-    "ant-design-vue/es/locale/en_US",
-    "ant-design-vue/es/locale/zh_CN",
-    "store/plugins/expire",
-    "ant-design-vue/es/_util/vue-types",
-    "ant-design-vue/es/form",
-    "moment/locale/eu",
-    "moment/locale/zh-cn",
-    "@ant-design/icons-vue",
-  ],
   css: {
     loaderOptions: {
       //define global scss variable
@@ -78,7 +68,7 @@ module.exports = {
       module: {
         rules: [
           {
-            test: /\.mjs$/,
+            test: /\.(c|m)js$/,
             include: /node_modules/,
             type: "javascript/auto",
           },
@@ -137,7 +127,7 @@ module.exports = {
 
     // 不要将需要被 webpack 处理的依赖变为外部扩展
     // 也应该把修改 `global` 的依赖 (例如各种 polyfill) 整理成一个白名单
-    webpackConfig.externals(nodeExternals({ allowlist: /\.(css|vue)$/ }));
+    webpackConfig.externals(nodeExternals({ allowlist: [/\.(css|vue)$/, /ant-design-vue/] }));
 
     webpackConfig.optimization.splitChunks(false).minimize(false);
 

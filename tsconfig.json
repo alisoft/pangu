@@ -15,11 +15,11 @@
       "webpack-env",
       "jest"
     ],
-//    "paths": {
-//      "@/admin/*": [
-//        "src/*"
-//      ]
-//    },
+    "paths": {
+      "@/*": [
+        "src/*"
+      ]
+    },
     "lib": [
       "esnext",
       "dom",

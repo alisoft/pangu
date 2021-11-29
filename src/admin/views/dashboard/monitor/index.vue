@@ -141,11 +141,11 @@ import { defineComponent } from "vue";
 import { useI18n } from "vue-i18n";
 import { default as GridContent } from "@/admin/components/base-layouts/grid-content/index.vue";
 import { Gauge, Pie, TagCloud, WaterWave } from "./components/charts";
-import { queryTags } from "../../../api/dashboard/monitor";
+import { queryTags } from "@/admin/api/dashboard/monitor";
 import ActiveChart from "./components/active-chart/index.vue";
 
 import numeral from "numeral";
-import { useFetchData } from "../../../utils/hooks/useFetchData";
+import { useFetchData } from "@/admin/utils/hooks/useFetchData";
 
 export default defineComponent({
   setup() {

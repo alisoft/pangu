@@ -13,7 +13,7 @@
 import type { PropType, VNodeChild } from "vue";
 import { defineComponent, computed, inject, ref } from "vue";
 import { useProProvider } from "../pro-provider";
-import { injectMenuState } from "../../../layouts/use-menu-state";
+import { injectMenuState } from "@/admin/layouts/use-menu-state";
 
 export interface FooterToolbarProps {
   extra?: VNodeChild;

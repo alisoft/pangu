@@ -10,7 +10,7 @@
 <script lang="ts">
 import type { PropType } from "vue";
 import { defineComponent, ref, computed, watch, onMounted } from "vue";
-import { Chart } from "../../../../../../components";
+import { Chart } from "@/admin/components";
 import moment from "moment";
 
 export interface TimelineItem {

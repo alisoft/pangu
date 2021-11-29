@@ -8,18 +8,18 @@ import {
   SET_ROUTERS,
   SET_TOKEN,
 } from "./mutations";
-import type { LoginParams, UserInfo } from "../../../api/user/login";
+import type { LoginParams, UserInfo } from "@/admin/api/user/login";
 import {
   postAccountLogin,
   getCurrentUser,
   postLogout,
-} from "../../../api/user/login";
-import { default as router } from "../../../router/index.client";
-import { routes } from "../../../router";
-import { filterMenu } from "../../../utils/menu-util";
-import { hasAuthority, filterChildRoute } from "../../../utils/authority";
-import { generatorDynamicRouter } from "../../../router/generator-routers";
-import type { MenuDataItem } from "../../../router/typing";
+} from "@/admin/api/user/login";
+import { default as router } from "@/admin/router";
+import { routes } from "@/admin/router/routers";
+import { filterMenu } from "@/admin/utils/menu-util";
+import { hasAuthority, filterChildRoute } from "@/admin/utils/authority";
+import { generatorDynamicRouter } from "@/admin/router/generator-routers";
+import type { MenuDataItem } from "@/admin/router/typing";
 
 export const LOGIN = "LOGIN";
 export const LOGOUT = "LOGOUT";
