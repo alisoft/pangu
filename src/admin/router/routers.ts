@@ -599,7 +599,7 @@ export const staticRoutes: MenuDataItem[] = [
   },
 ];
 
-export function createAppRouter(history: RouterHistory) {
+export default function (history: RouterHistory) {
   return createRouter({
     history,
     routes: staticRoutes,

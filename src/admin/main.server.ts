@@ -1,7 +1,7 @@
 import { createSSRApp } from "vue";
 import "ant-design-vue/lib/style/index.less";
 import { createMemoryHistory } from "vue-router";
-import { createAppRouter } from "./router/routers";
+import createRouter from "./router/routers";
 import store from "./store";
 import locale from "./locales";
 import App from "./App.vue";
@@ -12,11 +12,11 @@ import { useIcons } from "./icons";
 import Authority from "./utils/authority/authority.vue";
 
 import "./app.less";
-import "./router/router-guards";
+// import "./router/router-guards";
 
 export default function () {
   const app = createSSRApp(App);
-  const router = createAppRouter(createMemoryHistory("/admin/"));
+  const router = createRouter(createMemoryHistory("/admin/"));
 
   applyComponents(app)
     .use(router)

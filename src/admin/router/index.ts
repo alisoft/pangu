@@ -1,4 +1,4 @@
 import { createWebHistory } from "vue-router";
-import { createAppRouter } from "./routers";
+import createRouter from "./routers";
 
-export default createAppRouter(createWebHistory("/admin/"));
+export default createRouter(createWebHistory("/admin/"));
