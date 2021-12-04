@@ -7,7 +7,7 @@
     "build:client": "vue-cli-service build --dest dist/client",
     "build:node": "cross-env SSR=1 vue-cli-service build --dest dist/node",
     "build:server": "rimraf build/* && tsc -p src/node/tsconfig.json",
-    "build": "rimraf dist/* && npm run build:client && npm run build:node",
+    "build": "rimraf dist/* && npm run build:client && npm run build:node && npm run build:server",
     "server:prod": "pm2 start ecosystem.config.json",
     "server:dev": "nodemon",
     "test:unit": "vue-cli-service test:unit",
