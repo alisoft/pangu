@@ -59,6 +59,7 @@ import NoticeList from "./notice-list.vue";
 import { message } from "ant-design-vue/lib";
 import { useStore } from "vuex";
 import { SET_INFO } from "@/admin/store/modules/user/mutations";
+import { Timer } from "@element-plus/icons";
 
 // 如需要实时更新提醒通知，可以配置 realtime 为 true 打开该轮询，或者自行尝试配置 websocket 功能
 // 注意：目前未读数量是通过 currentUSer 接口取回的，如果更改成实时，未读数量也建议更改成独立接口 或者 合并到 getNoticeData 中
@@ -66,7 +67,7 @@ const useFetchNotice = (
   getNoticeData: () => Promise<void>,
   realtime?: boolean
 ) => {
-  let interval: number;
+  let interval: any;
   onMounted(() => {
     getNoticeData();
     if (realtime) {

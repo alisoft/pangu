@@ -47,7 +47,7 @@ function getActiveData() {
 }
 
 function useLoopData() {
-  const timer = ref<number | undefined>(undefined);
+  const timer = ref<any>(undefined);
   const requestRef = ref<number | undefined>(undefined);
   const activeData = ref<any>(getActiveData());
 
