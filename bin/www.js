@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
-const app = require("../build/server/app");
-const config = require("../build/server/config/config");
-const logger = require("../build/server/config/logger");
+const app = require("../build/server/app").default;
+const config = require("../build/server/config/config").default;
+const logger = require("../build/server/config/logger").default;
 const http = require("http");
 
 app.set("port", config.port);
