@@ -125,7 +125,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, reactive, toRefs } from "vue";
+import { defineComponent, reactive, toRefs, onMounted } from "vue";
 import { getSmsCaptcha } from "@/admin/api/user/login";
 import { message, notification } from "ant-design-vue/lib";
 import { useForm } from "ant-design-vue/lib/form";

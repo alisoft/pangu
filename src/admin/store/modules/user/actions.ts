@@ -1,5 +1,5 @@
 import type { ActionTree } from "vuex";
-import type { RouteRecordRaw } from "vue-router";
+import type { RouteRecordRaw, Router } from "vue-router";
 import type { Role, UserState } from "./typing";
 import type { RootState } from "../../root-state";
 import {
@@ -14,7 +14,6 @@ import {
   getCurrentUser,
   postLogout,
 } from "@/admin/api/user/login";
-import { default as router } from "@/admin/router";
 import { routes } from "@/admin/router/routers";
 import { filterMenu } from "@/admin/utils/menu-util";
 import { hasAuthority, filterChildRoute } from "@/admin/utils/authority";
@@ -56,7 +55,7 @@ export const actions: ActionTree<UserState, RootState> = {
     });
   },
   // 从路由表构建路由（前端对比后端权限字段过滤静态路由表）
-  [GENERATE_ROUTES]({ commit }, info: UserInfo) {
+  [GENERATE_ROUTES]({ commit }, { info, router }) {
     return new Promise<RouteRecordRaw[]>((resolve) => {
       // 修改这里可以进行接口返回的对象结构进行改变
       // 亦或是去掉 info.role 使用别的属性替代
@@ -99,7 +98,7 @@ export const actions: ActionTree<UserState, RootState> = {
     });
   },
   // 从后端获取路由表结构体，并构建前端路由
-  [GENERATE_ROUTES_DYNAMIC]({ commit }) {
+  [GENERATE_ROUTES_DYNAMIC]({ commit }, router: Router) {
     return new Promise<RouteRecordRaw>((resolve) => {
       generatorDynamicRouter()
         .then((routes: RouteRecordRaw) => {

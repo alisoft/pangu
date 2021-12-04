@@ -49,7 +49,10 @@ router.beforeEach(async (to) => {
     //     并且当用户认为 token 发生泄露或不安全时，可以根据相关服务端 token 设计规则，让 token 失效。
     const info = await store.dispatch(`user/${GET_INFO}`);
     // 使用当前用户的 权限信息 生成 对应权限的路由表
-    const allowRouters = await store.dispatch(`user/${GENERATE_ROUTES}`, info);
+    const allowRouters = await store.dispatch(`user/${GENERATE_ROUTES}`, {
+      info,
+      router,
+    });
     if (allowRouters) {
       return { ...to, replace: true };
     }

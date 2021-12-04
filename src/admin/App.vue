@@ -5,7 +5,7 @@
 </template>
 
 <script lang="ts">
-import { computed, provide, watch } from "vue";
+import { computed, provide, watch, onMounted, onBeforeUnmount } from "vue";
 import { useStore } from "vuex";
 import { STORAGE_LANG_KEY } from "./store/mutation-type";
 import { localStorage } from "./utils/local-storage";
@@ -38,9 +38,20 @@ export default {
       store.dispatch("app/SET_LANG", lang);
     }
     const theme = computed(() => store.getters["app/navTheme"]);
+
+    let mounted = false;
+    onMounted(() => {
+      mounted = true;
+    });
+
+    onBeforeUnmount(() => {
+      mounted = false;
+    });
+
     watch(
       theme,
       () => {
+        if (!mounted) return;
         if (theme.value === "realDark") {
           document
             .getElementsByTagName("html")[0]

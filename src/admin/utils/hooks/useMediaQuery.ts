@@ -62,6 +62,10 @@ const useMedia = () => {
   const colSpan = ref(getScreenClassName());
   (Object.keys(MediaQueryEnum) as MediaQueryKey[]).forEach((key) => {
     const { matchMedia } = MediaQueryEnum[key];
+    if (typeof window === "undefined") {
+      colSpan.value = key;
+      return;
+    }
     const mediaQuery = window.matchMedia(matchMedia);
     if (mediaQuery.matches) {
       colSpan.value = key;

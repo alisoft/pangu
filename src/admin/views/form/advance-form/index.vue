@@ -57,7 +57,14 @@
 
 <script lang="ts">
 import type { RendererElement } from "vue";
-import { defineComponent, reactive, ref, toRaw } from "vue";
+import {
+  defineComponent,
+  reactive,
+  ref,
+  toRaw,
+  onMounted,
+  onBeforeUnmount,
+} from "vue";
 import { CloseCircleOutlined } from "@ant-design/icons-vue";
 import { useI18n } from "vue-i18n";
 import scrollIntoView from "scroll-into-view-if-needed";
@@ -125,7 +132,18 @@ export default defineComponent({
           errorList(errs);
         });
     };
+
+    let mounted = false;
+    onMounted(() => {
+      mounted = true;
+    });
+
+    onBeforeUnmount(() => {
+      mounted = false;
+    });
+
     const handleErrorClick = (key: string) => {
+      if (!mounted) return;
       const node = document.querySelector(`[data-validate-id=${key}]`);
 
       if (node) {
