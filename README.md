@@ -1,6 +1,7 @@
 # Vue3 Node Boilerplate
 
-[![.github/workflows/deploy-to-ecs.yml](https://github.com/realkimmy/vue3-node-boilerplate/actions/workflows/deploy-to-ecs.yml/badge.svg?branch=ssr-mpa)](https://github.com/realkimmy/vue3-node-boilerplate/actions/workflows/deploy-to-ecs.yml)
+[![.github/workflows/deploy-to-heroku.yml](https://github.com/realkimmy/vue3-node-boilerplate/actions/workflows/deploy-to-heroku.yml/badge.svg?branch=ssr-mpa-ts)](https://github.com/realkimmy/vue3-node-boilerplate/actions/workflows/deploy-to-heroku.yml)
+[![Website](https://img.shields.io/website?url=https%3A%2F%2Fvue3-node-boilerplate-ts.herokuapp.com)](https://vue3-node-boilerplate-ts.herokuapp.com)
 
 ## API Documentation
 
@@ -91,4 +92,4 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
 
 ## Deployment
 
-This project is deployed on [Vercel](https://vercel.com/).
+This project is deployed on [Heroku](https://www.heroku.com/).
