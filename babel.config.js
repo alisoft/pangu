@@ -8,7 +8,12 @@ module.exports = {
     //     },
     //   },
     // ],
-    "@vue/cli-plugin-babel/preset",
+    [
+      "@vue/cli-plugin-babel/preset",
+      {
+        useBuiltIns: "entry",
+      },
+    ],
   ],
   plugins: [
     // "@vue/babel-plugin-jsx",

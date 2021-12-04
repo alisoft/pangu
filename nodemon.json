@@ -1,0 +1,9 @@
+{
+  "watch": ["src/node"],
+  "ext": "ts, js",
+  "exec": "ts-node ./src/node/index.ts",
+  "env": {
+    "NODE_ENV": "development"
+  },
+  "ignoreRoot": [".git"]
+}

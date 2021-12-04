@@ -28,6 +28,7 @@ module.exports = {
       },
   lintOnSave: process.env.NODE_ENV !== "production",
   productionSourceMap: false,
+  transpileDependencies: [/node_modules\/\\@babel\/runtime/],
   devServer: {
     open: true,
     overlay: {

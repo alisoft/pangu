@@ -20,6 +20,7 @@ module.exports = {
     "@typescript-eslint/no-explicit-any": 1,
     "@typescript-eslint/no-empty-function": 1,
     "@typescript-eslint/ban-ts-comment": 1,
+    "@typescript-eslint/no-this-alias": 1,
   },
   overrides: [
     {
