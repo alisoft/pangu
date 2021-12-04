@@ -16,7 +16,7 @@ import type {
   RouteRecordNormalized,
 } from "vue-router";
 import { useRouter, useRoute } from "vue-router";
-import { message } from "ant-design-vue";
+import { message } from "ant-design-vue/lib";
 import { flattenChildren } from "@/admin/utils/vnode-util";
 import findLast from "lodash.findlast";
 import omit from "lodash.omit";

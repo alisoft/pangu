@@ -56,7 +56,7 @@ import moment from "moment";
 import groupBy from "lodash.groupby";
 import NoticeDropdown from "./notice-dropdown.vue";
 import NoticeList from "./notice-list.vue";
-import { message } from "ant-design-vue";
+import { message } from "ant-design-vue/lib";
 import { useStore } from "vuex";
 import { SET_INFO } from "@/admin/store/modules/user/mutations";
 

@@ -26,7 +26,7 @@
 
 <script lants="ts">
 import { defineComponent, ref } from "vue";
-import { message } from "ant-design-vue";
+import { message } from "ant-design-vue/lib";
 
 export default defineComponent({
   name: "SecuritySettings",

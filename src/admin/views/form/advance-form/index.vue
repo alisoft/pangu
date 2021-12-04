@@ -65,7 +65,7 @@ import RepositoryForm from "./repository-form.vue";
 import TaskForm from "./task-form.vue";
 import MemberList from "./member-list.vue";
 import FooterToolbar from "@/admin/components/base-layouts/footer-toolbar/index.vue";
-import type { validateInfos } from "ant-design-vue/es/form/useForm";
+import type { validateInfos } from "ant-design-vue/lib/form/useForm";
 
 export interface ErrorItem {
   key: string;

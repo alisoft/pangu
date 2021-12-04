@@ -1,3 +1,4 @@
+import { App } from "vue";
 import {
   Layout,
   Menu,
@@ -41,8 +42,7 @@ import {
   BackTop,
   Upload,
   Badge,
-} from "ant-design-vue";
-import { App } from "vue";
+} from "ant-design-vue/lib";
 
 export const applyComponents = (app: App): App => {
   return app

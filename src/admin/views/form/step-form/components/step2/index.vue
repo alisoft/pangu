@@ -58,7 +58,7 @@
 
 <script lang="ts">
 import { defineComponent, reactive, computed, toRaw } from "vue";
-import { useForm } from "ant-design-vue/es/form";
+import { useForm } from "ant-design-vue/lib/form";
 import { useStore } from "vuex";
 // require defined typo
 import type { FormState } from "../../model";

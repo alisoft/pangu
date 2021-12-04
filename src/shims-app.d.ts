@@ -59,8 +59,8 @@ declare module "*.module.sass" {
   export default classes;
 }
 
-declare module "ant-design-vue/es/locale/*" {
-  import type { Locale } from "ant-design-vue/es/locale-provider";
+declare module "ant-design-vue/lib/locale/*" {
+  import type { Locale } from "ant-design-vue/lib/locale-provider";
   const locale: Locale & { readonly [key: string]: string };
   export default locale;
 }

@@ -79,7 +79,7 @@ import { defineComponent, reactive } from "vue";
 import CitySelect from "@/admin/components/city-select/index.vue";
 import InputPhone from "@/admin/components/input-phone/index.vue";
 import { UploadOutlined } from "@ant-design/icons-vue";
-import { useForm } from "ant-design-vue/es/form";
+import { useForm } from "ant-design-vue/lib/form";
 
 export default defineComponent({
   name: "BaseSettings",

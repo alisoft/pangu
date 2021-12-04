@@ -62,7 +62,7 @@
 
 <script lang="ts">
 import { defineComponent, reactive, toRaw } from "vue";
-import { useForm } from "ant-design-vue/es/form";
+import { useForm } from "ant-design-vue/lib/form";
 import { useStore } from "vuex";
 import type { ReceiverAccountType } from "../receiver-account.vue";
 import ReceiverAccount from "../receiver-account.vue";

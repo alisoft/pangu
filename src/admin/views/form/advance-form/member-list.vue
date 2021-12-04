@@ -65,7 +65,7 @@
 
 <script lang="ts">
 import { defineComponent, reactive } from "vue";
-import { message } from "ant-design-vue";
+import { message } from "ant-design-vue/lib";
 import { PlusOutlined } from "@ant-design/icons-vue";
 import { useI18n } from "vue-i18n";
 

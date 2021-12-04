@@ -113,8 +113,8 @@
 
 <script lang="ts">
 import { computed, defineComponent, reactive } from "vue";
-import { useForm } from "ant-design-vue/es/form";
-import { message, notification } from "ant-design-vue";
+import { useForm } from "ant-design-vue/lib/form";
+import { message, notification } from "ant-design-vue/lib";
 import { MailOutlined } from "@ant-design/icons-vue";
 import { getSmsCaptcha } from "@/admin/api/user/login";
 import { postRegister } from "@/admin/api/user/register";

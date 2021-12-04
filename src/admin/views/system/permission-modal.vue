@@ -41,10 +41,10 @@
 </template>
 
 <script lang="ts">
-import { useForm } from "ant-design-vue/es/form";
+import { useForm } from "ant-design-vue/lib/form";
 import type { PropType } from "vue";
 import { defineComponent, ref, reactive, toRaw, watchEffect } from "vue";
-import { message } from "ant-design-vue";
+import { message } from "ant-design-vue/lib";
 import { addPermission, updatePermission } from "@/admin/api/user/role";
 import type { Action, Permission } from "@/admin/store/modules/user/typing";
 

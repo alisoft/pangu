@@ -98,7 +98,7 @@
 </template>
 
 <script lang="ts">
-import { useForm } from "ant-design-vue/es/form";
+import { useForm } from "ant-design-vue/lib/form";
 import { defineComponent, reactive } from "vue";
 
 export default defineComponent({
