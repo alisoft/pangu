@@ -14,11 +14,11 @@
             style="margin-bottom: 24px"
             message="账户或密码错误"
           />
-          <a-form-item v-bind="validateInfos.username">
+          <a-form-item v-bind="validateInfos.email">
             <a-input
               size="large"
-              v-model:value="modelRef.username"
-              placeholder="账户: admin"
+              v-model:value="modelRef.email"
+              placeholder="账户: test@test.com"
               style="width: 100%"
             >
               <template #prefix>
@@ -31,7 +31,7 @@
             <a-input-password
               v-model:value="modelRef.password"
               size="large"
-              placeholder="密码: admin or ant.design"
+              placeholder="密码: test1234"
             >
               <template #prefix>
                 <lock-outlined class="prefixIcon" />
@@ -125,7 +125,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, reactive, toRefs, onMounted } from "vue";
+import { defineComponent, reactive, toRefs } from "vue";
 import { getSmsCaptcha } from "@/admin/api/user/login";
 import { message, notification } from "ant-design-vue/lib";
 import { useForm } from "ant-design-vue/lib/form";
@@ -175,15 +175,15 @@ export default defineComponent({
     };
     const modelRef = reactive({
       rememberMe: true,
-      username: "",
+      email: "",
       password: "",
       mobile: "",
       captcha: "",
     });
     const rulesRef = reactive({
       rememberMe: undefined,
-      username: [
-        { required: true, message: "请输入帐户名或邮箱地址", type: "string" },
+      email: [
+        { required: true, message: "请输入邮箱地址", type: "string" },
         { validator: handleUsernameOrEmail, trigger: "change" },
       ],
       password: [
@@ -280,12 +280,11 @@ export default defineComponent({
       e.preventDefault();
       const validateNames =
         state.customActiveKey === "tab1"
-          ? ["username", "password"]
+          ? ["email", "password"]
           : ["mobile", "captcha"];
       state.loginBtn = true;
       validate(validateNames)
         .then((values) => {
-          console.log("values", values);
           store
             .dispatch(`user/${LOGIN}`, {
               ...values,

@@ -1,5 +1,5 @@
-const usernames = ["ant.design", "admin", "superuser"];
-const passwords = ["ant.design", "admin"];
+const usernames = ["test@test.com"];
+const passwords = ["test1234"];
 
 module.exports = {
   "GET /api/currentUser": (req, res) => {
@@ -71,10 +71,10 @@ module.exports = {
     });
   },
 
-  "POST /api/login/account": (req, res) => {
-    const { password, username, type } = req.body;
+  "POST /api/auth/login": (req, res) => {
+    const { password, email, type } = req.body;
 
-    if (!usernames.includes(username) || !passwords.includes(password)) {
+    if (!usernames.includes(email) || !passwords.includes(password)) {
       res.status(400).send({
         data: {
           isLogin: true,
@@ -92,15 +92,31 @@ module.exports = {
       }, 800);
     }).then(() => {
       res.send({
-        type: "account",
-        token:
-          "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.PObw1E6dwD2Mo9vLQUO8CQxzITNXx4ABu7mS2zWLeJk",
-        success: true,
+        user: {
+          role: "admin",
+          isEmailVerified: false,
+          isDel: 0,
+          email: "test@test.com",
+          name: "Jay",
+          id: "6190802262461fb7a51fc937",
+        },
+        tokens: {
+          access: {
+            token:
+              "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2MTkwODAyMjYyNDYxZmI3YTUxZmM5MzciLCJpYXQiOjE2Mzg2NzkxMjQsImV4cCI6MTYzODY4MDkyNCwidHlwZSI6ImFjY2VzcyJ9.ALOT9Jadl7pcLuyI0c4qMsNPlwVyvQlDSIb4id-LvuA",
+            expires: "2021-12-05T05:08:44.010Z",
+          },
+          refresh: {
+            token:
+              "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2MTkwODAyMjYyNDYxZmI3YTUxZmM5MzciLCJpYXQiOjE2Mzg2NzkxMjQsImV4cCI6MTY0MTI3MTEyNCwidHlwZSI6InJlZnJlc2gifQ.zWMyaRTlRf_inSWHYhDyBe9wD2ctJyPm-kRTcCtvbWc",
+            expires: "2022-01-04T04:38:44.012Z",
+          },
+        },
       });
     });
   },
 
-  "POST /api/logout": (req, res) => {
+  "POST /api/auth/logout": (req, res) => {
     // 模拟请求延迟
     return new Promise((resolve) => {
       setTimeout(() => {

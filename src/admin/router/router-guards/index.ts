@@ -4,7 +4,7 @@ import localStorage from "../../utils/local-storage";
 import { allowList, loginRoutePath } from "../define-meta";
 import { STORAGE_TOKEN_KEY } from "../../store/mutation-type";
 // eslint-disable-next-line
-import { GENERATE_ROUTES, GET_INFO } from '../../store/modules/user/actions';
+import { GENERATE_ROUTES } from '../../store/modules/user/actions';
 
 router.beforeEach(async (to) => {
   const userToken = localStorage.get(STORAGE_TOKEN_KEY);
@@ -47,12 +47,12 @@ router.beforeEach(async (to) => {
     // 问题4：access token 不是也不能保障安全吗？
     //   - 用户在此进行登录，代表认同该设备。保存用户的 token 可以进行快速身份认证，
     //     并且当用户认为 token 发生泄露或不安全时，可以根据相关服务端 token 设计规则，让 token 失效。
-    const info = await store.dispatch(`user/${GET_INFO}`);
+    // const info = await store.dispatch(`user/${GET_INFO}`);
     // 使用当前用户的 权限信息 生成 对应权限的路由表
-    const allowRouters = await store.dispatch(`user/${GENERATE_ROUTES}`, {
-      info,
-      router,
-    });
+    const allowRouters = await store.dispatch(
+      `user/${GENERATE_ROUTES}`,
+      router
+    );
     if (allowRouters) {
       return { ...to, replace: true };
     }

@@ -5,25 +5,36 @@ export type LoginStatus = "ok" | "error";
 
 export interface LoginParams {
   type: LoginType;
-  username: string;
+  email: string;
   password: string;
 }
 
 export interface LoginResp {
   type: LoginType;
   success: boolean;
-  token: string;
+  user: UserInfo;
+  tokens: TokensInfo;
   // currentAuthority: string;
 }
 
+interface TokenInfo {
+  token: string;
+  expires: Date;
+}
+
+interface TokensInfo {
+  access: TokenInfo;
+  refresh: TokenInfo;
+}
+
 export interface UserInfo {
-  id: string | number;
-  address: string;
+  id: string;
+  name: string;
+  email: string;
+  isEmailVerified: boolean;
   avatar: string;
   country: string;
-  email: string;
   group: string;
-  name: string;
   phone: string;
   signature: string;
   role: {
@@ -59,7 +70,7 @@ export type RouteItem = {
 };
 
 export async function postAccountLogin(params: LoginParams) {
-  return request.post<LoginParams, LoginResp>("/login/account", params);
+  return request.post<LoginParams, LoginResp>("/auth/login", params);
 }
 
 export async function getCurrentUser() {
@@ -71,7 +82,7 @@ export async function getCurrentUserNav() {
 }
 
 export async function postLogout() {
-  return request.post<any, any>("/logout");
+  return request.post<any, any>("/auth/logout");
 }
 
 export async function getSmsCaptcha(params: SmsCaptchaRequest) {
