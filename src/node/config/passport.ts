@@ -1,4 +1,8 @@
-import { ExtractJwt, Strategy as JwtStrategy, VerifiedCallback } from "passport-jwt";
+import {
+  ExtractJwt,
+  Strategy as JwtStrategy,
+  VerifiedCallback,
+} from "passport-jwt";
 import config from "./config";
 import { tokenTypes } from "./tokens";
 import { User } from "../models";
