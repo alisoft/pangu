@@ -6,7 +6,7 @@
         :tab-bar-style="{ textAlign: 'center', borderBottom: 'unset' }"
         @change="handleTabClick"
       >
-        <a-tab-pane key="tab1" tab="账号密码登录">
+        <a-tab-pane key="password" tab="账号密码登录">
           <a-alert
             v-if="isLoginError"
             type="error"
@@ -40,7 +40,7 @@
           </a-form-item>
         </a-tab-pane>
 
-        <a-tab-pane key="tab2" tab="手机号登录">
+        <a-tab-pane key="phone" tab="手机号登录">
           <a-form-item v-bind="validateInfos.mobile">
             <a-input
               v-model:value="modelRef.mobile"
@@ -81,9 +81,46 @@
             </a-col>
           </a-row>
         </a-tab-pane>
+
+        <a-tab-pane key="qrcode" tab="二维码登录">
+          <QRCodeVue3
+            :width="300"
+            :height="300"
+            value="https://scholtz.sk"
+            :qrOptions="{
+              typeNumber: 0,
+              mode: 'Byte',
+              errorCorrectionLevel: 'H',
+            }"
+            :imageOptions="{
+              hideBackgroundDots: true,
+              imageSize: 0.4,
+              margin: 0,
+            }"
+            :dotsOptions="{
+              type: 'dots',
+              color: '#26249a',
+              gradient: {
+                type: 'linear',
+                rotation: 0,
+                colorStops: [
+                  { offset: 0, color: '#26249a' },
+                  { offset: 1, color: '#26249a' },
+                ],
+              },
+            }"
+            :backgroundOptions="{ color: '#ffffff' }"
+            :cornersSquareOptions="{ type: 'dot', color: '#000000' }"
+            :cornersDotOptions="{ type: undefined, color: '#000000' }"
+            fileExt="png"
+            :download="false"
+            myclass="qrcode-wrapper"
+            imgclass="img-qr"
+          />
+        </a-tab-pane>
       </a-tabs>
 
-      <a-form-item>
+      <a-form-item v-if="customActiveKey !== 'qrcode'">
         <a-checkbox v-model:cheched="modelRef.rememberMe">自动登录</a-checkbox>
         <router-link
           to="/user/recover"
@@ -94,7 +131,7 @@
         </router-link>
       </a-form-item>
 
-      <a-form-item style="margin-top: 24px">
+      <a-form-item v-if="customActiveKey !== 'qrcode'" style="margin-top: 24px">
         <a-button
           size="large"
           type="primary"
@@ -141,6 +178,7 @@ import {
 import type { AxiosError } from "axios";
 import { useRouter } from "vue-router";
 import { useStore } from "vuex";
+import QRCodeVue3 from "qrcode-vue3";
 import { LOGIN } from "@/admin/store/modules/user/actions";
 
 export default defineComponent({
@@ -149,7 +187,7 @@ export default defineComponent({
     const router = useRouter();
     const store = useStore();
     const state = reactive({
-      customActiveKey: "tab1",
+      customActiveKey: "password",
       loginBtn: false,
       // login type: 0 email, 1 username, 2 telephone
       loginType: 0,
@@ -279,16 +317,18 @@ export default defineComponent({
     const handleSubmit = (e: Event) => {
       e.preventDefault();
       const validateNames =
-        state.customActiveKey === "tab1"
+        state.customActiveKey === "password"
           ? ["email", "password"]
-          : ["mobile", "captcha"];
+          : state.customActiveKey === "phone"
+          ? ["mobile", "captcha"]
+          : [];
       state.loginBtn = true;
       validate(validateNames)
         .then((values) => {
           store
             .dispatch(`user/${LOGIN}`, {
               ...values,
-              type: state.customActiveKey === "tab1",
+              type: state.customActiveKey,
             })
             .then(() => {
               loginSuccess();
@@ -320,6 +360,7 @@ export default defineComponent({
     };
   },
   components: {
+    QRCodeVue3,
     UserOutlined,
     LockOutlined,
     MobileOutlined,
@@ -331,7 +372,7 @@ export default defineComponent({
 });
 </script>
 
-<style lang="less" scoped>
+<style lang="less">
 .user-layout-login {
   label {
     font-size: 14px;
@@ -376,6 +417,10 @@ export default defineComponent({
       float: right;
     }
   }
+  .qrcode-wrapper {
+    text-align: center;
+  }
+
   .prefixIcon {
     color: @primary-color;
     font-size: @font-size-base;

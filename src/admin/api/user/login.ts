@@ -1,6 +1,6 @@
 import request from "@/admin/utils/request";
 
-export type LoginType = "account" | "telephone";
+export type LoginType = "password" | "phone" | "qrcode";
 export type LoginStatus = "ok" | "error";
 
 export interface LoginParams {
