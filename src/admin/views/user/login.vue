@@ -372,7 +372,7 @@ export default defineComponent({
 });
 </script>
 
-<style lang="less">
+<style lang="less" scoped>
 .user-layout-login {
   label {
     font-size: 14px;
@@ -417,7 +417,7 @@ export default defineComponent({
       float: right;
     }
   }
-  .qrcode-wrapper {
+  :deep(.qrcode-wrapper) {
     text-align: center;
   }
 
