@@ -12,6 +12,11 @@ const envVarsSchema = Joi.object()
     PORT: Joi.number().default(3000),
     SSL_PORT: Joi.number().default(443),
     MONGODB_URL: Joi.string().required().description("Mongo DB url"),
+    REDIS_URL: Joi.string().required().description("Redis DB url"),
+    REDIS_PORT: Joi.string().required().description("Redis DB port"),
+    REDIS_PASSWORD: Joi.string().required().description("Redis DB password"),
+    REDIS_DATABASE: Joi.string().required().description("Redis DB database"),
+    SESSION_SECRET: Joi.string().required().description("Session secret key"),
     JWT_SECRET: Joi.string().required().description("JWT secret key"),
     JWT_ACCESS_EXPIRATION_MINUTES: Joi.number()
       .default(30)
@@ -54,6 +59,16 @@ export default {
       useNewUrlParser: true,
       useUnifiedTopology: true,
     },
+  },
+  redis: {
+    url: envVars.REDIS_URL,
+    port: envVars.REDIS_PORT,
+    password: envVars.REDIS_PASSWORD,
+    database:
+      envVars.REDIS_DATABASE + (envVars.NODE_ENV === "test" ? "-test" : ""),
+  },
+  session: {
+    secret: envVars.SESSION_SECRET,
   },
   jwt: {
     secret: envVars.JWT_SECRET,

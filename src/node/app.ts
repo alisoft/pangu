@@ -2,6 +2,9 @@ import express from "express";
 import { graphqlHTTP } from "express-graphql";
 import path from "path";
 import fs from "fs";
+import redis from "redis";
+import connectRedis from "connect-redis";
+import session from "express-session";
 import { renderToString } from "vue/server-renderer";
 import helmet from "helmet";
 import mongoSanitize from "express-mongo-sanitize";
@@ -70,6 +73,22 @@ app.use(compression());
 // enable cors
 app.use(cors());
 app.options("*", cors<any>());
+
+const RedisStore = connectRedis(session);
+const redisClient = redis.createClient(config.redis.port, config.redis.url, {
+  password: config.redis.password,
+  db: config.redis.database,
+  connect_timeout: 3600,
+});
+
+app.use(
+  session({
+    store: new RedisStore({ client: redisClient }),
+    saveUninitialized: false,
+    secret: config.session.secret,
+    resave: false,
+  })
+);
 
 app.use(
   "/img",
