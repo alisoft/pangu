@@ -12,14 +12,14 @@ import { useIcons } from "./icons";
 import Authority from "./utils/authority/authority.vue";
 
 import "./app.less";
-// import "./router/router-guards";
+import applyRouter from "./router/router-guards";
 
 export default function () {
   const app = createSSRApp(App);
   const router = createRouter(createMemoryHistory("/admin/"));
 
   applyComponents(app)
-    .use(router)
+    .use(applyRouter(router))
     .use(locale as any)
     .use(store)
     .use(ProProvider)

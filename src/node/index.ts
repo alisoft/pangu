@@ -5,6 +5,7 @@ import path from "path";
 import http from "http";
 import https from "https";
 import app from "./app";
+import { applyWs } from "./ws";
 import config from "./config/config";
 import logger from "./config/logger";
 const privateKey = fs.readFileSync(
@@ -35,6 +36,9 @@ const httpsServer = https.createServer(
   { key: privateKey, cert: certificate },
   app
 );
+
+applyWs(httpServer);
+applyWs(httpsServer);
 
 mongoose.connect(config.mongoose.url, config.mongoose.options).then(() => {
   logger.info("Connected to MongoDB");

@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
 const app = require("../build/server/app").default;
+const { applyWs } = require("../build/server/ws");
 const config = require("../build/server/config/config").default;
 const logger = require("../build/server/config/logger").default;
 const http = require("http");
@@ -7,6 +8,7 @@ const http = require("http");
 app.set("port", config.port);
 const server = http.createServer(app);
 
+applyWs(server);
 server.listen(config.port);
 server.on("error", onError);
 server.on("listening", onListening);

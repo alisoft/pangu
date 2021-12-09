@@ -83,40 +83,9 @@
         </a-tab-pane>
 
         <a-tab-pane key="qrcode" tab="二维码登录">
-          <QRCodeVue3
-            :width="300"
-            :height="300"
-            value="https://scholtz.sk"
-            :qrOptions="{
-              typeNumber: 0,
-              mode: 'Byte',
-              errorCorrectionLevel: 'H',
-            }"
-            :imageOptions="{
-              hideBackgroundDots: true,
-              imageSize: 0.4,
-              margin: 0,
-            }"
-            :dotsOptions="{
-              type: 'dots',
-              color: '#26249a',
-              gradient: {
-                type: 'linear',
-                rotation: 0,
-                colorStops: [
-                  { offset: 0, color: '#26249a' },
-                  { offset: 1, color: '#26249a' },
-                ],
-              },
-            }"
-            :backgroundOptions="{ color: '#ffffff' }"
-            :cornersSquareOptions="{ type: 'dot', color: '#000000' }"
-            :cornersDotOptions="{ type: undefined, color: '#000000' }"
-            fileExt="png"
-            :download="false"
-            myclass="qrcode-wrapper"
-            imgclass="img-qr"
-          />
+          <div class="qrcode-wrapper">
+            <img width="300" height="300" :src="qrcodeUrl" />
+          </div>
         </a-tab-pane>
       </a-tabs>
 
@@ -162,7 +131,15 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, reactive, toRefs } from "vue";
+import {
+  defineComponent,
+  reactive,
+  toRefs,
+  ref,
+  watch,
+  onMounted,
+  onBeforeUnmount,
+} from "vue";
 import { getSmsCaptcha } from "@/admin/api/user/login";
 import { message, notification } from "ant-design-vue/lib";
 import { useForm } from "ant-design-vue/lib/form";
@@ -178,7 +155,7 @@ import {
 import type { AxiosError } from "axios";
 import { useRouter } from "vue-router";
 import { useStore } from "vuex";
-import QRCodeVue3 from "qrcode-vue3";
+import QRCode from "qrcode";
 import { LOGIN } from "@/admin/store/modules/user/actions";
 
 export default defineComponent({
@@ -186,6 +163,7 @@ export default defineComponent({
   setup() {
     const router = useRouter();
     const store = useStore();
+    const qrcodeUrl = ref();
     const state = reactive({
       customActiveKey: "password",
       loginBtn: false,
@@ -349,9 +327,39 @@ export default defineComponent({
     // this.loginBtn = false;
     // this.stepCaptchaVisible = false;
 
+    let ws: WebSocket;
+    onMounted(() => {
+      ws = new WebSocket(`${process.env.VUE_APP_WS_URL_PREFIX}/ws`);
+      ws.onopen = () => {
+        ws.send("something");
+      };
+
+      ws.onmessage = (data) => {
+        console.log("received: %s", data);
+      };
+    });
+
+    onBeforeUnmount(() => {
+      ws && ws.close();
+    });
+
+    watch(
+      () => state.customActiveKey,
+      async () => {
+        if (state.customActiveKey === "qrcode") {
+          qrcodeUrl.value = await QRCode.toDataURL("text", {
+            width: 300,
+            type: "image/webp",
+            rendererOpts: { quality: 1 },
+          });
+        }
+      }
+    );
+
     return {
       ...toRefs(state),
       modelRef,
+      qrcodeUrl,
       validateInfos,
 
       handleTabClick,
@@ -360,7 +368,6 @@ export default defineComponent({
     };
   },
   components: {
-    QRCodeVue3,
     UserOutlined,
     LockOutlined,
     MobileOutlined,

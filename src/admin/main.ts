@@ -10,12 +10,12 @@ import { applyComponents } from "./component";
 import { useIcons } from "./icons";
 import Authority from "./utils/authority/authority.vue";
 import "./app.less";
-import "./router/router-guards";
+import applyRouter from "./router/router-guards";
 
 const app = createApp(App);
 
 applyComponents(app)
-  .use(router)
+  .use(applyRouter(router))
   .use(locale as any)
   .use(store)
   .use(ProProvider)
