@@ -11,7 +11,14 @@ const envVarsSchema = Joi.object()
       .required(),
     PORT: Joi.number().default(3000),
     SSL_PORT: Joi.number().default(443),
-    MONGODB_URL: Joi.string().required().description("Mongo DB url"),
+    MONGODB_SCHEME: Joi.string()
+      .valid("mongodb", "mongodb+srv")
+      .default("mongodb")
+      .description("Mongo DB scheme"),
+    MONGODB_HOST: Joi.string().required().description("Mongo DB url"),
+    MONGODB_USER: Joi.string().description("Mongo DB user"),
+    MONGODB_PASSWORD: Joi.string().description("Mongo DB password"),
+    MONGODB_DB: Joi.string().required().description("Mongo DB name"),
     REDIS_URL: Joi.string().required().description("Redis DB url"),
     REDIS_PORT: Joi.string().required().description("Redis DB port"),
     REDIS_PASSWORD: Joi.string().required().description("Redis DB password"),
@@ -53,7 +60,14 @@ export default {
   port: envVars.PORT,
   sslPort: envVars.SSL_PORT,
   mongoose: {
-    url: envVars.MONGODB_URL + (envVars.NODE_ENV === "test" ? "-test" : ""),
+    url:
+      (envVars.MONGODB_SCHEME ? `${envVars.MONGODB_SCHEME}://` : "") +
+      (envVars.MONGODB_USER && envVars.MONGODB_PASSWORD
+        ? `${envVars.MONGODB_USER}:${envVars.MONGODB_PASSWORD}@`
+        : "") +
+      envVars.MONGODB_HOST +
+      (envVars.MONGODB_DB ? `/${envVars.MONGODB_DB}` : "") +
+      (envVars.NODE_ENV === "test" ? "-test" : ""),
     options: {
       useCreateIndex: true,
       useNewUrlParser: true,
