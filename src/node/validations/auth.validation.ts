@@ -13,7 +13,7 @@ export const login = {
   body: Joi.object().keys({
     email: Joi.string().required(),
     password: Joi.string().required(),
-    type: Joi.boolean().required(),
+    type: Joi.string().required(),
   }),
 };
 
