@@ -1,13 +1,15 @@
-import { ref, onMounted, onBeforeUnmount } from "vue";
+import { ref } from "vue";
 import { createI18n } from "vue-i18n";
 import moment from "moment";
 import enUS from "./lang/en-US";
+import { withMounted } from "@/common/utils/mixins";
 
 export const locales: string[] = ["zh-CN", "zh-TW", "en-US", "pt-BR"];
 
 export const defaultLang = "en-US";
 
 const loadedLanguages = ref<string[]>([defaultLang]);
+const { mounted } = withMounted();
 
 const i18n = createI18n({
   missingWarn: false,
@@ -21,20 +23,11 @@ const i18n = createI18n({
   },
 });
 
-let mounted = false;
-onMounted(() => {
-  mounted = true;
-});
-
-onBeforeUnmount(() => {
-  mounted = false;
-});
-
 function setI18nLanguage(lang: string) {
   // @ts-ignore
   i18n.global.locale = lang;
   // request.headers['Accept-Language'] = lang
-  if (mounted) {
+  if (mounted.value) {
     const HTML = document.querySelector("html");
     HTML && HTML.setAttribute("lang", lang);
   }

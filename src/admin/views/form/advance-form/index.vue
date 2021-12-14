@@ -57,14 +57,7 @@
 
 <script lang="ts">
 import type { RendererElement } from "vue";
-import {
-  defineComponent,
-  reactive,
-  ref,
-  toRaw,
-  onMounted,
-  onBeforeUnmount,
-} from "vue";
+import { defineComponent, reactive, ref, toRaw } from "vue";
 import { CloseCircleOutlined } from "@ant-design/icons-vue";
 import { useI18n } from "vue-i18n";
 import scrollIntoView from "scroll-into-view-if-needed";
@@ -73,6 +66,7 @@ import TaskForm from "./task-form.vue";
 import MemberList from "./member-list.vue";
 import FooterToolbar from "@/admin/components/base-layouts/footer-toolbar/index.vue";
 import type { validateInfos } from "ant-design-vue/lib/form/useForm";
+import { withMounted } from "@/common/utils/mixins";
 
 export interface ErrorItem {
   key: string;
@@ -99,6 +93,7 @@ export default defineComponent({
   name: "AdvanceForm",
   setup() {
     const { t } = useI18n();
+    const { mounted } = withMounted();
     const state = reactive({
       errors: [] as ErrorItem[],
     });
@@ -133,17 +128,8 @@ export default defineComponent({
         });
     };
 
-    let mounted = false;
-    onMounted(() => {
-      mounted = true;
-    });
-
-    onBeforeUnmount(() => {
-      mounted = false;
-    });
-
     const handleErrorClick = (key: string) => {
-      if (!mounted) return;
+      if (!mounted.value) return;
       const node = document.querySelector(`[data-validate-id=${key}]`);
 
       if (node) {

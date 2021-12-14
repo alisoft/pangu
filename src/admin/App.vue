@@ -5,7 +5,7 @@
 </template>
 
 <script lang="ts">
-import { computed, provide, watch, onMounted, onBeforeUnmount } from "vue";
+import { computed, provide, watch } from "vue";
 import { useStore } from "vuex";
 import { STORAGE_LANG_KEY } from "./store/mutation-type";
 import { localStorage } from "./utils/local-storage";
@@ -13,12 +13,14 @@ import useMediaQuery from "./utils/hooks/useMediaQuery";
 import { useI18n } from "vue-i18n";
 import useMenuState, { MenuStateSymbol } from "./layouts/use-menu-state";
 import { useMultiTabStateProvider } from "./components/multi-tab";
+import { withMounted } from "@/common/utils/mixins";
 
 export default {
   name: "App",
   setup() {
     const store = useStore();
     const i18n = useI18n();
+    const { mounted } = withMounted();
     const multiTabState = useMultiTabStateProvider();
     const colSize = useMediaQuery();
     const isMobile = computed(
@@ -39,19 +41,10 @@ export default {
     }
     const theme = computed(() => store.getters["app/navTheme"]);
 
-    let mounted = false;
-    onMounted(() => {
-      mounted = true;
-    });
-
-    onBeforeUnmount(() => {
-      mounted = false;
-    });
-
     watch(
       theme,
       () => {
-        if (!mounted) return;
+        if (!mounted.value) return;
         if (theme.value === "realDark") {
           document
             .getElementsByTagName("html")[0]

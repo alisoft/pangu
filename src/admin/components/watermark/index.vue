@@ -27,18 +27,11 @@
 </template>
 
 <script lang="ts">
-import {
-  inject,
-  defineComponent,
-  computed,
-  ref,
-  watchEffect,
-  onMounted,
-  onBeforeUnmount,
-} from "vue";
+import { inject, defineComponent, computed, ref, watchEffect } from "vue";
 import type { CSSProperties } from "vue";
 import PropTypes from "ant-design-vue/lib/_util/vue-types";
 import { useProProvider } from "../base-layouts/pro-provider";
+import { withMounted } from "@/common/utils/mixins";
 
 export type WaterMarkProps = {
   /** 是否禁用水印 */
@@ -120,6 +113,7 @@ export default defineComponent({
   },
   setup(props) {
     const { getPrefixCls } = useProProvider();
+    const { mounted } = withMounted();
     const prefixCls = computed(() => getPrefixCls("admin-pro-water-mark"));
     const wrapperCls = computed(() => `${prefixCls.value}-wrapper`);
     const waterMakrCls = computed(() => {
@@ -137,17 +131,8 @@ export default defineComponent({
       );
     });
 
-    let mounted = false;
-    onMounted(() => {
-      mounted = true;
-    });
-
-    onBeforeUnmount(() => {
-      mounted = false;
-    });
-
     watchEffect(() => {
-      if (props.disabled || !mounted) {
+      if (props.disabled || !mounted.value) {
         return;
       }
       const canvas = document.createElement("canvas");
