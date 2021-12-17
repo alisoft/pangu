@@ -3,19 +3,20 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "start": "vue-cli-service serve",
-    "build:client": "vue-cli-service build --dest dist/client",
-    "build:node": "cross-env SSR=1 vue-cli-service build --dest dist/node",
-    "build:dist": "rimraf dist/* && npm run build:client && npm run build:node",
-    "build:server": "rimraf build/* && tsc -p src/node/tsconfig.json",
     "build": "npm run build:dist && npm run build:server",
-    "server:prod": "pm2 start ecosystem.config.json",
+    "build:client": "vue-cli-service build --dest dist/client",
+    "build:dist": "rimraf dist/* && npm run build:client && npm run build:node",
+    "build:node": "cross-env SSR=1 vue-cli-service build --dest dist/node",
+    "build:server": "rimraf build/* && tsc -p src/node/tsconfig.json",
+    "lint": "vue-cli-service lint",
+    "prepare": "husky install",
     "server:dev": "nodemon",
-    "test:unit": "vue-cli-service test:unit",
-    "test:e2e": "vue-cli-service test:e2e",
+    "server:prod": "pm2 start ecosystem.config.json",
+    "start": "vue-cli-service serve",
     "test": "jest -i --colors --verbose --detectOpenHandles --config=jest.config.node.js",
-    "test:watch": "jest -i --watchAll --config=jest.config.node.js",
-    "lint": "vue-cli-service lint"
+    "test:e2e": "vue-cli-service test:e2e",
+    "test:unit": "vue-cli-service test:unit",
+    "test:watch": "jest -i --watchAll --config=jest.config.node.js"
   },
   "dependencies": {
     "@ant-design/icons-vue": "^6.0.1",
@@ -88,6 +89,8 @@
     "xss-clean": "^0.1.1"
   },
   "devDependencies": {
+    "@commitlint/cli": "^15.0.0",
+    "@commitlint/config-conventional": "^15.0.0",
     "@types/bcryptjs": "^2.4.2",
     "@types/compression": "^1.7.2",
     "@types/connect-redis": "^0.0.17",
@@ -169,20 +172,5 @@
     "webpack-manifest-plugin": "3.2.0",
     "webpack-node-externals": "^3.0.0",
     "webpackbar": "^5.0.0-3"
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged"
-    }
-  },
-  "lint-staged": {
-    "package.json": [
-      "sort-package-json",
-      "git add"
-    ],
-    "src/**/*.js": [
-      "prettier --write",
-      "git add"
-    ]
   }
 }

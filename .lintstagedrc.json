@@ -1,0 +1,10 @@
+{
+  "package.json": [
+    "sort-package-json",
+    "git add"
+  ],
+  "src/**/*.(ts|vue)": [
+    "prettier --write",
+    "git add"
+  ]
+}
