@@ -4,7 +4,7 @@ import {
   VerifiedCallback,
 } from "passport-jwt";
 import config from "./config";
-import { tokenTypes } from "./tokens";
+import { TokenTypes } from "@/common/types/tokens";
 import { User } from "../models";
 
 const jwtOptions = {
@@ -14,7 +14,7 @@ const jwtOptions = {
 
 const jwtVerify = async (payload: any, done: VerifiedCallback) => {
   try {
-    if (payload.type !== tokenTypes.ACCESS) {
+    if (payload.type !== TokenTypes.ACCESS) {
       throw new Error("Invalid token type");
     }
     const user = await User.findById(payload.sub);

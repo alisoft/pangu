@@ -1,8 +1,8 @@
 import httpStatus from "http-status";
 import { UserRolePermission } from "../models";
 import ApiError from "../utils/ApiError";
-import { BaseTypes } from "../config/base";
-import { PageOptions, UserRolePermissionModel } from "@/node/types";
+import { BaseTypes } from "@/common/types/base";
+import { PageOptions, UserRolePermissionModel } from "@/common/types";
 
 /**
  * Create a UserRolePermission

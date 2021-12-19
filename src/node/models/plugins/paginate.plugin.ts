@@ -1,7 +1,7 @@
 /* eslint-disable no-param-reassign */
 
 import { Schema } from "mongoose";
-import { PageOptions } from "@/node/types";
+import { PageOptions } from "@/common/types";
 
 export const paginate = (schema: Schema<any>) => {
   /**

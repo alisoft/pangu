@@ -4,9 +4,9 @@ import httpStatus from "http-status";
 import config from "../config/config";
 import { Token } from "../models";
 import ApiError from "../utils/ApiError";
-import { tokenTypes } from "../config/tokens";
+import { TokenTypes } from "@/common/types/tokens";
 import * as userService from "./user.service";
-import { UserModel } from "@/node/types";
+import { UserModel } from "@/common/types";
 
 /**
  * Generate token
@@ -89,7 +89,7 @@ export const generateAuthTokens = async (user: UserModel) => {
   const accessToken = generateToken(
     user.id as string,
     accessTokenExpires,
-    tokenTypes.ACCESS
+    TokenTypes.ACCESS
   );
 
   const refreshTokenExpires = moment().add(
@@ -99,13 +99,13 @@ export const generateAuthTokens = async (user: UserModel) => {
   const refreshToken = generateToken(
     user.id as string,
     refreshTokenExpires,
-    tokenTypes.REFRESH
+    TokenTypes.REFRESH
   );
   await saveToken(
     refreshToken,
     user.id as string,
     refreshTokenExpires,
-    tokenTypes.REFRESH
+    TokenTypes.REFRESH
   );
 
   return {
@@ -137,13 +137,13 @@ export const generateResetPasswordToken = async (email: string) => {
   const resetPasswordToken = generateToken(
     user.id,
     expires,
-    tokenTypes.RESET_PASSWORD
+    TokenTypes.RESET_PASSWORD
   );
   await saveToken(
     resetPasswordToken,
     user.id,
     expires,
-    tokenTypes.RESET_PASSWORD
+    TokenTypes.RESET_PASSWORD
   );
   return resetPasswordToken;
 };
@@ -161,13 +161,13 @@ export const generateVerifyEmailToken = async (user: UserModel) => {
   const verifyEmailToken = generateToken(
     user.id as string,
     expires,
-    tokenTypes.VERIFY_EMAIL
+    TokenTypes.VERIFY_EMAIL
   );
   await saveToken(
     verifyEmailToken,
     user.id as string,
     expires,
-    tokenTypes.VERIFY_EMAIL
+    TokenTypes.VERIFY_EMAIL
   );
   return verifyEmailToken;
 };

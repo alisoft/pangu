@@ -1,7 +1,10 @@
 import { Schema, model, SchemaTypes } from "mongoose";
 import { paginate, toJSON } from "./plugins";
-import { BaseTypes } from "../config/base";
-import { RolePermissionModel, RolePermissionStaticMethod } from "@/node/types";
+import { BaseTypes } from "@/common/types/base";
+import {
+  RolePermissionModel,
+  RolePermissionStaticMethod,
+} from "@/common/types";
 
 const rolePermissionSchema = new Schema<
   RolePermissionModel,

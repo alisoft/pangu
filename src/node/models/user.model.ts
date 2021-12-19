@@ -2,9 +2,9 @@ import { model, Schema, SchemaTypes } from "mongoose";
 import bcrypt from "bcryptjs";
 import validator from "validator";
 import { toJSON, paginate } from "./plugins";
-import { RoleTypes } from "../config/roles";
-import { BaseTypes } from "../config/base";
-import { UserModel, UserStaticMethod } from "@/node/types";
+import { RoleTypes } from "@/common/types/roles";
+import { BaseTypes } from "@/common/types/base";
+import { UserModel, UserStaticMethod } from "@/common/types";
 
 const userSchema = new Schema<UserModel, UserStaticMethod>(
   {

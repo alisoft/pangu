@@ -1,8 +1,8 @@
 import httpStatus from "http-status";
 import { Role } from "../models";
 import ApiError from "../utils/ApiError";
-import { BaseTypes } from "../config/base";
-import { PageOptions, RoleModel } from "@/node/types";
+import { BaseTypes } from "@/common/types/base";
+import { PageOptions, RoleModel } from "@/common/types";
 
 /**
  * Create a role

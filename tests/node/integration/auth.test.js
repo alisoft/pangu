@@ -12,7 +12,7 @@ const ApiError = require("../../../src/node/utils/ApiError");
 const setupTestDB = require("../utils/setupTestDB");
 const { User, Token } = require("../../../src/node/models");
 const { roleRights } = require("../../../src/node/config/roles");
-const { tokenTypes } = require("../../../src/node/config/tokens");
+const { TokenTypes } = require("../../../src/common/types/tokens");
 const { userOne, admin, insertUsers } = require("../fixtures/user.fixture");
 const {
   userOneAccessToken,
@@ -178,13 +178,13 @@ describe("Auth routes", () => {
       const refreshToken = tokenService.generateToken(
         userOne._id,
         expires,
-        tokenTypes.REFRESH
+        TokenTypes.REFRESH
       );
       await tokenService.saveToken(
         refreshToken,
         userOne._id,
         expires,
-        tokenTypes.REFRESH
+        TokenTypes.REFRESH
       );
 
       await request(app)
@@ -209,7 +209,7 @@ describe("Auth routes", () => {
       const refreshToken = tokenService.generateToken(
         userOne._id,
         expires,
-        tokenTypes.REFRESH
+        TokenTypes.REFRESH
       );
 
       await request(app)
@@ -224,13 +224,13 @@ describe("Auth routes", () => {
       const refreshToken = tokenService.generateToken(
         userOne._id,
         expires,
-        tokenTypes.REFRESH
+        TokenTypes.REFRESH
       );
       await tokenService.saveToken(
         refreshToken,
         userOne._id,
         expires,
-        tokenTypes.REFRESH,
+        TokenTypes.REFRESH,
         true
       );
 
@@ -248,13 +248,13 @@ describe("Auth routes", () => {
       const refreshToken = tokenService.generateToken(
         userOne._id,
         expires,
-        tokenTypes.REFRESH
+        TokenTypes.REFRESH
       );
       await tokenService.saveToken(
         refreshToken,
         userOne._id,
         expires,
-        tokenTypes.REFRESH
+        TokenTypes.REFRESH
       );
 
       const res = await request(app)
@@ -271,7 +271,7 @@ describe("Auth routes", () => {
         token: res.body.refresh.token,
       });
       expect(dbRefreshTokenDoc).toMatchObject({
-        type: tokenTypes.REFRESH,
+        type: TokenTypes.REFRESH,
         user: userOne._id,
         blacklisted: false,
       });
@@ -293,14 +293,14 @@ describe("Auth routes", () => {
       const refreshToken = tokenService.generateToken(
         userOne._id,
         expires,
-        tokenTypes.REFRESH,
+        TokenTypes.REFRESH,
         "invalidSecret"
       );
       await tokenService.saveToken(
         refreshToken,
         userOne._id,
         expires,
-        tokenTypes.REFRESH
+        TokenTypes.REFRESH
       );
 
       await request(app)
@@ -315,7 +315,7 @@ describe("Auth routes", () => {
       const refreshToken = tokenService.generateToken(
         userOne._id,
         expires,
-        tokenTypes.REFRESH
+        TokenTypes.REFRESH
       );
 
       await request(app)
@@ -330,13 +330,13 @@ describe("Auth routes", () => {
       const refreshToken = tokenService.generateToken(
         userOne._id,
         expires,
-        tokenTypes.REFRESH
+        TokenTypes.REFRESH
       );
       await tokenService.saveToken(
         refreshToken,
         userOne._id,
         expires,
-        tokenTypes.REFRESH,
+        TokenTypes.REFRESH,
         true
       );
 
@@ -354,7 +354,7 @@ describe("Auth routes", () => {
         refreshToken,
         userOne._id,
         expires,
-        tokenTypes.REFRESH
+        TokenTypes.REFRESH
       );
 
       await request(app)
@@ -368,13 +368,13 @@ describe("Auth routes", () => {
       const refreshToken = tokenService.generateToken(
         userOne._id,
         expires,
-        tokenTypes.REFRESH
+        TokenTypes.REFRESH
       );
       await tokenService.saveToken(
         refreshToken,
         userOne._id,
         expires,
-        tokenTypes.REFRESH
+        TokenTypes.REFRESH
       );
 
       await request(app)
@@ -440,13 +440,13 @@ describe("Auth routes", () => {
       const resetPasswordToken = tokenService.generateToken(
         userOne._id,
         expires,
-        tokenTypes.RESET_PASSWORD
+        TokenTypes.RESET_PASSWORD
       );
       await tokenService.saveToken(
         resetPasswordToken,
         userOne._id,
         expires,
-        tokenTypes.RESET_PASSWORD
+        TokenTypes.RESET_PASSWORD
       );
 
       await request(app)
@@ -464,7 +464,7 @@ describe("Auth routes", () => {
 
       const dbResetPasswordTokenCount = await Token.countDocuments({
         user: userOne._id,
-        type: tokenTypes.RESET_PASSWORD,
+        type: TokenTypes.RESET_PASSWORD,
       });
       expect(dbResetPasswordTokenCount).toBe(0);
     });
@@ -487,13 +487,13 @@ describe("Auth routes", () => {
       const resetPasswordToken = tokenService.generateToken(
         userOne._id,
         expires,
-        tokenTypes.RESET_PASSWORD
+        TokenTypes.RESET_PASSWORD
       );
       await tokenService.saveToken(
         resetPasswordToken,
         userOne._id,
         expires,
-        tokenTypes.RESET_PASSWORD,
+        TokenTypes.RESET_PASSWORD,
         true
       );
 
@@ -510,13 +510,13 @@ describe("Auth routes", () => {
       const resetPasswordToken = tokenService.generateToken(
         userOne._id,
         expires,
-        tokenTypes.RESET_PASSWORD
+        TokenTypes.RESET_PASSWORD
       );
       await tokenService.saveToken(
         resetPasswordToken,
         userOne._id,
         expires,
-        tokenTypes.RESET_PASSWORD
+        TokenTypes.RESET_PASSWORD
       );
 
       await request(app)
@@ -534,13 +534,13 @@ describe("Auth routes", () => {
       const resetPasswordToken = tokenService.generateToken(
         userOne._id,
         expires,
-        tokenTypes.RESET_PASSWORD
+        TokenTypes.RESET_PASSWORD
       );
       await tokenService.saveToken(
         resetPasswordToken,
         userOne._id,
         expires,
-        tokenTypes.RESET_PASSWORD
+        TokenTypes.RESET_PASSWORD
       );
 
       await request(app)
@@ -559,13 +559,13 @@ describe("Auth routes", () => {
       const resetPasswordToken = tokenService.generateToken(
         userOne._id,
         expires,
-        tokenTypes.RESET_PASSWORD
+        TokenTypes.RESET_PASSWORD
       );
       await tokenService.saveToken(
         resetPasswordToken,
         userOne._id,
         expires,
-        tokenTypes.RESET_PASSWORD
+        TokenTypes.RESET_PASSWORD
       );
 
       await request(app)
@@ -645,7 +645,7 @@ describe("Auth routes", () => {
         verifyEmailToken,
         userOne._id,
         expires,
-        tokenTypes.VERIFY_EMAIL
+        TokenTypes.VERIFY_EMAIL
       );
 
       await request(app)
@@ -660,7 +660,7 @@ describe("Auth routes", () => {
 
       const dbVerifyEmailToken = await Token.countDocuments({
         user: userOne._id,
-        type: tokenTypes.VERIFY_EMAIL,
+        type: TokenTypes.VERIFY_EMAIL,
       });
       expect(dbVerifyEmailToken).toBe(0);
     });
@@ -685,7 +685,7 @@ describe("Auth routes", () => {
         verifyEmailToken,
         userOne._id,
         expires,
-        tokenTypes.VERIFY_EMAIL,
+        TokenTypes.VERIFY_EMAIL,
         true
       );
 
@@ -704,7 +704,7 @@ describe("Auth routes", () => {
         verifyEmailToken,
         userOne._id,
         expires,
-        tokenTypes.VERIFY_EMAIL
+        TokenTypes.VERIFY_EMAIL
       );
 
       await request(app)
@@ -724,7 +724,7 @@ describe("Auth routes", () => {
         verifyEmailToken,
         userOne._id,
         expires,
-        tokenTypes.VERIFY_EMAIL
+        TokenTypes.VERIFY_EMAIL
       );
 
       await request(app)
@@ -790,7 +790,7 @@ describe("Auth middleware", () => {
     const refreshToken = tokenService.generateToken(
       userOne._id,
       expires,
-      tokenTypes.REFRESH
+      TokenTypes.REFRESH
     );
     const req = httpMocks.createRequest({
       headers: { Authorization: `Bearer ${refreshToken}` },
@@ -814,7 +814,7 @@ describe("Auth middleware", () => {
     const accessToken = tokenService.generateToken(
       userOne._id,
       expires,
-      tokenTypes.ACCESS,
+      TokenTypes.ACCESS,
       "invalidSecret"
     );
     const req = httpMocks.createRequest({
@@ -839,7 +839,7 @@ describe("Auth middleware", () => {
     const accessToken = tokenService.generateToken(
       userOne._id,
       expires,
-      tokenTypes.ACCESS
+      TokenTypes.ACCESS
     );
     const req = httpMocks.createRequest({
       headers: { Authorization: `Bearer ${accessToken}` },

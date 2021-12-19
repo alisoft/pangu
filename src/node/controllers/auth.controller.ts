@@ -7,7 +7,7 @@ import {
   tokenService,
   userService,
 } from "../services";
-import { UserModel } from "@/node/types";
+import { UserModel } from "@/common/types";
 
 export const register = catchAsync(async (req: Request, res: Response) => {
   const user = await userService.createUser(req.body);

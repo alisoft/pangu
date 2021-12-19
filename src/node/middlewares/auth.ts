@@ -3,7 +3,7 @@ import httpStatus from "http-status";
 import ApiError from "../utils/ApiError";
 import { allRoles } from "../config/roles";
 import { NextFunction, Request, Response } from "express";
-import { UserModel } from "@/node/types";
+import { UserModel } from "@/common/types";
 
 const verifyCallback =
   (req: Request, resolve: any, reject: any, requiredRights: string[]) =>

@@ -1,8 +1,8 @@
 import httpStatus from "http-status";
 import { Permission } from "../models";
 import ApiError from "../utils/ApiError";
-import { BaseTypes } from "../config/base";
-import { PageOptions, PermissionModel } from "@/node/types";
+import { BaseTypes } from "@/common/types/base";
+import { PageOptions, PermissionModel } from "@/common/types";
 
 /**
  * Create a permission

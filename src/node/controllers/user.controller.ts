@@ -4,7 +4,7 @@ import { pick } from "../utils/pick";
 import ApiError from "../utils/ApiError";
 import { catchAsync } from "../utils/catchAsync";
 import { userService } from "../services";
-import { BaseTypes } from "../config/base";
+import { BaseTypes } from "@/common/types/base";
 
 export const createUser = catchAsync(async (req: Request, res: Response) => {
   const user = await userService.createUser({

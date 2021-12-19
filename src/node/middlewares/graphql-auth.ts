@@ -2,7 +2,7 @@ import { NextFunction, Request, Response } from "express";
 import httpStatus from "http-status";
 import passport from "passport";
 import ApiError from "../utils/ApiError";
-import { UserModel } from "@/node/types";
+import { UserModel } from "@/common/types";
 
 const verifyCallback =
   (req: Request, resolve: any, reject: any) =>

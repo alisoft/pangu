@@ -1,7 +1,7 @@
 import { Schema, model, SchemaTypes } from "mongoose";
 import { toJSON } from "./plugins";
-import { tokenTypes } from "../config/tokens";
-import { TokenModel } from "@/node/types";
+import { TokenTypes } from "@/common/types/tokens";
+import { TokenModel } from "@/common/types";
 
 const tokenSchema = new Schema<TokenModel>(
   {
@@ -18,9 +18,9 @@ const tokenSchema = new Schema<TokenModel>(
     type: {
       type: String,
       enum: [
-        tokenTypes.REFRESH,
-        tokenTypes.RESET_PASSWORD,
-        tokenTypes.VERIFY_EMAIL,
+        TokenTypes.REFRESH,
+        TokenTypes.RESET_PASSWORD,
+        TokenTypes.VERIFY_EMAIL,
       ],
       required: true,
     },

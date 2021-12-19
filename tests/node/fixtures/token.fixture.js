@@ -1,6 +1,6 @@
 const moment = require("moment");
 const config = require("../../../src/node/config/config");
-const { tokenTypes } = require("../../../src/node/config/tokens");
+const { TokenTypes } = require("../../../src/common/types/tokens");
 const tokenService = require("../../../src/node/services/token.service");
 const { userOne, admin } = require("./user.fixture");
 
@@ -11,12 +11,12 @@ const accessTokenExpires = moment().add(
 const userOneAccessToken = tokenService.generateToken(
   userOne._id,
   accessTokenExpires,
-  tokenTypes.ACCESS
+  TokenTypes.ACCESS
 );
 const adminAccessToken = tokenService.generateToken(
   admin._id,
   accessTokenExpires,
-  tokenTypes.ACCESS
+  TokenTypes.ACCESS
 );
 
 module.exports = {

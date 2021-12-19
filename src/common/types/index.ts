@@ -1,7 +1,6 @@
-import { Request } from "express";
 import { Model } from "mongoose";
-import { BaseTypes, UserRolePermissionTypes } from "@/node/config/base";
-import { RoleTypes } from "@/node/config/roles";
+import { BaseTypes, UserRolePermissionTypes } from "@/common/types/base";
+import { RoleTypes } from "@/common/types/roles";
 
 export interface PageOptions {
   sortBy: string;
@@ -98,5 +97,3 @@ export interface UserStaticMethod extends Model<UserModel> {
   isEmailTaken(email: string, excludeUserId?: string): Promise<boolean>;
   paginate(filter: any, options: PageOptions): Promise<any>;
 }
-
-export type CustomRequest = { user: UserModel } & Request;
