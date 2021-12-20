@@ -10,6 +10,7 @@
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
     "sourceMap": true,
+    "outDir": "build",
     "baseUrl": ".",
     "types": [
       "webpack-env",
@@ -25,6 +26,9 @@
       "dom",
       "dom.iterable",
       "scripthost"
+    ],
+    "plugins": [
+      { "transform": "typescript-transform-paths" }
     ]
   },
   "include": [
