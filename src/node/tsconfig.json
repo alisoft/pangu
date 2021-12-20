@@ -3,7 +3,7 @@
   "compilerOptions": {
     "target": "es5",
     "module": "commonjs",
-    "outDir": "../../build/server"
+    "outDir": "../../build"
   },
   "include": [
     "./**/*.ts",
