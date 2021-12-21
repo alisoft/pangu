@@ -1,13 +1,23 @@
-import { ref, onMounted, onBeforeUnmount } from "vue";
+import { ref, onMounted, onBeforeUnmount, Ref } from "vue";
 import { Locale } from "vant";
-import { useI18n } from "vue-i18n";
+import { useI18n, Composer } from "vue-i18n";
 
-interface HooksResp {
-  [key: string]: any;
+export interface ThemeTypes {
+  color: Ref<string | undefined>;
 }
 
-export const withTheme = (): HooksResp => {
-  const color = ref();
+export interface PullDownTypes {
+  refreshing: Ref<boolean>;
+}
+
+export interface MountedTypes {
+  mounted: Ref<boolean>;
+}
+
+export type LocaleTypes = Pick<Composer, "t">;
+
+export const withTheme = (): ThemeTypes => {
+  const color = ref<string>();
 
   const addThemeEventListener = (event: MessageEvent, c: string) => {
     color.value = `#${Number(c).toString(16).substring(2)}`;
@@ -88,7 +98,7 @@ export const withDarkMode = (): void => {
   });
 };
 
-export const withLocale = (): HooksResp => {
+export const withLocale = (): LocaleTypes => {
   const { t, locale, availableLocales } = useI18n();
   const mappedAvailableLocales = availableLocales.map((locale) =>
     locale.replace("_", "-")
@@ -125,8 +135,8 @@ export const withLocale = (): HooksResp => {
   };
 };
 
-export const withPullDown = (): HooksResp => {
-  const refreshing = ref(false);
+export const withPullDown = (): PullDownTypes => {
+  const refreshing = ref<boolean>(false);
 
   const addPullRefreshEventListener = (pullRefresh: boolean) => {
     if (pullRefresh) {
@@ -159,7 +169,7 @@ export const withPullDown = (): HooksResp => {
   };
 };
 
-export const withMounted = (): HooksResp => {
+export const withMounted = (): MountedTypes => {
   const mounted = ref(false);
 
   onMounted(() => {
