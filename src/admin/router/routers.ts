@@ -365,6 +365,15 @@ export const routes: MenuDataItem[] = [
                 /* webpackChunkName: "system" */ "@/admin/views/system/permission-list.vue"
               ),
           },
+          {
+            path: "/system/user-list",
+            name: "user-list",
+            meta: { title: "pages.system.user-list.title" },
+            component: (): Component =>
+              import(
+                /* webpackChunkName: "system" */ "@/admin/views/system/user-list.vue"
+              ),
+          },
         ],
       },
 

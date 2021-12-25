@@ -58,6 +58,25 @@ const rolePermissionJoinDataSource = [
   },
 ];
 
+const userDataSource = [
+  {
+    id: 1,
+    name: "dashboard",
+    label: "Dashboard",
+    email: "test@test.com",
+    role: "admin",
+    isEmailVerified: false,
+  },
+  {
+    id: 2,
+    name: "form",
+    label: "Form",
+    email: "test@test.com",
+    role: "user",
+    isEmailVerified: true,
+  },
+];
+
 const genRoles = () => {
   return roleDataSource.map((item) => {
     const rpList = rolePermissionJoinDataSource
@@ -79,6 +98,25 @@ const genRoles = () => {
 
 const genPermissions = () => {
   return permissionDataSource.concat();
+};
+
+const genUsers = () => {
+  return userDataSource.map((item) => {
+    const rpList = rolePermissionJoinDataSource
+      .filter((rp) => rp.roleId === item.id)
+      .map((rp) => {
+        const currentAllowPermissions = permissionDataSource.filter(
+          (permission) => permission.id === rp.permissionId
+        );
+        return currentAllowPermissions;
+      })
+      .flat();
+
+    return {
+      ...item,
+      permissions: rpList,
+    };
+  });
 };
 
 const getRoles = (req, res) => {
@@ -125,6 +163,28 @@ const getPermissions = (req, res) => {
     res.json(result);
   });
 };
+const getUsers = (req, res) => {
+  const { current = 1, pageSize = 10 } = req.query || {};
+
+  const dataSource = genUsers();
+
+  const result = {
+    data: dataSource,
+    total: dataSource.length,
+    success: true,
+    pageSize,
+    current: parseInt(`${current}`, 10) || 1,
+  };
+
+  // 模拟请求延迟
+  return new Promise((resolve) => {
+    setTimeout(() => {
+      resolve();
+    }, 800);
+  }).then(() => {
+    res.json(result);
+  });
+};
 
 const addRole = (req, res) => {};
 const addPermission = (req, res) => {
@@ -151,6 +211,7 @@ const addPermission = (req, res) => {
     res.json(data);
   });
 };
+const addUser = (req, res) => {};
 
 const updateRole = (req, res) => {};
 const updatePermission = (req, res) => {
@@ -167,14 +228,22 @@ const updatePermission = (req, res) => {
     res.json(item);
   });
 };
+const updateUser = (req, res) => {};
+
+const deleteUser = (req, res) => {};
 
 module.exports = {
   "GET /api/roles": getRoles,
   "GET /api/permissions": getPermissions,
+  "GET /api/users": getUsers,
 
   "POST /api/role": addRole,
   "POST /api/permission": addPermission,
+  "POST /api/users": addUser,
 
   "PUT /api/role": updateRole,
   "PUT /api/permission": updatePermission,
+  "PUT /api/users/:userId": updateUser,
+
+  "DELETE /api/users/:userId": deleteUser,
 };

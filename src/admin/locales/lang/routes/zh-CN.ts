@@ -39,6 +39,7 @@ export default {
   "pages.system.title": "系统管理",
   "pages.system.role-list.title": "角色管理",
   "pages.system.permission-list.title": "权限管理",
+  "pages.system.user-list.title": "用户管理",
 
   "pages.settings.title": "设置",
 

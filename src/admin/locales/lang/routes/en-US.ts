@@ -39,6 +39,7 @@ export default {
   "pages.system.title": "System",
   "pages.system.role-list.title": "Role List",
   "pages.system.permission-list.title": "Permission List",
+  "pages.system.user-list.title": "User List",
 
   "pages.settings.title": "Settings",
 
