@@ -97,3 +97,22 @@ export interface UserStaticMethod extends Model<UserModel> {
   isEmailTaken(email: string, excludeUserId?: string): Promise<boolean>;
   paginate(filter: any, options: PageOptions): Promise<any>;
 }
+
+export interface MenuModel {
+  id?: string;
+  path?: string;
+  url?: string;
+  name?: string;
+  icon?: string;
+  title?: string;
+  lock?: boolean;
+  parent?: MenuModel;
+  children?: MenuModel[];
+  createBy?: string;
+  updateBy?: string;
+  isDel?: BaseTypes;
+}
+
+export interface MenuStaticMethod extends Model<MenuModel> {
+  paginate(filter: any, options: PageOptions): Promise<any>;
+}

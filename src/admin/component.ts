@@ -42,6 +42,7 @@ import {
   BackTop,
   Upload,
   Badge,
+  Tree,
 } from "ant-design-vue/lib";
 
 export const applyComponents = (app: App): App => {
@@ -87,5 +88,6 @@ export const applyComponents = (app: App): App => {
     .use(Badge)
     .use(Carousel)
     .use(BackTop)
-    .use(Upload);
+    .use(Upload)
+    .use(Tree);
 };

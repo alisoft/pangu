@@ -20,7 +20,7 @@ export const LOGIN = "LOGIN";
 export const LOGOUT = "LOGOUT";
 // export const GET_INFO = "GET_INFO";
 export const GENERATE_ROUTES = "GenerateRoutes";
-export const GENERATE_ROUTES_DYNAMIC = "";
+export const GENERATE_ROUTES_DYNAMIC = "GenerateDynamicRoutes";
 
 export const actions: ActionTree<UserState, RootState> = {
   [LOGIN]({ commit }, info: LoginParams) {
@@ -97,13 +97,12 @@ export const actions: ActionTree<UserState, RootState> = {
   },
   // 从后端获取路由表结构体，并构建前端路由
   [GENERATE_ROUTES_DYNAMIC]({ commit }, router: Router) {
-    return new Promise<RouteRecordRaw>((resolve) => {
+    return new Promise<RouteRecordRaw[]>((resolve) => {
       generatorDynamicRouter()
-        .then((routes: RouteRecordRaw) => {
-          const allowRoutes = routes.children || [];
+        .then((routes: RouteRecordRaw[]) => {
           // 添加到路由表
-          router.addRoute(routes);
-          commit(SET_ROUTERS, allowRoutes);
+          routes.forEach((route) => router.addRoute(route));
+          commit(SET_ROUTERS, routes[0].children);
           resolve(routes);
         })
         .catch((err) => {

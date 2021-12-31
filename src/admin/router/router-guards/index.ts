@@ -3,10 +3,12 @@ import store from "../../store";
 import localStorage from "../../utils/local-storage";
 import { allowList, loginRoutePath } from "../define-meta";
 import { STORAGE_TOKEN_KEY } from "../../store/mutation-type";
-// eslint-disable-next-line
-import { GENERATE_ROUTES } from '../../store/modules/user/actions';
+import {
+  GENERATE_ROUTES,
+  GENERATE_ROUTES_DYNAMIC,
+} from "../../store/modules/user/actions";
 
-export default function(router: Router) {
+export default function (router: Router) {
   router.beforeEach(async (to) => {
     const userToken = localStorage.get(STORAGE_TOKEN_KEY);
     // token check
@@ -51,7 +53,7 @@ export default function(router: Router) {
       // const info = await store.dispatch(`user/${GET_INFO}`);
       // 使用当前用户的 权限信息 生成 对应权限的路由表
       const allowRouters = await store.dispatch(
-        `user/${GENERATE_ROUTES}`,
+        `user/${GENERATE_ROUTES_DYNAMIC}`,
         router
       );
       if (allowRouters) {
