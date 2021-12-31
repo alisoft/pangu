@@ -7,6 +7,7 @@ import permissionRoute from "./permission.route";
 import rolePermissionRoute from "./role.permission.route";
 import userRolePermissionRoute from "./user.role.permission.route";
 import docsRoute from "./docs.route";
+import menuRoute from "./menu.route";
 
 const router = express.Router();
 
@@ -27,6 +28,10 @@ const defaultRoutes: CustomRoute[] = [
   {
     path: "/roles",
     route: roleRoute,
+  },
+  {
+    path: "/menus",
+    route: menuRoute,
   },
   {
     path: "/permissions",

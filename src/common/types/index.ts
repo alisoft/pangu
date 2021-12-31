@@ -103,6 +103,7 @@ export interface MenuModel {
   path?: string;
   url?: string;
   name?: string;
+  redirect?: string;
   icon?: string;
   title?: string;
   lock?: boolean;

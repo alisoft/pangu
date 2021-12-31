@@ -6,3 +6,4 @@ export * as roleService from "./role.service";
 export * as permissionService from "./permission.service";
 export * as rolePermissionService from "./role.permission.service";
 export * as userRolePermissionService from "./user.role.permission.service";
+export * as menuService from "./menu.service";
