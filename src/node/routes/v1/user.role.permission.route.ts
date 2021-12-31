@@ -1,8 +1,8 @@
 import express from "express";
 import { auth } from "../../middlewares/auth";
 import { validate } from "../../middlewares/validate";
-const { userRolePermissionValidation } = require("../../validations");
-const { userRolePermissionController } = require("../../controllers");
+import { userRolePermissionValidation } from "../../validations";
+import { userRolePermissionController } from "../../controllers";
 
 const router = express.Router();
 
