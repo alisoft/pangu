@@ -111,6 +111,7 @@ export interface MenuModel {
   hideInMenu?: boolean;
   hideChildrenInMenu?: boolean;
   parent?: MenuModel;
+  children?: MenuModel[];
   createBy?: string;
   updateBy?: string;
   isDel?: BaseTypes;

@@ -13,10 +13,7 @@ import { postAccountLogin, postLogout } from "@/admin/api/user/login";
 import { routes } from "@/admin/router/routers";
 import { filterMenu } from "@/admin/utils/menu-util";
 import { hasAuthority, filterChildRoute } from "@/admin/utils/authority";
-import {
-  generatorDynamicRouter,
-  generatorDynamicRouter2,
-} from "@/admin/router/generator-routers";
+import { generatorDynamicRouter } from "@/admin/router/generator-routers";
 import type { MenuDataItem } from "@/admin/router/typing";
 
 export const LOGIN = "LOGIN";
@@ -24,7 +21,6 @@ export const LOGOUT = "LOGOUT";
 // export const GET_INFO = "GET_INFO";
 export const GENERATE_ROUTES = "GenerateRoutes";
 export const GENERATE_ROUTES_DYNAMIC = "GenerateDynamicRoutes";
-export const GENERATE_ROUTES_DYNAMIC2 = "GenerateDynamicRoutes2";
 
 export const actions: ActionTree<UserState, RootState> = {
   [LOGIN]({ commit }, info: LoginParams) {
@@ -103,21 +99,6 @@ export const actions: ActionTree<UserState, RootState> = {
   [GENERATE_ROUTES_DYNAMIC]({ commit }, router: Router) {
     return new Promise<RouteRecordRaw[]>((resolve) => {
       generatorDynamicRouter()
-        .then((routes: RouteRecordRaw[]) => {
-          // 添加到路由表
-          routes.forEach((route) => router.addRoute(route));
-          commit(SET_ROUTERS, routes[0].children);
-          resolve(routes);
-        })
-        .catch((err) => {
-          console.error("generatorDynamicRouter", err);
-        });
-    });
-  },
-  // 从后端获取路由表结构体，并构建前端路由
-  [GENERATE_ROUTES_DYNAMIC2]({ commit }, router: Router) {
-    return new Promise<RouteRecordRaw[]>((resolve) => {
-      generatorDynamicRouter2()
         .then((routes: RouteRecordRaw[]) => {
           // 添加到路由表
           routes.forEach((route) => router.addRoute(route));

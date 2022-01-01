@@ -79,263 +79,10 @@ const userDataSource = [
 
 const menuDataSource = [
   {
-    id: 1,
-    name: "index",
-    redirect: "/workplace",
-    async: false,
-    path: "/",
-    component: "/layouts/index.vue",
-    meta: {
-      title: "",
-      icon: "",
-    },
-    children: [
-      {
-        id: 11,
-        name: "Workplace",
-        redirect: "/workplace/workplace",
-        path: "/workplace",
-        component: "/layouts/route-view.vue",
-        meta: {
-          title: "pages.dashboard.workplace.title",
-          icon: "HistoryOutlined",
-        },
-        children: [
-          {
-            id: 111,
-            name: "Workplace",
-            redirect: "",
-            path: "/workplace/workplace",
-            component: "/views/dashboard/workplace/index.vue",
-            meta: {
-              title: "pages.dashboard.workplace.title",
-              icon: "HistoryOutlined",
-              keepAlive: false,
-              lock: true,
-            },
-          },
-        ],
-      },
-      {
-        id: 12,
-        name: "Dashboard",
-        redirect: "/dashboard/welcome",
-        async: false,
-        path: "/dashboard",
-        component: "/layouts/route-view.vue",
-        meta: {
-          title: "pages.dashboard.title",
-          icon: "HeartOutlined",
-        },
-        children: [
-          {
-            id: 121,
-            name: "welcome",
-            redirect: "",
-            async: false,
-            path: "/dashboard/welcome",
-            component: "/views/dashboard/workplace2/index.vue",
-            meta: {
-              title: "pages.dashboard.welcome.title",
-              icon: "HistoryOutlined",
-            },
-          },
-          {
-            id: 122,
-            name: "Analysis",
-            redirect: "",
-            async: false,
-            path: "/dashboard/analysis",
-            component: "/views/dashboard/analysis/index.vue",
-            meta: {
-              title: "pages.dashboard.analysis.title",
-              icon: "HeartOutlined",
-            },
-          },
-          {
-            id: 123,
-            name: "Monitor",
-            redirect: "",
-            async: false,
-            path: "/dashboard/monitor",
-            component: "/views/dashboard/monitor/index.vue",
-            meta: {
-              title: "pages.dashboard.monitor.title",
-              icon: "HeartOutlined",
-            },
-          },
-        ],
-      },
-      {
-        id: 13,
-        name: "system",
-        redirect: "/system/role-list",
-        async: false,
-        path: "/system",
-        component: "/layouts/route-view.vue",
-        meta: {
-          title: "pages.system.title",
-          icon: "TableOutlined",
-        },
-        children: [
-          {
-            id: 131,
-            name: "role-list",
-            redirect: "",
-            async: false,
-            path: "/system/role-list",
-            component: "/views/system/role-list.vue",
-            meta: {
-              title: "pages.system.role-list.title",
-              icon: "",
-            },
-          },
-          {
-            id: 132,
-            name: "permission-list",
-            redirect: "",
-            async: false,
-            path: "/system/permission-list",
-            component: "/views/system/permission-list.vue",
-            meta: {
-              title: "pages.system.permission-list.title",
-              icon: "",
-            },
-          },
-          {
-            id: 133,
-            name: "user-list",
-            redirect: "",
-            async: false,
-            path: "/system/user-list",
-            component: "/views/system/user-list.vue",
-            meta: {
-              title: "pages.system.user-list.title",
-              icon: "",
-            },
-          },
-          {
-            id: 134,
-            name: "menu-list",
-            redirect: "",
-            async: false,
-            path: "/system/menu-list",
-            component: "/views/system/menu-list.vue",
-            meta: {
-              title: "pages.system.menu-list.title",
-              icon: "",
-            },
-          },
-        ],
-      },
-      {
-        id: 14,
-        path: "/jump-url",
-        name: "jumpUrl",
-        meta: { title: "pages.jumpUrl.title", icon: "LinkOutlined" },
-        component: "/layouts/route-view.vue",
-        redirect: "/jump-url/router",
-        children: [
-          {
-            id: 141,
-            path: "/jump-url/router",
-            name: "jumpUrlExamples",
-            meta: { title: "pages.jumpUrl.router.title" },
-            component: "/views/examples/jump-url/index.vue",
-          },
-          {
-            id: 142,
-            path: "https://github.com/vueComponent/ant-design-vue",
-            name: "github",
-            meta: {
-              title: "pages.jumpUrl.github.title",
-              target: "_blank",
-            },
-            component: "",
-          },
-        ],
-      },
-      {
-        id: 15,
-        name: "nested",
-        path: "/nested",
-        meta: { title: "pages.nested.title", icon: "AppstoreAddOutlined" },
-        component: "/layouts/route-view.vue",
-        redirect: "/nested/menu1",
-        children: [
-          {
-            id: 151,
-            name: "nested-menu1",
-            path: "/nested/menu1",
-            meta: { title: "pages.nested.menu1.title" },
-            component: "/views/examples/nested/menu1.vue",
-            redirect: "/nested/menu1/menu1-1",
-            children: [
-              {
-                id: 1511,
-                name: "nested-menu1-1",
-                path: "/nested/menu1/menu1-1",
-                meta: {
-                  title: "pages.nested.menu1-1.title",
-                  authority: "nested-menu1",
-                },
-                component: "/views/examples/nested/menu1-1.vue",
-              },
-              {
-                id: 1512,
-                name: "nested-menu1-2",
-                path: "/nested/menu1/menu1-2",
-                meta: { title: "pages.nested.menu1-2.title" },
-                redirect: "/nested/menu1/menu1-2/menu1-2-1",
-                component: "/views/examples/nested/menu1-2.vue",
-                children: [
-                  {
-                    id: 15121,
-                    name: "nested-menu1-2-1",
-                    path: "/nested/menu1/menu1-2/menu1-2-1",
-                    meta: { title: "pages.nested.menu1-2-1.title" },
-                    component: "/views/examples/nested/menu1-2-1.vue",
-                  },
-                ],
-              },
-            ],
-          },
-          {
-            id: 152,
-            name: "nested-menu2",
-            path: "/nested/menu2",
-            meta: { title: "pages.nested.menu2.title" },
-            component: "/views/examples/nested/menu2.vue",
-          },
-          {
-            id: 153,
-            name: "nested-menu3",
-            path: "/nested/menu3",
-            meta: {
-              title: "pages.nested.menu3.title",
-              hideChildrenInMenu: true,
-            },
-            redirect: "/nested/menu3/menu3-1",
-            component: "/views/examples/nested/menu3.vue",
-            children: [
-              {
-                id: 1531,
-                name: "nested-menu3-1",
-                path: "/nested/menu3/menu3-1",
-                meta: { title: "pages.nested.menu3-1.title" },
-                component: "/views/examples/nested/menu3-1.vue",
-              },
-            ],
-          },
-        ],
-      },
-    ],
-  },
-];
-
-const menuDataSource2 = [
-  {
     lock: false,
+    target: "_blank",
+    hideInMenu: false,
+    hideChildrenInMenu: false,
     isDel: 0,
     path: "/",
     component: "/layouts/index.vue",
@@ -345,18 +92,24 @@ const menuDataSource2 = [
   },
   {
     lock: false,
+    target: "_blank",
+    hideInMenu: false,
+    hideChildrenInMenu: false,
     isDel: 0,
     path: "/workplace",
     component: "/layouts/route-view.vue",
     name: "Workplace",
     redirect: "/workplace/workplace",
     icon: "HistoryOutlined",
-    title: "pages.dashboard.workplace.title",
     parent: "61cfd9af4e7c161cf8e999ea",
+    title: "pages.dashboard.workplace.title",
     id: "61cfdada4e7c161cf8e999f0",
   },
   {
     lock: true,
+    target: "_blank",
+    hideInMenu: false,
+    hideChildrenInMenu: false,
     isDel: 0,
     path: "/workplace/workplace",
     component: "/views/dashboard/workplace/index.vue",
@@ -365,6 +118,169 @@ const menuDataSource2 = [
     parent: "61cfdada4e7c161cf8e999f0",
     title: "pages.dashboard.workplace.title",
     id: "61cfdbe94e7c161cf8e999f3",
+  },
+  {
+    lock: false,
+    target: "_blank",
+    hideInMenu: false,
+    hideChildrenInMenu: false,
+    isDel: 0,
+    path: "/dashboard",
+    component: "/layouts/route-view.vue",
+    name: "Dashboard",
+    title: "pages.dashboard.title",
+    icon: "HeartOutlined",
+    parent: "61cfd9af4e7c161cf8e999ea",
+    id: "61cff4d94c6de8394a68297d",
+  },
+  {
+    lock: false,
+    target: "_blank",
+    hideInMenu: false,
+    hideChildrenInMenu: false,
+    isDel: 0,
+    path: "/dashboard/welcome",
+    component: "/views/dashboard/workplace2/index.vue",
+    name: "welcome",
+    title: "pages.dashboard.welcome.title",
+    icon: "HeartOutlined",
+    parent: "61cff4d94c6de8394a68297d",
+    id: "61cff5074c6de8394a682980",
+  },
+  {
+    lock: false,
+    target: "_blank",
+    hideInMenu: false,
+    hideChildrenInMenu: false,
+    isDel: 0,
+    path: "/dashboard/analysis",
+    component: "/views/dashboard/analysis/index.vue",
+    name: "Analysis",
+    title: "pages.dashboard.analysis.title",
+    icon: "HeartOutlined",
+    parent: "61cff4d94c6de8394a68297d",
+    id: "61cff5294c6de8394a682983",
+  },
+  {
+    lock: false,
+    target: "_blank",
+    hideInMenu: false,
+    hideChildrenInMenu: false,
+    isDel: 0,
+    path: "/dashboard/monitor",
+    component: "/views/dashboard/monitor/index.vue",
+    name: "Monitor",
+    title: "pages.dashboard.monitor.title",
+    icon: "HeartOutlined",
+    parent: "61cff4d94c6de8394a68297d",
+    id: "61cff5474c6de8394a682986",
+  },
+  {
+    lock: false,
+    target: "_blank",
+    hideInMenu: false,
+    hideChildrenInMenu: false,
+    isDel: 0,
+    path: "/system",
+    component: "/layouts/route-view.vue",
+    redirect: "/system/role-list",
+    name: "system",
+    title: "pages.system.title",
+    icon: "TableOutlined",
+    parent: "61cfd9af4e7c161cf8e999ea",
+    id: "61cff5b54c6de8394a682989",
+  },
+  {
+    lock: false,
+    target: "_blank",
+    hideInMenu: false,
+    hideChildrenInMenu: false,
+    isDel: 0,
+    path: "/system/role-list",
+    component: "/views/system/role-list.vue",
+    name: "role-list",
+    title: "pages.system.role-list.title",
+    parent: "61cff5b54c6de8394a682989",
+    id: "61cff5eb4c6de8394a68298c",
+  },
+  {
+    lock: false,
+    target: "_blank",
+    hideInMenu: false,
+    hideChildrenInMenu: false,
+    isDel: 0,
+    path: "/system/permission-list",
+    component: "/views/system/permission-list.vue",
+    name: "permission-list",
+    title: "pages.system.permission-list.title",
+    parent: "61cff5b54c6de8394a682989",
+    id: "61cff5f84c6de8394a68298f",
+  },
+  {
+    lock: false,
+    target: "_blank",
+    hideInMenu: false,
+    hideChildrenInMenu: false,
+    isDel: 0,
+    path: "/system/user-list",
+    component: "/views/system/user-list.vue",
+    name: "user-list",
+    title: "pages.system.user-list.title",
+    parent: "61cff5b54c6de8394a682989",
+    id: "61cff6024c6de8394a682992",
+  },
+  {
+    lock: false,
+    target: "_blank",
+    hideInMenu: false,
+    hideChildrenInMenu: false,
+    isDel: 0,
+    path: "/system/menu-list",
+    component: "/views/system/menu-list.vue",
+    name: "menu-list",
+    title: "pages.system.menu-list.title",
+    parent: "61cff5b54c6de8394a682989",
+    id: "61cff60c4c6de8394a682995",
+  },
+  {
+    lock: false,
+    target: "_blank",
+    hideInMenu: false,
+    hideChildrenInMenu: false,
+    isDel: 0,
+    path: "/jump-url",
+    component: "/layouts/route-view.vue",
+    redirect: "/jump-url/router",
+    name: "jumpUrl",
+    title: "pages.jumpUrl.title",
+    icon: "LinkOutlined",
+    parent: "61cfd9af4e7c161cf8e999ea",
+    id: "61cff6a04c6de8394a682998",
+  },
+  {
+    lock: false,
+    target: "_blank",
+    hideInMenu: false,
+    hideChildrenInMenu: false,
+    isDel: 0,
+    path: "/jump-url/router",
+    component: "/views/examples/jump-url/index.vue",
+    name: "jumpUrlExamples",
+    title: "pages.jumpUrl.router.title",
+    parent: "61cff6a04c6de8394a682998",
+    id: "61cff6ca4c6de8394a68299b",
+  },
+  {
+    lock: false,
+    target: "_blank",
+    hideInMenu: false,
+    hideChildrenInMenu: false,
+    isDel: 0,
+    path: "https://github.com/vueComponent/ant-design-vue",
+    name: "github",
+    title: "pages.jumpUrl.github.title",
+    parent: "61cff6a04c6de8394a682998",
+    id: "61cff880abfb6c3d6e535d4c",
   },
 ];
 
@@ -393,10 +309,6 @@ const genPermissions = () => {
 
 const genMenus = () => {
   return menuDataSource.concat();
-};
-
-const genMenus2 = () => {
-  return menuDataSource2.concat();
 };
 
 const genUsers = () => {
@@ -506,28 +418,6 @@ const getMenus = (req, res) => {
     res.json(result);
   });
 };
-const getMenus2 = (req, res) => {
-  const { current = 1, pageSize = 10 } = req.query || {};
-
-  const dataSource = genMenus2();
-
-  const result = {
-    data: dataSource,
-    total: dataSource.length,
-    success: true,
-    pageSize,
-    current: parseInt(`${current}`, 10) || 1,
-  };
-
-  // 模拟请求延迟
-  return new Promise((resolve) => {
-    setTimeout(() => {
-      resolve();
-    }, 800);
-  }).then(() => {
-    res.json(result);
-  });
-};
 
 const addRole = (req, res) => {};
 const addPermission = (req, res) => {
@@ -583,7 +473,6 @@ module.exports = {
   "GET /api/permissions": getPermissions,
   "GET /api/users": getUsers,
   "GET /api/menus": getMenus,
-  "GET /api/menus2": getMenus2,
 
   "POST /api/role": addRole,
   "POST /api/permission": addPermission,

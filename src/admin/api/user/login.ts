@@ -1,6 +1,5 @@
 import request from "@/admin/utils/request";
 import { PageResult } from "@/admin/api/typing";
-import { UserModel } from "@/common/types";
 
 export type LoginType = "password" | "phone" | "qrcode";
 export type LoginStatus = "ok" | "error";
@@ -53,7 +52,7 @@ export interface SmsCaptchaRequest {
 }
 
 // 后端的结构体定义
-export type RouteItem = {
+export interface RouteItem {
   id: string;
   parent: string;
   name: string;
@@ -62,28 +61,7 @@ export type RouteItem = {
   component: string;
   children: RouteItem[];
   async: boolean;
-  meta: {
-    title: string | false;
-    icon?: string;
-    lock?: boolean;
-    target?: "_blank" | "_self";
-    hideInMenu?: boolean;
-    hideChildrenInMenu?: boolean;
-    authority?: string | string[];
-    [key: string]: any;
-  };
-};
-
-export interface RouteItem2 {
-  id: string;
-  parent: string;
-  name: string;
-  path: string;
-  redirect: string;
-  component: string;
-  children: RouteItem2[];
-  async: boolean;
-  title: string | false;
+  title: string;
   icon?: string;
   lock?: boolean;
   target?: "_blank" | "_self";
@@ -101,11 +79,7 @@ export async function getCurrentUser() {
 }
 
 export async function getDynamicMenus() {
-  return request.get<any, PageResult<RouteItem>>("/menus");
-}
-
-export async function getDynamicMenus2() {
-  return request.get<any, PageResult<RouteItem2>>("/menus");
+  return request.get<any, PageResult<RouteItem>>("/menus?limit=100000");
 }
 
 export async function postLogout() {

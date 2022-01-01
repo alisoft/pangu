@@ -144,7 +144,7 @@
           :size="state.tableSize"
           :loading="state.loading"
           :columns="dynamicColumns"
-          :data-source="state.dataSource"
+          :data-source="generatorMenus(state.dataSource, undefined)"
           :pagination="{
             current: state.current,
             pageSize: state.pageSize,
@@ -203,6 +203,7 @@ import DragIcon from "@/admin/components/table/drag-icon.vue";
 import UserModal from "./user-modal.vue";
 import { UserModel } from "@/common/types";
 import { getMenus } from "@/admin/api/user/menu";
+import { generatorMenus } from "@/admin/router/generator-routers";
 
 const baseColumns: TableColumn[] = [
   {
@@ -276,7 +277,7 @@ export default defineComponent({
       context: state,
     } = useFetchData(getMenus, {
       current: 1,
-      pageSize: 10,
+      pageSize: 100000,
       tableSize: "middle", // 'default' | 'middle' | 'small'
     });
     const handleTableChange = (
@@ -293,12 +294,14 @@ export default defineComponent({
     };
     // 新增修改表单
     const modalVisible = ref<boolean>(false);
+    console.log(state.dataSource, generatorMenus(state.dataSource, undefined));
 
     return {
       state,
       columnState,
       dynamicColumns,
       dynamicColumnItems,
+      generatorMenus,
 
       // fullscreen
       elRef,
