@@ -6,9 +6,9 @@ import { PageOptions } from "@/common/types";
 export const paginate = (schema: Schema<any>) => {
   /**
    * @typedef {Object} QueryResult
-   * @property {Document[]} results - Results found
+   * @property {Document[]} data - Results found
    * @property {number} page - Current page
-   * @property {number} limit - Maximum number of results per page
+   * @property {number} limit - Maximum number of data per page
    * @property {number} totalPages - Total number of pages
    * @property {number} totalResults - Total number of documents
    */
@@ -18,7 +18,7 @@ export const paginate = (schema: Schema<any>) => {
    * @param {Object} [options] - Query options
    * @param {string} [options.sortBy] - Sorting criteria using the format: sortField:(desc|asc). Multiple sorting criteria should be separated by commas (,)
    * @param {string} [options.populate] - Populate data fields. Hierarchy of fields should be separated by (.). Multiple populating criteria should be separated by commas (,)
-   * @param {number} [options.limit] - Maximum number of results per page (default = 10)
+   * @param {number} [options.limit] - Maximum number of data per page (default = 10)
    * @param {number} [options.page] - Current page (default = 1)
    * @returns {Promise<QueryResult>}
    */
@@ -63,10 +63,10 @@ export const paginate = (schema: Schema<any>) => {
     docsPromise = docsPromise.exec();
 
     return Promise.all([countPromise, docsPromise]).then((values) => {
-      const [totalResults, results] = values;
+      const [totalResults, data] = values;
       const totalPages = Math.ceil(totalResults / limit);
       const result = {
-        results,
+        data,
         page,
         limit,
         totalPages,

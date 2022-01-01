@@ -105,7 +105,7 @@ export async function getDynamicMenus() {
 }
 
 export async function getDynamicMenus2() {
-  return request.get<any, PageResult<RouteItem2>>("/menus2");
+  return request.get<any, PageResult<RouteItem2>>("/menus");
 }
 
 export async function postLogout() {
