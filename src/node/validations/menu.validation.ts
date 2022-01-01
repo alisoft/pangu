@@ -4,12 +4,15 @@ import { objectId } from "./custom.validation";
 export const createMenu = {
   body: Joi.object().keys({
     path: Joi.string().required(),
-    component: Joi.string().required(),
     name: Joi.string().required(),
+    component: Joi.string(),
     redirect: Joi.string(),
     icon: Joi.string(),
     title: Joi.string(),
     lock: Joi.boolean(),
+    target: Joi.string().valid("_blank", "_self"),
+    hideInMenu: Joi.boolean(),
+    hideChildrenInMenu: Joi.boolean(),
     parent: Joi.string(),
   }),
 };
@@ -41,6 +44,9 @@ export const updateMenu = {
       icon: Joi.string(),
       title: Joi.string(),
       lock: Joi.boolean(),
+      target: Joi.string().valid("_blank", "_self"),
+      hideInMenu: Joi.boolean(),
+      hideChildrenInMenu: Joi.boolean(),
       parent: Joi.string(),
     })
     .min(1),

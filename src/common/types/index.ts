@@ -107,8 +107,10 @@ export interface MenuModel {
   icon?: string;
   title?: string;
   lock?: boolean;
+  target?: "_blank" | "_self";
+  hideInMenu?: boolean;
+  hideChildrenInMenu?: boolean;
   parent?: MenuModel;
-  children?: MenuModel[];
   createBy?: string;
   updateBy?: string;
   isDel?: BaseTypes;

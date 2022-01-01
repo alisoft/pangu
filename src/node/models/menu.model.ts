@@ -12,7 +12,6 @@ const menuSchema = new Schema<MenuModel, MenuStaticMethod>(
     },
     component: {
       type: String,
-      required: true,
       trim: true,
     },
     name: {
@@ -33,6 +32,19 @@ const menuSchema = new Schema<MenuModel, MenuStaticMethod>(
       trim: true,
     },
     lock: {
+      type: Boolean,
+      default: false,
+    },
+    target: {
+      type: String,
+      enum: ["_blank", "_self"],
+      default: "_blank",
+    },
+    hideInMenu: {
+      type: Boolean,
+      default: false,
+    },
+    hideChildrenInMenu: {
       type: Boolean,
       default: false,
     },
