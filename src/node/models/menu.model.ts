@@ -13,7 +13,6 @@ const menuSchema = new Schema<MenuModel, MenuStaticMethod>(
     component: {
       type: String,
       required: true,
-      unique: true,
       trim: true,
     },
     name: {
