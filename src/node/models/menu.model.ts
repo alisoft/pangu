@@ -25,6 +25,10 @@ const menuSchema = new Schema<MenuModel, MenuStaticMethod>(
       type: String,
       trim: true,
     },
+    title: {
+      type: String,
+      trim: true,
+    },
     icon: {
       type: String,
       trim: true,
