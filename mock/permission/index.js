@@ -333,6 +333,41 @@ const menuDataSource = [
   },
 ];
 
+const menuDataSource2 = [
+  {
+    lock: false,
+    isDel: 0,
+    path: "/",
+    component: "/layouts/index.vue",
+    name: "index",
+    redirect: "/workplace",
+    id: "61cfd9af4e7c161cf8e999ea",
+  },
+  {
+    lock: false,
+    isDel: 0,
+    path: "/workplace",
+    component: "/layouts/route-view.vue",
+    name: "Workplace",
+    redirect: "/workplace/workplace",
+    icon: "HistoryOutlined",
+    title: "pages.dashboard.workplace.title",
+    parent: "61cfd9af4e7c161cf8e999ea",
+    id: "61cfdada4e7c161cf8e999f0",
+  },
+  {
+    lock: true,
+    isDel: 0,
+    path: "/workplace/workplace",
+    component: "/views/dashboard/workplace/index.vue",
+    name: "Workplace",
+    icon: "HistoryOutlined",
+    parent: "61cfdada4e7c161cf8e999f0",
+    title: "pages.dashboard.workplace.title",
+    id: "61cfdbe94e7c161cf8e999f3",
+  },
+];
+
 const genRoles = () => {
   return roleDataSource.map((item) => {
     const rpList = rolePermissionJoinDataSource
@@ -358,6 +393,10 @@ const genPermissions = () => {
 
 const genMenus = () => {
   return menuDataSource.concat();
+};
+
+const genMenus2 = () => {
+  return menuDataSource2.concat();
 };
 
 const genUsers = () => {
@@ -467,6 +506,28 @@ const getMenus = (req, res) => {
     res.json(result);
   });
 };
+const getMenus2 = (req, res) => {
+  const { current = 1, pageSize = 10 } = req.query || {};
+
+  const dataSource = genMenus2();
+
+  const result = {
+    data: dataSource,
+    total: dataSource.length,
+    success: true,
+    pageSize,
+    current: parseInt(`${current}`, 10) || 1,
+  };
+
+  // 模拟请求延迟
+  return new Promise((resolve) => {
+    setTimeout(() => {
+      resolve();
+    }, 800);
+  }).then(() => {
+    res.json(result);
+  });
+};
 
 const addRole = (req, res) => {};
 const addPermission = (req, res) => {
@@ -522,6 +583,7 @@ module.exports = {
   "GET /api/permissions": getPermissions,
   "GET /api/users": getUsers,
   "GET /api/menus": getMenus,
+  "GET /api/menus2": getMenus2,
 
   "POST /api/role": addRole,
   "POST /api/permission": addPermission,
