@@ -10,7 +10,7 @@ const menuSchema = new Schema<MenuModel, MenuStaticMethod>(
       required: true,
       trim: true,
     },
-    url: {
+    component: {
       type: String,
       required: true,
       unique: true,
@@ -20,7 +20,6 @@ const menuSchema = new Schema<MenuModel, MenuStaticMethod>(
       type: String,
       required: true,
       trim: true,
-      minlength: 8,
     },
     redirect: {
       type: String,

@@ -101,7 +101,7 @@ export interface UserStaticMethod extends Model<UserModel> {
 export interface MenuModel {
   id?: string;
   path?: string;
-  url?: string;
+  component?: string;
   name?: string;
   redirect?: string;
   icon?: string;

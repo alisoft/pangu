@@ -4,7 +4,7 @@ import { objectId } from "./custom.validation";
 export const createMenu = {
   body: Joi.object().keys({
     path: Joi.string().required(),
-    url: Joi.string().required(),
+    component: Joi.string().required(),
     name: Joi.string().required(),
     redirect: Joi.string(),
     icon: Joi.string(),
@@ -35,7 +35,7 @@ export const updateMenu = {
   body: Joi.object()
     .keys({
       path: Joi.string().required(),
-      url: Joi.string().required(),
+      component: Joi.string().required(),
       name: Joi.string().required(),
       redirect: Joi.string(),
       icon: Joi.string(),
