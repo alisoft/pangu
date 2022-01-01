@@ -9,7 +9,7 @@ import { User } from "../models";
 
 const jwtOptions = {
   secretOrKey: config.jwt.secret,
-  jwtFromRequest: ExtractJwt.fromHeader("Access-Token"),
+  jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
 };
 
 const jwtVerify = async (payload: any, done: VerifiedCallback) => {
