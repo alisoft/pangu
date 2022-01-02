@@ -1,5 +1,6 @@
 import Joi from "joi";
 import { objectId } from "./custom.validation";
+import { TargetTypes } from "@/common/types/base";
 
 export const createMenu = {
   body: Joi.object().keys({
@@ -10,7 +11,7 @@ export const createMenu = {
     icon: Joi.string(),
     title: Joi.string(),
     lock: Joi.boolean(),
-    target: Joi.string().valid("_blank", "_self"),
+    target: Joi.string().valid(TargetTypes.BLANK, TargetTypes.SELF),
     hideInMenu: Joi.boolean(),
     hideChildrenInMenu: Joi.boolean(),
     parent: Joi.string(),
@@ -44,7 +45,7 @@ export const updateMenu = {
       icon: Joi.string(),
       title: Joi.string(),
       lock: Joi.boolean(),
-      target: Joi.string().valid("_blank", "_self"),
+      target: Joi.string().valid(TargetTypes.BLANK, TargetTypes.SELF),
       hideInMenu: Joi.boolean(),
       hideChildrenInMenu: Joi.boolean(),
       parent: Joi.string(),

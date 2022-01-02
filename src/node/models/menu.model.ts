@@ -1,6 +1,6 @@
 import { model, Schema, SchemaTypes } from "mongoose";
 import { toJSON, paginate } from "./plugins";
-import { BaseTypes } from "@/common/types/base";
+import { BaseTypes, TargetTypes } from "@/common/types/base";
 import { MenuModel, MenuStaticMethod } from "@/common/types";
 
 const menuSchema = new Schema<MenuModel, MenuStaticMethod>(
@@ -37,8 +37,8 @@ const menuSchema = new Schema<MenuModel, MenuStaticMethod>(
     },
     target: {
       type: String,
-      enum: ["_blank", "_self"],
-      default: "_blank",
+      enum: [TargetTypes.BLANK, TargetTypes.SELF],
+      default: TargetTypes.BLANK,
     },
     hideInMenu: {
       type: Boolean,
