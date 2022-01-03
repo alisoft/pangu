@@ -1,4 +1,4 @@
-import { defineAsyncComponent } from "vue";
+import { defineAsyncComponent, h } from "vue";
 import type { MenuDataItem } from "./typing";
 import type { RouteItem } from "../api/user/login";
 import { getDynamicMenus } from "../api/user/login";
@@ -6,7 +6,8 @@ import { MenuModel } from "@/common/types";
 
 export const generator = (
   routeMap: RouteItem[],
-  parent: string | undefined
+  parent: string | undefined,
+  index: number
 ) => {
   return routeMap
     .filter((item) => item.parent === parent)
@@ -27,12 +28,11 @@ export const generator = (
           target: target,
           authority: authority,
         },
+        index,
         // 该路由对应页面的 组件 (动态加载 @/admin/views/ 下面的路径文件)
         component: item.async
-          ? defineAsyncComponent(
-              () => import(/* @vite-ignore */ `@/admin${item.component}`)
-            )
-          : () => import(/* @vite-ignore */ `@/admin${item.component}`),
+          ? defineAsyncComponent(() => import(`@/admin${item.component}`))
+          : () => import(`@/admin${item.component}`),
       };
 
       // 为了防止出现后端返回结果不规范，处理有可能出现拼接出两个 反斜杠
@@ -44,13 +44,22 @@ export const generator = (
       item.redirect && (currentRouter.redirect = item.redirect);
 
       // 子菜单，递归处理
-      currentRouter.children = generator(routeMap, item.id);
+      currentRouter.children = generator(routeMap, item.id, index + 1);
       if (
         currentRouter.children === undefined ||
         currentRouter.children.length <= 0
       ) {
         delete currentRouter.children;
       }
+
+      if (currentRouter.index === 1 && !currentRouter.children) {
+        currentRouter.component = h(
+          require("@/admin/layouts/route-view.vue").default,
+          {},
+          () => h(require(`@/admin${item.component}`).default)
+        );
+      }
+
       return currentRouter;
     })
     .filter((item) => item);
@@ -83,7 +92,12 @@ export const generatorDynamicRouter = () => {
     getDynamicMenus()
       .then((menuNav) => {
         // root id = 0;
-        const rootRouter = generator(menuNav.data, undefined) as MenuDataItem[];
+        const rootRouter = generator(
+          menuNav.data,
+          undefined,
+          0
+        ) as MenuDataItem[];
+        console.log(rootRouter);
         // routes.push(notFoundRouter);
         resolve(rootRouter);
       })
