@@ -12,8 +12,15 @@ export const generator = (
   return routeMap
     .filter((item) => item.parent === parent)
     .map((item) => {
-      const { title, hideInMenu, hideChildrenInMenu, target, icon, authority } =
-        item || {};
+      const {
+        title,
+        hideInMenu,
+        hideChildrenInMenu,
+        target,
+        icon,
+        authority,
+        lock,
+      } = item || {};
       const currentRouter: MenuDataItem = {
         // 如果路由设置了 path，则作为默认 path，否则 路由地址 动态拼接生成如 /dashboard/workplace
         path: item.path,
@@ -27,6 +34,7 @@ export const generator = (
           hideChildrenInMenu,
           target: target,
           authority: authority,
+          lock,
         },
         index,
         // 该路由对应页面的 组件 (动态加载 @/admin/views/ 下面的路径文件)

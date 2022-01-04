@@ -91,7 +91,7 @@ const menuDataSource = [
     id: "61cfd9af4e7c161cf8e999ea",
   },
   {
-    lock: false,
+    lock: true,
     target: "_blank",
     hideInMenu: false,
     hideChildrenInMenu: false,
