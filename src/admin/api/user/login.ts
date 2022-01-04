@@ -75,7 +75,7 @@ export async function postAccountLogin(params: LoginParams) {
 }
 
 export async function getCurrentUser() {
-  return request.get<any, UserInfo>("/currentUser");
+  return request.get<any, UserInfo>("/users/info");
 }
 
 export async function getDynamicMenus() {

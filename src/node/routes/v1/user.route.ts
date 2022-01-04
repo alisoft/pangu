@@ -19,6 +19,8 @@ router
     userController.getUsers
   );
 
+router.route("/info").get(auth("getUsers"), userController.getCurrentUser);
+
 router
   .route("/:userId")
   .get(

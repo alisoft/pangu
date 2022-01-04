@@ -14,6 +14,12 @@ export const createUser = catchAsync(async (req: Request, res: Response) => {
   res.status(httpStatus.CREATED).send(user);
 });
 
+export const getCurrentUser = catchAsync(
+  async (req: Request, res: Response) => {
+    res.send(req.user);
+  }
+);
+
 export const getUsers = catchAsync(async (req: Request, res: Response) => {
   const filter = pick(req.query, ["name", "role"]);
   const options = pick(req.query, ["sortBy", "limit", "page"]);

@@ -2,7 +2,7 @@ const usernames = ["test@test.com"];
 const passwords = ["test1234"];
 
 module.exports = {
-  "GET /api/currentUser": (req, res) => {
+  "GET /api/users/info": (req, res) => {
     res.send({
       name: "Serati Ma",
       avatar:

@@ -1,5 +1,5 @@
 import type { ActionTree } from "vuex";
-import type { RouteRecordRaw, Router } from "vue-router";
+import type { RouteRecordRaw } from "vue-router";
 import type { Role, UserState } from "./typing";
 import type { RootState } from "../../root-state";
 import {
@@ -8,8 +8,12 @@ import {
   SET_ROUTERS,
   SET_TOKEN,
 } from "./mutations";
-import type { LoginParams } from "@/admin/api/user/login";
-import { postAccountLogin, postLogout } from "@/admin/api/user/login";
+import type { LoginParams, UserInfo } from "@/admin/api/user/login";
+import {
+  getCurrentUser,
+  postAccountLogin,
+  postLogout,
+} from "@/admin/api/user/login";
 import { routes } from "@/admin/router/routers";
 import { filterMenu } from "@/admin/utils/menu-util";
 import { hasAuthority, filterChildRoute } from "@/admin/utils/authority";
@@ -18,7 +22,7 @@ import type { MenuDataItem } from "@/admin/router/typing";
 
 export const LOGIN = "LOGIN";
 export const LOGOUT = "LOGOUT";
-// export const GET_INFO = "GET_INFO";
+export const GET_INFO = "GET_INFO";
 export const GENERATE_ROUTES = "GenerateRoutes";
 export const GENERATE_ROUTES_DYNAMIC = "GenerateDynamicRoutes";
 
@@ -38,20 +42,20 @@ export const actions: ActionTree<UserState, RootState> = {
         });
     });
   },
-  // [GET_INFO]({ commit }) {
-  //   return new Promise((resolve, reject) => {
-  //     getCurrentUser()
-  //       .then((res: UserInfo) => {
-  //         commit(SET_INFO, res);
-  //         resolve(res);
-  //       })
-  //       .catch((err) => {
-  //         // 获取登录用户信息后，直接清理掉当前 token 并强制让流程走到登录页
-  //         commit(SET_TOKEN, null);
-  //         reject(err);
-  //       });
-  //   });
-  // },
+  [GET_INFO]({ commit }) {
+    return new Promise((resolve, reject) => {
+      getCurrentUser()
+        .then((res: UserInfo) => {
+          commit(SET_INFO, res);
+          resolve(res);
+        })
+        .catch((err) => {
+          // 获取登录用户信息后，直接清理掉当前 token 并强制让流程走到登录页
+          commit(SET_TOKEN, null);
+          reject(err);
+        });
+    });
+  },
   // 从路由表构建路由（前端对比后端权限字段过滤静态路由表）
   [GENERATE_ROUTES]({ commit, state }, router) {
     return new Promise<RouteRecordRaw[]>((resolve) => {
@@ -96,7 +100,7 @@ export const actions: ActionTree<UserState, RootState> = {
     });
   },
   // 从后端获取路由表结构体，并构建前端路由
-  [GENERATE_ROUTES_DYNAMIC]({ commit }, router: Router) {
+  [GENERATE_ROUTES_DYNAMIC]({ commit }, { router, info }) {
     return new Promise<RouteRecordRaw[]>((resolve) => {
       generatorDynamicRouter()
         .then((routes: RouteRecordRaw[]) => {
@@ -106,7 +110,7 @@ export const actions: ActionTree<UserState, RootState> = {
           resolve(routes);
         })
         .catch((err) => {
-          console.error("generatorDynamicRouter2", err);
+          console.error("generatorDynamicRouter", err);
         });
     });
   },
