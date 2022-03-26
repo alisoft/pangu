@@ -31,14 +31,17 @@ module.exports = {
   transpileDependencies: [/node_modules\/\\@babel\/runtime/],
   devServer: {
     open: true,
-    overlay: {
-      warnings: false,
-      errors: true,
+    client: {
+      overlay: {
+        warnings: false,
+        errors: true,
+      },
     },
-    before: (app) => {
+    setupMiddlewares: (middlewares, devServer) => {
       if (process.env.MOCK !== "none" && process.env.HTTP_MOCK !== "none") {
-        app.use(createMockMiddleware());
+        devServer.app.use(createMockMiddleware());
       }
+      return middlewares;
     },
   },
   css: {
@@ -75,14 +78,20 @@ module.exports = {
           },
         ],
       },
+      plugins: [
+        new webpack.IgnorePlugin({
+          resourceRegExp: /(\/es\/locale)|(\.md$)/,
+        }),
+      ],
     };
     if (process.env.NODE_ENV === "production") {
       config.plugins = [
+        ...config.plugins,
         new WebpackBar({
           name,
         }),
         new CompressionWebpackPlugin({
-          filename: "[path].gz[query]",
+          filename: "[path][base].gz[query]",
           algorithm: "gzip",
           test: new RegExp("\\.(" + ["js", "css"].join("|") + ")$"),
           threshold: 10240,
@@ -128,7 +137,9 @@ module.exports = {
 
     // 不要将需要被 webpack 处理的依赖变为外部扩展
     // 也应该把修改 `global` 的依赖 (例如各种 polyfill) 整理成一个白名单
-    webpackConfig.externals(nodeExternals({ allowlist: [/\.(css|vue)$/, /ant-design-vue/] }));
+    webpackConfig.externals(
+      nodeExternals({ allowlist: [/\.(css|vue)$/, /ant-design-vue/] })
+    );
 
     webpackConfig.optimization.splitChunks(false).minimize(false);
 
