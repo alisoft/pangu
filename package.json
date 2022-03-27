@@ -13,10 +13,11 @@
     "server:dev": "nodemon",
     "server:prod": "pm2 start ecosystem.config.json",
     "start": "vue-cli-service serve",
-    "test": "jest -i --colors --verbose --detectOpenHandles --config=jest.config.node.js",
+    "test:client": "npm run test:e2e && npm run test:unit",
     "test:e2e": "vue-cli-service test:e2e",
-    "test:unit": "vue-cli-service test:unit",
-    "test:watch": "jest -i --watchAll --config=jest.config.node.js"
+    "test:server": "jest -i --colors --verbose --detectOpenHandles --config=jest.config.node.js",
+    "test:server:watch": "jest -i --watchAll --config=jest.config.node.js",
+    "test:unit": "vue-cli-service test:unit"
   },
   "dependencies": {
     "@ant-design/icons-vue": "^6.0.1",
