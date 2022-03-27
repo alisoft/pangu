@@ -118,8 +118,10 @@ export const useFetchData = <T extends ReponseData<any>>(
       state.loading = false;
       // 如果没有传递这个方法的话，需要把错误抛出去，以免吞掉错误
       if (options?.onRequestError === undefined) {
+        // @ts-ignore
         throw new Error(e);
       } else {
+        // @ts-ignore
         options.onRequestError(e);
       }
     }
