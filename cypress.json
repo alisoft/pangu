@@ -1,4 +1,0 @@
-{
-  "pluginsFile": "tests/client/e2e/plugins/index.js",
-  "supportFile": "tests/client/e2e/support/index.js"
-}

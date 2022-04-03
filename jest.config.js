@@ -1,16 +1,13 @@
 module.exports = {
-  preset: "@vue/cli-plugin-unit-jest/presets/typescript",
-  globals: {
-    "@vue/vue3-jest": {
-      "@vue/vue3-jest": {
-        babelConfig: true,
-      },
-    },
+  testEnvironment: "node",
+  testEnvironmentOptions: {
+    NODE_ENV: "test",
   },
-  roots: ["<rootDir>/tests/client"],
-  testMatch: ["**/tests/client/unit/**/*.[jt]s?(x)"],
-  transform: {
-    "^.+\\.(js|jsx)$": "babel-jest",
-    "^.+\\.vue$": "@vue/vue3-jest",
-  },
+  restoreMocks: true,
+  roots: ["<rootDir>/tests/node"],
+  coveragePathIgnorePatterns: [
+    "node_modules",
+    "tests",
+  ],
+  coverageReporters: ["text", "lcov", "clover", "html"],
 };
