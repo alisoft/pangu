@@ -17,7 +17,6 @@ module.exports = {
     "@typescript-eslint/ban-ts-comment": 1,
     "@typescript-eslint/no-this-alias": 1,
     "@typescript-eslint/no-non-null-assertion": 1,
-    "vue/multi-word-component-names": 1,
   },
   overrides: [
     {
