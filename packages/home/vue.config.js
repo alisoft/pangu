@@ -2,6 +2,7 @@
 const path = require("path");
 const WebpackBar = require("webpackbar");
 const CompressionWebpackPlugin = require("compression-webpack-plugin");
+const CopyPlugin = require("copy-webpack-plugin");
 const { WebpackManifestPlugin } = require("webpack-manifest-plugin");
 const nodeExternals = require("webpack-node-externals");
 const webpack = require("webpack");
@@ -54,6 +55,12 @@ module.exports = {
       plugins: [
         new webpack.IgnorePlugin({
           resourceRegExp: /(\/es\/locale)|(\.md$)/,
+        }),
+        new CopyPlugin({
+          patterns: [
+            { from: "public/img", to: "home-assets/img" },
+            { from: "public/video", to: "home-assets/video" },
+          ],
         }),
       ],
     };

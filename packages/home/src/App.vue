@@ -1,5 +1,8 @@
 <template>
-  <video-background :sources="['/video/timelapse.mp4']" img="/img/bg.jpeg">
+  <video-background
+    :sources="['/home-assets/video/timelapse.mp4']"
+    img="/home-assets/img/bg.jpeg"
+  >
     <!-- Our Nav Bar Component and Side Menu -->
     <nav-bar />
     <!-- Main Content and Buttons -->
