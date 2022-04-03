@@ -1,10 +1,10 @@
 import { Request, Response } from "express";
 import httpStatus from "http-status";
-import { pick } from "@/utils/pick";
+import { pick } from "../utils/pick";
 import ApiError from "../utils/ApiError";
-import { catchAsync } from "@/utils/catchAsync";
+import { catchAsync } from "../utils/catchAsync";
 import { userRolePermissionService } from "../services";
-import { BaseTypes } from "@/types/base";
+import { BaseTypes } from "../types/base";
 
 export const createUserRolePermission = catchAsync(
   async (req: Request, res: Response) => {

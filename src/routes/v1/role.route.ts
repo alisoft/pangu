@@ -1,6 +1,6 @@
 import express from "express";
-import { auth } from "@/middlewares/auth";
-import { validate } from "@/middlewares/validate";
+import { auth } from "../../middlewares/auth";
+import { validate } from "../../middlewares/validate";
 import { roleValidation } from "../../validations";
 import { roleController } from "../../controllers";
 

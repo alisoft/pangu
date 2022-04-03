@@ -4,7 +4,7 @@ import {
   VerifiedCallback,
 } from "passport-jwt";
 import config from "./config";
-import { TokenTypes } from "@/types/tokens";
+import { TokenTypes } from "../types/tokens";
 import { User } from "../models";
 
 const jwtOptions = {

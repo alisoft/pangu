@@ -1,13 +1,13 @@
 import { Request, Response } from "express";
 import httpStatus from "http-status";
-import { catchAsync } from "@/utils/catchAsync";
+import { catchAsync } from "../utils/catchAsync";
 import {
   authService,
   emailService,
   tokenService,
   userService,
 } from "../services";
-import { UserModel } from "@/types";
+import { UserModel } from "../types";
 
 export const register = catchAsync(async (req: Request, res: Response) => {
   const user = await userService.createUser(req.body);

@@ -11,8 +11,8 @@ import {
 } from "graphql";
 import { applyMiddleware } from "graphql-middleware";
 import { userService } from "../services";
-import { pick } from "@/utils/pick";
-import { BaseTypes } from "@/types/base";
+import { pick } from "../utils/pick";
+import { BaseTypes } from "../types/base";
 import permissions from "../rules";
 
 const RoleEnumType = new GraphQLEnumType({

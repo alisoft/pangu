@@ -16,20 +16,20 @@
       "webpack-env",
       "jest"
     ],
-    "paths": {
-      "@/*": [
-        "src/*"
-      ]
-    },
+//    "paths": {
+//      "@/*": [
+//        "src/*"
+//      ]
+//    },
     "lib": [
       "esnext",
       "dom",
       "dom.iterable",
       "scripthost"
     ],
-    "plugins": [
-      { "transform": "typescript-transform-paths" }
-    ]
+//    "plugins": [
+//      { "transform": "typescript-transform-paths" }
+//    ]
   },
   "include": [
     "src/**/*.ts",

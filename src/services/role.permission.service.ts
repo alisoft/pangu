@@ -1,8 +1,8 @@
 import httpStatus from "http-status";
-import { RolePermission } from "@/models";
+import { RolePermission } from "../models";
 import ApiError from "../utils/ApiError";
-import { BaseTypes } from "@/types/base";
-import { PageOptions, RolePermissionModel } from "@/types";
+import { BaseTypes } from "../types/base";
+import { PageOptions, RolePermissionModel } from "../types";
 
 /**
  * Create a RolePermission

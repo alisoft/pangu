@@ -1,11 +1,8 @@
 import express from "express";
 import { graphqlHTTP } from "express-graphql";
-import path from "path";
-import fs from "fs";
 import redis from "redis";
 import connectRedis from "connect-redis";
 import session from "express-session";
-import { renderToString } from "vue/server-renderer";
 import helmet from "helmet";
 import mongoSanitize from "express-mongo-sanitize";
 import compression from "compression";
@@ -22,30 +19,7 @@ import ApiError from "./utils/ApiError";
 import schema from "./schema";
 import routes from "./routes/v1";
 const xss = require("xss-clean");
-const manifest = require("../../dist/node/ssr-manifest.json");
-const homePath = path.join(
-  __dirname,
-  "../../dist",
-  "node",
-  manifest["home.js"]
-);
-const createHomeApp = require(homePath).default;
-
-const adminPath = path.join(
-  __dirname,
-  "../../dist",
-  "node",
-  manifest["admin.js"]
-);
-const createAdminApp = require(adminPath).default;
-
-const mobilePath = path.join(
-  __dirname,
-  "../../dist",
-  "node",
-  manifest["mobile.js"]
-);
-const createMobileApp = require(mobilePath).default;
+import { useStatic, useRouter } from "./server";
 
 const app = express();
 
@@ -90,27 +64,7 @@ app.use(
   })
 );
 
-app.use(
-  "/img",
-  express.static(path.join(__dirname, "../../dist/client", "img"))
-);
-app.use("/js", express.static(path.join(__dirname, "../../dist/client", "js")));
-app.use(
-  "/video",
-  express.static(path.join(__dirname, "../../dist/client", "video"))
-);
-app.use(
-  "/css",
-  express.static(path.join(__dirname, "../../dist/client", "css"))
-);
-app.use(
-  "/favicon.ico",
-  express.static(path.join(__dirname, "../../dist/client", "favicon.ico"))
-);
-app.use(
-  "/manifest.json",
-  express.static(path.join(__dirname, "../../dist/client", "manifest.json"))
-);
+useStatic(app);
 
 // jwt authentication
 app.use(passport.initialize());
@@ -137,72 +91,7 @@ app.post(
   }))
 );
 
-const homeTemplate = fs.readFileSync(
-  path.join(__dirname, "../../dist/client/home.html"),
-  "utf-8"
-);
-
-const appTemplate = fs.readFileSync(
-  path.join(__dirname, "../../dist/client/admin.html"),
-  "utf-8"
-);
-
-const mobileTemplate = fs.readFileSync(
-  path.join(__dirname, "../../dist/client/mobile.html"),
-  "utf-8"
-);
-
-app.get("/", async (req, res) => {
-  const { app } = createHomeApp();
-
-  const appContent = await renderToString(app);
-
-  const html = homeTemplate
-    .toString()
-    .replace('<div id="app">', `<div id="app">${appContent}`);
-
-  res.setHeader("Content-Type", "text/html");
-  res.send(html);
-});
-app.get("/admin/*", async (req, res) => {
-  const { app, router } = createAdminApp();
-
-  await router.push(req.url);
-  await router.isReady();
-
-  const appContent = await renderToString(app);
-
-  const html = appTemplate
-    .toString()
-    .replace('<div id="app">', `<div id="app">${appContent}`);
-
-  res.setHeader("Content-Type", "text/html");
-  res.send(html);
-});
-app.get("/mobile/*", async (req, res) => {
-  const { app, router } = createMobileApp();
-
-  await router.push(req.url);
-  await router.isReady();
-
-  const appContent = await renderToString(app);
-
-  const html = mobileTemplate
-    .toString()
-    .replace('<div id="app">', `<div id="app">${appContent}`);
-
-  res.setHeader("Content-Type", "text/html");
-  res.send(html);
-});
-
-app.get("/admin", async (req, res, next) => {
-  res.status(301).redirect("/admin/");
-  next();
-});
-app.get("/mobile", async (req, res, next) => {
-  res.status(301).redirect("/mobile/");
-  next();
-});
+useRouter(app);
 
 // send back a 404 error for any unknown api request
 app.use((req, res, next) => {

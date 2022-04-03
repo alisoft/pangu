@@ -1,8 +1,8 @@
 import httpStatus from "http-status";
-import { Menu } from "@/models";
+import { Menu } from "../models";
 import ApiError from "../utils/ApiError";
-import { BaseTypes } from "@/types/base";
-import { PageOptions, MenuModel } from "@/types";
+import { BaseTypes } from "../types/base";
+import { PageOptions, MenuModel } from "../types";
 
 /**
  * Create a menu

@@ -1,8 +1,8 @@
 import httpStatus from "http-status";
-import { Permission, User } from "@/models";
+import { Permission, User } from "../models";
 import ApiError from "../utils/ApiError";
-import { BaseTypes } from "@/types/base";
-import { PageOptions, UserModel } from "@/types";
+import { BaseTypes } from "../types/base";
+import { PageOptions, UserModel } from "../types";
 
 /**
  * Create a user

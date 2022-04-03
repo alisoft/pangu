@@ -2,7 +2,7 @@ import { NextFunction, Request, Response } from "express";
 import { ValidationErrorItem } from "joi";
 import Joi from "joi";
 import httpStatus from "http-status";
-import { pick } from "@/utils/pick";
+import { pick } from "../utils/pick";
 import ApiError from "../utils/ApiError";
 
 export const validate =

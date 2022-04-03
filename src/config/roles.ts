@@ -1,4 +1,4 @@
-import { RoleTypes } from "@/types/roles";
+import { RoleTypes } from "../types/roles";
 
 export const allRoles: Record<RoleTypes, string[]> = {
   user: [],

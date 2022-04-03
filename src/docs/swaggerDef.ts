@@ -1,5 +1,5 @@
 import config from "../config/config";
-const { version } = require("../../../package.json");
+const { version } = require("../../package.json");
 export const swaggerDefinition = {
   openapi: "3.0.0",
   info: {

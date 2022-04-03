@@ -1,10 +1,10 @@
 import { Request, Response } from "express";
 import httpStatus from "http-status";
-import { pick } from "@/utils/pick";
+import { pick } from "../utils/pick";
 import ApiError from "../utils/ApiError";
-import { catchAsync } from "@/utils/catchAsync";
+import { catchAsync } from "../utils/catchAsync";
 import { menuService } from "../services";
-import { BaseTypes } from "@/types/base";
+import { BaseTypes } from "../types/base";
 
 export const createMenu = catchAsync(async (req: Request, res: Response) => {
   const role = await menuService.createMenu({

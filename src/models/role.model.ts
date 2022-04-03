@@ -1,7 +1,7 @@
 import { model, Schema, SchemaTypes } from "mongoose";
 import { paginate, toJSON } from "./plugins";
-import { BaseTypes } from "@/types/base";
-import { RoleModel, RoleStaticMethod } from "@/types";
+import { BaseTypes } from "../types/base";
+import { RoleModel, RoleStaticMethod } from "../types";
 
 const roleSchema = new Schema<RoleModel, RoleStaticMethod>(
   {

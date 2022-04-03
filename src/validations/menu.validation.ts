@@ -1,6 +1,6 @@
 import Joi from "joi";
 import { objectId } from "./custom.validation";
-import { TargetTypes } from "@/types/base";
+import { TargetTypes } from "../types/base";
 
 export const createMenu = {
   body: Joi.object().keys({

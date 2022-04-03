@@ -1,7 +1,7 @@
 import { Schema, model, SchemaTypes } from "mongoose";
 import { paginate, toJSON } from "./plugins";
-import { BaseTypes } from "@/types/base";
-import { PermissionModel, PermissionStaticMethod } from "@/types";
+import { BaseTypes } from "../types/base";
+import { PermissionModel, PermissionStaticMethod } from "../types";
 
 const permissionSchema = new Schema<PermissionModel, PermissionStaticMethod>(
   {

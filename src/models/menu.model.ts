@@ -1,7 +1,7 @@
 import { model, Schema, SchemaTypes } from "mongoose";
 import { toJSON, paginate } from "./plugins";
-import { BaseTypes, TargetTypes } from "@/types/base";
-import { MenuModel, MenuStaticMethod } from "@/types";
+import { BaseTypes, TargetTypes } from "../types/base";
+import { MenuModel, MenuStaticMethod } from "../types";
 
 const menuSchema = new Schema<MenuModel, MenuStaticMethod>(
   {

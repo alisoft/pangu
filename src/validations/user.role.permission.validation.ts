@@ -1,6 +1,6 @@
 import Joi from "joi";
 import { objectId } from "./custom.validation";
-import { UserRolePermissionTypes } from "@/types/base";
+import { UserRolePermissionTypes } from "../types/base";
 
 export const createUserRolePermission = {
   body: Joi.object().keys({
