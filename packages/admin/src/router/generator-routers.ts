@@ -39,8 +39,8 @@ export const generator = (
         index,
         // 该路由对应页面的 组件 (动态加载 @/views/ 下面的路径文件)
         component: item.async
-          ? defineAsyncComponent(() => import(`@/admin${item.component}`))
-          : () => import(`@/admin${item.component}`),
+          ? defineAsyncComponent(() => import(`@${item.component}`))
+          : () => import(`@${item.component}`),
       };
 
       // 为了防止出现后端返回结果不规范，处理有可能出现拼接出两个 反斜杠
@@ -64,7 +64,7 @@ export const generator = (
         currentRouter.component = h(
           require("@/layouts/route-view.vue").default,
           {},
-          () => h(require(`@/admin${item.component}`).default)
+          () => h(require(`@${item.component}`).default)
         );
       }
 
