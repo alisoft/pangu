@@ -27,8 +27,12 @@ export const applyWs = (server: Server | HttpsServer) => {
       console.log(connectionParams);
 
       websocketConnection.on("message", (message: string) => {
-        const parsedMessage = JSON.parse(message);
-        console.log(parsedMessage);
+        try {
+          const parsedMessage = JSON.parse(message);
+          console.log(parsedMessage);
+        } catch (e) {
+          console.error(e);
+        }
       });
     }
   );

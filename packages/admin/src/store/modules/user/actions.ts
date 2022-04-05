@@ -9,11 +9,7 @@ import {
   SET_TOKEN,
 } from "./mutations";
 import type { LoginParams, UserInfo } from "@/api/user/login";
-import {
-  getCurrentUser,
-  postAccountLogin,
-  postLogout,
-} from "@/api/user/login";
+import { getCurrentUser, postAccountLogin, postLogout } from "@/api/user/login";
 import { routes } from "@/router/routers";
 import { filterMenu } from "@/utils/menu-util";
 import { hasAuthority, filterChildRoute } from "@/utils/authority";

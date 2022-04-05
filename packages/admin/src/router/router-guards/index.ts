@@ -2,11 +2,11 @@ import { Router } from "vue-router";
 import store from "../../store";
 import localStorage from "../../utils/local-storage";
 import { allowList, loginRoutePath } from "../define-meta";
-import { STORAGE_TOKEN_KEY } from "../../store/mutation-type";
+import { STORAGE_TOKEN_KEY } from "@/store/mutation-type";
 import {
   GENERATE_ROUTES_DYNAMIC,
   GET_INFO,
-} from "../../store/modules/user/actions";
+} from "@/store/modules/user/actions";
 
 export default function (router: Router) {
   router.beforeEach(async (to) => {

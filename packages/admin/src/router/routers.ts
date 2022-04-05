@@ -593,9 +593,7 @@ export const staticRoutes: MenuDataItem[] = [
         name: "register",
         meta: { title: "pages.login.registerAccount" },
         component: () =>
-          import(
-            /* webpackChunkName: "user" */ "@/views/user/register.vue"
-          ),
+          import(/* webpackChunkName: "user" */ "@/views/user/register.vue"),
       },
       {
         path: "/user/register-result",
@@ -611,9 +609,7 @@ export const staticRoutes: MenuDataItem[] = [
   {
     path: "/:pathMatch(.*)",
     component: () =>
-      import(
-        /* webpackChunkName: "exception" */ "@/views/exception/404.vue"
-      ),
+      import(/* webpackChunkName: "exception" */ "@/views/exception/404.vue"),
   },
 ];
 

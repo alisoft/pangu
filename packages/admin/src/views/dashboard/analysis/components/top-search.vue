@@ -73,10 +73,7 @@ import { MiniArea } from "./charts";
 import NumberInfo from "./number-info/index.vue";
 import Trend from "./trend/index.vue";
 
-import type {
-  SearchDataItem,
-  VisitDataItem,
-} from "@/api/dashboard/analysis";
+import type { SearchDataItem, VisitDataItem } from "@/api/dashboard/analysis";
 
 import numeral from "numeral";
 

@@ -212,10 +212,7 @@ import {
   FullscreenOutlined,
   FullscreenExitOutlined,
 } from "@ant-design/icons-vue";
-import {
-  Container as DragContainer,
-  Draggable,
-} from "@/components/draggable";
+import { Container as DragContainer, Draggable } from "@/components/draggable";
 import { queryRule } from "@/api/list/table-list";
 import type { Pagination, TableFilters, TableColumn } from "@/typing";
 import { useFetchData } from "@/utils/hooks/useFetchData";

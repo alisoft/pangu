@@ -4,6 +4,14 @@ import type { RouteItem } from "@/api/user/login";
 import { getDynamicMenus } from "@/api/user/login";
 import { MenuModel } from "@/utils/types";
 
+const defineRouteComponents: Record<string, any> = {
+  BasicLayout: () => import("@/layouts/index.vue"),
+  RouteView: () => import("@/layouts/route-view.vue"),
+  PageView: () => import("@/layouts/route-view.vue"),
+};
+
+const defineRouteComponentKeys = Object.keys(defineRouteComponents);
+
 export const generator = (
   routeMap: RouteItem[],
   parent: string | undefined,
@@ -21,6 +29,12 @@ export const generator = (
         authority,
         lock,
       } = item || {};
+
+      const comp =
+        item.component && defineRouteComponentKeys.includes(item.component)
+          ? defineRouteComponents[item.component]
+          : () => import(/* @vite-ignore */ `@/views/${item.component}`);
+
       const currentRouter: MenuDataItem = {
         // 如果路由设置了 path，则作为默认 path，否则 路由地址 动态拼接生成如 /dashboard/workplace
         path: item.path,
@@ -38,9 +52,7 @@ export const generator = (
         },
         index,
         // 该路由对应页面的 组件 (动态加载 @/views/ 下面的路径文件)
-        component: item.async
-          ? defineAsyncComponent(() => import(`@${item.component}`))
-          : () => import(`@${item.component}`),
+        component: comp,
       };
 
       // 为了防止出现后端返回结果不规范，处理有可能出现拼接出两个 反斜杠
@@ -64,7 +76,7 @@ export const generator = (
         currentRouter.component = h(
           require("@/layouts/route-view.vue").default,
           {},
-          () => h(require(`@${item.component}`).default)
+          () => h(require(`@/views/${item.component}`).default)
         );
       }
 

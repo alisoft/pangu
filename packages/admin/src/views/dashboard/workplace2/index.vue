@@ -108,10 +108,7 @@ import { GridContent } from "@/components";
 import { useStore } from "vuex";
 import Info from "@/views/list/basic-list/info.vue";
 import { useFetchData } from "@/utils/hooks/useFetchData";
-import {
-  queryActivities,
-  queryProjectNotice,
-} from "@/api/dashboard/workplace";
+import { queryActivities, queryProjectNotice } from "@/api/dashboard/workplace";
 
 export default defineComponent({
   name: "Workplace2",
