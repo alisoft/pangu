@@ -8,6 +8,7 @@
   "scripts": {
     "build": "npm-run-all --parallel build:*",
     "build:admin": "yarn workspace admin build",
+    "build:admin2": "yarn workspace admin2 build",
     "build:admin-react": "yarn workspace admin-react build",
     "build:mobile": "yarn workspace mobile build",
     "build:home": "yarn workspace home build",
