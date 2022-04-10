@@ -1,6 +1,6 @@
 import express from "express";
 import { graphqlHTTP } from "express-graphql";
-import redis from "redis";
+import { createClient } from "redis";
 import connectRedis from "connect-redis";
 import session from "express-session";
 import helmet from "helmet";
@@ -49,11 +49,12 @@ app.use(cors());
 app.options("*", cors<any>());
 
 const RedisStore = connectRedis(session);
-const redisClient = redis.createClient({
-  url: `${config.redis.url}:${config.redis.port}`,
+const redisClient = createClient({
+  url: `redis://${config.redis.url}:${config.redis.port}`,
   password: config.redis.password,
   database: config.redis.database,
 });
+redisClient.connect().catch(console.error);
 
 app.use(
   session({
