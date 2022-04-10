@@ -5,7 +5,7 @@ import type { RootState } from '@/store/root-state';
 import { RESET_CURRENT_USER, SET_INFO, SET_ROUTERS, SET_TOKEN } from './mutations';
 import type { LoginParams, UserInfo } from '@/api/user/login';
 import { postAccountLogin, getCurrentUser, postLogout } from '@/api/user/login';
-import { default as router, routes } from '@/router';
+import { routes } from '@/router';
 import { filterMenu } from '@/utils/menu-util';
 import { hasAuthority, filterChildRoute } from '@/utils/authority';
 import { generatorDynamicRouter } from '@/router/generator-routers';
@@ -46,7 +46,7 @@ export const actions: ActionTree<UserState, RootState> = {
     });
   },
   // 从路由表构建路由（前端对比后端权限字段过滤静态路由表）
-  [GENERATE_ROUTES]({ commit }, info: UserInfo) {
+  [GENERATE_ROUTES]({ commit }, { info, router }) {
     return new Promise<RouteRecordRaw[]>(resolve => {
       // 修改这里可以进行接口返回的对象结构进行改变
       // 亦或是去掉 info.role 使用别的属性替代
@@ -83,7 +83,7 @@ export const actions: ActionTree<UserState, RootState> = {
     });
   },
   // 从后端获取路由表结构体，并构建前端路由
-  [GENERATE_ROUTES_DYNAMIC]({ commit }) {
+  [GENERATE_ROUTES_DYNAMIC]({ commit }, { router }) {
     return new Promise<RouteRecordRaw>(resolve => {
       generatorDynamicRouter()
         .then((routes: RouteRecordRaw) => {

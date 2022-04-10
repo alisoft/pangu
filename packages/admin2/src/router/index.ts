@@ -1,6 +1,6 @@
 import type { Component } from 'vue';
 import { defineAsyncComponent, h } from 'vue';
-import { createRouter, createWebHistory } from 'vue-router';
+import { createRouter as _createRouter, RouterHistory } from 'vue-router';
 import type { MenuDataItem } from './typing';
 import Layout from '@/layouts/index.vue';
 // import UserLayout from '@/layouts/user-layout.vue';
@@ -508,9 +508,9 @@ export const staticRoutes: MenuDataItem[] = [
   },
 ];
 
-const router = createRouter({
-  history: createWebHistory(process.env.VUE_APP_PUBLIC_PATH),
-  routes: staticRoutes,
-});
-
-export default router;
+export function createRouter(history: RouterHistory) {
+  return _createRouter({
+    history,
+    routes: staticRoutes,
+  });
+}

@@ -70,7 +70,7 @@ import { defineComponent, reactive, ref } from 'vue';
 import CitySelect from '@/components/city-select/index.vue';
 import InputPhone from '@/components/input-phone/index.vue';
 import { UploadOutlined } from '@ant-design/icons-vue';
-import { Form } from 'ant-design-vue';
+import { Form } from 'ant-design-vue/lib';
 import type { FormItemInstance } from 'ant-design-vue';
 
 export default defineComponent({

@@ -1,4 +1,4 @@
-import { ConfigProvider } from 'ant-design-vue';
+import { ConfigProvider } from 'ant-design-vue/lib';
 import { disable as darkreaderDisable, enable as darkreaderEnable } from '@umijs/ssr-darkreader';
 
 const themeConfig = {
