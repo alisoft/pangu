@@ -49,10 +49,10 @@ app.use(cors());
 app.options("*", cors<any>());
 
 const RedisStore = connectRedis(session);
-const redisClient = redis.createClient(config.redis.port, config.redis.url, {
+const redisClient = redis.createClient({
+  url: `${config.redis.url}:${config.redis.port}`,
   password: config.redis.password,
-  db: config.redis.database,
-  connect_timeout: 3600,
+  database: config.redis.database,
 });
 
 app.use(
