@@ -1,6 +1,6 @@
 import { createSSRApp } from 'vue';
-import 'ant-design-vue/dist/antd.less';
-import 'ant-design-vue/dist/antd.variable.less';
+// import 'ant-design-vue/dist/antd.less';
+// import 'ant-design-vue/dist/antd.variable.less';
 import router from '@/router';
 import store from '@/store';
 import locale from './locales';
