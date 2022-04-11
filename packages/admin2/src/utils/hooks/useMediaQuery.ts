@@ -1,4 +1,5 @@
 import { ref } from 'vue';
+import { useMounted } from '@/utils/hooks/useMounted';
 
 export const MediaQueryEnum = {
   xs: {
@@ -58,18 +59,21 @@ export const getScreenClassName = () => {
 
 const useMedia = () => {
   const colSpan = ref(getScreenClassName());
-  (Object.keys(MediaQueryEnum) as MediaQueryKey[]).forEach(key => {
-    const { matchMedia } = MediaQueryEnum[key];
-    const mediaQuery = window.matchMedia(matchMedia);
-    if (mediaQuery.matches) {
-      colSpan.value = key;
-    }
-    mediaQuery.onchange = e => {
-      if (e.matches) {
+  const { mounted } = useMounted();
+  if (mounted.value) {
+    (Object.keys(MediaQueryEnum) as MediaQueryKey[]).forEach(key => {
+      const { matchMedia } = MediaQueryEnum[key];
+      const mediaQuery = window.matchMedia(matchMedia);
+      if (mediaQuery.matches) {
         colSpan.value = key;
       }
-    };
-  });
+      mediaQuery.onchange = e => {
+        if (e.matches) {
+          colSpan.value = key;
+        }
+      };
+    });
+  }
   return colSpan;
 };
 

@@ -53,6 +53,7 @@ import TaskForm from './task-form.vue';
 import MemberList from './member-list.vue';
 import FooterToolbar from '@/components/base-layouts/footer-toolbar/index.vue';
 import type { validateInfos } from 'ant-design-vue/es/form/useForm';
+import { useMounted } from '@/utils/hooks/useMounted';
 
 export interface ErrorItem {
   key: string;
@@ -79,6 +80,7 @@ export default defineComponent({
   name: 'AdvanceForm',
   setup() {
     const { t } = useI18n();
+    const { mounted } = useMounted();
     const state = reactive({
       errors: [] as ErrorItem[],
     });
@@ -110,6 +112,8 @@ export default defineComponent({
         });
     };
     const handleErrorClick = (key: string) => {
+      if (!mounted.value) return;
+
       const node = document.querySelector(`[data-validate-id=${key}]`);
 
       if (node) {

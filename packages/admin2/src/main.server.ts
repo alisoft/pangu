@@ -1,5 +1,5 @@
 import { createSSRApp } from 'vue';
-import { createMemoryHistory } from "vue-router";
+import { createMemoryHistory } from 'vue-router';
 // import 'ant-design-vue/dist/antd.less';
 // import 'ant-design-vue/dist/antd.variable.less';
 import { createRouter } from '@/router';

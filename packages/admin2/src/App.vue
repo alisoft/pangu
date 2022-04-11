@@ -15,12 +15,14 @@ import useMenuState, { MenuStateSymbol } from './layouts/use-menu-state';
 import { useMultiTabStateProvider } from './components/multi-tab';
 import { defaultLang } from './locales';
 import type { ConfigProviderProps } from 'ant-design-vue/lib/config-provider';
+import { useMounted } from '@/utils/hooks/useMounted';
 
 export default defineComponent({
   name: 'App',
   setup() {
     const store = useStore();
     const i18n = useI18n();
+    const { mounted } = useMounted();
     const multiTabState = useMultiTabStateProvider();
     const colSize = useMediaQuery();
     const isMobile = computed(() => colSize.value === 'sm' || colSize.value === 'xs');
@@ -41,6 +43,7 @@ export default defineComponent({
     watch(
       theme,
       () => {
+        if (!mounted.value) return;
         if (theme.value === 'realDark') {
           document
             .getElementsByTagName('html')[0]

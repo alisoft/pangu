@@ -2,12 +2,15 @@ import { ref } from 'vue';
 import { createI18n } from 'vue-i18n';
 import dayjs from 'dayjs';
 import enUS from './lang/en-US';
+import { useMounted } from '@/utils/hooks/useMounted';
 
 export const locales: string[] = ['zh-CN', 'zh-TW', 'en-US', 'pt-BR'];
 
 export const defaultLang = 'en-US';
 
 const loadedLanguages = ref<string[]>([defaultLang]);
+
+const { mounted } = useMounted();
 
 const i18n = createI18n({
   missingWarn: false,
@@ -24,8 +27,10 @@ const i18n = createI18n({
 function setI18nLanguage(lang: string) {
   i18n.global.locale = lang;
   // request.headers['Accept-Language'] = lang
-  const HTML = document.querySelector('html');
-  HTML && HTML.setAttribute('lang', lang);
+  if (mounted.value) {
+    const HTML = document.querySelector('html');
+    HTML && HTML.setAttribute('lang', lang);
+  }
   return lang;
 }
 

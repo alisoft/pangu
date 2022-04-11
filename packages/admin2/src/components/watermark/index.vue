@@ -30,6 +30,7 @@
 import { inject, defineComponent, computed, ref, watchEffect } from 'vue';
 import type { CSSProperties, PropType } from 'vue';
 import { useProProvider } from '../base-layouts/pro-provider';
+import { useMounted } from '@/utils/hooks/useMounted';
 
 const getPixelRatio = (context: any) => {
   if (!context) {
@@ -92,6 +93,7 @@ export default defineComponent({
   },
   setup(props) {
     const { getPrefixCls } = useProProvider();
+    const { mounted } = useMounted();
     const prefixCls = computed(() => getPrefixCls('admin-pro-water-mark'));
     const wrapperCls = computed(() => `${prefixCls.value}-wrapper`);
     const waterMakrCls = computed(() => {
@@ -107,7 +109,7 @@ export default defineComponent({
     });
 
     watchEffect(() => {
-      if (props.disabled) {
+      if (props.disabled || !mounted.value) {
         return;
       }
       const canvas = document.createElement('canvas');
