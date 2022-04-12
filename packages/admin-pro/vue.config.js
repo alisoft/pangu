@@ -6,7 +6,7 @@ const CompressionWebpackPlugin = require('compression-webpack-plugin');
 const { WebpackManifestPlugin } = require('webpack-manifest-plugin');
 const nodeExternals = require('webpack-node-externals');
 const webpack = require('webpack');
-const name = 'Admin2'; // page title
+const name = 'Admin Pro'; // page title
 
 function resolve(dir) {
   return path.join(__dirname, dir);
@@ -16,7 +16,7 @@ module.exports = {
   pages: {
     index: process.env.SSR ? './src/main.server.ts' : './src/main.ts',
   },
-  assetsDir: 'admin-assets',
+  assetsDir: 'admin-pro-assets',
   lintOnSave: process.env.NODE_ENV !== 'production',
   productionSourceMap: false,
   transpileDependencies: true,
