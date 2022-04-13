@@ -2,12 +2,13 @@ import type { ActionTree } from 'vuex';
 import type { AppState } from './state';
 import { SET_LANG } from './mutations';
 import { loadLanguageAsync } from '@/locales';
+import type { Locale } from '@/locales';
 import { localStorage } from '@/utils/local-storage';
 import { STORAGE_LANG_KEY } from '@/store/mutation-type';
 import type { RootState } from '@/store/root-state';
 
 export const actions: ActionTree<AppState, RootState> = {
-  [SET_LANG]({ commit }, lang: string) {
+  [SET_LANG]({ commit }, lang: Locale) {
     return new Promise<void>((resolve, reject) => {
       loadLanguageAsync(lang)
         .then(() => {

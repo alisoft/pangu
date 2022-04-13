@@ -35,7 +35,7 @@
     "smooth-dnd": "^0.12.1",
     "store": "^2.0.12",
     "vue": "^3.2.32",
-    "vue-i18n": "~9.1.9",
+    "vue-i18n": "~9.2.0-0",
     "vue-router": "^4.0.3",
     "vuex": "^4.0.0",
     "vuex-persistedstate": "^4.1.0"
@@ -56,7 +56,6 @@
     "@types/store": "^2.0.2",
     "@typescript-eslint/eslint-plugin": "^5.4.0",
     "@typescript-eslint/parser": "^5.4.0",
-    "@umijs/ssr-darkreader": "^4.9.45",
     "@vue/babel-plugin-jsx": "^1.1.1",
     "@vue/cli-plugin-babel": "~5.0.0",
     "@vue/cli-plugin-e2e-cypress": "~5.0.0",
