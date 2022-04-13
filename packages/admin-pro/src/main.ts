@@ -21,7 +21,7 @@ dayjs.extend(updateLocale);
 dayjs.extend(relativeTime);
 
 const app = createApp(App);
-const router = createRouter(createWebHistory('admin'));
+const router = createRouter(createWebHistory('admin-pro'));
 
 applyRouter(router);
 applyComponents(app)

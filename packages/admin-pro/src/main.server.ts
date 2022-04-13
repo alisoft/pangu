@@ -21,7 +21,7 @@ dayjs.extend(relativeTime);
 
 export default function () {
   const app = createSSRApp(App);
-  const router = createRouter(createMemoryHistory('admin'));
+  const router = createRouter(createMemoryHistory('admin-pro'));
 
   applyRouter(router);
   applyComponents(app)
