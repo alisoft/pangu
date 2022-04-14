@@ -4,14 +4,16 @@ import moment from "moment";
 import enUS from "./lang/en-US";
 import { withMounted } from "@/utils/mixins";
 
-export const locales: string[] = ["zh-CN", "zh-TW", "en-US", "pt-BR"];
+export const locales = ["zh-CN", "zh-TW", "en-US", "pt-BR"];
+export type Locale = "zh-CN" | "zh-TW" | "en-US" | "pt-BR";
 
 export const defaultLang = "en-US";
 
-const loadedLanguages = ref<string[]>([defaultLang]);
+const loadedLanguages = ref([defaultLang]);
 const { mounted } = withMounted();
 
 const i18n = createI18n({
+  legacy: false,
   missingWarn: false,
   fallbackWarn: false,
   // 如果不需要国际化，可以打开如下两个配置，取消控制台的警告
@@ -23,9 +25,8 @@ const i18n = createI18n({
   },
 });
 
-function setI18nLanguage(lang: string) {
-  // @ts-ignore
-  i18n.global.locale = lang;
+function setI18nLanguage(lang: Locale) {
+  i18n.global.locale.value = lang as any;
   // request.headers['Accept-Language'] = lang
   if (mounted.value) {
     const HTML = document.querySelector("html");
@@ -34,11 +35,11 @@ function setI18nLanguage(lang: string) {
   return lang;
 }
 
-export function loadLanguageAsync(lang: string = defaultLang): Promise<string> {
+export function loadLanguageAsync(lang: Locale = defaultLang): Promise<string> {
   return new Promise<string>((resolve) => {
     const currentLocale = i18n.global;
 
-    if (currentLocale.locale !== lang) {
+    if (currentLocale.locale.value !== lang) {
       if (!loadedLanguages.value.includes(lang)) {
         return import(
           /* webpackChunkName: "lang-[request]" */

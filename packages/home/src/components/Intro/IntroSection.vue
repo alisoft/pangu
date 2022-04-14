@@ -4,6 +4,7 @@
     <h2>Welcome to here.</h2>
     <div class="btn-wrapper">
       <action-btn msg="Admin" href="/admin" />
+      <action-btn msg="Admin Pro" href="/admin-pro" />
       <action-btn msg="Mobile" href="/mobile" />
     </div>
     <div class="small-wrapper-link">

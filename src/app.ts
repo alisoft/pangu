@@ -1,6 +1,6 @@
 import express from "express";
 import { graphqlHTTP } from "express-graphql";
-import redis from "redis";
+import { createClient } from "redis";
 import connectRedis from "connect-redis";
 import session from "express-session";
 import helmet from "helmet";
@@ -22,6 +22,10 @@ const xss = require("xss-clean");
 import { useStatic, useRouter } from "./server";
 
 const app = express();
+
+useStatic(app);
+
+useRouter(app);
 
 if (config.env !== "test") {
   app.use(morgan.successHandler);
@@ -49,11 +53,12 @@ app.use(cors());
 app.options("*", cors<any>());
 
 const RedisStore = connectRedis(session);
-const redisClient = redis.createClient(config.redis.port, config.redis.url, {
+const redisClient = createClient({
+  url: `redis://${config.redis.url}:${config.redis.port}`,
   password: config.redis.password,
-  db: config.redis.database,
-  connect_timeout: 3600,
+  database: config.redis.database,
 });
+redisClient.connect().catch(console.error);
 
 app.use(
   session({
@@ -63,8 +68,6 @@ app.use(
     resave: false,
   })
 );
-
-useStatic(app);
 
 // jwt authentication
 app.use(passport.initialize());
@@ -90,8 +93,6 @@ app.post(
     graphiql: true,
   }))
 );
-
-useRouter(app);
 
 // send back a 404 error for any unknown api request
 app.use((req, res, next) => {

@@ -78,8 +78,7 @@ export default {
     url: envVars.REDIS_URL,
     port: envVars.REDIS_PORT,
     password: envVars.REDIS_PASSWORD,
-    database:
-      envVars.REDIS_DATABASE + (envVars.NODE_ENV === "test" ? "-test" : ""),
+    database: envVars.REDIS_DATABASE,
   },
   session: {
     secret: envVars.SESSION_SECRET,
