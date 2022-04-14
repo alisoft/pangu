@@ -3919,6 +3919,11 @@
     "@typescript-eslint/types" "5.19.0"
     eslint-visitor-keys "^3.0.0"
 
+"@umijs/ssr-darkreader@^4.9.45":
+  version "4.9.45"
+  resolved "https://registry.yarnpkg.com/@umijs/ssr-darkreader/-/ssr-darkreader-4.9.45.tgz#7f13cfc89616f3203290775eb61b53047ece1733"
+  integrity sha512-XlcwzSYQ/SRZpHdwIyMDS4FOGX5kP4U/2g2mykyn/iPQTK4xTiQAyBu6UnnDnn7d5P8s7Atzh1C7H0ETNOypJg==
+
 "@vant/icons@^1.7.1":
   version "1.8.0"
   resolved "https://registry.yarnpkg.com/@vant/icons/-/icons-1.8.0.tgz#36b13f2e628b533f6523a93a168cf02f07056674"
