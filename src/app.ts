@@ -23,6 +23,10 @@ import { useStatic, useRouter } from "./server";
 
 const app = express();
 
+useStatic(app);
+
+useRouter(app);
+
 if (config.env !== "test") {
   app.use(morgan.successHandler);
   app.use(morgan.errorHandler);
@@ -65,8 +69,6 @@ app.use(
   })
 );
 
-useStatic(app);
-
 // jwt authentication
 app.use(passport.initialize());
 passport.use("jwt", jwtStrategy);
@@ -91,8 +93,6 @@ app.post(
     graphiql: true,
   }))
 );
-
-useRouter(app);
 
 // send back a 404 error for any unknown api request
 app.use((req, res, next) => {

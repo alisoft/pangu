@@ -15,7 +15,7 @@ export const LOGIN = 'LOGIN';
 export const LOGOUT = 'LOGOUT';
 export const GET_INFO = 'GET_INFO';
 export const GENERATE_ROUTES = 'GenerateRoutes';
-export const GENERATE_ROUTES_DYNAMIC = '';
+export const GENERATE_ROUTES_DYNAMIC = 'GenerateRoutesDynamic';
 
 export const actions: ActionTree<UserState, RootState> = {
   [LOGIN]({ commit }, info: LoginParams) {
