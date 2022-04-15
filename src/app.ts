@@ -23,7 +23,7 @@ import { useStatic, useRouter } from "./server";
 
 const app = express();
 
-useStatic(app);
+// useStatic(app);
 
 useRouter(app);
 

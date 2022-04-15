@@ -4,6 +4,7 @@ const fs = require('fs');
 const path = require('path');
 const webpack = require('webpack');
 const resolve = require('resolve');
+const WebpackAliyunOss = require('webpack-aliyun-oss');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CaseSensitivePathsPlugin = require('case-sensitive-paths-webpack-plugin');
 const InlineChunkHtmlPlugin = require('react-dev-utils/InlineChunkHtmlPlugin');
@@ -217,7 +218,7 @@ module.exports = function (webpackEnv) {
       // webpack uses `publicPath` to determine where the app is being served from.
       // It requires a trailing slash, or the file assets will get an incorrect path.
       // We inferred the "public path" (such as / or /my-project) from homepage.
-      publicPath: paths.publicUrlOrPath,
+      publicPath: isEnvProduction ? paths.publicUrlOrPath : '/',
       // Point sourcemap entries to original disk location (format as URL on Windows)
       devtoolModuleFilenameTemplate: isEnvProduction
         ? info =>
@@ -619,6 +620,32 @@ module.exports = function (webpackEnv) {
       // a plugin that prints an error when you attempt to do this.
       // See https://github.com/facebook/create-react-app/issues/240
       isEnvDevelopment && new CaseSensitivePathsPlugin(),
+      isEnvProduction && new WebpackAliyunOss({
+        from: ['../../dist/admin-react/client/admin-react-assets'], // build目录下除html之外的所有文件
+        dist: '/', // oss上传目录
+        overwrite: true,
+        timeout: 60000,
+        region: process.env.ALIYUN_OSS_REGION,
+        accessKeyId: process.env.ACCESS_KEY_ID,
+        accessKeySecret: process.env.ACCESS_KEY_SECRET,
+        bucket: process.env.ALIYUN_OSS_BUCKET,
+
+        // // 如果希望自定义上传路径，就传这个函数
+        // // 否则按 output.path (webpack.config.js) 目录下的文件路径上传
+        // setOssPath(filePath) {
+        //   // filePath为当前文件路径。函数应该返回路径+文件名。
+        //   // 如果返回/new/path/to/file.js，则最终上传路径为 /path/in/alioss/new/path/to/file.js
+        //   return '/new/path/to/file.js';
+        // },
+
+        // 如果想定义header就传
+        setHeaders(filePath) {
+          // 定义当前文件header，可选
+          return {
+            'Cache-Control': 'max-age=31536000'
+          }
+        }
+      }),
       isEnvProduction &&
         new MiniCssExtractPlugin({
           // Options similar to the same options in webpackOptions.output
@@ -634,7 +661,7 @@ module.exports = function (webpackEnv) {
       //   can be used to reconstruct the HTML if necessary
       new WebpackManifestPlugin({
         fileName: 'asset-manifest.json',
-        publicPath: paths.publicUrlOrPath,
+        publicPath: isEnvProduction ? paths.publicUrlOrPath : '/',
         generate: (seed, files, entrypoints) => {
           const manifestFiles = files.reduce((manifest, file) => {
             manifest[file.name] = file.path;

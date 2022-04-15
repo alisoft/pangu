@@ -1,7 +1,7 @@
 <template>
   <video-background
-    :sources="['/home-assets/video/timelapse.mp4']"
-    img="/home-assets/img/bg.jpeg"
+    :sources="['https://vue3-node-boilerplate.kimmy.me/home-assets/video/timelapse.mp4']"
+    img="https://vue3-node-boilerplate.kimmy.me/home-assets/img/bg.jpeg"
   >
     <!-- Our Nav Bar Component and Side Menu -->
     <nav-bar />

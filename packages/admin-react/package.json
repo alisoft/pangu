@@ -2,7 +2,7 @@
   "name": "admin-react",
   "version": "0.1.0",
   "scripts": {
-    "build": "rimraf ../../dist/admin-react/* &&yarn build:client && yarn build:node",
+    "build": "rimraf ../../dist/admin-react/* && yarn build:client && yarn build:node",
     "build:client": "cross-env BUILD_PATH=../../dist/admin-react/client node scripts/build.js",
     "build:node": "cross-env BUILD_PATH=../../dist/admin-react/node SSR=1 node scripts/buildSSR.js",
     "start": "node scripts/start.js",
@@ -80,6 +80,7 @@
     "typescript": "^4.6.3",
     "web-vitals": "^2.1.4",
     "webpack": "^5.64.4",
+    "webpack-aliyun-oss": "^0.5.6",
     "webpack-dev-server": "^4.6.0",
     "webpack-manifest-plugin": "^4.0.2",
     "webpack-node-externals": "^3.0.0",

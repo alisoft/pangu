@@ -15,11 +15,17 @@ jobs:
           mkdir .cert
           echo "$CERT_KEY" | base64 --decode > .cert/cert.key
           echo "$CERT_PEM" | base64 --decode > .cert/cert.pem
+          echo "$REPO_ENV" | base64 --decode > ./packages/admin/.env
+          echo "$REPO_ENV" | base64 --decode > ./packages/admin-pro/.env
+          echo "$REPO_ENV" | base64 --decode > ./packages/admin-react/.env
+          echo "$REPO_ENV" | base64 --decode > ./packages/home/.env
+          echo "$REPO_ENV" | base64 --decode > ./packages/mobile/.env
           echo "$PROD_ENV" | base64 --decode > .env
         env:
           CERT_KEY: ${{ secrets.CERT_KEY }}
           CERT_PEM: ${{ secrets.CERT_PEM }}
           PROD_ENV: ${{ secrets.PROD_ENV }}
+          REPO_ENV: ${{ secrets.REPO_ENV }}
 
       - name: Deploy To Heroku
         uses: akhileshns/heroku-deploy@v3.12.12 # This is the action

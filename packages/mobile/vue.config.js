@@ -1,6 +1,7 @@
 // vue.config.js
 const path = require("path");
 const WebpackBar = require("webpackbar");
+const WebpackAliyunOss = require("webpack-aliyun-oss");
 const CompressionWebpackPlugin = require("compression-webpack-plugin");
 const { WebpackManifestPlugin } = require("webpack-manifest-plugin");
 const nodeExternals = require("webpack-node-externals");
@@ -15,6 +16,10 @@ module.exports = {
   pages: {
     index: process.env.SSR ? "./src/main.server.ts" : "./src/main.ts",
   },
+  publicPath:
+    process.env.NODE_ENV === "production" && !process.env.SSR
+      ? process.env.PUBLIC_URL
+      : "/",
   assetsDir: "mobile-assets",
   lintOnSave: process.env.NODE_ENV !== "production",
   productionSourceMap: false,
@@ -57,6 +62,37 @@ module.exports = {
         }),
       ],
     };
+    if (!process.env.SSR) {
+      config.plugins = [
+        ...config.plugins,
+        new WebpackAliyunOss({
+          from: ["../../dist/mobile/client/mobile-assets"], // build目录下除html之外的所有文件
+          dist: "/", // oss上传目录
+          overwrite: true,
+          timeout: 60000,
+          region: process.env.ALIYUN_OSS_REGION,
+          accessKeyId: process.env.ACCESS_KEY_ID,
+          accessKeySecret: process.env.ACCESS_KEY_SECRET,
+          bucket: process.env.ALIYUN_OSS_BUCKET,
+
+          // // 如果希望自定义上传路径，就传这个函数
+          // // 否则按 output.path (webpack.config.js) 目录下的文件路径上传
+          // setOssPath(filePath) {
+          //   // filePath为当前文件路径。函数应该返回路径+文件名。
+          //   // 如果返回/new/path/to/file.js，则最终上传路径为 /path/in/alioss/new/path/to/file.js
+          //   return '/new/path/to/file.js';
+          // },
+
+          // 如果想定义header就传
+          setHeaders(filePath) {
+            // 定义当前文件header，可选
+            return {
+              "Cache-Control": "max-age=31536000",
+            };
+          },
+        }),
+      ];
+    }
     if (process.env.NODE_ENV === "production") {
       config.plugins = [
         ...config.plugins,
