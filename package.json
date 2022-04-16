@@ -3,7 +3,8 @@
   "version": "0.1.0",
   "private": true,
   "workspaces": [
-    "packages/*"
+    "web/*",
+    "desktop/*"
   ],
   "scripts": {
     "build": "npm-run-all --parallel build:web build:server",

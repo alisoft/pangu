@@ -2,7 +2,8 @@
   "npmClient": "yarn",
   "useWorkspaces": true,
   "packages": [
-    "packages/*"
+    "web/*",
+    "desktop/*"
   ],
   "version": "0.1.0"
 }
