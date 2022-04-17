@@ -2,11 +2,17 @@
   "name": "vue3-node-boilerplate",
   "version": "0.1.0",
   "private": true,
-  "workspaces": [
-    "web/*",
-    "desktop/*",
-    "mobile/*"
-  ],
+  "workspaces": {
+    "packages": [
+      "web/*",
+      "desktop/*",
+      "mobile/*"
+    ],
+    "nohoist": [
+      "**/react-native",
+      "**/react-native/**"
+    ]
+  },
   "scripts": {
     "build": "npm-run-all --parallel build:web build:server",
     "build:web": "npm-run-all --parallel build:admin build:admin-pro build:admin-react build:mobile build:home",
