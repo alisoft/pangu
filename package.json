@@ -26,12 +26,10 @@
     "prepare": "husky install",
     "server:dev": "nodemon",
     "server:prod": "pm2 start ecosystem.config.json",
-    "start": "vue-cli-service serve",
-    "test:client": "npm run test:e2e && npm run test:unit",
-    "test:e2e": "vue-cli-service test:e2e",
-    "test:server": "jest -i --colors --verbose --detectOpenHandles --config=jest.config.node.js",
-    "test:server:watch": "jest -i --watchAll --config=jest.config.node.js",
-    "test:unit": "vue-cli-service test:unit"
+    "test": "jest -i --colors --verbose --detectOpenHandles --config=jest.config.js",
+    "test:watch": "jest -i --watchAll --config=jest.config.js",
+    "ios": "yarn workspace react-native-app ios",
+    "android": "yarn workspace react-native-app android"
   },
   "dependencies": {
     "bcryptjs": "^2.4.3",

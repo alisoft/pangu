@@ -1,145 +1,70 @@
-# Welcome to your new ignited app!
+# :space_invader: React Native Template TypeScript
 
-[![CircleCI](https://circleci.com/gh/infinitered/ignite.svg?style=svg)](https://circleci.com/gh/infinitered/ignite)
+<p>
+  <a href="https://github.com/react-native-community/react-native-template-typescript/actions/workflows/npm-publish.yml">
+    <img alt="Build Status" src="https://github.com/react-native-community/react-native-template-typescript/actions/workflows/npm-publish.yml/badge.svg" />
+  </a>
+  <a href="https://github.com/react-native-community/react-native-template-typescript#readme">
+    <img alt="Documentation" src="https://img.shields.io/badge/documentation-yes-brightgreen.svg" />
+  </a>
+  <a href="https://github.com/react-native-community/react-native-template-typescript/graphs/commit-activity">
+    <img alt="Maintenance" src="https://img.shields.io/badge/Maintained%3F-yes-green.svg" />
+  </a>
+  <a href="https://github.com/react-native-community/react-native-template-typescript/blob/master/LICENSE">
+    <img alt="License: MIT" src="https://img.shields.io/badge/License-MIT-yellow.svg" />
+  </a>
+</p>
 
-## The latest and greatest boilerplate for Infinite Red opinions
+> Clean and minimalist React Native template for a quick start with TypeScript.
 
-This is the boilerplate that [Infinite Red](https://infinite.red) uses as a way to test bleeding-edge changes to our React Native stack.
+## :star: Features
 
-Currently includes:
+- Elegant usage directly within the [React Native CLI](https://github.com/react-native-community/cli)
+- Consistent with the default React Native template
+- Minimal additional dependencies
 
-- React Native
-- React Navigation
-- MobX State Tree
-- TypeScript
-- And more!
+## :arrow_forward: Usage
 
-## Quick Start
-
-The Ignite boilerplate project's structure will look similar to this:
-
-```
-ignite-project
-├── app
-│   ├── components
-│   ├── i18n
-│   ├── utils
-│   ├── models
-│   ├── navigators
-│   ├── screens
-│   ├── services
-│   ├── theme
-│   ├── app.tsx
-├── storybook
-│   ├── views
-│   ├── index.ts
-│   ├── storybook-registry.ts
-│   ├── storybook.ts
-│   ├── toggle-storybook.tsx
-├── test
-│   ├── __snapshots__
-│   ├── storyshots.test.ts.snap
-│   ├── mock-i18n.ts
-│   ├── mock-reactotron.ts
-│   ├── setup.ts
-│   ├── storyshots.test.ts
-├── README.md
-├── android
-│   ├── app
-│   ├── build.gradle
-│   ├── gradle
-│   ├── gradle.properties
-│   ├── gradlew
-│   ├── gradlew.bat
-│   ├── keystores
-│   └── settings.gradle
-├── ignite
-│   ├── ignite.json
-│   └── plugins
-├── index.js
-├── ios
-│   ├── IgniteProject
-│   ├── IgniteProject-tvOS
-│   ├── IgniteProject-tvOSTests
-│   ├── IgniteProject.xcodeproj
-│   └── IgniteProjectTests
-├── .env
-└── package.json
-
+```sh
+npx react-native init MyApp --template react-native-template-typescript
 ```
 
-### ./app directory
+### Usage with older versions of React Native
 
-Included in an Ignite boilerplate project is the `app` directory. This is a directory you would normally have to create when using vanilla React Native.
+#### e.g. `react-native@0.67.x`
 
-The inside of the src directory looks similar to the following:
-
-```
-app
-│── components
-│── i18n
-├── models
-├── navigators
-├── screens
-├── services
-├── theme
-├── utils
-└── app.tsx
+```sh
+npx react-native init MyApp --template react-native-template-typescript@6.9.*
 ```
 
-**components**
-This is where your React components will live. Each component will have a directory containing the `.tsx` file, along with a story file, and optionally `.presets`, and `.props` files for larger components. The app will come with some commonly used components like Button.
+See the below table to find out which version of the template to use.
 
-**i18n**
-This is where your translations will live if you are using `react-native-i18n`.
+#### React Native <=> Template Version
 
-**models**
-This is where your app's models will live. Each model has a directory which will contain the `mobx-state-tree` model file, test file, and any other supporting files like actions, types, etc.
+| React Native | Template |
+| ------------ | -------- |
+| 0.68         | 6.10.\*  |
+| 0.67         | 6.9.\*   |
+| 0.66         | 6.8.\*   |
+| 0.65         | 6.7.\*   |
+| 0.64         | 6.6.\*   |
+| 0.63         | 6.5.\*   |
+| 0.62         | 6.4.\*   |
+| 0.61         | 6.3.\*   |
+| 0.60         | 6.2.\*   |
 
-**navigators**
-This is where your `react-navigation` navigators will live.
+## :warning: React Native CLI
 
-**screens**
-This is where your screen components will live. A screen is a React component which will take up the entire screen and be part of the navigation hierarchy. Each screen will have a directory containing the `.tsx` file, along with any assets or other helper files.
+This template only works with the new CLI. Make sure you have uninstalled the legacy `react-native-cli` first (`npm uninstall -g react-native-cli`) for the below command to work. If you wish to not use `npx`, you can also install the new CLI globally (`npm i -g @react-native-community/cli` or `yarn global add @react-native-community/cli`).
 
-**services**
-Any services that interface with the outside world will live here (think REST APIs, Push Notifications, etc.).
+If you tried the above and still get the react-native-template-react- native-template-typescript: Not found error, please try adding the `--ignore-existing` flag to [force npx to ignore](https://github.com/npm/npx#description) any locally installed versions of the CLI and use the latest.
 
-**theme**
-Here lives the theme for your application, including spacing, colors, and typography.
+Further information can be found here: https://github.com/react-native-community/cli#about
 
-**utils**
-This is a great place to put miscellaneous helpers and utilities. Things like date helpers, formatters, etc. are often found here. However, it should only be used for things that are truely shared across your application. If a helper or utility is only used by a specific component or model, consider co-locating your helper with that component or model.
+## :computer: Contributing
 
-**app.tsx** This is the entry point to your app. This is where you will find the main App component which renders the rest of the application.
+Contributions are very welcome. Please check out the [contributing document](CONTRIBUTING.md).
 
-### ./ignite directory
+## :bookmark: License
 
-The `ignite` directory stores all things Ignite, including CLI and boilerplate items. Here you will find generators, plugins and examples to help you get started with React Native.
-
-### ./storybook directory
-
-This is where your stories will be registered and where the Storybook configs will live.
-
-### ./test directory
-
-This directory will hold your Jest configs and mocks, as well as your [storyshots](https://github.com/storybooks/storybook/tree/master/addons/storyshots) test file. This is a file that contains the snapshots of all your component storybooks.
-
-## Running Storybook
-
-From the command line in your generated app's root directory, enter `yarn run storybook`
-This starts up the storybook server and opens a story navigator in your browser. With your app
-running, choose Toggle Storybook from the developer menu to switch to Storybook; you can then
-use the story navigator in your browser to change stories.
-
-For Visual Studio Code users, there is a handy extension that makes it easy to load Storybook use cases into a running emulator via tapping on items in the editor sidebar. Install the `React Native Storybook` extension by `Orta`, hit `cmd + shift + P` and select "Reconnect Storybook to VSCode". Expand the STORYBOOK section in the sidebar to see all use cases for components that have `.story.tsx` files in their directories.
-
-## Running e2e tests
-
-Read [e2e setup instructions](./e2e/README.md).
-
-## Previous Boilerplates
-
-- [2018 aka Bowser](https://github.com/infinitered/ignite-bowser)
-- [2017 aka Andross](https://github.com/infinitered/ignite-andross)
-- [2016 aka Ignite 1.0](https://github.com/infinitered/ignite-ir-boilerplate-2016)
+This project is [MIT](LICENSE) licensed.
