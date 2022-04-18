@@ -2,7 +2,7 @@ on:
   push:
     tags:
       - 'mobile-*'
-name: Release Desktop
+name: Release Mobile
 jobs:
   publish:
     runs-on: ${{ matrix.os }}
