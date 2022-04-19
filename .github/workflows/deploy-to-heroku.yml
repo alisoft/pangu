@@ -2,8 +2,7 @@ name: Deploy To Heroku
 
 on:
   push:
-    tags:
-      - 'web-*'
+    branches: [ main ]
 
 jobs:
   deploy-to-heroku:
