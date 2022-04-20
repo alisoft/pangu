@@ -76,7 +76,7 @@ module.exports = {
         }),
       ],
     };
-    if (!process.env.SSR) {
+    if (process.env.NODE_ENV === 'production' && !process.env.SSR) {
       config.plugins = [
         ...config.plugins,
         new WebpackAliyunOss({
