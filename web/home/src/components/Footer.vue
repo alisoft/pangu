@@ -2,7 +2,7 @@
   <div class="footer">
     <div class="container w-container">
       <a href="#" class="footer-link"
-        >Flutter Boilerplate Store © 2021
+        >Pangu © 2021
         <span><font-awesome-icon icon="circle"></font-awesome-icon></span>
       </a>
       <a href="#" class="footer-link"

@@ -16,7 +16,7 @@
         </a>
       </div>
       <!-- Tesla Logo -->
-      <logo />
+<!--      <logo />-->
       <!-- Nav Items center -->
       <nav role="navigation" class="nav-menu w-nav-menu">
         <a href="#" class="nav-item w-nav-link">Model S</a>

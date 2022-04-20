@@ -1,6 +1,6 @@
 <template>
   <div class="main-content">
-    <h1>Vue3 Node Boilerplate.</h1>
+    <h1>Pangu.</h1>
     <h2>Welcome to here.</h2>
     <div class="btn-wrapper">
       <action-btn msg="Admin" href="/admin" />
