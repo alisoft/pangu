@@ -38,9 +38,6 @@ jobs:
 #        run: yarn test
       - name: Build app
         run: yarn build:actions && yarn build:desktop
-        env:
-          NODE_ENV: production
-          BUGSNAG_API_KEY: ${{ secrets.BUGSNAG_API_KEY }}
       - uses: ./actions/desktop-release-action
         with:
           mac_csc_link: ${{ secrets.MAC_CSC_LINK }}
