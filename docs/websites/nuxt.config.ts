@@ -14,9 +14,8 @@ export default withDocus({
       { rel: 'preconnect', href: 'https://fonts.gstatic.com' }
     ],
     meta: [
-      { hid: 'og:site_name', property: 'og:site_name', content: 'Nuxt' },
+      { hid: 'og:site_name', property: 'og:site_name', content: 'Pangu' },
       { hid: 'og:type', property: 'og:type', content: 'website' },
-      { hid: 'twitter:site', name: 'twitter:site', content: '@nuxt_js' },
       {
         hid: 'twitter:card',
         name: 'twitter:card',
@@ -25,22 +24,22 @@ export default withDocus({
       {
         hid: 'og:image',
         property: 'og:image',
-        content: 'https://alisoft.dev/preview.png'
+        content: 'https://pangujs.org/preview.png'
       },
       {
         hid: 'og:image:secure_url',
         property: 'og:image:secure_url',
-        content: 'https://alisoft.dev/preview.png'
+        content: 'https://pangujs.org/preview.png'
       },
       {
         hid: 'og:image:alt',
         property: 'og:image:alt',
-        content: 'AliSoft'
+        content: 'Pangu'
       },
       {
         hid: 'twitter:image',
         name: 'twitter:image',
-        content: 'https://alisoft.dev/preview.png'
+        content: 'https://pangujs.org/preview.png'
       }
     ],
     bodyAttrs: {

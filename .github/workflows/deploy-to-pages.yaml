@@ -23,6 +23,6 @@ jobs:
         with:
           github_token: ${{ secrets.GH_TOKEN }}
           publish_dir: ./docs/websites/dist/
-#          cname: alisoft.dev
+          cname: pangujs.org
           user_name: 'see'
           user_email: 'upcwangying@126.com'

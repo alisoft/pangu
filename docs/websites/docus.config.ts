@@ -1,7 +1,7 @@
 export default {
   title: 'Pangu',
   description: '',
-  url: 'https://alisoft.dev',
+  url: 'https://pangujs.org',
   template: 'docs',
   credits: true,
   socialImage: false,
