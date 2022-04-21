@@ -1,0 +1,28 @@
+on:
+  push:
+    branches: [ main ]
+name: Deploy to GitHub Pages
+jobs:
+  deploy-to-pages:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+
+      - uses: actions/setup-node@v2
+        with:
+          node-version: '16'
+
+      - name: Install deps
+        run: yarn install:docs
+
+      - name: Build
+        run: yarn build:docs
+
+      - name: Deploy
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GH_TOKEN }}
+          publish_dir: ./docs/websites/dist/
+#          cname: alisoft.dev
+          user_name: 'see'
+          user_email: 'upcwangying@126.com'
