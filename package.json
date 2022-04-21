@@ -6,7 +6,8 @@
     "packages": [
       "web/*",
       "desktop/*",
-      "mobile/*"
+      "mobile/*",
+      "actions/*"
     ],
     "nohoist": [
       "**/electron",
@@ -26,6 +27,7 @@
     "build:mobile": "yarn workspace mobile build",
     "build:home": "yarn workspace home build",
     "build:server": "rimraf build/* && tsc -p src/tsconfig.json",
+    "build:actions": "yarn workspace desktop-release-action build",
     "build:desktop": "yarn workspace electron-app build",
     "install:docs": "cd docs/websites && yarn install",
     "build:docs": "cd docs/websites && yarn build",

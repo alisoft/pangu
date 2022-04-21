@@ -4,7 +4,8 @@
   "packages": [
     "web/*",
     "desktop/*",
-    "mobile/*"
+    "mobile/*",
+    "actions/*"
   ],
   "version": "0.1.0"
 }
