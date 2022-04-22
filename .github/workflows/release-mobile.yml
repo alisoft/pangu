@@ -13,6 +13,7 @@ jobs:
       - name: Set up our JDK environment # setup JDK environment: mandatory as we need to build  android project
         uses: actions/setup-java@v3
         with:
+          distribution: 'temurin'
           java-version: 11
       - name: Get yarn cache directory path
         id: yarn-cache-dir-path
