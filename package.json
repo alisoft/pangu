@@ -31,6 +31,8 @@
     "build:desktop": "yarn workspace electron-app build",
     "install:docs": "cd docs/websites && yarn install",
     "build:docs": "cd docs/websites && yarn build",
+    "build:android:apk": "yarn workspace react-native-app build:android:apk",
+    "build:android:bundle": "yarn workspace react-native-app build:android:bundle",
     "lint": "vue-cli-service lint",
     "prepare": "husky install",
     "server:dev": "nodemon",
