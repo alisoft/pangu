@@ -22,7 +22,7 @@ jobs:
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GH_TOKEN }}
-          publish_dir: ./docs/websites/dist/
+          publish_dir: ./docs/pangujs.org/dist/
           cname: pangujs.org
           user_name: 'see'
           user_email: 'upcwangying@126.com'
