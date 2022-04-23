@@ -1,8 +1,8 @@
 on:
   push:
     tags:
-      - 'mobile-*'
-name: Release Mobile
+      - 'android-release-*'
+name: Release Android
 jobs:
   android-build:
     name: Android Build
