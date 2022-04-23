@@ -48,9 +48,7 @@ jobs:
         with:
           project-path: mobile/react-native-app/ios/RNApp.xcodeproj
           p12-base64: ${{ secrets.IOS_P12_BASE64 }}
-          mobileprovision-base64: |
-            ${{ secrets.IOS_MOBILE_PROVISION_DEV_BASE64 }}
-            ${{ secrets.IOS_MOBILE_PROVISION_PROD_BASE64 }}
+          mobileprovision-base64: ${{ secrets.IOS_MOBILE_PROVISION_PROD_BASE64 }}
           code-signing-identity: ${{ secrets.IOS_CODE_SIGNING_IDENTITY }}
           team-id: ${{ secrets.IOS_TEAM_ID }}
           certificate-password: ${{ secrets.IOS_CERTIFICATE_PASSWORD }}
