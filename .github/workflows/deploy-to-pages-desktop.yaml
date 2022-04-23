@@ -1,0 +1,33 @@
+on:
+  push:
+    branches: [ main ]
+    paths:
+      - 'docs/desktop.pangujs.org/**'
+name: Deploy to GitHub Pages (Desktop)
+jobs:
+  deploy-to-pages:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+
+      - uses: actions/setup-node@v2
+        with:
+          node-version: '16'
+
+      - name: Install deps
+        run: yarn install:docs:desktop
+
+      - name: Build
+        run: yarn build:docs:desktop
+
+      - name: Deploy
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GH_TOKEN }}
+          personal_token: ${{ secrets.GH_TOKEN }}
+          publish_dir: ./docs/desktop.pangujs.org/dist/
+          external_repository: see/desktop.pangujs.org
+          publish_branch: master
+          cname: desktop.pangujs.org
+          user_name: 'see'
+          user_email: 'upcwangying@126.com'
