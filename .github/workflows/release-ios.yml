@@ -48,7 +48,9 @@ jobs:
         with:
           project-path: ios/RNApp.xcodeproj
           p12-base64: ${{ secrets.IOS_P12_BASE64 }}
-          mobileprovision-base64: ${{ secrets.IOS_MOBILE_PROVISION_BASE64 }}
+          mobileprovision-base64: |
+            ${{ secrets.IOS_MOBILE_PROVISION_DEV_BASE64 }}
+            ${{ secrets.IOS_MOBILE_PROVISION_PROD_BASE64 }}
           code-signing-identity: 'iPhone Distribution'
           team-id: ${{ secrets.IOS_TEAM_ID }}
           certificate-password: ${{ secrets.IOS_CERTIFICATE_PASSWORD }}
@@ -59,10 +61,10 @@ jobs:
         with:
           artifacts: 'output.ipa'
           token: ${{ secrets.GH_TOKEN }}
-      - name: 'Upload app to TestFlight'
-        uses: apple-actions/upload-testflight-build@v1
-        with:
-          app-path: 'output.ipa'
-          issuer-id: ${{ secrets.APPSTORE_ISSUER_ID }}
-          api-key-id: ${{ secrets.APPSTORE_API_KEY_ID }}
-          api-private-key: ${{ secrets.APPSTORE_API_PRIVATE_KEY }}
+#      - name: 'Upload app to TestFlight'
+#        uses: apple-actions/upload-testflight-build@v1
+#        with:
+#          app-path: 'output.ipa'
+#          issuer-id: ${{ secrets.APPSTORE_ISSUER_ID }}
+#          api-key-id: ${{ secrets.APPSTORE_API_KEY_ID }}
+#          api-private-key: ${{ secrets.APPSTORE_API_PRIVATE_KEY }}
