@@ -51,7 +51,7 @@ jobs:
           mobileprovision-base64: |
             ${{ secrets.IOS_MOBILE_PROVISION_DEV_BASE64 }}
             ${{ secrets.IOS_MOBILE_PROVISION_PROD_BASE64 }}
-          code-signing-identity: 'iPhone Distribution'
+          code-signing-identity: ${{ secrets.IOS_CODE_SIGNING_IDENTITY }}
           team-id: ${{ secrets.IOS_TEAM_ID }}
           certificate-password: ${{ secrets.IOS_CERTIFICATE_PASSWORD }}
           workspace-path: mobile/react-native-app/ios/RNApp.xcworkspace
@@ -59,7 +59,7 @@ jobs:
       - name: Push IPA to Releases
         uses: ncipollo/release-action@v1
         with:
-          artifacts: 'output.ipa'
+          artifacts: './mobile/react-native-app/ios/*.ipa'
           token: ${{ secrets.GH_TOKEN }}
 #      - name: 'Upload app to TestFlight'
 #        uses: apple-actions/upload-testflight-build@v1
