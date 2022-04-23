@@ -32,21 +32,6 @@
  */
 
 
-/*! @docsearch/js 3.0.0 | MIT License | © Algolia, Inc. and contributors | https://docsearch.algolia.com */
-
-
-/*!
- * Chart.js v2.9.4
- * https://www.chartjs.org
- * (c) 2020 Chart.js Contributors
- * Released under the MIT License
- */
-
-//! moment.js
-
-//! moment.js locale configuration
-
-
 /*!
  * vue-client-only v0.0.0-semantic-release
  * (c) 2021-present egoist <0x142857@gmail.com>
@@ -98,6 +83,21 @@ PERFORMANCE OF THIS SOFTWARE.
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+
+
+/*! @docsearch/js 3.0.0 | MIT License | © Algolia, Inc. and contributors | https://docsearch.algolia.com */
+
+
+/*!
+ * Chart.js v2.9.4
+ * https://www.chartjs.org
+ * (c) 2020 Chart.js Contributors
+ * Released under the MIT License
+ */
+
+//! moment.js
+
+//! moment.js locale configuration
 
 
 /*!
