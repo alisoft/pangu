@@ -2,7 +2,7 @@ on:
   push:
     branches: [ main ]
     paths:
-      - 'docs/app.pangujs.org/*'
+      - 'docs/app.pangujs.org/**'
 name: Deploy to GitHub Pages (App)
 jobs:
   deploy-to-pages:
