@@ -28,6 +28,8 @@
     "build:desktop": "yarn workspace electron-app build",
     "install:docs": "cd docs/pangujs.org && yarn install",
     "build:docs": "cd docs/pangujs.org && yarn build",
+    "install:docs:app": "cd docs/app.pangujs.org && yarn install",
+    "build:docs:app": "cd docs/app.pangujs.org && yarn build",
     "install:mobile": "cd mobile/react-native-app && yarn install",
     "install:mobile:pods": "cd mobile/react-native-app && yarn install:pods",
     "build:android:apk": "cd mobile/react-native-app && yarn build:android:apk",

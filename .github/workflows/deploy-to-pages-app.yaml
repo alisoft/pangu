@@ -15,10 +15,10 @@ jobs:
           node-version: '16'
 
       - name: Install deps
-        run: yarn install:docs
+        run: yarn install:docs:app
 
       - name: Build
-        run: yarn build:docs
+        run: yarn build:docs:app
 
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3
