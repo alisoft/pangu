@@ -1,6 +1,6 @@
 ---
 template: blank
-title: 'The Intuitive Vue Framework'
+title: 'App'
 description: 'Build your next Vue.js application with confidence using Nuxt. An open source framework making web development simple and powerful.'
 bgClass: 'bg-white'
 ---
