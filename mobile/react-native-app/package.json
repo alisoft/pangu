@@ -4,7 +4,7 @@
   "scripts": {
     "android": "react-native run-android",
     "ios": "react-native run-ios",
-    "install:pods": "cd ios && pod install --repo-update",
+    "install:pods": "cd ios && RCT_NEW_ARCH_ENABLED=1 pod install --repo-update",
     "build:android:apk": "cd android && ./gradlew assembleRelease --no-daemon",
     "build:android:bundle": "cd android && ./gradlew bundleRelease --no-daemon",
     "lint": "eslint . --ext .js,.jsx,.ts,.tsx",
