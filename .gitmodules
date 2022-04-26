@@ -1,0 +1,3 @@
+[submodule "web/admin-pro"]
+	path = web/admin-pro
+	url = git@github.com:see/pangu-admin.git
