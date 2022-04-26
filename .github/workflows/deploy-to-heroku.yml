@@ -2,14 +2,15 @@ name: Deploy To Heroku
 
 on:
   push:
-    tags:
-      - 'web-*'
+    branches: [ main ]
 
 jobs:
   deploy-to-heroku:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
+        with:
+          submodules: true
 
       - name: Configure cert
         run: |
