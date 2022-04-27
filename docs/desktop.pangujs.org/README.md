@@ -1,6 +1,4 @@
-# `mobile-apps-theme`
-
-> TODO: description
+# desktop.pangujs.org
 
 ## Installation
 
