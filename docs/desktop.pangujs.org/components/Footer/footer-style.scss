@@ -1,0 +1,288 @@
+@import '~/assets/styles';
+
+$deco-wave: '/images/mobile/deco-wave-footer.png';
+
+.link {
+  margin: spacing(1, 1.5);
+}
+.footer {
+  margin-top: $spacing8;
+  padding-top: $spacing3;
+  padding-bottom: $spacing8;
+  color: $palette-common-white;
+  position: relative;
+  z-index: 60;
+  ul {
+    margin: 0;
+    padding: 0;
+    li {
+      list-style: none;
+      line-height: 32px;
+      a {
+        text-decoration: none;
+        font-size: 14px;
+        color: $palette-common-white;
+        &:hover {
+          color: $palette-primary-light
+        }
+      }
+    }
+  }
+  p {
+    color: $palette-common-white;
+    @include breakpoints-down(sm) {
+      padding: spacing(0, 3)
+    }
+  }
+  .accordion-root {
+    margin: 0 auto;
+    margin-top: $spacing2
+  }
+  &-desc{
+    display: block;
+    font-size: 14px;
+    margin-bottom: $spacing2
+  }
+  &.invert {
+    p {
+      @include palette-text-primary;
+    }
+    li a {
+      @include palette-text-primary;
+    }
+    .logo {
+      h6 {
+        color: $palette-primary-dark
+      }
+    }
+    .title-nav {
+      @include use-theme(color, $palette-primary-dark, $palette-primary-light)
+    }
+    .select-lang.v-text-field.v-text-field--enclosed {
+      ::v-deep .v-select__selections,
+      ::v-deep .v-icon,
+      ::v-deep .v-select__selection {
+        @include palette-text-primary;
+      }
+    }
+  }
+}
+
+.footer-desc {
+  display: block;
+  font-size: 14px;
+  margin-bottom: $spacing2;
+}
+
+.title-nav {
+  color: $palette-common-white;
+  font-size: 14px;
+  text-transform: uppercase;
+  margin-bottom: $spacing3;
+  font-weight: $font-bold
+}
+.logo {
+  text-align: center;
+  margin-bottom: $spacing3;
+  img {
+    width: 64px;
+  }
+  h6 {
+    color: $palette-common-white;
+  }
+}
+.socmed {
+  display: flex;
+  justify-content: center;
+  margin-bottom: $spacing4;
+  button {
+    margin: $spacing1;
+    color: $palette-primary-dark;
+    background: $palette-secondary-main;
+    width: 36px;
+    height: 36px;
+    .icon {
+      color: $palette-common-white
+    }
+  }
+  .icon {
+    font-size: 24px
+  }
+}
+
+.icon {
+  & + div {
+    background: none !important;
+    padding: spacing(1.5, 1.5, 1.5, 4);
+    width: calc(100% - 32px)
+  }
+}
+
+.select-lang.v-text-field.v-text-field--enclosed {
+  margin: 0 auto;
+  width: 200px;
+  display: inherit;
+  margin-top: $spacing2;
+  ::v-deep .v-input__slot{
+    min-height: 43px;
+  }
+  ::v-deep .v-input__append-inner,
+  ::v-deep .v-input__prepend-inner {
+    margin-top: 10px
+  }
+  ::v-deep .v-select__selections,
+  ::v-deep .v-icon{
+    padding: 0;
+    color: var(--v-primarylight-base)
+  }
+  ::v-deep fieldset {
+    box-shadow: 0 1.5px 12px 2px rgba(0, 0, 0, 0.06);
+    border-color: var(--v-primarylight-darken3) !important;
+    legend {
+      top: 5px;
+      position: relative;
+    }
+  }
+  ::v-deep .v-select__selection {
+    color: $palette-common-white
+  }
+}
+.site-map-item {
+  @include breakpoints-down('md') {
+    padding-bottom: 0 !important;
+    padding-top: 0 !important
+  }
+}
+.accordion-root {
+  background: none;
+  box-shadow: none;
+  max-width: 480px
+}
+#main-wrap .accordion-content.v-expansion-panel {
+  background-color: transparent;
+  &:before, &:after {
+    display: none
+  }
+}
+.accordion-icon {
+  padding: 0
+}
+
+.deco-top {
+  height: 300px;
+  width: 100%;
+  position: absolute;
+  top: -10px;
+  &.back {
+    @include use-theme(fill, $palette-primary-light, #303030);
+  }
+  &.cover {
+    @include use-theme(fill, #fff, $palette-primary-light);
+    @include use-theme(opacity, 0.8, 0.2);
+  }
+  @include breakpoints-up(xl) {
+    display: none
+  }
+  @include breakpoints-up(lg) {
+    transform: scale(1.5, 1)
+  }
+  @include breakpoints-down(md) {
+    transform: scale(1.2, 0.7);
+    top: -80px;
+  }
+  @include breakpoints-down(xs) {
+    transform: scale(0.5, 0.5);
+    top: -90px;
+    @include left(-330px);
+    width: 1280px;
+  }
+}
+
+.footer-deco {
+  position: relative;
+  top: 0;
+  @include use-theme(background-image, linear-gradient(30deg, $palette-primary-main 50%, $palette-secondary-main 140%), linear-gradient(30deg, $palette-primary-dark 50%, $palette-secondary-dark 140%));
+  padding-top: $spacing20 * 2;
+  margin-top: -360px;
+  @include breakpoints-up(xl) {
+    padding-top: $spacing20;
+    margin-top: $spacing20
+  }
+  @include breakpoints-down(sm) {
+    padding-top: $spacing15 * 2
+  }
+  @include breakpoints-down(xs) {
+    padding: spacing(10, 3, 0)
+  }
+  &:before {
+    z-index: 1;
+    content: "";
+    width: 100%;
+    height: 500px;
+    position: absolute;
+    top: $spacing10;
+    @include left(0);
+    opacity: 0.1;
+    background: url($deco-wave) no-repeat transparent;
+    background-size: 100%;
+  }
+}
+
+.decoration {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  @include left(0);
+  overflow: hidden;
+  clip: rect(0, auto, auto, 0);
+  svg {
+    fill: $palette-secondary-main;
+    opacity: 0.15;
+    position: fixed;
+    top: 0
+  }
+}
+
+.action {
+  text-align: center;
+  position: relative;
+  z-index: 1;
+  padding-top: $spacing8;
+  @include breakpoints-down(md) {
+    padding-top: 0;
+    padding-bottom: $spacing3
+  }
+  @include breakpoints-down(xs) {
+    padding-top: $spacing15;
+    padding-bottom: 0
+  }
+  h4 {
+    color: $palette-common-white;
+    margin-bottom: $spacing6
+  }
+}
+
+.btn-area {
+  margin: spacing(5, 0);
+  justify-content: center;
+  position: relative;
+  display: flex;
+  @include breakpoints-down(xs) {
+    justify-content: space-around;
+  }
+  a {
+    @include breakpoints-up(sm) {
+      @include margin-right($spacing2)
+    }
+    @include breakpoints-down(xs) {
+      margin: 4px;
+    }
+    img {
+      width: 160px;
+      @include breakpoints-down(xs) {
+        width: 100%
+      }
+    }
+  }
+}

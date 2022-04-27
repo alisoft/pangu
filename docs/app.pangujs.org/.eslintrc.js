@@ -4,38 +4,38 @@ module.exports = {
     browser: true,
     node: true
   },
-  plugins: ['prettier'],
+  parserOptions: {
+    parser: 'babel-eslint'
+  },
   extends: [
-    '@nuxtjs',
-    'prettier',
-    'plugin:prettier/recommended',
-    'plugin:nuxt/recommended',
-    '@nuxtjs/eslint-config-typescript'
+    'plugin:vue/strongly-recommended',
+    'eslint:recommended',
+    'prettier/vue',
+    'plugin:prettier/recommended'
   ],
+  // required to lint *.vue files
+  plugins: ['vue', 'prettier'],
+  // add your custom rules here
   rules: {
-    // Vue rules
-    'vue/component-name-in-template-casing': [
-      'error',
-      'PascalCase',
-      {
-        registeredComponentsOnly: true
-      }
-    ],
-    'vue/singleline-html-element-content-newline': [0],
-    'vue/multiline-html-element-content-newline': [0],
-    'vue/html-self-closing': [0],
-    'vue/no-v-html': [0],
-    'vue/max-attributes-per-line': [0],
-    'vue/html-closing-bracket-newline': [0],
-    'vue/html-indent': [0],
-    // Prettier rules
-    'max-len': [0, 120],
-    code: [0, 120],
-    'print-width': [0, 120],
-    'no-console': [1],
-    'space-before-function-paren': [0],
-    'arrow-parens': [0],
-    curly: [0],
-    'keyword-spacing': [0]
+    'no-console': process.env.NODE_ENV === 'production' ? 'error' : 'off',
+    'no-debugger': process.env.NODE_ENV === 'production' ? 'error' : 'off',
+    'no-nested-ternary': 0,
+    'vue/no-template-shadow': 0,
+    'import/no-unresolved': 0,
+    'import/no-named-as-default': 0,
+    'no-unused-expressions': 0,
+    'id-length': 0,
+    'no-script-url': 0,
+    'import/no-extraneous-dependencies': 0,
+    'no-underscore-dangle': 0,
+    'global-require': 0,
+    'import/newline-after-import': 0,
+    'import/extensions': 0,
+    'prefer-template': 0,
+    'max-len': 0,
+    'function-paren-newline': 0,
+    'react/no-typos': 0,
+    'arrow-parens': 0,
+    'linebreak-style': 0
   }
 }

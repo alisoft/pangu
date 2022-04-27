@@ -1,14 +1,27 @@
-# AliSoft
-> This repository is a fork of [nuxt/nuxtjs.org](https://github.com/nuxt/nuxtjs.org), thank to [Nuxt](https://nuxtjs.org).
+# `mobile-apps-theme`
 
-## Development
+> TODO: description
 
-Start the development server on [http://localhost:4000](http://localhost:4000)
+## Installation
 
-```bash
-yarn dev
+```
+lerna bootstrap
 ```
 
-## License
+## Run Development
 
-[MIT](./LICENSE.md)
+```
+npm run dev
+```
+
+## Build
+
+```
+npm run build
+```
+
+## Run Production
+
+```
+npm start
+```

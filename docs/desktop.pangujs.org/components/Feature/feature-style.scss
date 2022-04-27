@@ -1,0 +1,248 @@
+$deco-light-top: '/images/mobile/deco-light-top.svg';
+$deco-dark-top: '/images/mobile/deco-dark-top.svg';
+
+@mixin deco-style {
+  width: 450px;
+  height: 450px;
+  position: absolute;
+  top: 80px;
+  @include right(40px)
+}
+
+.deco-primary {
+  @include use-theme(fill, $palette-primary-light, $palette-primary-dark);
+  @include breakpoints-down(sm) {
+    top: 0;
+  }
+  @include deco-style;
+}
+
+.deco-secondary {
+  @include use-theme(fill, $palette-secondary-light, $palette-secondary-dark);
+  @include breakpoints-down(sm) {
+    top: 0;
+  }
+  @include deco-style;
+}
+
+.first {
+  position: relative;
+  z-index: 10;
+}
+
+.last {
+  position: relative;
+  z-index: 30;
+  margin-bottom: $spacing2 * -35;
+  @include breakpoints-up(xl) {
+    margin-bottom: $spacing20 * -2;
+  }
+}
+
+.deco-primary-big {
+  fill: $palette-primary-dark;
+  width: 500px;
+  height: 500px;
+  @include left(80px);
+  top: -40px;
+  position: absolute;
+  @include breakpoints-down(xs) {
+    top: -100px;
+    transform: scale(0.5)
+  }
+}
+
+.bg-color {
+  position: relative;
+  .theme--light & {
+    @include bg-color-fade($palette-primary-light, 0.2)
+  }
+  .theme--dark & {
+    @include bg-color-darken($palette-primary-light, 0.65)
+  }
+  padding: spacing(20, 0);
+  margin-top: $spacing20 * -1
+}
+.deco-bg-top {
+  @include use-theme(background-image, url($deco-light-top), url($deco-dark-top));
+  background-repeat: no-repeat;
+  background-color: transparent;
+  background-size: 100% auto;
+  position: absolute;
+  width: 100%;
+  height: 550px;
+  @include left(0);
+  top: 0;
+  &:after {
+    content: "";
+    @include use-theme(background-image, url($deco-light-top), url($deco-dark-top));
+    background-repeat: no-repeat;
+    background-color: transparent;
+    background-size: 100% auto;
+    position: absolute;
+    width: 100%;
+    height: 550px;
+    opacity: 0.5;
+    @include left(20px);
+    top: 20px;
+  }
+}
+
+.item {
+  position: relative;
+  padding-bottom: $spacing5;
+  p {
+    margin-bottom: $spacing1;
+  }
+  > div {
+    @include breakpoints-down(xs) {
+      padding: 0
+    }
+  }
+}
+
+.text {
+  @include breakpoints-up(md) {
+    padding-top: $spacing12
+  }
+  @include breakpoints-down(sm) {
+    text-align: center
+  }
+}
+
+.screen {
+  position: relative;
+  img {
+    display: block;
+    width: 400px;
+    margin: 0 auto;
+    @include breakpoints-down(sm) {
+      width: 320px;
+      margin: 0 auto
+    }
+  }
+}
+
+.video {
+  overflow: hidden;
+  font-weight: $font-bold;
+  text-align: center;
+  width: 100%;
+  position: relative;
+  height: 300px;
+  @include breakpoints-down(xs) {
+    height: 180px;
+  }
+  img {
+    position: absolute;
+    @include left(0);
+    width: 100%;
+    min-height: 100%
+  }
+  h6 {
+    font-weight: $font-bold;
+    text-align: center;
+    position: relative;
+    margin: spacing(8, 0, 4);
+    @include breakpoints-down(xs) {
+      margin: spacing(4, 0)
+    }
+  }
+  .button {
+    background: $palette-primary-main;
+    width: 64px;
+    height: 64px;
+    line-height: 64px;
+    i {
+      font-size: 26px;
+      color: $palette-common-white;
+      transform: scale(1.7) translateX(2px);
+    }
+  }
+}
+
+.graphic {
+  position: absolute;
+  img {
+    width: 90%;
+    display: block
+  }
+}
+
+.tab-content {
+  position: relative;
+  padding: spacing(8, 4);
+}
+
+.tab-label {
+  font-size: 18px;
+  border-bottom: 1px solid;
+  @include use-theme(border-bottom-color, $light-text-disabled, $dark-text-disabled);
+}
+
+.illustration-left {
+  position: relative;
+  .screen {
+    margin: 0;
+    @include breakpoints-up(md) {
+      margin-top: -50px;
+    }
+    @include breakpoints-down(sm) {
+      @include margin-left($spacing20 * -1)
+    }
+    @include breakpoints-down(xs) {
+      @include margin-left($spacing1)
+    }
+  }
+}
+
+.illustration-right {
+  position: relative;
+  .screen {
+    @include breakpoints-up(md) {
+      @include left(20px);
+      top: -40px;
+    }
+    @include breakpoints-down(xs) {
+      @include margin-left($spacing1)
+    }
+  }
+}
+
+.illustration-center {
+  position: relative;
+  margin-top: $spacing10;
+  @include breakpoints-down(xs) {
+    margin-top: $spacing3
+  }
+}
+
+.video-popup {
+  max-width: none;
+  @include breakpoints-up(sm) {
+    width: 690px;
+  }
+  @include breakpoints-down(xs) {
+    &::v-deep iframe {
+      width: 100%
+    }
+  }
+}
+
+.headline {
+  .title-main {
+    font-size: 1.25rem;
+    font-weight: $font-medium;
+    line-height: 2rem;
+    letter-spacing: 0.0125em;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+  }
+}
+
+.close-btn {
+  position: absolute;
+  top: 4px;
+  @include right(40px)
+}

@@ -1,0 +1,112 @@
+.landscape {
+  margin-bottom: $spacing5;
+  align-items: center;
+  flex-direction: row;
+  @include breakpoints-down(xs) {
+    flex-direction: column;
+  }
+  figure {
+    width: 150px;
+    height: 150px;
+    margin: 0;
+    @include breakpoints-down(xs) {
+      width: 93%;
+      margin: 0 auto;
+      height: 180px;
+    }
+    img {
+      height: 100%;
+      @include breakpoints-down(xs) {
+        height: auto;
+        min-width: 100%;
+        height: 100%;
+      }
+    }
+  }
+  .desc {
+    height: 185px;
+    padding: spacing(3, 1);
+    @include breakpoints-up(sm) {
+      padding: $spacing3;
+      @include margin-left($spacing12 * -1);
+      @include padding-left($spacing13);
+    }
+    @include breakpoints-down(xs) {
+      padding: spacing(3, 1);
+      padding-top: 230px;
+      margin-top: -200px;
+    }
+  }
+}
+
+.potrait {
+  flex-direction: column;
+  figure {
+    height: 250px;
+    width: 93%;
+    margin: 0 auto;
+    @include breakpoints-down(xs) {
+      height: 180px;
+    }
+    img {
+      width: 100%;
+      min-height: 100%;
+    }
+  }
+  .desc {
+    margin-top: -200px;
+    padding: $spacing3;
+    padding-top: 230px;
+    @include breakpoints-down(xs) {
+      padding-left: $spacing1;
+      padding-right: $spacing1;
+    }
+  }
+}
+
+.news {
+  display: flex;
+  @include breakpoints-down(xs) {
+    margin-bottom: $spacing8
+  }
+  figure {
+    overflow: hidden;
+    border-radius: 15px;
+    @include shadow8;
+    z-index: 1;
+    img {
+      @include margin-left(50%);
+      .v-application--is-rtl & {
+        transform: translateX(50%)
+      }
+      .v-application--is-ltr & {
+        transform: translateX(-50%)
+      }
+    }
+  }
+  p {
+    font-size: 18px;
+    font-weight: $font-medium
+  }
+}
+
+.desc {
+  flex: 1
+}
+
+.text {
+  padding: spacing(0, 1.5);
+}
+
+.type {
+  font-weight: $font-bold;
+  text-transform: uppercase;
+  @include palette-text-secondary;
+}
+
+.btn.v-btn {
+  margin-top: $spacing1;
+  @include use-theme(color, $palette-primary-main, $palette-primary-light);
+  text-transform: none;
+  padding: 0 12px !important
+}

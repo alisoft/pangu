@@ -1,0 +1,29 @@
+.title-main {
+  font-weight: $font-bold;
+  @include breakpoints-down(xs) {
+    font-size: 24px;
+    line-height: 36px
+  }
+}
+
+.root {
+  display: flex;
+  margin: spacing(5, 0, 0);
+  justify-content: center;
+  position: relative;
+  overflow: auto;
+  z-index: 95;
+  @include breakpoints-down(xs) {
+    justify-content: flex-start
+  }
+  img {
+    height: 64px;
+    margin: $spacing4;
+    filter: grayscale(1) contrast(0.5) brightness(1.5);
+    transition: all 0.3s ease-out;
+    @include use-theme(opacity, 1, 0.5);
+    &:hover {
+      filter: none
+    }
+  }
+}

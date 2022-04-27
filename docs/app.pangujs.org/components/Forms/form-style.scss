@@ -1,0 +1,324 @@
+$deco-wave-light: '/images/mobile/deco-wave-light.png';
+$deco-wave-dark: '/images/mobile/deco-wave-dark.png';
+$deco-line-light: '/images/mobile/deco-line-light.png';
+$deco-line-dark: '/images/mobile/deco-line-dark.png';
+
+.page-wrap {
+  text-align: center;
+  @include use-theme(background, $light-background-paper, $dark-background-default);
+  min-height: 100%;
+  position: relative;
+  width: 100%;
+  align-items: center;
+  padding: spacing(10, 5);
+  @include breakpoints-up(md) {
+    display: flex;
+  }
+  @include breakpoints-down(sm) {
+    padding: spacing(5, 0)
+  }
+  .title-contact {
+    @include use-theme(color, $palette-primary-dark, $palette-primary-light);
+    font-weight: $font-bold;
+    @include breakpoints-down(sm) {
+      font-size: 32px;
+    }
+  }
+  a {
+    @include use-theme(color, $palette-primary-main, $palette-primary-light);
+    text-transform: none;
+    font-size: 16px;
+    text-decoration: none;
+    font-weight: $font-regular;
+    @include breakpoints-down(xs) {
+      font-size: 14px;
+    }
+  }
+}
+
+.inner-wrap {
+  @include text-align(left)
+}
+
+.background {
+  position: absolute;
+  height: 700px;
+  top: -30px;
+  @include right(-200px);
+  width: 50%;
+  .v-application--is-rtl & {
+    transform: scale(-1, 1)
+  }
+  img {
+    position: absolute;
+    top: 0;
+    .v-application--is-rtl & {
+      right: auto;
+      left: 200px;
+    }
+    .v-application--is-ltr & {
+      right: 200px;
+      left: auto;
+    }
+  }
+}
+
+.deco-inner {
+  position: absolute;
+  top: 0;
+  @include right(0);
+  opacity: 0.2;
+  .v-application--is-rtl & {
+    transform: scale(-1, 1)
+  }
+}
+
+.gradient {
+  background-image: linear-gradient(30deg, $palette-primary-main 50%, $palette-secondary-main 140%);
+  width: 100%;
+  height: 100%;
+  .v-application--is-rtl & {
+    transform: scale(-1, 1)
+  }
+  img {
+    display: block
+  }
+}
+
+.deco-wave {
+  position: absolute;
+  top: 0px;
+  @include left(-1px);
+  width: 102%;
+  height: 100%;
+  background-repeat: no-repeat;
+  background-position: 0 0;
+  @include use-theme(background-image, url($deco-wave-light), url($deco-wave-dark));
+  background-size: 100% 720px;
+  .v-application--is-rtl & {
+    transform: scale(-1, 1)
+  }
+}
+
+.deco-line {
+  position: absolute;
+  @include left(-12px);
+  top: -40px;
+  opacity: 0.56;
+  width: 100%;
+  height: 100%;
+  background-repeat: no-repeat;
+  background-position: 0 0;
+  @include use-theme(background-image, url($deco-line-light), url($deco-line-dark));
+  background-size: 100% 700px;
+  .v-application--is-rtl & {
+    transform: scale(-1, 1)
+  }
+}
+
+.parallax {
+  overflow: hidden;
+  height: 100%;
+  position: absolute;
+  width: 100%;
+  top: 0px;
+  @include left(0)
+}
+
+.full-form-wrap {
+  padding-top: $spacing8;
+  @include breakpoints-down(xs) {
+    padding-top: $spacing4
+  }
+}
+
+.v-card.form-box {
+  border-radius: 40px !important;
+  overflow: hidden;
+  background: transparent;
+  box-shadow: 0 1.5px 12px 2px rgba(0, 0, 0, 0.28);
+  @include breakpoints-down(xs) {
+    box-shadow: none
+  }
+}
+
+.desc {
+  font-size: 20px;
+  @include palette-text-secondary;
+  text-align: center;
+  padding: spacing(0, 15);
+  @include breakpoints-down(xs) {
+    padding: spacing(2, 1);
+    font-size: 18px;
+  }
+}
+
+.input {
+  width: 100%;
+  label {
+    @include left(4px)
+  }
+  ::v-deep .v-input__slot {
+    background: none;
+    overflow: hidden;
+    border: 1px solid;
+    @include use-theme(border-color, rgba(0, 0, 0, 0.2), rgba(255, 255, 255, 0.25));
+    input, textarea, select {
+      @include left($spacing2);
+      &:focus {
+        background: none
+      }
+      &:hover {
+        background: none
+      }
+    }
+  }
+}
+
+.form {
+  @include text-align(left);
+  position: relative;
+  margin-top: $spacing8;
+  padding: spacing(0, 15, 10);
+  @include breakpoints-down(sm) {
+    padding: spacing(0, 4, 10)
+  }
+  @include breakpoints-down(xs) {
+    padding: spacing(2, 1);
+    margin-top: $spacing2
+  }
+}
+
+.form-helper {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  @include breakpoints-down(xs) {
+    flex-direction: column;
+    align-items: center;
+  }
+}
+
+.btn-area {
+  justify-content: space-between;
+  @include breakpoints-up(sm) {
+    margin-top: $spacing3;
+    display: flex;
+  }
+  @include breakpoints-down('sm') {
+    button {
+      margin-top: $spacing4;
+      width: 100%
+    }
+  }
+  @include breakpoints-down(xs) {
+    margin-top: $spacing2;
+    margin-bottom: $spacing5;
+  }
+  button.v-btn.v-size--large {
+    margin-top: $spacing2;
+    min-height: 48px;
+    min-width: 180px;
+  }
+  span {
+    a.link {
+      text-decoration: none !important;
+      color: $palette-secondary-main
+    }
+  }
+  &.flex {
+    display: flex;
+    justify-content: space-between;
+    @include breakpoints-down(sm) {
+      display: block
+    }
+  }
+}
+
+.right-icon {
+  @include margin-left($spacing1)
+}
+
+.check {
+  svg {
+    fill: $palette-secondary-main
+  }
+}
+
+.logo {
+  align-items: center;
+  justify-content: center;
+  margin-bottom: $spacing3;
+  position: relative;
+  z-index: 1;
+  &.logoHeader {
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    z-index: 10
+  }
+  img {
+    width: 64px
+  }
+  p, span {
+    display: block;
+    padding-bottom: 4px;
+  }
+}
+
+.form-control-label {
+  ::v-deep .v-messages {
+    min-height: 0;
+  }
+  > div {
+    margin-top: 0
+  }
+}
+
+.backtohome {
+  width: 80px;
+  height: 80px;
+  position: absolute;
+  margin-top: 20px;
+  z-index: 4;
+  @include margin-left(20px);
+  @include breakpoints-down(sm) {
+    @include left(calc(50% - 40px));
+    top: 40px;
+    margin: 0
+  }
+  @include breakpoints-down('sm') {
+    display: none
+  }
+  i {
+    font-size: 32px;
+    @include palette-text-disabled;
+  }
+  > span i:first-child {
+    opacity: 1;
+    transition: opacity 0.3s ease
+  }
+  > span i:last-child {
+    position: absolute;
+    @include right(0);
+    opacity: 0;
+    transition: all 0.3s ease
+  }
+  &:hover {
+    background: rgba(0, 0, 0, 0.05);
+    > span i:first-child {
+      opacity: 0;
+    }
+    > span i:last-child {
+      @include right(27px);
+      opacity: 1;
+    }
+  }
+}
+
+.check-label {
+  ::v-deep .v-messages__message {
+    position: relative;
+    top: $spacing3
+  }
+}
