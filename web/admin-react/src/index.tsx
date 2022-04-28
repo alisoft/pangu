@@ -1,17 +1,54 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import { BrowserRouter } from "react-router-dom";
-import './index.css';
-import App from './pages/App';
-import reportWebVitals from './reportWebVitals';
-
-export default App
+import React from "react";
+import { BrowserRouter, Route, Switch } from "react-router-dom";
+import reportWebVitals from "./reportWebVitals";
+import { persistor, store } from "./app/store";
+import { Provider } from "react-redux";
+import { PersistGate } from "redux-persist/integration/react";
+import ReactDOM from "react-dom";
+// STYLE
+import "./styles/index.scss";
+import "./index.css";
+import "./fonts/line-awesome-1.3.0/css/line-awesome.css";
+import {pages} from "./routers";
+import ScrollToTop from "./routers/ScrollToTop";
+import MediaRunningContainer from "./containers/MediaRunningContainer/MediaRunningContainer";
+import HeaderContainer from "./containers/HeaderContainer/HeaderContainer";
+import Page404 from "./containers/Page404/Page404";
+import Footer from "./components/Footer/Footer";
 
 ReactDOM.hydrate(
   <React.StrictMode>
-    <BrowserRouter basename={"admin-react"}>
-      <App />
-    </BrowserRouter>
+    <Provider store={store}>
+      {/*@ts-ignore*/}
+      <PersistGate loading={null} persistor={persistor}>
+        <div className="bg-white text-base dark:bg-neutral-900 text-neutral-900 dark:text-neutral-200">
+          <BrowserRouter
+            basename={"admin-react"}
+          >
+            <MediaRunningContainer />
+
+            <ScrollToTop />
+            <HeaderContainer />
+            <Switch>
+              {pages.map(({ component, path, exact }) => {
+                return (
+                  <Route
+                    key={path}
+                    // @ts-ignore
+                    component={component}
+                    exact={!!exact}
+                    path={path}
+                  />
+                );
+              })}
+              <Route component={Page404} />
+            </Switch>
+            <Footer />
+            {/* MEDIA */}
+          </BrowserRouter>
+        </div>
+      </PersistGate>
+    </Provider>
   </React.StrictMode>,
   document.getElementById('root')
 );
