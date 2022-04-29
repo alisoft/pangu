@@ -1,10 +1,9 @@
 import express from "express";
 const path = require("path");
 const fs = require("fs");
-const homeManifest = require("../dist/home/node/ssr-manifest.json");
+const homeManifest = require("../dist/home/node/asset-manifest.json");
 const adminManifest = require("../dist/admin/node/ssr-manifest.json");
 const adminProManifest = require("../dist/admin-pro/node/ssr-manifest.json");
-const homeReactManifest = require("../dist/admin-react/node/asset-manifest.json");
 const mobileManifest = require("../dist/mobile/node/ssr-manifest.json");
 const { createElement } = require("react");
 const { renderToString: renderReactToString } = require("react-dom/server");
@@ -13,7 +12,7 @@ const homePath = path.join(
   __dirname,
   "../dist/home",
   "node",
-  homeManifest["index.js"]
+  homeManifest["files"]["main.js"]
 );
 const createHomeApp = require(homePath).default;
 
@@ -32,14 +31,6 @@ const adminProPath = path.join(
   adminProManifest["index.js"]
 );
 const createAdminProApp = require(adminProPath).default;
-
-const adminReactPath = path.join(
-  __dirname,
-  "../dist/admin-react",
-  "node",
-  homeReactManifest["files"]["main.js"]
-);
-const createAdminReactApp = require(adminReactPath).default;
 
 const mobilePath = path.join(
   __dirname,
@@ -70,12 +61,6 @@ export function useStatic(app: express.Application) {
       path.join(__dirname, "../dist/admin-pro/client", "admin-pro-assets")
     )
   );
-  app.use(
-    "/admin-react-assets",
-    express.static(
-      path.join(__dirname, "../dist/admin-react/client", "admin-react-assets")
-    )
-  );
 }
 
 const homeTemplate = fs.readFileSync(
@@ -93,11 +78,6 @@ const adminProTemplate = fs.readFileSync(
   "utf-8"
 );
 
-const adminReactTemplate = fs.readFileSync(
-  path.join(__dirname, "../dist/admin-react/client/index.html"),
-  "utf-8"
-);
-
 const mobileTemplate = fs.readFileSync(
   path.join(__dirname, "../dist/mobile/client/index.html"),
   "utf-8"
@@ -105,13 +85,11 @@ const mobileTemplate = fs.readFileSync(
 
 export function useRouter(app: express.Application) {
   app.get("/", async (req, res) => {
-    const { app } = createHomeApp();
-
-    const appContent = await renderToString(app);
-
+    const app = createElement(createHomeApp(req.url));
+    const appContent = renderReactToString(app);
     const html = homeTemplate
       .toString()
-      .replace('<div id="app">', `<div id="app">${appContent}`);
+      .replace('<div id="root">', `<div id="root">${appContent}`);
 
     res.setHeader("Content-Type", "text/html");
     res.send(html);
@@ -142,17 +120,6 @@ export function useRouter(app: express.Application) {
     const html = adminProTemplate
       .toString()
       .replace('<div id="app">', `<div id="app">${appContent}`);
-
-    res.setHeader("Content-Type", "text/html");
-    res.send(html);
-  });
-
-  app.get("/admin-react/*", async (req, res) => {
-    const app = createElement(createAdminReactApp(req.url));
-    const appContent = renderReactToString(app);
-    const html = adminReactTemplate
-      .toString()
-      .replace('<div id="root">', `<div id="root">${appContent}`);
 
     res.setHeader("Content-Type", "text/html");
     res.send(html);
