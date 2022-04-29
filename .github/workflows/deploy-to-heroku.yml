@@ -19,9 +19,8 @@ jobs:
           echo "$CERT_KEY" | base64 --decode > .cert/cert.key
           echo "$CERT_PEM" | base64 --decode > .cert/cert.pem
           echo "$REPO_ENV" | base64 --decode > ./web/admin/.env
-          echo "$REPO_ENV" | base64 --decode > ./web/admin-pro/.env
-          echo "$REPO_ENV" | base64 --decode > ./web/admin-react/.env
-          echo "$REPO_ENV" | base64 --decode > ./web/home/.env
+          echo "$REPO_ENV" | base64 --decode > ./web/pangu-admin/.env
+          echo "$REPO_ENV" | base64 --decode > ./web/pangu-home/.env
           echo "$REPO_ENV" | base64 --decode > ./web/mobile/.env
           echo "$PROD_ENV" | base64 --decode > .env
         env:
@@ -29,6 +28,9 @@ jobs:
           CERT_PEM: ${{ secrets.CERT_PEM }}
           PROD_ENV: ${{ secrets.PROD_ENV }}
           REPO_ENV: ${{ secrets.REPO_ENV }}
+
+      - name: Remove git submodules
+        run: rm -f .gitmodules
 
       - name: Deploy To Heroku
         uses: akhileshns/heroku-deploy@v3.12.12 # This is the action
