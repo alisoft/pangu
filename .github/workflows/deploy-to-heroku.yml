@@ -30,7 +30,10 @@ jobs:
           REPO_ENV: ${{ secrets.REPO_ENV }}
 
       - name: Remove git submodules
-        run: rm -f .gitmodules
+        run: |
+          rm -f .gitmodules
+          rm -f ./web/pangu-admin/.git
+          rm -f ./web/pangu-home/.git
 
       - name: Deploy To Heroku
         uses: akhileshns/heroku-deploy@v3.12.12 # This is the action
