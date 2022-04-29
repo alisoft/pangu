@@ -1,5 +1,5 @@
-[submodule "web/admin-pro"]
-	path = web/admin-pro
+[submodule "web/pangu-admin"]
+	path = web/pangu-admin
 	url = git@github.com:see/pangu-admin.git
 [submodule "web/pangu-home"]
 	path = web/pangu-home
