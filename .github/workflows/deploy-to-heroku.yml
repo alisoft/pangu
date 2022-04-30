@@ -40,6 +40,7 @@ jobs:
           git config --global user.email "upcwangying@126.com"
           git config --global user.name "see"
           git commit -m "initial commit"
+          git branch -M main
 
       - name: Deploy To Heroku
         uses: akhileshns/heroku-deploy@v3.12.12 # This is the action
