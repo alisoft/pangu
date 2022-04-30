@@ -37,6 +37,8 @@ jobs:
           rm -f ./web/pangu-home/.git
           git init
           git add .
+          git config --global user.email "upcwangying@126.com"
+          git config --global user.name "see"
           git commit -m "initial commit"
 
       - name: Deploy To Heroku
