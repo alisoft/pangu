@@ -2,7 +2,7 @@ name: Deploy To ECS
 
 on:
   push:
-    branches: [ ssr-mpa ]
+    branches: [ main ]
 
 jobs:
   deploy-to-ecs:
@@ -28,9 +28,8 @@ jobs:
           echo "$CERT_KEY" | base64 --decode > .cert/cert.key
           echo "$CERT_PEM" | base64 --decode > .cert/cert.pem
           echo "$REPO_ENV" | base64 --decode > ./web/admin/.env
-          echo "$REPO_ENV" | base64 --decode > ./web/admin-pro/.env
-          echo "$REPO_ENV" | base64 --decode > ./web/admin-react/.env
-          echo "$REPO_ENV" | base64 --decode > ./web/home/.env
+          echo "$REPO_ENV" | base64 --decode > ./web/pangu-admin/.env
+          echo "$REPO_ENV" | base64 --decode > ./web/pangu-home/.env
           echo "$REPO_ENV" | base64 --decode > ./web/mobile/.env
           echo "$PROD_ENV" | base64 --decode > .env
         env:
