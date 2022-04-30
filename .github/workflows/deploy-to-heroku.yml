@@ -31,9 +31,13 @@ jobs:
 
       - name: Remove git submodules
         run: |
+          rm -rf .git
           rm -f .gitmodules
           rm -f ./web/pangu-admin/.git
           rm -f ./web/pangu-home/.git
+          git init
+          git add .
+          git commit -m "initial commit"
 
       - name: Deploy To Heroku
         uses: akhileshns/heroku-deploy@v3.12.12 # This is the action
