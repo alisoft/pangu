@@ -1,8 +1,8 @@
-FROM node:12-alpine
+FROM node:14-alpine
 
-RUN mkdir -p /code/node-boilerplate && chown -R node:node /code/node-boilerplate
+RUN mkdir -p /code/pangu && chown -R node:node /code/pangu
 
-WORKDIR /code/node-boilerplate
+WORKDIR /code/pangu
 
 COPY package.json yarn.lock ./
 
@@ -17,4 +17,4 @@ RUN yarn build
 EXPOSE 80
 EXPOSE 443
 
-CMD [ "yarn", "server:prod" ]
+CMD [ "yarn", "start" ]
