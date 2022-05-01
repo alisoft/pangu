@@ -38,10 +38,10 @@ jobs:
           CERT_PEM: ${{ secrets.CERT_PEM }}
           PROD_ENV: ${{ secrets.PROD_ENV }}
           REPO_ENV: ${{ secrets.REPO_ENV }}
-      - name: npm install, build
-        run: |
-          yarn install
-          CI=false yarn build
+#      - name: npm install, build
+#        run: |
+#          yarn install
+#          CI=false yarn build
       - name: Docker build
         run: |
           docker build . -t kimmy.azurecr.io/pangu:${{ github.sha }}
