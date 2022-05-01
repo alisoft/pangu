@@ -1,8 +1,5 @@
 import React from "react";
-import { BrowserRouter, Switch, Route } from "react-router-dom";
 import { Page } from "./types";
-import ScrollToTop from "./ScrollToTop";
-import Footer from "components/Footer/Footer";
 import Page404 from "containers/Page404/Page404";
 import PageArchive from "containers/PageArchive/PageArchive";
 import PageAuthor from "containers/PageAuthor/PageAuthor";
@@ -36,7 +33,6 @@ import PageHomeDemo5 from "containers/PageHome/PageHomeDemo5";
 import PageHomeDemo6 from "containers/PageHome/PageHomeDemo6";
 import PageHomeDemo7 from "containers/PageHome/PageHomeDemo7";
 import PageSingleTemp4Sidebar from "containers/PageSingle/PageSingleTemp4Sidebar";
-import MediaRunningContainer from "containers/MediaRunningContainer/MediaRunningContainer";
 
 export const pages: Page[] = [
   { path: "/", exact: true, component: PageHome },
