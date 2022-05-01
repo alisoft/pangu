@@ -163,19 +163,17 @@
               </a-row>
             </div>
           </template>
-          <template #bodyCell="{ record, column }">
-            <template v-if="column.dataIndex === 'action'">
-              <a
-                @click="
-                  () => {
-                    roleModalRef = record;
-                    modalVisible = true;
-                  }
-                "
-              >
-                编辑
-              </a>
-            </template>
+          <template #action="{ record }">
+            <a
+              @click="
+                () => {
+                  roleModalRef = record;
+                  modalVisible = true;
+                }
+              "
+            >
+              编辑
+            </a>
           </template>
         </a-table>
       </a-card>
@@ -220,6 +218,7 @@ const baseColumns: TableColumn[] = [
   {
     title: '操作',
     dataIndex: 'action',
+    slots: { customRender: 'action' },
   },
 ];
 export default defineComponent({
@@ -234,7 +233,9 @@ export default defineComponent({
       handleColumnChange,
       reset,
       move,
-    } = useTableDynamicColumns(baseColumns, { needRowIndex: false });
+    } = useTableDynamicColumns(baseColumns, {
+      needRowIndex: false,
+    });
     const [elRef, screenState, { setFull, exitFull }] = useFullscreen();
 
     // 表格数据和加载

@@ -22,6 +22,7 @@ export interface MenuRouteMeta {
 export type MenuDataItem = {
   path: string;
   name?: string;
+  index?: number;
   children?: MenuDataItem[];
   meta?: MenuRouteMeta & RouteMeta;
   redirect?: RouteRecordRedirectOption;

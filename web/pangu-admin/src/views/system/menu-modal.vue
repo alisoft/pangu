@@ -1,6 +1,6 @@
 <template>
   <a-modal
-    title="权限编辑"
+    title="用户编辑"
     :visible="visible"
     :width="600"
     :confirmLoading="loading"
@@ -18,8 +18,14 @@
       <a-form-item label="唯一编号" v-show="modelRef.id > 0" v-bind="validateInfos.id">
         <a-input :value="modelRef.id" disabled />
       </a-form-item>
-      <a-form-item label="角色名称" v-bind="validateInfos.name">
+      <a-form-item label="用户名称" v-bind="validateInfos.name">
         <a-input v-model:value="modelRef.name" />
+      </a-form-item>
+      <a-form-item label="邮箱" v-bind="validateInfos.email">
+        <a-input v-model:value="modelRef.email" />
+      </a-form-item>
+      <a-form-item label="密码" v-bind="validateInfos.password">
+        <a-input v-model:value="modelRef.password" />
       </a-form-item>
       <a-form-item label="角色权限表">
         <p v-for="permission in rolePermissions" :key="permission.id" style="margin-left: 12px">
@@ -42,9 +48,11 @@
 import type { PropType } from 'vue';
 import { defineComponent, reactive, ref, watchEffect, watch } from 'vue';
 import { useForm } from 'ant-design-vue/lib/form';
-import type { Role, Permission, Action } from '@/store/modules/user/typing';
+import type { Permission, Action } from '@/store/modules/user/typing';
 import { getPermissions } from '@/api/user/role';
 import { cloneDeep } from 'lodash';
+import { UserModel } from '@/utils/types';
+import { RoleTypes } from '@/utils/types/roles';
 
 type Tag = {
   key: string;
@@ -69,22 +77,25 @@ export default defineComponent({
       required: true,
     },
     model: {
-      type: Object as PropType<Role | null>,
+      type: Object as PropType<UserModel | null>,
       default: () => null,
     },
   },
   emits: ['cancel'],
   setup(props) {
     const loading = ref(false);
-    const modelRef = reactive<Partial<Role>>({
+    const modelRef = reactive<Partial<UserModel>>({
       id: undefined,
       name: undefined,
-      describe: undefined,
-      permissions: [],
+      email: undefined,
+      password: undefined,
+      role: RoleTypes.user,
     });
     const rulesRef = reactive({
       id: [{ required: true, type: 'any' }],
       name: [{ required: true }],
+      email: [{ required: true, type: 'email' }],
+      password: [{ required: true }],
     });
     // mock role permissions
     /* { id: 'roleManage', name: '角色管理', actions: [Action.ADD, Action.UPDATE] },
@@ -133,14 +144,14 @@ export default defineComponent({
         // 这一步可以不用，直接传递 model.permissions 到页面进行渲染
         // 这里重新组装是为了演示结构不相同情况下可以按照下列方案组装结构
         rolePermissions.value = [];
-        rolePermissions.value = (props.model.permissions || []).map(item => {
-          return {
-            id: item.roleId,
-            name: item.name,
-            label: item.label,
-            actions: item.actions,
-          } as Permission;
-        });
+        // rolePermissions.value = (props.model.role || []).map((item) => {
+        //   return {
+        //     id: item.roleId,
+        //     name: item.name,
+        //     label: item.label,
+        //     actions: item.actions,
+        //   } as Permission;
+        // });
       } else {
         // 没有传递 model 属于新增
         rolePermissions.value = [];

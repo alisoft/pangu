@@ -5,7 +5,7 @@
         <a-form layout="horizontal">
           <a-row :gutter="16" type="flex" justify="start">
             <a-col :xs="24" :sm="24" :md="12">
-              <a-form-item label="权限名称">
+              <a-form-item label="用户名(邮箱)">
                 <a-input placeholder="please enter" />
               </a-form-item>
             </a-col>
@@ -21,7 +21,7 @@
         <div class="ant-pro-table-list-toolbar">
           <div class="ant-pro-table-list-toolbar-container">
             <div class="ant-pro-table-list-toolbar-left">
-              <div class="ant-pro-table-list-toolbar-title">权限列表</div>
+              <div class="ant-pro-table-list-toolbar-title">用户列表</div>
             </div>
             <div class="ant-pro-table-list-toolbar-right">
               <a-space align="center">
@@ -29,13 +29,13 @@
                   type="primary"
                   @click="
                     () => {
-                      editModal.model = null;
-                      editModal.visible = true;
+                      modalVisible = true;
+                      userModalRef = null;
                     }
                   "
                 >
                   <plus-outlined />
-                  新增权限
+                  新增用户
                 </a-button>
               </a-space>
               <div class="ant-pro-table-list-toolbar-divider">
@@ -142,36 +142,50 @@
           }"
           @change="handleTableChange"
         >
-          <template #actions="{ record }">
-            <a-tag v-for="action in record.actions" :key="action">{{ action }}</a-tag>
+          <template #expandedRowRender="{ record }">
+            <div class="table-role-permission-card">
+              <a-row :gutter="12">
+                <a-col
+                  style="height: 48px"
+                  :span="12"
+                  :key="permission.id"
+                  v-for="permission in record.permissions"
+                >
+                  <a-row :gutter="16">
+                    <a-col :span="4">{{ permission.label }}</a-col>
+                    <a-col>
+                      <a-tag color="cyan" :key="action" v-for="action in permission.actions">
+                        {{ action }}
+                      </a-tag>
+                    </a-col>
+                  </a-row>
+                </a-col>
+              </a-row>
+            </div>
           </template>
-          <template #action="{ text, record }">
-            <a :title="text" @click="() => handleOpenEdit(record)">编辑</a>
+          <template #action="{ record }">
+            <a
+              @click="
+                () => {
+                  userModalRef = record;
+                  modalVisible = true;
+                }
+              "
+            >
+              编辑
+            </a>
+            <a-divider type="vertical" />
+            <a>删除</a>
           </template>
         </a-table>
       </a-card>
     </div>
-
-    <permission-modal
-      :model="editModal.model"
-      :visible="editModal.visible"
-      @cancel="
-        () => {
-          editModal.visible = false;
-        }
-      "
-      @ok="
-        () => {
-          editModal.visible = false;
-          reload();
-        }
-      "
-    />
+    <user-modal :model="userModalRef" :visible="modalVisible" @cancel="modalVisible = false" />
   </page-container>
 </template>
 
 <script lang="ts">
-import { defineComponent, reactive } from 'vue';
+import { defineComponent, ref } from 'vue';
 import {
   PlusOutlined,
   ReloadOutlined,
@@ -181,28 +195,35 @@ import {
   FullscreenExitOutlined,
 } from '@ant-design/icons-vue';
 import { Container as DragContainer, Draggable } from '@/components/draggable';
-import { getPermissions } from '@/api/user/role';
 import type { Pagination, TableFilters, TableColumn } from '@/typing';
 import { useFetchData } from '@/utils/hooks/useFetchData';
 import { useFullscreen } from '@/utils/hooks/useFullscreen';
 import { useTableDynamicColumns } from '@/utils/hooks/useTableColumn';
 import DragIcon from '@/components/table/drag-icon.vue';
-
-import PermissionModal from './permission-modal.vue';
+import UserModal from './user-modal.vue';
+import { UserModel } from '@/utils/types';
+import { getUsers } from '@/api/user/user';
 
 const baseColumns: TableColumn[] = [
   {
-    title: '#',
+    title: '编号',
     dataIndex: 'id',
   },
   {
-    title: '权限名称',
+    title: '用户名称',
     dataIndex: 'name',
   },
   {
-    title: 'Action',
-    dataIndex: 'actions',
-    slots: { customRender: 'actions' },
+    title: '邮箱',
+    dataIndex: 'email',
+  },
+  {
+    title: '角色',
+    dataIndex: 'role',
+  },
+  {
+    title: '是否确认邮箱',
+    dataIndex: 'isEmailVerified',
   },
   {
     title: '操作',
@@ -211,8 +232,9 @@ const baseColumns: TableColumn[] = [
   },
 ];
 export default defineComponent({
-  name: 'PermissionList',
+  name: 'UserList',
   setup() {
+    const userModalRef = ref<UserModel>({} as UserModel);
     const {
       state: columnState,
       dynamicColumns,
@@ -226,11 +248,12 @@ export default defineComponent({
     });
     const [elRef, screenState, { setFull, exitFull }] = useFullscreen();
 
+    // 表格数据和加载
     const {
       reload,
       setPageInfo,
       context: state,
-    } = useFetchData(getPermissions, {
+    } = useFetchData(getUsers, {
       current: 1,
       pageSize: 10,
       tableSize: 'middle', // 'default' | 'middle' | 'small'
@@ -244,25 +267,14 @@ export default defineComponent({
 
       reload();
     };
-
-    // edit
-    const editModal = reactive({
-      visible: false,
-      model: null,
-    });
-    const handleOpenEdit = (record: any) => {
-      editModal.visible = true;
-      editModal.model = {
-        ...record,
-      };
-    };
+    // 新增修改表单
+    const modalVisible = ref<boolean>(false);
 
     return {
       state,
       columnState,
       dynamicColumns,
       dynamicColumnItems,
-      reload,
 
       // fullscreen
       elRef,
@@ -277,9 +289,10 @@ export default defineComponent({
       reset,
       move,
 
-      // edit
-      editModal,
-      handleOpenEdit,
+      // 表单
+      modalVisible,
+
+      userModalRef,
     };
   },
   components: {
@@ -292,7 +305,7 @@ export default defineComponent({
     FullscreenExitOutlined,
     Draggable,
     DragContainer,
-    PermissionModal,
+    UserModal,
   },
 });
 </script>

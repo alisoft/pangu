@@ -1,29 +1,41 @@
 import request from '@/utils/request';
+import { PageResult } from '@/api/typing';
 
-export type LoginType = 'account' | 'telephone';
+export type LoginType = 'password' | 'phone' | 'qrcode';
 export type LoginStatus = 'ok' | 'error';
 
 export interface LoginParams {
   type: LoginType;
-  username: string;
+  email: string;
   password: string;
 }
 
 export interface LoginResp {
   type: LoginType;
   success: boolean;
-  token: string;
+  user: UserInfo;
+  tokens: TokensInfo;
   // currentAuthority: string;
 }
 
+interface TokenInfo {
+  token: string;
+  expires: Date;
+}
+
+interface TokensInfo {
+  access: TokenInfo;
+  refresh: TokenInfo;
+}
+
 export interface UserInfo {
-  id: string | number;
-  address: string;
+  id: string;
+  name: string;
+  email: string;
+  isEmailVerified: boolean;
   avatar: string;
   country: string;
-  email: string;
   group: string;
-  name: string;
   phone: string;
   signature: string;
   role: {
@@ -40,38 +52,38 @@ export interface SmsCaptchaRequest {
 }
 
 // 后端的结构体定义
-export type RouteItem = {
-  id: number | string;
-  parentId: number | string;
+export interface RouteItem {
+  id: string;
+  parent: string;
   name: string;
   path: string;
   redirect: string;
   component: string;
-  meta: {
-    title: string | false;
-    icon?: string;
-    target?: '_blank' | '_self';
-    hideInMenu?: boolean;
-    hideChildrenInMenu?: boolean;
-    authority?: string | string[];
-    [key: string]: any;
-  };
-};
+  children: RouteItem[];
+  async: boolean;
+  title: string;
+  icon?: string;
+  lock?: boolean;
+  target?: '_blank' | '_self';
+  hideInMenu?: boolean;
+  hideChildrenInMenu?: boolean;
+  authority?: string | string[];
+}
 
 export async function postAccountLogin(params: LoginParams) {
-  return request.post<LoginParams, LoginResp>('/login/account', params);
+  return request.post<LoginParams, LoginResp>('/auth/login', params);
 }
 
 export async function getCurrentUser() {
-  return request.get<any, UserInfo>('/currentUser');
+  return request.get<any, UserInfo>('/users/info');
 }
 
-export async function getCurrentUserNav() {
-  return request.get<any, RouteItem[]>('/currentUserNav');
+export async function getDynamicMenus() {
+  return request.get<any, PageResult<RouteItem>>('/menus?limit=100000');
 }
 
 export async function postLogout() {
-  return request.post<any, any>('/logout');
+  return request.post<any, any>('/auth/logout');
 }
 
 export async function getSmsCaptcha(params: SmsCaptchaRequest) {

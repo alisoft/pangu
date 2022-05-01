@@ -39,12 +39,13 @@ export default {
   'pages.system.title': 'System',
   'pages.system.role-list.title': 'Role List',
   'pages.system.permission-list.title': 'Permission List',
+  'pages.system.user-list.title': 'User List',
+  'pages.system.menu-list.title': 'Menu List',
 
   'pages.settings.title': 'Settings',
 
   'pages.examples.title': 'Components',
   'pages.examples.button.title': 'Button',
-  'pages.examples.surely-vue.title': 'Surely Vue',
   'pages.examples.input.title': 'Input',
   'pages.examples.rate.title': 'Rate',
   'pages.examples.authority.title': 'Authority',

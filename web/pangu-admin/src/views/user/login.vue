@@ -1,8 +1,12 @@
 <template>
   <div class="main">
     <a-form id="formLogin" layout="vertical" class="user-layout-login">
-      <a-tabs centered :active-key="customActiveKey" @change="handleTabClick">
-        <a-tab-pane key="tab1" tab="账号密码登录">
+      <a-tabs
+        :active-key="customActiveKey"
+        :tab-bar-style="{ textAlign: 'center', borderBottom: 'unset' }"
+        @change="handleTabClick"
+      >
+        <a-tab-pane key="password" tab="账号密码登录">
           <a-alert
             v-if="isLoginError"
             type="error"
@@ -10,11 +14,11 @@
             style="margin-bottom: 24px"
             message="账户或密码错误"
           />
-          <a-form-item v-bind="validateInfos.username">
+          <a-form-item v-bind="validateInfos.email">
             <a-input
               size="large"
-              v-model:value="modelRef.username"
-              placeholder="账户: admin"
+              v-model:value="modelRef.email"
+              placeholder="账户: test@test.com"
               style="width: 100%"
             >
               <template #prefix>
@@ -27,7 +31,7 @@
             <a-input-password
               v-model:value="modelRef.password"
               size="large"
-              placeholder="密码: admin or ant.design"
+              placeholder="密码: test1234"
             >
               <template #prefix>
                 <lock-outlined class="prefixIcon" />
@@ -36,7 +40,7 @@
           </a-form-item>
         </a-tab-pane>
 
-        <a-tab-pane key="tab2" tab="手机号登录">
+        <a-tab-pane key="phone" tab="手机号登录">
           <a-form-item v-bind="validateInfos.mobile">
             <a-input v-model:value="modelRef.mobile" size="large" type="text" placeholder="手机号">
               <template #prefix>
@@ -72,16 +76,22 @@
             </a-col>
           </a-row>
         </a-tab-pane>
+
+        <a-tab-pane key="qrcode" tab="二维码登录">
+          <div class="qrcode-wrapper">
+            <img width="300" height="300" :src="qrcodeUrl" />
+          </div>
+        </a-tab-pane>
       </a-tabs>
 
-      <a-form-item>
+      <a-form-item v-if="customActiveKey !== 'qrcode'">
         <a-checkbox v-model:cheched="modelRef.rememberMe">自动登录</a-checkbox>
         <router-link to="/user/recover" class="forge-password" style="float: right">
           忘记密码
         </router-link>
       </a-form-item>
 
-      <a-form-item style="margin-top: 24px">
+      <a-form-item v-if="customActiveKey !== 'qrcode'" style="margin-top: 24px">
         <a-button
           size="large"
           type="primary"
@@ -112,9 +122,10 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, reactive, toRefs } from 'vue';
+import { defineComponent, reactive, toRefs, ref, watch, onMounted, onBeforeUnmount } from 'vue';
 import { getSmsCaptcha } from '@/api/user/login';
-import { message, notification, Form } from 'ant-design-vue/lib';
+import { message, notification } from 'ant-design-vue/lib';
+import { useForm } from 'ant-design-vue/lib/form';
 import {
   UserOutlined,
   LockOutlined,
@@ -125,18 +136,19 @@ import {
   WeiboCircleOutlined,
 } from '@ant-design/icons-vue';
 import type { AxiosError } from 'axios';
-import { useRoute, useRouter } from 'vue-router';
+import { useRouter } from 'vue-router';
 import { useStore } from 'vuex';
+import QRCode from 'qrcode';
 import { LOGIN } from '@/store/modules/user/actions';
 
 export default defineComponent({
   name: 'Login',
   setup() {
     const router = useRouter();
-    const route = useRoute();
     const store = useStore();
+    const qrcodeUrl = ref();
     const state = reactive({
-      customActiveKey: 'tab1',
+      customActiveKey: 'password',
       loginBtn: false,
       // login type: 0 email, 1 username, 2 telephone
       loginType: 0,
@@ -161,19 +173,24 @@ export default defineComponent({
     };
     const modelRef = reactive({
       rememberMe: true,
-      username: '',
+      email: '',
       password: '',
       mobile: '',
       captcha: '',
     });
     const rulesRef = reactive({
       rememberMe: undefined,
-      username: [
-        { required: true, message: '请输入帐户名或邮箱地址', type: 'string' },
+      email: [
+        { required: true, message: '请输入邮箱地址', type: 'string' },
         { validator: handleUsernameOrEmail, trigger: 'change' },
       ],
       password: [
-        { required: true, message: '请输入密码', type: 'string', trigger: ['blur', 'change'] },
+        {
+          required: true,
+          message: '请输入密码',
+          type: 'string',
+          trigger: ['blur', 'change'],
+        },
       ],
       mobile: [
         {
@@ -185,7 +202,7 @@ export default defineComponent({
       ],
       captcha: [{ required: true, message: '请输入验证码' }],
     });
-    const { validateInfos, validate, resetFields } = Form.useForm(modelRef, rulesRef);
+    const { validateInfos, validate, resetFields } = useForm(modelRef, rulesRef);
 
     const handleTabClick = (key: string) => {
       state.customActiveKey = key;
@@ -203,7 +220,7 @@ export default defineComponent({
     };
 
     const loginSuccess = () => {
-      router.push(decodeURIComponent((route.query?.redirect as string) || '') || '/');
+      router.push({ path: '/' });
       // 延迟 1 秒显示欢迎信息
       setTimeout(() => {
         notification.success({
@@ -255,15 +272,18 @@ export default defineComponent({
     const handleSubmit = (e: Event) => {
       e.preventDefault();
       const validateNames =
-        state.customActiveKey === 'tab1' ? ['username', 'password'] : ['mobile', 'captcha'];
+        state.customActiveKey === 'password'
+          ? ['email', 'password']
+          : state.customActiveKey === 'phone'
+          ? ['mobile', 'captcha']
+          : [];
       state.loginBtn = true;
       validate(validateNames)
         .then(values => {
-          console.log('values', values);
           store
             .dispatch(`user/${LOGIN}`, {
               ...values,
-              type: state.customActiveKey === 'tab1',
+              type: state.customActiveKey,
             })
             .then(() => {
               loginSuccess();
@@ -284,9 +304,39 @@ export default defineComponent({
     // this.loginBtn = false;
     // this.stepCaptchaVisible = false;
 
+    let ws: WebSocket;
+    onMounted(() => {
+      ws = new WebSocket(`${process.env.VUE_APP_WS_URL_PREFIX}/ws`);
+      ws.onopen = () => {
+        ws.send('something');
+      };
+
+      ws.onmessage = data => {
+        console.log('received: %s', data);
+      };
+    });
+
+    onBeforeUnmount(() => {
+      ws && ws.close();
+    });
+
+    watch(
+      () => state.customActiveKey,
+      async () => {
+        if (state.customActiveKey === 'qrcode') {
+          qrcodeUrl.value = await QRCode.toDataURL('text', {
+            width: 300,
+            type: 'image/webp',
+            rendererOpts: { quality: 1 },
+          });
+        }
+      },
+    );
+
     return {
       ...toRefs(state),
       modelRef,
+      qrcodeUrl,
       validateInfos,
 
       handleTabClick,
@@ -351,14 +401,13 @@ export default defineComponent({
       float: right;
     }
   }
+  :deep(.qrcode-wrapper) {
+    text-align: center;
+  }
+
   .prefixIcon {
     color: @primary-color;
     font-size: @font-size-base;
-  }
-}
-.user-layout-login :deep(.ant-tabs) {
-  .ant-tabs-nav::before {
-    border-bottom: none;
   }
 }
 </style>

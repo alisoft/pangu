@@ -39,12 +39,13 @@ export default {
   'pages.system.title': '系统管理',
   'pages.system.role-list.title': '角色管理',
   'pages.system.permission-list.title': '权限管理',
+  'pages.system.user-list.title': '用户管理',
+  'pages.system.menu-list.title': '菜单管理',
 
   'pages.settings.title': '设置',
 
   'pages.examples.title': '组件展示',
   'pages.examples.button.title': '按钮',
-  'pages.examples.surely-vue.title': 'Surely Vue',
   'pages.examples.input.title': '输入框',
   'pages.examples.rate.title': '评分',
   'pages.examples.authority.title': '权限',
