@@ -37,6 +37,7 @@
     "build:android:bundle": "cd mobile/react-native-app && yarn build:android:bundle",
     "lint": "vue-cli-service lint",
     "prepare": "husky install",
+    "start": "cross-env NODE_ENV=production node ./bin/www.js",
     "server:dev": "nodemon",
     "server:prod": "pm2 start ecosystem.config.json",
     "test": "jest -i --colors --verbose --detectOpenHandles --config=jest.config.js",
