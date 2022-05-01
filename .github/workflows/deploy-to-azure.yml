@@ -36,7 +36,7 @@ jobs:
       - name: npm install, build
         run: |
           yarn install
-          yarn build
+          CI=false yarn build
       - name: Deploy to Azure WebApp
         uses: azure/webapps-deploy@v2
         with:
