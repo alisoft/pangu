@@ -5,11 +5,13 @@ const config = require("../build/config/config").default;
 const logger = require("../build/config/logger").default;
 const http = require("http");
 
-app.set("port", config.port);
+const port = process.env.PORT || config.port;
+
+app.set("port", port);
 const server = http.createServer(app);
 
 applyWs(server);
-server.listen(config.port);
+server.listen(port);
 server.on("error", onError);
 server.on("listening", onListening);
 
@@ -19,9 +21,9 @@ function onError(error) {
   }
 
   const bind =
-    typeof config.port === "string"
-      ? "Pipe " + config.port
-      : "Port " + config.port;
+    typeof port === "string"
+      ? "Pipe " + port
+      : "Port " + port;
 
   // handle specific listen errors with friendly messages
   switch (error.code) {
