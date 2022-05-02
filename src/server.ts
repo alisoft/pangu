@@ -84,7 +84,12 @@ const mobileTemplate = fs.readFileSync(
 );
 
 export function useRouter(app: express.Application) {
-  app.get("/", async (req, res) => {
+  app.get("/", async (req, res, next) => {
+    res.status(301).redirect("/blog");
+    next();
+  });
+
+  app.get("/blog/*", async (req, res) => {
     const app = createElement(createHomeApp(req.url));
     const appContent = renderReactToString(app);
     const html = homeTemplate
@@ -140,16 +145,16 @@ export function useRouter(app: express.Application) {
     res.send(html);
   });
 
+  app.get("/blog", async (req, res, next) => {
+    res.status(301).redirect("/blog/");
+    next();
+  });
   app.get("/admin", async (req, res, next) => {
     res.status(301).redirect("/admin/");
     next();
   });
   app.get("/admin-pro", async (req, res, next) => {
     res.status(301).redirect("/admin-pro/");
-    next();
-  });
-  app.get("/admin-react", async (req, res, next) => {
-    res.status(301).redirect("/admin-react/");
     next();
   });
   app.get("/mobile", async (req, res, next) => {

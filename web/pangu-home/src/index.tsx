@@ -22,7 +22,7 @@ ReactDOM.hydrate(
       {/*@ts-ignore*/}
       <PersistGate loading={null} persistor={persistor}>
         <div className="bg-white text-base dark:bg-neutral-900 text-neutral-900 dark:text-neutral-200">
-          <BrowserRouter>
+          <BrowserRouter basename={"blog"}>
             <MediaRunningContainer />
 
             <ScrollToTop />

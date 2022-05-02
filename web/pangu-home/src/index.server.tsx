@@ -21,6 +21,7 @@ export default function createApp(url: string) {
     <PersistGate loading={null} persistor={persistor}>
       <div className="bg-white text-base dark:bg-neutral-900 text-neutral-900 dark:text-neutral-200">
         <StaticRouter
+          basename={"blog"}
           location={url}
         >
           <MediaRunningContainer />
