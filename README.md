@@ -1,5 +1,6 @@
 # Pangu
 
+[![.github/workflows/deploy-to-azure.yml](https://github.com/see/pangu/actions/workflows/deploy-to-azure.yml/badge.svg?branch=main)](https://github.com/see/pangu/actions/workflows/deploy-to-azure.yml)
 [![.github/workflows/deploy-to-heroku.yml](https://github.com/see/pangu/actions/workflows/deploy-to-heroku.yml/badge.svg?branch=main)](https://github.com/see/pangu/actions/workflows/deploy-to-heroku.yml)
 [![Website](https://img.shields.io/website?url=https://pangu.kimmy.me)](https://pangu.kimmy.me)
 
