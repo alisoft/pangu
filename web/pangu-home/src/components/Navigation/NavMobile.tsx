@@ -9,6 +9,7 @@ import { NAVIGATION_DEMO } from "data/navigation";
 import ButtonPrimary from "components/Button/ButtonPrimary";
 import SocialsList from "components/SocialsList/SocialsList";
 import { ChevronDownIcon } from "@heroicons/react/solid";
+import I18nContainer from "../../containers/I18nContainer/I18nContainer";
 
 export interface NavMobileProps {
   data?: NavItemType[];
@@ -162,6 +163,7 @@ const NavMobile: React.FC<NavMobileProps> = ({
           <div className="flex justify-between items-center mt-4">
             <SocialsList itemClass="w-9 h-9 flex items-center justify-center rounded-full bg-neutral-100 text-xl dark:bg-neutral-800 dark:text-neutral-300" />
             <span className="block">
+              <span><I18nContainer /></span>
               <DarkModeContainer className="bg-neutral-100 dark:bg-neutral-800" />
             </span>
           </div>

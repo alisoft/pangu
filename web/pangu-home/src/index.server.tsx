@@ -1,9 +1,11 @@
 import React from "react";
-import { StaticRouter, Route, Switch } from "react-router-dom";
+import {StaticRouter, Route, Switch} from "react-router-dom";
 import reportWebVitals from "./reportWebVitals";
-import { persistor, store } from "./app/store";
-import { Provider } from "react-redux";
-import { PersistGate } from "redux-persist/lib/integration/react";
+import {persistor, store} from "./app/store";
+import {Provider} from "react-redux";
+import {PersistGate} from "redux-persist/lib/integration/react";
+import {I18nextProvider} from 'react-i18next';
+import i18n from "./locales";
 // STYLE
 import "./assets/styles/index.scss";
 import "./index.css";
@@ -16,20 +18,21 @@ import Page404 from "./containers/Page404/Page404";
 import Footer from "./components/Footer/Footer";
 
 export default function createApp(url: string) {
-  return () => <Provider store={store}>
-    {/*@ts-ignore*/}
-    <PersistGate loading={null} persistor={persistor}>
+  return () => <I18nextProvider i18n={i18n}>
+    <Provider store={store}>
+      {/*@ts-ignore*/}
+      <PersistGate loading={null} persistor={persistor}>
       <div className="bg-white text-base dark:bg-neutral-900 text-neutral-900 dark:text-neutral-200">
         <StaticRouter
           basename={"blog"}
           location={url}
         >
-          <MediaRunningContainer />
+          <MediaRunningContainer/>
 
-          <ScrollToTop />
-          <HeaderContainer />
+          <ScrollToTop/>
+          <HeaderContainer/>
           <Switch>
-            {pages.map(({ component, path, exact }) => {
+            {pages.map(({component, path, exact}) => {
               return (
                 <Route
                   key={path}
@@ -40,14 +43,15 @@ export default function createApp(url: string) {
                 />
               );
             })}
-            <Route component={Page404} />
+            <Route component={Page404}/>
           </Switch>
-          <Footer />
+          <Footer/>
           {/* MEDIA */}
         </StaticRouter>
       </div>
     </PersistGate>
-  </Provider>
+    </Provider>
+  </I18nextProvider>
 }
 
 // If you want to start measuring performance in your app, pass a function

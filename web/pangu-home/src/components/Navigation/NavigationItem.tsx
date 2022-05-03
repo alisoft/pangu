@@ -1,6 +1,7 @@
+import { useTranslation } from "react-i18next";
 import { Popover, Transition } from "@headlessui/react";
 import { ChevronDownIcon } from "@heroicons/react/solid";
-import React, { FC, Fragment, useEffect, useState } from "react";
+import React, {FC, Fragment, MouseEventHandler, useEffect, useState} from "react";
 import { NavLink, RouteComponentProps, withRouter } from "react-router-dom";
 import NcImage from "components/NcImage/NcImage";
 
@@ -15,6 +16,8 @@ export interface NavItemType {
   id: string;
   name: string;
   href: string;
+  element?: "a" | "button"
+  onClick?: MouseEventHandler;
   targetBlank?: boolean;
   children?: NavItemType[];
   megaMenu?: MegamenuItem[];
@@ -33,6 +36,7 @@ const NavigationItem: FC<NavigationItemWithRouterProps> = ({
   history,
 }) => {
   const [menuCurrentHovers, setMenuCurrentHovers] = useState<string[]>([]);
+  const { t } = useTranslation();
 
   // CLOSE ALL MENU OPENING WHEN CHANGE HISTORY
   useEffect(() => {
@@ -105,7 +109,7 @@ const NavigationItem: FC<NavigationItemWithRouterProps> = ({
                           />
                         </div>
                         <p className="font-medium text-neutral-900 dark:text-neutral-200 py-1 px-2 my-2">
-                          {item.title}
+                          {t(item.title)}
                         </p>
                         <ul className="grid space-y-1">
                           {item.items.map(renderMegaMenuNavlink)}
@@ -132,7 +136,7 @@ const NavigationItem: FC<NavigationItemWithRouterProps> = ({
             className="inline-flex items-center font-normal text-neutral-6000 dark:text-neutral-300 py-1 px-2 rounded hover:text-neutral-700 hover:bg-neutral-100 dark:hover:bg-neutral-800 dark:hover:text-neutral-200"
             href={item.href}
           >
-            {item.name}
+            {t(item.name)}
           </a>
         ) : (
           <NavLink
@@ -146,7 +150,7 @@ const NavigationItem: FC<NavigationItemWithRouterProps> = ({
             }}
             activeClassName="font-semibold text-neutral-900 dark:!text-neutral-200"
           >
-            {item.name}
+            {t(item.name)}
           </NavLink>
         )}
       </li>
@@ -254,14 +258,21 @@ const NavigationItem: FC<NavigationItemWithRouterProps> = ({
   };
 
   const renderDropdownMenuNavlink = (item: NavItemType) => {
-    return item.targetBlank ? (
+    return item.element === "button" ? (
+      <button
+        onClick={item.onClick}
+        className="flex block w-full items-center font-normal text-neutral-6000 dark:text-neutral-300 py-2 px-4 rounded-md hover:text-neutral-700 hover:bg-neutral-100 dark:hover:bg-neutral-800 dark:hover:text-neutral-200"
+      >
+        {t(item.name)}
+      </button>
+    ) : item.targetBlank ? (
       <a
         target="_blank"
         rel="noopener noreferrer"
         className="flex items-center font-normal text-neutral-6000 dark:text-neutral-300 py-2 px-4 rounded-md hover:text-neutral-700 hover:bg-neutral-100 dark:hover:bg-neutral-800 dark:hover:text-neutral-200"
         href={item.href}
       >
-        {item.name}
+        {t(item.name)}
         {item.type && (
           <ChevronDownIcon
             className="ml-2 h-4 w-4 text-neutral-500"
@@ -285,7 +296,7 @@ const NavigationItem: FC<NavigationItemWithRouterProps> = ({
         }}
         activeClassName="font-semibold text-neutral-700 dark:!text-neutral-200"
       >
-        {item.name}
+        {t(item.name)}
         {item.type && (
           <ChevronDownIcon
             className="ml-2 h-4 w-4 text-neutral-500"
@@ -303,14 +314,21 @@ const NavigationItem: FC<NavigationItemWithRouterProps> = ({
 
   // ===================== MENU MAIN MENU =====================
   const renderMainItem = (item: NavItemType) => {
-    return item.targetBlank ? (
+    return item.element === "button" ? (
+      <button
+        onClick={item.onClick}
+        className="inline-flex block w-full items-center text-sm xl:text-base font-normal text-neutral-700 dark:text-neutral-300 py-2 px-4 xl:px-5 rounded-full hover:text-neutral-900 hover:bg-neutral-100 dark:hover:bg-neutral-800 dark:hover:text-neutral-200"
+      >
+        {t(item.name)}
+      </button>
+    ) : item.targetBlank ? (
       <a
         target="_blank"
         rel="noopener noreferrer"
         className="inline-flex items-center text-sm xl:text-base font-normal text-neutral-700 dark:text-neutral-300 py-2 px-4 xl:px-5 rounded-full hover:text-neutral-900 hover:bg-neutral-100 dark:hover:bg-neutral-800 dark:hover:text-neutral-200"
         href={item.href}
       >
-        {item.name}
+        {t(item.name)}
         {item.type && (
           <ChevronDownIcon
             className="ml-1 -mr-1 h-4 w-4 text-neutral-400"
@@ -329,7 +347,7 @@ const NavigationItem: FC<NavigationItemWithRouterProps> = ({
         }}
         activeClassName="!font-semibold !text-neutral-900 bg-neutral-100 dark:bg-neutral-800 dark:!text-neutral-100"
       >
-        {item.name}
+        {t(item.name)}
         {item.type && (
           <ChevronDownIcon
             className="ml-1 -mr-1 h-4 w-4 text-neutral-400"

@@ -7,6 +7,7 @@ import Navigation from "components/Navigation/Navigation";
 import DarkModeContainer from "containers/DarkModeContainer/DarkModeContainer";
 import { NAVIGATION_SHORT_DEMO } from "data/navigation";
 import React, { FC } from "react";
+import I18nContainer from "../../containers/I18nContainer/I18nContainer";
 
 export interface MainNav2Props {}
 
@@ -57,6 +58,7 @@ const MainNav2: FC<MainNav2Props> = () => {
           <div className="hidden items-center xl:flex space-x-2">
             <Navigation navigations={NAVIGATION_SHORT_DEMO} />
             <div className="hidden sm:block h-10 border-l border-neutral-300 dark:border-neutral-6000"></div>
+            <I18nContainer />
             <DarkModeContainer />
 
             <ButtonSecondary href={"/login"} sizeClass="px-4 py-2 sm:px-5">

@@ -5,6 +5,7 @@ import SearchDropdown from "./SearchDropdown";
 import ButtonPrimary from "components/Button/ButtonPrimary";
 import MenuBar from "components/MenuBar/MenuBar";
 import DarkModeContainer from "containers/DarkModeContainer/DarkModeContainer";
+import I18nContainer from "../../containers/I18nContainer/I18nContainer";
 
 export interface MainNav1Props {
   isTop: boolean;
@@ -24,6 +25,7 @@ const MainNav1: FC<MainNav1Props> = ({ isTop }) => {
         </div>
         <div className="flex-shrink-0 flex items-center justify-end text-neutral-700 dark:text-neutral-100 space-x-1">
           <div className="hidden items-center xl:flex space-x-1">
+            <I18nContainer />
             <DarkModeContainer />
             <SearchDropdown />
             <div className="px-1" />
