@@ -2,6 +2,12 @@
 
 [![.github/workflows/deploy-to-azure.yml](https://github.com/see/pangu/actions/workflows/deploy-to-azure.yml/badge.svg?branch=main)](https://github.com/see/pangu/actions/workflows/deploy-to-azure.yml)
 [![.github/workflows/deploy-to-heroku.yml](https://github.com/see/pangu/actions/workflows/deploy-to-heroku.yml/badge.svg?branch=main)](https://github.com/see/pangu/actions/workflows/deploy-to-heroku.yml)
+[![.github/workflows/deploy-to-pages.yaml](https://github.com/see/pangu/actions/workflows/deploy-to-pages.yaml/badge.svg?branch=main)](https://github.com/see/pangu/actions/workflows/deploy-to-pages.yaml)
+[![.github/workflows/deploy-to-pages-app.yaml](https://github.com/see/pangu/actions/workflows/deploy-to-pages-app.yaml/badge.svg?branch=main)](https://github.com/see/pangu/actions/workflows/deploy-to-pages-app.yaml)
+[![.github/workflows/deploy-to-pages-desktop.yaml](https://github.com/see/pangu/actions/workflows/deploy-to-pages-desktop.yaml/badge.svg?branch=main)](https://github.com/see/pangu/actions/workflows/deploy-to-pages-desktop.yaml)
+[![.github/workflows/release-android.yml](https://github.com/see/pangu/actions/workflows/release-android.yml/badge.svg?branch=main)](https://github.com/see/pangu/actions/workflows/release-android.yml)
+[![.github/workflows/release-desktop.yml](https://github.com/see/pangu/actions/workflows/release-desktop.yml/badge.svg?branch=main)](https://github.com/see/pangu/actions/workflows/release-desktop.yml)
+[![.github/workflows/release-ios.yml](https://github.com/see/pangu/actions/workflows/release-ios.yml/badge.svg?branch=main)](https://github.com/see/pangu/actions/workflows/release-ios.yml)
 [![Website](https://img.shields.io/website?url=https://pangu.kimmy.me)](https://pangu.kimmy.me)
 
 ## API Documentation
