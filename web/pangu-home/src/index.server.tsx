@@ -5,9 +5,9 @@ import { persistor, store } from "./app/store";
 import { Provider } from "react-redux";
 import { PersistGate } from "redux-persist/lib/integration/react";
 // STYLE
-import "./styles/index.scss";
+import "./assets/styles/index.scss";
 import "./index.css";
-import "./fonts/line-awesome-1.3.0/css/line-awesome.css";
+import "./assets/fonts/line-awesome-1.3.0/css/line-awesome.css";
 import {pages} from "./routers";
 import ScrollToTop from "./routers/ScrollToTop";
 import MediaRunningContainer from "./containers/MediaRunningContainer/MediaRunningContainer";

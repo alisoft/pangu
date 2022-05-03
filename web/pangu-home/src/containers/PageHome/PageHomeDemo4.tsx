@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import SectionVideos from "./SectionVideos";
 import SectionHero2 from "./SectionHero2";
-import becomAuthorImg from "images/BecomeAnAuthorImg.png";
+import becomAuthorImg from "assets/images/BecomeAnAuthorImg.png";
 import { DEMO_POSTS, DEMO_POSTS_VIDEO } from "data/posts";
 import { DEMO_AUTHORS } from "data/authors";
 import { Helmet } from "react-helmet";

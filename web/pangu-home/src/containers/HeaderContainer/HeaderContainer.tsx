@@ -1,9 +1,8 @@
 import Header, { HeaderProps } from "components/Header/Header";
-import React, { FC, useEffect } from "react";
+import React, { FC } from "react";
 import { useAppSelector } from "app/hooks";
 import { selectCurrentPageData } from "app/pages/pages";
 import { useLocation } from "react-router-dom";
-import { LocationStates } from "routers/types";
 
 export interface HeaderContainerProps {
   className?: string;

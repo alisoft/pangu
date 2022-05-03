@@ -10,7 +10,7 @@ import {
 } from "app/mediaRunning/mediaRunning";
 
 import LoadingVideo from "components/LoadingVideo/LoadingVideo";
-import iconPlaying from "images/icon-playing.gif";
+import iconPlaying from "assets/images/icon-playing.gif";
 import PostTypeFeaturedIcon from "components/PostTypeFeaturedIcon/PostTypeFeaturedIcon";
 import { PostDataType } from "data/types";
 

@@ -8,7 +8,7 @@ import SectionMagazine2 from "./SectionMagazine2";
 import SectionMagazine10 from "./SectionMagazine10";
 import SectionMagazine9 from "./SectionMagazine9";
 import SectionMagazine11 from "./SectionMagazine11";
-import imgAds from "images/ads2.png";
+import imgAds from "assets/images/ads2.png";
 
 //
 const MAGAZINE1_TABS = ["all", "Garden", "Fitness", "Design"];

@@ -4,7 +4,7 @@ import __comments from "./jsons/__comments.json";
 import a10 from "./avatars/11.jpg";
 import { DEMO_AUTHORS } from "./authors";
 import { CommentType } from "components/CommentCard/CommentCard";
-import podcastImg from "images/podcast.jpg";
+import podcastImg from "assets/images/podcast.jpg";
 
 // function nested the comment child -- make tree comment
 const nest = (

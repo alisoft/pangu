@@ -1,8 +1,8 @@
 import React, { FC } from "react";
 import LayoutPage from "components/LayoutPage/LayoutPage";
-import facebookSvg from "images/Facebook.svg";
-import twitterSvg from "images/Twitter.svg";
-import googleSvg from "images/Google.svg";
+import facebookSvg from "assets/images/Facebook.svg";
+import twitterSvg from "assets/images/Twitter.svg";
+import googleSvg from "assets/images/Google.svg";
 import Input from "components/Input/Input";
 import ButtonPrimary from "components/Button/ButtonPrimary";
 import NcLink from "components/NcLink/NcLink";

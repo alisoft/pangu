@@ -1,6 +1,5 @@
 import React, { FC, ReactNode, useEffect } from "react";
 import { PostDataType, TaxonomyType } from "data/types";
-import NcImage from "components/NcImage/NcImage";
 import { SINGLE } from "data/single";
 import SingleContent from "./SingleContent";
 import { CommentType } from "components/CommentCard/CommentCard";
@@ -8,7 +7,6 @@ import { useAppDispatch } from "app/hooks";
 import { changeCurrentPage } from "app/pages/pages";
 import { Sidebar } from "./Sidebar";
 import SingleRelatedPosts from "./SingleRelatedPosts";
-import SingleHeader from "./SingleHeader";
 import SingleHeader4 from "./SingleHeader4";
 
 export interface PageSingleTemp4SidebarProps {

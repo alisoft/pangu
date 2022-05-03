@@ -1,4 +1,3 @@
-import React from "react";
 import { Page } from "./types";
 import Page404 from "containers/Page404/Page404";
 import PageArchive from "containers/PageArchive/PageArchive";
@@ -17,7 +16,6 @@ import PageSignUp from "containers/PageSignUp/PageSignUp";
 import PageForgotPass from "containers/PageForgotPass/PageForgotPass";
 import PageDashboard from "containers/PageDashboard/PageDashboard";
 import PageSubcription from "containers/PageSubcription/PageSubcription";
-import HeaderContainer from "containers/HeaderContainer/HeaderContainer";
 import PageHome from "containers/PageHome/PageHome";
 import PageHomeDemo2 from "containers/PageHome/PageHomeDemo2";
 import PageHomeDemo3 from "containers/PageHome/PageHomeDemo3";

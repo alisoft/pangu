@@ -12,7 +12,7 @@ import SingleTitle from "containers/PageSingle/SingleTitle";
 import SingleMetaAction2 from "containers/PageSingle/SingleMetaAction2";
 import ButtonPlayMusicRunningContainer from "containers/ButtonPlayMusicRunningContainer/ButtonPlayMusicRunningContainer";
 import LoadingVideo from "components/LoadingVideo/LoadingVideo";
-import iconPlaying from "images/icon-playing.gif";
+import iconPlaying from "assets/images/icon-playing.gif";
 import { MediaRunningState } from "app/mediaRunning/mediaRunning";
 
 export interface PageSingleAudioProps {

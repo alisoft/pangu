@@ -4,7 +4,7 @@ import { PostDataType } from "data/types";
 import { Link } from "react-router-dom";
 import CategoryBadgeList from "components/CategoryBadgeList/CategoryBadgeList";
 import PostCardLikeAndComment from "components/PostCardLikeAndComment/PostCardLikeAndComment";
-import musicWave from "images/musicWave.png";
+import musicWave from "assets/images/musicWave.png";
 import ButtonPlayMusicRunningContainer from "containers/ButtonPlayMusicRunningContainer/ButtonPlayMusicRunningContainer";
 import NcImage from "components/NcImage/NcImage";
 

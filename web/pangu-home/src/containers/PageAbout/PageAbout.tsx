@@ -1,5 +1,5 @@
 import SectionHero from "components/SectionHero/SectionHero";
-import rightImg from "images/about-hero-right.png";
+import rightImg from "assets/images/about-hero-right.png";
 import React, { FC } from "react";
 import SectionFounder from "./SectionFounder";
 import SectionStatistic from "./SectionStatistic";
