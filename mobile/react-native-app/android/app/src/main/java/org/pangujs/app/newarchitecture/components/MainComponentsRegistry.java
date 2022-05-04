@@ -1,4 +1,4 @@
-package com.rnapp.newarchitecture.components;
+package org.pangujs.app.newarchitecture.components;
 
 import com.facebook.jni.HybridData;
 import com.facebook.proguard.annotations.DoNotStrip;
