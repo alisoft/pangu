@@ -14,7 +14,7 @@ export interface MegamenuItem {
 }
 export interface NavItemType {
   id: string;
-  name: string;
+  name: string | Function;
   href: string;
   element?: "a" | "button"
   onClick?: MouseEventHandler;
@@ -136,7 +136,7 @@ const NavigationItem: FC<NavigationItemWithRouterProps> = ({
             className="inline-flex items-center font-normal text-neutral-6000 dark:text-neutral-300 py-1 px-2 rounded hover:text-neutral-700 hover:bg-neutral-100 dark:hover:bg-neutral-800 dark:hover:text-neutral-200"
             href={item.href}
           >
-            {t(item.name)}
+            {typeof item.name === 'string' ? t(item.name) : item.name()}
           </a>
         ) : (
           <NavLink
@@ -150,7 +150,7 @@ const NavigationItem: FC<NavigationItemWithRouterProps> = ({
             }}
             activeClassName="font-semibold text-neutral-900 dark:!text-neutral-200"
           >
-            {t(item.name)}
+            {typeof item.name === 'string' ? t(item.name) : item.name()}
           </NavLink>
         )}
       </li>
@@ -263,7 +263,7 @@ const NavigationItem: FC<NavigationItemWithRouterProps> = ({
         onClick={item.onClick}
         className="flex block w-full items-center font-normal text-neutral-6000 dark:text-neutral-300 py-2 px-4 rounded-md hover:text-neutral-700 hover:bg-neutral-100 dark:hover:bg-neutral-800 dark:hover:text-neutral-200"
       >
-        {t(item.name)}
+        {typeof item.name === 'string' ? t(item.name) : item.name()}
       </button>
     ) : item.targetBlank ? (
       <a
@@ -272,7 +272,7 @@ const NavigationItem: FC<NavigationItemWithRouterProps> = ({
         className="flex items-center font-normal text-neutral-6000 dark:text-neutral-300 py-2 px-4 rounded-md hover:text-neutral-700 hover:bg-neutral-100 dark:hover:bg-neutral-800 dark:hover:text-neutral-200"
         href={item.href}
       >
-        {t(item.name)}
+        {typeof item.name === 'string' ? t(item.name) : item.name()}
         {item.type && (
           <ChevronDownIcon
             className="ml-2 h-4 w-4 text-neutral-500"
@@ -296,7 +296,7 @@ const NavigationItem: FC<NavigationItemWithRouterProps> = ({
         }}
         activeClassName="font-semibold text-neutral-700 dark:!text-neutral-200"
       >
-        {t(item.name)}
+        {typeof item.name === 'string' ? t(item.name) : item.name()}
         {item.type && (
           <ChevronDownIcon
             className="ml-2 h-4 w-4 text-neutral-500"
@@ -319,7 +319,7 @@ const NavigationItem: FC<NavigationItemWithRouterProps> = ({
         onClick={item.onClick}
         className="inline-flex block w-full items-center text-sm xl:text-base font-normal text-neutral-700 dark:text-neutral-300 py-2 px-4 xl:px-5 rounded-full hover:text-neutral-900 hover:bg-neutral-100 dark:hover:bg-neutral-800 dark:hover:text-neutral-200"
       >
-        {t(item.name)}
+        {typeof item.name === 'string' ? t(item.name) : item.name()}
       </button>
     ) : item.targetBlank ? (
       <a
@@ -328,7 +328,7 @@ const NavigationItem: FC<NavigationItemWithRouterProps> = ({
         className="inline-flex items-center text-sm xl:text-base font-normal text-neutral-700 dark:text-neutral-300 py-2 px-4 xl:px-5 rounded-full hover:text-neutral-900 hover:bg-neutral-100 dark:hover:bg-neutral-800 dark:hover:text-neutral-200"
         href={item.href}
       >
-        {t(item.name)}
+        {typeof item.name === 'string' ? t(item.name) : item.name()}
         {item.type && (
           <ChevronDownIcon
             className="ml-1 -mr-1 h-4 w-4 text-neutral-400"
@@ -347,7 +347,7 @@ const NavigationItem: FC<NavigationItemWithRouterProps> = ({
         }}
         activeClassName="!font-semibold !text-neutral-900 bg-neutral-100 dark:bg-neutral-800 dark:!text-neutral-100"
       >
-        {t(item.name)}
+        {typeof item.name === 'string' ? t(item.name) : item.name()}
         {item.type && (
           <ChevronDownIcon
             className="ml-1 -mr-1 h-4 w-4 text-neutral-400"

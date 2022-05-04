@@ -1,4 +1,5 @@
 import React, {FC} from "react";
+import { TranslateIcon } from "@heroicons/react/solid";
 import NavigationItem, {NavItemType} from "../../components/Navigation/NavigationItem";
 import ncNanoId from "../../utils/ncNanoId";
 import i18n from '../../locales'
@@ -24,18 +25,22 @@ const demoChildMenus: NavItemType[] = [
   },
 ];
 
-const I18nContainer: FC = () => {
+export interface I18nContainerProps {
+  className?: string;
+}
+
+const I18nContainer: FC<I18nContainerProps> = ({ className = "hidden" }) => {
 
   const i18nNav: NavItemType = {
     id: ncNanoId(),
     href: "#",
-    name: "i18n.title",
+    name: () => <TranslateIcon className="w-7 h-7" aria-hidden="true" />,
     type: "dropdown",
     children: demoChildMenus,
   };
 
   return (
-    <ul className="nc-Navigation hidden lg:flex lg:flex-wrap lg:items-center lg:space-x-1 relative">
+    <ul className={`nc-Navigation ${className} lg:flex lg:flex-wrap lg:items-center lg:space-x-1 relative`}>
       <NavigationItem menuItem={i18nNav}/>
     </ul>
   );
