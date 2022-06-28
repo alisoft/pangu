@@ -1,14 +1,17 @@
 on:
   push:
     branches: [ main ]
-    paths:
-      - 'docs/app.pangu.dev/**'
+#    paths:
+#      - 'docs/app.pangu.dev/**'
 name: Deploy to GitHub Pages (App)
 jobs:
   deploy-to-pages:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
+        with:
+          token: ${{ secrets.GH_TOKEN }}
+          submodules: true
 
       - uses: actions/setup-node@v2
         with:

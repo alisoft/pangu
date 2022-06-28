@@ -3,9 +3,9 @@ name: Deploy To Azure Web App
 on:
  push:
    branches: [ main ]
-   paths:
-     - 'web/**'
-     - 'src/**'
+#   paths:
+#     - 'web/**'
+#     - 'src/**'
 
 env:
   NODE_VERSION: '14.x'
@@ -17,6 +17,7 @@ jobs:
     steps:
       - uses: actions/checkout@master
         with:
+          token: ${{ secrets.GH_TOKEN }}
           submodules: true
       - name: Use Node.js ${{ env.NODE_VERSION }}
         uses: actions/setup-node@v1
