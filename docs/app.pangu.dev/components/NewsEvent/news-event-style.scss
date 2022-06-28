@@ -1,0 +1,59 @@
+$deco-light-top: '/images/mobile/deco-light-top.svg';
+$deco-dark-bottom: '/images/mobile/deco-dark-top.svg';
+
+.root {
+  position: relative;
+  margin: 0 auto;
+  padding-bottom: $spacing15 * 2;
+  margin-Bottom: $spacing20 * -2;
+  &:before {
+    @include use-theme(background-image, linear-gradient(180deg, #FFF 40%, $palette-primary-light 40%), linear-gradient(180deg, $dark-background-default 40%, $palette-primary-light 40%));
+    opacity: 0.2;
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    @include breakpoints-down(sm) {
+      top: -30px
+    }
+  }
+}
+.deco-bg-top {
+  @include use-theme(background-image, url($deco-light-top), url($deco-dark-bottom));
+  background-repeat: no-repeat;
+  background-color: transparent;
+  background-size: 100% auto;
+  transform: scale(1, 0.4);
+  position: absolute;
+  width: 100%;
+  height: 600px;
+  @include left(0);
+  top: 220px;
+  @include breakpoints-down(sm) {
+    top: 400px;
+  }
+}
+
+.parallax-event {
+  position: absolute;
+  top: -320px;
+  @include left(0);
+  width: 100%;
+}
+
+.blog-wrap {
+  position: relative;
+  z-index: 10;
+  margin: spacing(10, 0)
+}
+
+.list-news {
+  > div {
+    @include breakpoints-down(xs) {
+      padding-top: 0 !important;
+      padding-bottom: 0 !important
+    }
+  }
+}

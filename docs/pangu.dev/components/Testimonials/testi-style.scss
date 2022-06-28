@@ -1,0 +1,169 @@
+.root {
+  position: relative;
+  @include breakpoints-up(sm) {
+    padding-bottom: $spacing8
+  }
+  @include breakpoints-down(sm) {
+    background: linear-gradient(-45deg, $palette-primary-main 20%, $palette-primary-dark 70%);
+  }
+  @include breakpoints-down(xs) {
+    padding-bottom: $spacing10
+  }
+}
+
+.slider-wrap {
+  position: relative;
+}
+
+.decoration {
+  position: absolute;
+  top: 0;
+  width: 830px;
+  height: 600px;
+  @include left(-160px);
+  @include breakpoints-down(md) {
+    @include left(-320px)
+  }
+  svg {
+    fill: $palette-primary-main;
+    transform: scale(1.2);
+    width: 100%;
+    height: 100%
+  }
+}
+
+.testi-title {
+  position: relative;
+  margin: spacing(0, 3, 8);
+  padding-top: $spacing7;
+  color: $palette-common-white;
+  strong {
+    font-weight: $font-bold
+  }
+}
+
+.sliderWrap {
+  position: relative
+}
+
+.v-icon.icon {
+  font-size: 140px;
+  position: absolute;
+  color: $palette-common-white;
+  opacity: 0.15;
+  top: 200px;
+  @include breakpoints-up(sm) {
+    @include left(240px)
+  }
+}
+
+.carousel {
+  @include breakpoints-up(lg) {
+    margin: spacing(0, 2)
+  }
+  .slick-active {
+    p {
+      opacity: 1;
+      transition: all 0.5s cubic-bezier(0.45, 0.05, 0.55, 0.95);
+      transform: translate3d(0, 0, 0)
+    }
+  }
+}
+
+.item {
+  position: relative
+}
+
+.inner {
+  color: $palette-common-white;
+  .v-application--is-rtl & {
+    direction: rtl
+  }
+  @include breakpoints-up(sm) {
+    display: flex;
+  }
+  p {
+    opacity: 0;
+    flex: 1;
+    transform: translate3d(-10%, 0, 0);
+    margin-top: $spacing5;
+    @include breakpoints-up(lg) {
+      margin-top: $spacing10
+    }
+    @include breakpoints-up(sm) {
+      width: 100%
+    }
+    @include breakpoints-down(xs) {
+      text-align: center;
+      -webkit-line-clamp: 3;
+      -webkit-box-orient: vertical;
+      height: 75px;
+      overflow: hidden;
+      text-overflow: ellipsis
+    }
+  }
+}
+
+.profile {
+  text-align: center;
+  padding: $spacing3;
+  @include breakpoints-up(lg) {
+    padding: spacing(2, 3)
+  }
+}
+
+.avatar {
+  width: 85px !important;
+  height: 85px !important;
+  margin: 0 auto;
+  margin-bottom: $spacing3
+}
+
+.name {
+  font-size: 18px;
+  font-weight: $font-medium;
+  span {
+    margin-top: 4px;
+    font-size: 14px;
+    display: block
+  }
+}
+
+.logo-wrap {
+  position: relative;
+  z-index: 42;
+}
+
+.figure-btn {
+  display: inline-block;
+  padding: $spacing3;
+  line-height: 150px;
+  text-align: center;
+  vertical-align: middle;
+  width: 30%;
+  height: 150px;
+  button {
+    height: auto !important;
+    padding: 6px 8px !important;
+    border-radius: 36px;
+    ::v-deep .v-btn__content {
+      display: block;
+      width: 100%;
+      height: 100%;
+    }
+  }
+  @include breakpoints-down(md) {
+    padding: $spacing2
+  }
+  img {
+    transition: all 0.3s ease-out;
+    display: block;
+    width: 100%;
+    filter: grayscale(1) contrast(0.5) brightness(1.5);
+  }
+  .active, &:hover {
+    img {
+      filter: none
+    }
+  }
+}

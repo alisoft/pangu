@@ -1,0 +1,33 @@
+on:
+  push:
+    branches: [ main ]
+    paths:
+      - 'docs/app.pangu.dev/**'
+name: Deploy to GitHub Pages (App)
+jobs:
+  deploy-to-pages:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+
+      - uses: actions/setup-node@v2
+        with:
+          node-version: '16'
+
+      - name: Install deps
+        run: yarn install:docs:app
+
+      - name: Build
+        run: yarn build:docs:app
+
+      - name: Deploy
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+#          github_token: ${{ secrets.GH_TOKEN }}
+          personal_token: ${{ secrets.GH_TOKEN }}
+          publish_dir: ./docs/app.pangu.dev/dist/
+          external_repository: see/app.pangu.dev
+          publish_branch: master
+          cname: app.pangu.dev
+          user_name: 'see'
+          user_email: 'upcwangying@126.com'

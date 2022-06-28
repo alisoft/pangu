@@ -1,0 +1,173 @@
+.parallax-wrap {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  @include left(0);
+  top: 0;
+  z-index: 0;
+  &.dots-wrap {
+    z-index: 40
+  }
+  @include breakpoints-down(md) {
+    display: none
+  }
+}
+
+.inner-parallax {
+  height: 800px;
+  width: 100%;
+  position: absolute;
+  display: block;
+  & > div {
+    height: 500px;
+    width: 100%;
+    display: block;
+    position: absolute;
+    svg {
+      position: absolute;
+      z-index: 2
+    }
+  }
+  ::v-deep .Masthead, ::v-deep .Masthead__image {
+    overflow: visible;
+  }
+  .figure {
+    > div {
+      display: block;
+      position: absolute;
+      top: 200px;
+      width: 100%;
+      height: 700px;
+      svg {
+        position: absolute
+      }
+    }
+  }
+}
+
+.triangle {
+  @include use-theme(stroke, $palette-primary-main, $palette-primary-light);
+  opacity: 0.2;
+  width: 60px;
+  height: 60px;
+}
+
+.circle {
+  stroke: $palette-secondary-main;
+  width: 150px;
+  height: 150px;
+  opacity: 0.2;
+}
+
+.square {
+  fill: $palette-primary-light;
+  width: 110px;
+  height: 110px;
+  opacity: 0.2;
+  @include left(-10px);
+}
+
+.dot {
+  fill: $palette-primary-light;
+  width: 140px;
+  height: 140px;
+  top: -15px;
+  @include left(-10px);
+}
+
+.dot-many {
+  @include use-theme(fill, $palette-primary-main, $palette-primary-light);
+  width: 510px;
+  height: 510px;
+  top: 0px;
+  @include left(120px);
+  transform: rotate(30deg);
+  transform-origin: left center;
+}
+
+.dot-many-small {
+  @include use-theme(fill, $palette-primary-main, $palette-primary-light);
+  width: 510px;
+  height: 510px;
+  top: 0;
+  @include left(-120px);
+  transform: rotate(30deg);
+  transform-origin: left center;
+  opacity: 0.4
+}
+
+.square-dot {
+  position: absolute
+}
+
+.large {
+  .triangle {
+    @include left(40px);
+    top: 400px;
+  }
+  .circle {
+    @include left(70%);
+    top: 600px;
+  }
+  .square-dot {
+    @include left(50px);
+    top: 600px !important;
+  }
+}
+
+.medium {
+  .triangle {
+    top: -100px;
+    @include left(-100px)
+  }
+  .circle {
+    top: -250px;
+    @include right(-120px);
+    transform: scale(0.8);
+  }
+  .square-dot {
+    @include left(0);
+    .dot-many {
+      top: -550px;
+      fill: $palette-primary-light;
+      opacity: 0.4
+    }
+  }
+}
+
+.small {
+  .triangle {
+    top: 0;
+    @include left(30px)
+  }
+  .circle {
+    top: -250px;
+    @include right(120px);
+    transform: scale(0.8);
+  }
+  .square-dot {
+    @include left(0);
+    top: -50px;
+    .dot-many {
+      opacity: 0.4
+    }
+  }
+}
+
+.extra-small {
+  .triangle {
+    top: 1600px;
+    @include left(10px);
+    transform: scale(0.8);
+  }
+  .circle {
+    top: 1400px;
+    @include left(250px);
+    transform: scale(0.8)
+  }
+  .square-dot {
+    top: 800px !important;
+    @include left(30px);
+    transform: scale(0.7)
+  }
+}

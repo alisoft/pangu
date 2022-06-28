@@ -1,0 +1,55 @@
+.root {
+  position: relative;
+  z-index: 55
+}
+
+.subtitle {
+  margin-bottom: $spacing5
+}
+
+.decoration {
+  position: absolute;
+  width: 1280px;
+  height: 960px;
+  svg {
+    width: 1280px;
+    height: 100%;
+    @include use-theme(fill, $palette-primary-light, $palette-primary-dark);
+    opacity: 0.2;
+    @include breakpoints-up(lg) {
+      transform: scale(1.7, 1)
+    }
+    @include breakpoints-up(xl) {
+      display: none
+    }
+    @include breakpoints-down(xs) {
+      transform: scale(0.5);
+      transform-origin: center left
+    }
+  }
+}
+
+.item {
+  &:hover {
+    z-index: 56 !important
+  }
+}
+
+.pricing-wrap > section {
+  align-items: center;
+  margin-top: $spacing3;
+  display: flex;
+  @include breakpoints-down(sm) {
+    flex-wrap: wrap;
+    justify-content: space-around
+  }
+  @include breakpoints-up(lg) {
+    padding: spacing(0, 5)
+  }
+  > * {
+    margin: 0 -8px
+  }
+  > *:first-child, & > *:last-child {
+    z-index: 1
+  }
+}

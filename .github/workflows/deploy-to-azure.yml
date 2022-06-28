@@ -1,0 +1,58 @@
+name: Deploy To Azure Web App
+
+on:
+ push:
+   branches: [ main ]
+   paths:
+     - 'web/**'
+     - 'src/**'
+
+env:
+  NODE_VERSION: '14.x'
+
+jobs:
+  build-and-deploy:
+    name: Build and Deploy
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@master
+        with:
+          submodules: true
+      - name: Use Node.js ${{ env.NODE_VERSION }}
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+      - name: Docker login
+        uses: azure/docker-login@v1
+        with:
+          login-server: kimmy.azurecr.io
+          username: ${{ secrets.AZURE_REGISTRY_USERNAME }}
+          password: ${{ secrets.AZURE_REGISTRY_PASSWORD }}
+      - name: Configure cert
+        run: |
+          mkdir .cert
+          echo "$CERT_KEY" | base64 --decode > .cert/cert.key
+          echo "$CERT_PEM" | base64 --decode > .cert/cert.pem
+          echo "$REPO_ENV" | base64 --decode > ./web/admin/.env
+          echo "$REPO_ENV" | base64 --decode > ./web/home/.env
+          echo "$REPO_ENV" | base64 --decode > ./web/mobile/.env
+          echo "$PROD_ENV" | base64 --decode > .env
+        env:
+          CERT_KEY: ${{ secrets.CERT_KEY }}
+          CERT_PEM: ${{ secrets.CERT_PEM }}
+          PROD_ENV: ${{ secrets.PROD_ENV }}
+          REPO_ENV: ${{ secrets.REPO_ENV }}
+#      - name: npm install, build
+#        run: |
+#          yarn install
+#          CI=false yarn build
+      - name: Docker build
+        run: |
+          docker build . -t kimmy.azurecr.io/pangu:${{ github.sha }}
+          docker push kimmy.azurecr.io/pangu:${{ github.sha }}
+      - name: Deploy to Azure WebApp
+        uses: azure/webapps-deploy@v2
+        with:
+          app-name: ${{ secrets.AZURE_WEBAPP_NAME }}
+          publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE }}
+          images: 'kimmy.azurecr.io/pangu:${{ github.sha }}'

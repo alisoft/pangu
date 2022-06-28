@@ -1,0 +1,9 @@
+[submodule "web/home"]
+	path = web/home
+	url = git@github.com:see/pangu-blog.git
+[submodule "web/admin"]
+	path = web/admin
+	url = git@github.com:see/pangu-admin.git
+[submodule "web/mobile"]
+	path = web/mobile
+	url = git@github.com:see/pangu-mobile.git
