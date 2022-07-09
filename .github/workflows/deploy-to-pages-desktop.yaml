@@ -29,7 +29,7 @@ jobs:
 #          github_token: ${{ secrets.GH_TOKEN }}
           personal_token: ${{ secrets.GH_TOKEN }}
           publish_dir: ./docs/desktop.pangu.dev/dist/
-          external_repository: see/desktop.pangu.dev
+          external_repository: pangu-dev/desktop.pangu.dev
           publish_branch: master
           cname: desktop.pangu.dev
           user_name: 'see'
