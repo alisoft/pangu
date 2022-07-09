@@ -1,25 +1,29 @@
 # app.pangu.dev
 
-## Installation
+We recommend to look at the [documentation](https://v3.nuxtjs.org).
 
-```
-lerna bootstrap
-```
+## Setup
 
-## Run Development
+Make sure to install the dependencies
 
-```
-npm run dev
+```bash
+yarn install
 ```
 
-## Build
+## Development
 
-```
-npm run build
+Start the development server on http://localhost:3000
+
+```bash
+yarn dev
 ```
 
-## Run Production
+## Production
 
+Build the application for production:
+
+```bash
+yarn build
 ```
-npm start
-```
+
+Checkout the [deployment documentation](https://v3.nuxtjs.org/docs/deployment).
