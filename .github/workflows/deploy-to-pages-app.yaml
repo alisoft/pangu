@@ -1,8 +1,8 @@
 on:
   push:
     branches: [ main ]
-    paths:
-      - 'docs/app.pangu.dev/**'
+#    paths:
+#      - 'docs/app.pangu.dev/**'
 name: Deploy to GitHub Pages (App)
 jobs:
   deploy-to-pages:
