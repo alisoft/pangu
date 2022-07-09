@@ -20,6 +20,12 @@ jobs:
       - name: Install deps
         run: yarn install:docs:app
 
+      - name: Configure env
+        run: |
+          echo "$DOCS_ENV" | base64 --decode > ./docs/app.pangu.dev/.env
+        env:
+          DOCS_ENV: ${{ secrets.DOCS_ENV }}
+
       - name: Build
         run: yarn build:docs:app
 
