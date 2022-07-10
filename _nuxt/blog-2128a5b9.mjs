@@ -1,1 +1,0 @@
-import{_ as t,y as a,o as c,c as n,b as s}from"./entry-b1521372.mjs";const r={},l={class:"w-full"};function _(e,u){const o=a("NuxtPage");return c(),n("section",l,[s(o,{"page-key":e.$route.fullPath},null,8,["page-key"])])}var p=t(r,[["render",_]]);export{p as default};
