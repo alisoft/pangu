@@ -33,13 +33,19 @@ export default defineComponent({
     }
   },
   async fetch () {
-    const { $docus } = this
-    this.headerLinks = (await $docus
-      .search('/collections/header')
-      .fetch()).links
-    this.footerLinks = (await $docus
-      .search('/collections/footer')
-      .fetch()).links
+    const { $docus, $i18n } = this
+    this.headerLinks = (
+      await $docus
+        .search('/collections/navigations', { deep: true })
+        .where({ slug: { $in: 'header' }, language: $i18n.locale })
+        .fetch()
+    )[0].links
+    this.footerLinks = (
+      await $docus
+        .search('/collections/navigations/', { deep: true })
+        .where({ slug: { $in: 'footer' }, language: $i18n.locale })
+        .fetch()
+    )[0].links
   },
   computed: {
     layout () {

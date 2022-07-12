@@ -1,6 +1,6 @@
 ---
 links:
-  - title: 'Discover'
+  - title: '发现'
     items:
       - title: 'Showcases'
         subtitle: 'Selection of websites built with Nuxt'
