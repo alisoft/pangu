@@ -71,7 +71,8 @@ export default withDocus({
     'vue-plausible'
   ],
   plugins: [
-    '~/plugins/mq'
+    '~/plugins/mq',
+    '~/plugins/nav',
   ],
   publicRuntimeConfig: {
     plausible: {
