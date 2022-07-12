@@ -1,5 +1,6 @@
 <template>
   <div class="relative w-full">
+    <AppBanner />
     <AppHeader :links="headerLinks" />
 
     <div class="lg:flex" :class="containerClass">
@@ -11,7 +12,12 @@
         <slot />
       </div>
     </div>
-    <AppFooter />
+    <AppFooter :links="footerLinks" :class="{ 'pb-16 md:pb-12': showCookieBanner }" />
+    <CookieBanner
+      v-if="showCookieBanner"
+      class="fixed bottom-0 inset-x-0 z-40"
+      @cookie-banner="showCookieBanner = false"
+    />
   </div>
 </template>
 
@@ -21,14 +27,25 @@ import { defineComponent } from '@nuxtjs/composition-api'
 export default defineComponent({
   data () {
     return {
-      headerLinks: []
+      headerLinks: [],
+      footerLinks: [],
+      showCookieBanner: false
     }
   },
   async fetch () {
-    const { $docus } = this
-    this.headerLinks = (await $docus
-      .search('/collections/header')
-      .fetch()).links
+    const { $docus, $i18n } = this
+    this.headerLinks = (
+      await $docus
+        .search('/collections/navigations', { deep: true })
+        .where({ slug: { $in: 'header' }, language: $i18n.locale })
+        .fetch()
+    )[0].links
+    this.footerLinks = (
+      await $docus
+        .search('/collections/navigations/', { deep: true })
+        .where({ slug: { $in: 'footer' }, language: $i18n.locale })
+        .fetch()
+    )[0].links
   },
   computed: {
     layout () {
@@ -39,6 +56,17 @@ export default defineComponent({
       if (this.layout.aside) { return 'd-container' }
       return ''
     }
+  },
+  watch: {
+    '$i18n.locale'() {
+      this.$fetch()
+    }
+  },
+  mounted() {
+    const cookieBanner = 'cookieconsent_status'
+    const docCookies = `; ${document.cookie}`
+
+    this.showCookieBanner = !docCookies.includes(cookieBanner)
   }
 })
 </script>

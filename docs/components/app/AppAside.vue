@@ -47,26 +47,33 @@
             pointer-events-auto
             min-h-fill-available
             border-r
-            dark:border-sky-darker
             !w-base
           "
+          :class="isHome ? 'border-sky-darker' : 'd-border'"
         >
-          <div class="w-auto h-full overflow-auto d-bg-header">
+          <div class="w-auto h-full overflow-auto" :class="isHome ? 'd-bg-header-home' : 'd-bg-header'">
             <div
               class="flex items-center justify-between w-full px-0.5 sm:px-2 h-header d-aside-header-bg"
+              :class="isHome ? 'd-aside-header-home-bg' : 'd-aside-header-bg'"
             >
               <button
-                class="transition-colors duration-200 d-secondary-text hover:d-secondary-text-hover focus:outline-none"
+                class="transition-colors duration-200 focus:outline-none"
+                :class="isHome ? 'text-gray-300 hover:text-white' : 'd-secondary-text hover:d-secondary-text-hover'"
                 aria-label="backButton"
                 @click.stop="mobileBack"
               >
                 <IconArrowLeft v-if="!mobileMainNav && layout.aside" class="p-3 w-12 h-12" />
                 <IconClose v-else class="p-3 w-12 h-12" />
               </button>
-              <div class="flex items-center h-header space-x-1">
-                <GitHubButton />
-                <TwitterButton />
-                <ColorSwitcher padding="p-3" />
+              <div class="flex items-center h-header space-x-2">
+                <LangSwitcher
+                  :class="{ 'text-white': isHome }"
+                  :icon-class="`w-6 h-6 m-auto ${
+                    isHome ? 'text-gray-300 hover:text-primary-400' : 'd-secondary-text hover:d-secondary-text-hover'
+                  }`"
+                  strategy="fixed"
+                />
+                <ColorSwitcher />
               </div>
             </div>
 
@@ -81,6 +88,7 @@
 
 <script lang="ts">
 import { defineComponent, useContext, ref, watch } from '@nuxtjs/composition-api'
+import { useNav } from '~/plugins/nav'
 
 export default defineComponent({
   props: {
@@ -91,6 +99,7 @@ export default defineComponent({
   },
   setup () {
     const { $docus, $menu } = useContext()
+    const { isHome } = useNav()
 
     const mobileMainNav = ref(!$docus.layout.value.aside)
 
@@ -100,7 +109,7 @@ export default defineComponent({
       }
     })
 
-    function mobileBack () {
+    function mobileBack() {
       if (!mobileMainNav.value) {
         mobileMainNav.value = true
       } else {
@@ -111,7 +120,8 @@ export default defineComponent({
     return {
       mobileMainNav,
       mobileBack,
-      layout: $docus.layout
+      layout: $docus.layout,
+      isHome
     }
   }
 })

@@ -71,8 +71,28 @@ export default withDocus({
     'vue-plausible'
   ],
   plugins: [
-    '~/plugins/mq'
+    '~/plugins/mq',
+    '~/plugins/nav',
+    '~/plugins/newsletter',
+    '~/plugins/notifications',
   ],
+  i18n: {
+    langDir: 'i18n/',
+    locales: [
+      {
+        code: 'en',
+        iso: 'en-US',
+        file: 'en-US.js',
+        name: 'English'
+      },
+      {
+        code: 'zh',
+        iso: 'zh-ZH',
+        file: 'zh-ZH.js',
+        name: '中文'
+      },
+    ]
+  },
   publicRuntimeConfig: {
     plausible: {
       domain: process.env.PLAUSIBLE_DOMAIN
