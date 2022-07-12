@@ -11,7 +11,12 @@
         <slot />
       </div>
     </div>
-    <AppFooter />
+    <AppFooter :links="footerLinks" :class="{ 'pb-16 md:pb-12': showCookieBanner }" />
+    <CookieBanner
+      v-if="showCookieBanner"
+      class="fixed bottom-0 inset-x-0 z-40"
+      @cookie-banner="showCookieBanner = false"
+    />
   </div>
 </template>
 
@@ -21,13 +26,18 @@ import { defineComponent } from '@nuxtjs/composition-api'
 export default defineComponent({
   data () {
     return {
-      headerLinks: []
+      headerLinks: [],
+      footerLinks: [],
+      showCookieBanner: false
     }
   },
   async fetch () {
     const { $docus } = this
     this.headerLinks = (await $docus
       .search('/collections/header')
+      .fetch()).links
+    this.footerLinks = (await $docus
+      .search('/collections/footer')
       .fetch()).links
   },
   computed: {
@@ -39,6 +49,12 @@ export default defineComponent({
       if (this.layout.aside) { return 'd-container' }
       return ''
     }
+  },
+  mounted() {
+    const cookieBanner = 'cookieconsent_status'
+    const docCookies = `; ${document.cookie}`
+
+    this.showCookieBanner = !docCookies.includes(cookieBanner)
   }
 })
 </script>

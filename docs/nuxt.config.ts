@@ -73,6 +73,8 @@ export default withDocus({
   plugins: [
     '~/plugins/mq',
     '~/plugins/nav',
+    '~/plugins/newsletter',
+    '~/plugins/notifications',
   ],
   publicRuntimeConfig: {
     plausible: {
