@@ -71,6 +71,13 @@
       <div class="flex items-center justify-end gap-1 lg:flex-1">
         <GitHubButton />
 <!--        <TwitterButton class="hidden lg:block" />-->
+        <LangSwitcher
+          class="hidden lg:inline-flex"
+          :class="{ 'text-white': isHome }"
+          :icon-class="`w-6 h-6 m-auto ${
+            isHome ? 'text-gray-300 hover:text-primary-400' : 'd-secondary-text hover:d-secondary-text-hover'
+          }`"
+        />
         <ColorSwitcher class="hidden lg:block" padding="p-3" />
         <AlgoliaSearchBox v-if="settings && settings.algolia" :options="settings.algolia" :settings="settings" />
       </div>

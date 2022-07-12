@@ -50,6 +50,11 @@ export default defineComponent({
       return ''
     }
   },
+  watch: {
+    '$i18n.locale'() {
+      this.$fetch()
+    }
+  },
   mounted() {
     const cookieBanner = 'cookieconsent_status'
     const docCookies = `; ${document.cookie}`
