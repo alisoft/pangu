@@ -2,10 +2,8 @@
   "name": "pangu.dev",
   "private": true,
   "scripts": {
-    "dev": "nuxt dev",
-    "generate": "nuxt generate --force-build",
-    "lint:docs": "cd .. && yarn lint:docs",
-    "lint:docs:fix": "cd .. && yarn lint:docs:fix"
+    "build": "nuxt generate --force-build",
+    "dev": "nuxt dev"
   },
   "dependencies": {
     "@popperjs/core": "^2.11.5",

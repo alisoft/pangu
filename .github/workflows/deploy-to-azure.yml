@@ -23,6 +23,11 @@ jobs:
         uses: actions/setup-node@v1
         with:
           node-version: ${{ env.NODE_VERSION }}
+      - uses: pnpm/action-setup@v2.0.1
+        name: Install pnpm
+        with:
+          version: 7
+          run_install: false
       - name: Docker login
         uses: azure/docker-login@v1
         with:

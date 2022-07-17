@@ -7,19 +7,20 @@
     "web/*"
   ],
   "scripts": {
-    "build": "npm-run-all --parallel build:web build:server",
-    "build:web": "npm-run-all --parallel build:admin build:mobile build:home",
-    "build:admin": "yarn workspace @pangu/admin build",
-    "build:mobile": "yarn workspace @pangu/mobile build",
-    "build:home": "yarn workspace @pangu/home build",
+    "build": "concurrently \"pnpm build:web\" \"pnpm build:server\"",
+    "build:docs": "pnpm run -C docs build",
     "build:server": "rimraf build/* && tsc -p src/tsconfig.json",
+    "build:web": "pnpm run -C web --parallel --filter \"@pangu/*\" build",
     "lint": "vue-cli-service lint",
     "prepare": "husky install",
-    "start": "cross-env NODE_ENV=production node ./bin/www.js",
     "server:dev": "nodemon",
     "server:prod": "pm2 start ecosystem.config.json",
+    "start": "cross-env NODE_ENV=production node ./bin/www.js",
     "test": "jest -i --colors --verbose --detectOpenHandles --config=jest.config.js",
     "test:watch": "jest -i --watchAll --config=jest.config.js"
+  },
+  "resolutions": {
+    "@types/react": "^17.0.43"
   },
   "dependencies": {
     "bcryptjs": "^2.4.3",
@@ -92,6 +93,8 @@
     "@types/numeral": "0.0.28",
     "@types/passport": "^1.0.7",
     "@types/passport-jwt": "^3.0.6",
+    "@types/react": "^17.0.43",
+    "@types/react-dom": "^17.0.14",
     "@types/react-router-dom": "^5.3.3",
     "@types/store": "^2.0.2",
     "@types/swagger-jsdoc": "^6.0.1",
@@ -106,6 +109,7 @@
     "body-parser": "^1.19.0",
     "chalk": "^4.1.2",
     "chokidar": "^3.5.2",
+    "concurrently": "^7.2.1",
     "debug": "^4.3.3",
     "echarts-wordcloud": "^2.0.0",
     "eslint": "^7.32.0",
@@ -114,14 +118,13 @@
     "faker": "^5.5.3",
     "glob": "^7.2.0",
     "husky": "^7.0.4",
-    "lerna": "^4.0.0",
     "lint-staged": "^11.2.6",
     "mockjs": "^1.1.0",
     "node-mocks-http": "^1.11.0",
     "nodemon": "^2.0.14",
-    "npm-run-all": "^4.1.5",
     "pm2": "^5.1.2",
     "prettier": "^2.4.1",
+    "rimraf": "^3.0.2",
     "sort-package-json": "^1.52.0",
     "supertest": "^6.1.6",
     "svg-sprite-loader": "^6.0.11",
@@ -130,6 +133,7 @@
     "tslib": "^2.3.1",
     "typescript": "~4.5.5"
   },
+  "packageManager": "pnpm@7.5.0",
   "engines": {
     "node": "^14.13.1 || >=16.0.0",
     "yarn": "1.x"
