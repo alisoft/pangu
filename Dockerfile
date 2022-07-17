@@ -12,7 +12,7 @@ USER node
 
 COPY --chown=node:node . .
 
-RUN pnpm install --pure-lockfile
+RUN pnpm install --frozen-lockfile
 
 RUN pnpm build
 
