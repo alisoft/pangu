@@ -17,14 +17,8 @@ jobs:
         with:
           node-version: '16'
 
-      - uses: pnpm/action-setup@v2.0.1
-        name: Install pnpm
-        with:
-          version: 7
-          run_install: false
-
       - name: Install deps
-        run: pnpm i
+        run: yarn install:docs
 
 #      - name: Configure env
 #        run: |
@@ -33,7 +27,7 @@ jobs:
 #          DOCS_ENV: ${{ secrets.DOCS_ENV }}
 
       - name: Build
-        run: pnpm build:docs
+        run: yarn build:docs
 
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3

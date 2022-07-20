@@ -3,14 +3,14 @@
   "version": "0.1.0",
   "private": true,
   "workspaces": [
-    "docs",
     "web/*"
   ],
   "scripts": {
     "build": "concurrently \"pnpm build:web\" \"pnpm build:server\"",
-    "build:docs": "pnpm run -C docs build",
+    "build:docs": "cd docs && yarn build",
     "build:server": "rimraf build/* && tsc -p src/tsconfig.json",
     "build:web": "pnpm run -C web --parallel --filter \"@pangu/*\" build",
+    "install:docs": "cd docs && yarn install",
     "lint": "vue-cli-service lint",
     "prepare": "husky install",
     "server:dev": "nodemon",
