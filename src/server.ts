@@ -1,19 +1,11 @@
 import express from "express";
 const path = require("path");
 const fs = require("fs");
-const homeManifest = require("../dist/home/node/asset-manifest.json");
+const homeManifest = require("../dist/home/client/ssr-manifest.json");
 const adminManifest = require("../dist/admin/node/ssr-manifest.json");
 const mobileManifest = require("../dist/mobile/node/ssr-manifest.json");
-const { createElement } = require("react");
-const { renderToString: renderReactToString } = require("react-dom/server");
 const { renderToString } = require("vue/server-renderer");
-const homePath = path.join(
-  __dirname,
-  "../dist/home",
-  "node",
-  homeManifest["files"]["main.js"]
-);
-const createHomeApp = require(homePath).default;
+const { render } = require("../dist/home/node/index.server.js");
 
 const adminPath = path.join(
   __dirname,
@@ -70,11 +62,18 @@ export function useRouter(app: express.Application) {
   });
 
   app.get("/blog/*", async (req, res) => {
-    const app = createElement(createHomeApp(req.url));
-    const appContent = renderReactToString(app);
-    const html = homeTemplate
-      .toString()
-      .replace('<div id="root">', `<div id="root">${appContent}`);
+    const appHtml = await render(req.url, homeManifest);
+
+    const html = homeTemplate.replace(`<!--ssr-outlet-->`, appHtml);
+
+    res.setHeader("Content-Type", "text/html");
+    res.send(html);
+  });
+
+  app.get("/blog-rtl/*", async (req, res) => {
+    const appHtml = await render(req.url, homeManifest);
+
+    const html = homeTemplate.replace(`<!--ssr-outlet-->`, appHtml);
 
     res.setHeader("Content-Type", "text/html");
     res.send(html);
@@ -112,6 +111,10 @@ export function useRouter(app: express.Application) {
 
   app.get("/blog", async (req, res, next) => {
     res.status(301).redirect("/blog/");
+    next();
+  });
+  app.get("/blog-rtl", async (req, res, next) => {
+    res.status(301).redirect("/blog-rtl/");
     next();
   });
   app.get("/admin", async (req, res, next) => {
