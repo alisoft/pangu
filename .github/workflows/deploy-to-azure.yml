@@ -2,7 +2,6 @@ name: Deploy To Azure Web App
 
 on:
  push:
-   branches: [ main ]
    tags:
      - 'v*'
 
