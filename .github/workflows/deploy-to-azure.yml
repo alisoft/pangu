@@ -3,9 +3,8 @@ name: Deploy To Azure Web App
 on:
  push:
    branches: [ main ]
-   paths:
-     - 'web/**'
-     - 'src/**'
+   tags:
+     - 'v*'
 
 env:
   NODE_VERSION: '14.x'
