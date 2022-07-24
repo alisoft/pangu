@@ -1,5 +1,5 @@
 <template>
-  <header :class="isHome ? 'd-header-home' : 'd-header'">
+  <header :class="'d-header'">
     <div class="flex items-center h-full px-1 mx-auto max-w-7xl sm:px-3 lg:px-6">
       <NavigationButton
         aria-label="mobileMenu"
@@ -13,7 +13,7 @@
         </Link>
       </div>
 
-      <nav class="items-center justify-center hidden h-full lg:flex">
+      <nav class="items-center justify-center hidden h-full lg:flex gap-4">
         <template v-for="(link, index) in links">
           <Dropdown
             v-if="link.items && link.items.length"
@@ -33,7 +33,6 @@
               <HeaderNavigationLink
                 :link="link"
                 class="px-1 py-2"
-                :class="{ 'text-white': isHome }"
                 :force-active="isActiveGroup(link)"
                 :inactive-class="`${!isHome ? 'hover:d-primary-text-hover ' : 'hover:text-gray-300'}`"
               >
@@ -45,7 +44,6 @@
               <HeaderNavigationLink
                 :link="item"
                 class="px-2 py-1"
-                :class="{ 'text-white': isHome }"
                 :inactive-class="`${!isHome ? 'hover:text-sky-black dark:hover:text-white' : 'hover:text-white'}`"
               >
                 <HeaderDropdownItem
@@ -60,8 +58,7 @@
             v-else
             :key="index"
             :link="link"
-            class="px-1 py-2"
-            :class="{ 'text-white': isHome }"
+            class="px-2 py-1"
             :inactive-class="`${!isHome ? 'hover:d-primary-text-hover ' : 'hover:text-gray-300'}`"
           >
             {{ link.title }}
@@ -70,15 +67,15 @@
       </nav>
 
       <div class="flex items-center justify-end gap-1 lg:flex-1">
-        <GitHubButton />
-<!--        <TwitterButton class="hidden lg:block" />-->
         <LangSwitcher
           class="hidden lg:inline-flex"
           :class="{ 'text-white': isHome }"
-          :icon-class="`w-6 h-6 m-auto ${
-            isHome ? 'text-gray-300 hover:text-primary-400' : 'd-secondary-text hover:d-secondary-text-hover'
+          :icon-class="`w-6 h-6 m-auto d-secondary-text ${
+            isHome ? 'hover:text-primary-400' : 'hover:d-secondary-text-hover'
           }`"
         />
+        <GitHubButton />
+<!--        <TwitterButton class="hidden lg:block" />-->
         <ColorSwitcher class="hidden lg:block" padding="p-3" />
         <AlgoliaSearchBox v-if="settings && settings.algolia" :options="settings.algolia" :settings="settings" />
       </div>

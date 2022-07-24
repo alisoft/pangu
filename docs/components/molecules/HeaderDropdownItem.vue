@@ -4,7 +4,7 @@
     :class="isHome ? 'hover:bg-sky-black' : 'hover:dark:bg-sky-black hover:bg-cloud-lightest'"
   >
     <div class="flex space-x-2 items-center">
-      <div class="rounded-md w-8 h-8 p-2" :class="colorClass">
+      <div v-if="icon" class="rounded-md w-8 h-8 p-2" :class="colorClass">
         <img :src="`/img/header/${icon}`" :alt="title" />
       </div>
       <div>
@@ -30,11 +30,9 @@ export default defineComponent({
     },
     icon: {
       type: String,
-      required: true
     },
     colorClass: {
       type: String,
-      required: true
     }
   },
   setup() {

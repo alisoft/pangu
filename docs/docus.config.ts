@@ -12,7 +12,7 @@ export default {
   },
   github: {
     repo: 'pangu-dev/pangu',
-    dir: 'docs/pangu.dev',
+    dir: 'docs',
     branch: 'main'
   },
   layout: {

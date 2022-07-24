@@ -13,7 +13,7 @@
       <IconChevronBottom
         v-if="icon"
         class="h-4 w-4"
-        :class="isHome ? 'text-white' : 'dark:text-secondary light:text-gray-300'"
+        :class="isHome ? 'd-secondary-text' : 'dark:text-secondary light:d-secondary-text'"
       />
     </div>
 
