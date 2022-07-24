@@ -3,9 +3,10 @@ const path = require("path");
 const fs = require("fs");
 const homeManifest = require("../dist/home/client/ssr-manifest.json");
 const adminManifest = require("../dist/admin/node/ssr-manifest.json");
-const mobileManifest = require("../dist/mobile/node/ssr-manifest.json");
+const mobileManifest = require("../dist/mobile/client/ssr-manifest.json");
 const { renderToString } = require("vue/server-renderer");
 const { render } = require("../dist/home/node/index.server.js");
+const { render: renderMobile } = require("../dist/mobile/node/entry-server.js");
 
 const adminPath = path.join(
   __dirname,
@@ -14,14 +15,6 @@ const adminPath = path.join(
   adminManifest["index.js"]
 );
 const createAdminApp = require(adminPath).default;
-
-const mobilePath = path.join(
-  __dirname,
-  "../dist/mobile",
-  "node",
-  mobileManifest["index.js"]
-);
-const createMobileApp = require(mobilePath).default;
 
 export function useStatic(app: express.Application) {
   app.use(
@@ -95,18 +88,16 @@ export function useRouter(app: express.Application) {
   });
 
   app.get("/mobile/*", async (req, res) => {
-    const { app, router } = createMobileApp();
+    const [appHtml, preloadLinks] = await renderMobile(
+      req.originalUrl,
+      mobileManifest
+    );
 
-    await router.push(req.url);
-    await router.isReady();
-
-    const appContent = await renderToString(app);
     const html = mobileTemplate
-      .toString()
-      .replace('<div id="app">', `<div id="app">${appContent}`);
+      .replace(`<!--preload-links-->`, preloadLinks)
+      .replace(`<!--ssr-outlet-->`, appHtml);
 
-    res.setHeader("Content-Type", "text/html");
-    res.send(html);
+    res.status(200).set({ "Content-Type": "text/html" }).end(html);
   });
 
   app.get("/blog", async (req, res, next) => {
