@@ -2,7 +2,7 @@
   "name": "pangu.dev",
   "private": true,
   "scripts": {
-    "build": "nuxt generate --force-build",
+    "build": "NODE_OPTIONS=--max_old_space_size=4096 nuxt generate --force-build",
     "dev": "nuxt dev"
   },
   "dependencies": {
