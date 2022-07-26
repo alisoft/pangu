@@ -89,7 +89,7 @@ export function useRouter(app: express.Application) {
 
   app.get("/mobile/*", async (req, res) => {
     const [appHtml, preloadLinks] = await renderMobile(
-      req.originalUrl,
+      req.originalUrl.replace("/mobile/", "/"),
       mobileManifest
     );
 
