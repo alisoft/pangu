@@ -2,6 +2,7 @@ import { Server } from "http";
 import { Server as HttpsServer } from "https";
 import WebSocket from "ws";
 import queryString from "query-string";
+import logger from "../config/logger";
 
 export const applyWs = (server: Server | HttpsServer) => {
   const websocketServer = new WebSocket.Server({
@@ -24,14 +25,14 @@ export const applyWs = (server: Server | HttpsServer) => {
 
       // NOTE: connectParams are not used here but good to understand how to get
       // to them if you need to pass data with the connection to identify it (e.g., a userId).
-      console.log(connectionParams);
+      logger.info(connectionParams);
 
       websocketConnection.on("message", (message: string) => {
         try {
           const parsedMessage = JSON.parse(message);
-          console.log(parsedMessage);
+          logger.info(parsedMessage);
         } catch (e) {
-          console.error(e);
+          logger.error(e);
         }
       });
     }

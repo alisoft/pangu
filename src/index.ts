@@ -43,10 +43,10 @@ applyWs(httpsServer);
 mongoose.connect(config.mongoose.url, config.mongoose.options).then(() => {
   logger.info("Connected to MongoDB");
   httpServer.listen(config.port, function () {
-    console.log("HTTP Server is running on: http://localhost:%s", config.port);
+    logger.info("HTTP Server is running on: http://localhost:%s", config.port);
   });
   httpsServer.listen(config.sslPort, function () {
-    console.log(
+    logger.info(
       "HTTPS Server is running on: https://localhost:%s",
       config.sslPort
     );
