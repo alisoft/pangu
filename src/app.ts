@@ -19,7 +19,7 @@ import ApiError from "./utils/ApiError";
 import schema from "./schema";
 import routes from "./routes/v1";
 const xss = require("xss-clean");
-import { useStatic, useRouter } from "./server";
+import { useStatic, useRouter } from "./web";
 
 const app = express();
 
