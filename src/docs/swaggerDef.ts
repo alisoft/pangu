@@ -3,11 +3,11 @@ const { version } = require("../../package.json");
 export const swaggerDefinition = {
   openapi: "3.0.0",
   info: {
-    title: "node-express-boilerplate API documentation",
+    title: "Pangu API documentation",
     version,
     license: {
       name: "MIT",
-      url: "https://github.com/hagopj13/node-express-boilerplate/blob/master/LICENSE",
+      url: "https://github.com/alisoft/pangu/blob/main/LICENSE.md",
     },
   },
   servers: [
