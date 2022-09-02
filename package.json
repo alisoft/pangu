@@ -1,9 +1,6 @@
 {
   "name": "pangu",
   "private": true,
-  "workspaces": [
-    "web/*"
-  ],
   "scripts": {
     "build": "concurrently \"pnpm build:web\" \"pnpm build:server\"",
     "build:docs": "cd docs && yarn build",
@@ -60,7 +57,6 @@
     "xss-clean": "^0.1.1"
   },
   "devDependencies": {
-    "@changesets/cli": "^2.24.0",
     "@commitlint/cli": "^15.0.0",
     "@commitlint/config-conventional": "^15.0.0",
     "@types/bcryptjs": "^2.4.2",
@@ -100,6 +96,7 @@
     "faker": "^5.5.3",
     "glob": "^7.2.0",
     "husky": "^7.0.4",
+    "lerna": "^5.5.0",
     "lint-staged": "^11.2.6",
     "mockjs": "^1.1.0",
     "node-mocks-http": "^1.11.0",

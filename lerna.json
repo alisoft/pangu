@@ -1,0 +1,14 @@
+{
+  "command": {
+    "publish": {
+      "graphType": "all",
+      "conventionalCommits": true
+    },
+    "version": {
+      "message": "chore(release): %s"
+    }
+  },
+  "version": "0.1.2-alpha.0",
+  "npmClient": "pnpm",
+  "useWorkspaces": true
+}
