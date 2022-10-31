@@ -1,8 +1,8 @@
 .DS_Store
 .cert
 node_modules
-/dist
-/build
+dist
+build
 
 /tests/e2e/videos/
 /tests/e2e/screenshots/

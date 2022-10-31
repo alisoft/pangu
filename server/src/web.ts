@@ -1,16 +1,16 @@
 import express from "express";
 const path = require("path");
 const fs = require("fs");
-const homeManifest = require("../dist/home/client/ssr-manifest.json");
-const adminManifest = require("../dist/admin/node/ssr-manifest.json");
-const mobileManifest = require("../dist/mobile/client/ssr-manifest.json");
+const homeManifest = require("../../dist/home/client/ssr-manifest.json");
+const adminManifest = require("../../dist/admin/node/ssr-manifest.json");
+const mobileManifest = require("../../dist/mobile/client/ssr-manifest.json");
 const { renderToString } = require("vue/server-renderer");
-const { render } = require("../dist/home/node/index.server.js");
-const { render: renderMobile } = require("../dist/mobile/node/entry-server.js");
+const { render } = require("../../dist/home/node/index.server.js");
+const { render: renderMobile } = require("../../dist/mobile/node/entry-server.js");
 
 const adminPath = path.join(
   __dirname,
-  "../dist/admin",
+  "../../dist/admin",
   "node",
   adminManifest["index.js"]
 );
@@ -19,32 +19,32 @@ const createAdminApp = require(adminPath).default;
 export function useStatic(app: express.Application) {
   app.use(
     "/home-assets",
-    express.static(path.join(__dirname, "../dist/home/client", "home-assets"))
+    express.static(path.join(__dirname, "../../dist/home/client", "home-assets"))
   );
   app.use(
     "/mobile-assets",
     express.static(
-      path.join(__dirname, "../dist/mobile/client", "mobile-assets")
+      path.join(__dirname, "../../dist/mobile/client", "mobile-assets")
     )
   );
   app.use(
     "/admin-assets",
-    express.static(path.join(__dirname, "../dist/admin/client", "admin-assets"))
+    express.static(path.join(__dirname, "../../dist/admin/client", "admin-assets"))
   );
 }
 
 const homeTemplate = fs.readFileSync(
-  path.join(__dirname, "../dist/home/client/index.html"),
+  path.join(__dirname, "../../dist/home/client/index.html"),
   "utf-8"
 );
 
 const adminTemplate = fs.readFileSync(
-  path.join(__dirname, "../dist/admin/client/index.html"),
+  path.join(__dirname, "../../dist/admin/client/index.html"),
   "utf-8"
 );
 
 const mobileTemplate = fs.readFileSync(
-  path.join(__dirname, "../dist/mobile/client/index.html"),
+  path.join(__dirname, "../../dist/mobile/client/index.html"),
   "utf-8"
 );
 
@@ -59,8 +59,7 @@ export function useRouter(app: express.Application) {
 
     const html = homeTemplate.replace(`<!--ssr-outlet-->`, appHtml);
 
-    res.setHeader("Content-Type", "text/html");
-    res.send(html);
+    res.status(200).set({ "Content-Type": "text/html" }).end(html);
   });
 
   app.get("/blog-rtl/*", async (req, res) => {
@@ -68,8 +67,7 @@ export function useRouter(app: express.Application) {
 
     const html = homeTemplate.replace(`<!--ssr-outlet-->`, appHtml);
 
-    res.setHeader("Content-Type", "text/html");
-    res.send(html);
+    res.status(200).set({ "Content-Type": "text/html" }).end(html);
   });
 
   app.get("/admin/*", async (req, res) => {
@@ -83,8 +81,7 @@ export function useRouter(app: express.Application) {
       .toString()
       .replace('<div id="app">', `<div id="app">${appContent}`);
 
-    res.setHeader("Content-Type", "text/html");
-    res.send(html);
+    res.status(200).set({ "Content-Type": "text/html" }).end(html);
   });
 
   app.get("/mobile/*", async (req, res) => {
