@@ -9,11 +9,11 @@ import { applyWs } from "./ws";
 import config from "./config/config";
 import logger from "./config/logger";
 const privateKey = fs.readFileSync(
-  path.join(__dirname, "../.cert/cert.key"),
+  path.join(__dirname, "../../.cert/cert.key"),
   "utf8"
 );
 const certificate = fs.readFileSync(
-  path.join(__dirname, "../.cert/cert.pem"),
+  path.join(__dirname, "../../.cert/cert.pem"),
   "utf8"
 );
 
