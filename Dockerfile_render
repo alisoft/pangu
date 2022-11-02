@@ -1,21 +1,28 @@
 # syntax = docker/dockerfile:1.2
 FROM node:14
 
+USER root
+
 RUN curl -f https://get.pnpm.io/v6.16.js | node - add --global pnpm
 
-RUN mkdir -p /code/pangu && chown -R node:node /code/pangu
+RUN mkdir -p /code/pangu
 
 WORKDIR /code/pangu
 
 COPY package.json pnpm-lock.yaml ./
 
-USER node
-
-COPY --chown=node:node . .
+COPY . .
 
 RUN pnpm install --frozen-lockfile
 
-RUN --mount=type=secret,id=_env,dst=/etc/secrets/.env RUN pnpm build
+RUN --mount=type=secret,id=_build_env,dst=/etc/secrets/.build_env cp /etc/secrets/.build_env ./web/admin/.env
+RUN --mount=type=secret,id=_build_env,dst=/etc/secrets/.build_env cp /etc/secrets/.build_env ./web/home/.env
+RUN --mount=type=secret,id=_build_env,dst=/etc/secrets/.build_env cp /etc/secrets/.build_env ./web/mobile/.env
+RUN --mount=type=secret,id=_node_env,dst=/etc/secrets/.node_env cp /etc/secrets/.node_env ./server/.env
+
+RUN pnpm build
+
+RUN rm -f ./web/*/.env
 
 EXPOSE 80
 EXPOSE 443
