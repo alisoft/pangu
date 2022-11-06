@@ -1,9 +1,9 @@
 name: Deploy To Azure Web App
 
-on:
- push:
-   tags:
-     - 'v*'
+#on:
+# push:
+#   tags:
+#     - 'v*'
 
 env:
   NODE_VERSION: '14.x'
