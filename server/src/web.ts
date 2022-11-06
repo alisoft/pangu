@@ -1,20 +1,15 @@
 import express from "express";
 const path = require("path");
 const fs = require("fs");
-const homeManifest = require("../../dist/home/client/ssr-manifest.json");
-const adminManifest = require("../../dist/admin/node/ssr-manifest.json");
-const mobileManifest = require("../../dist/mobile/client/ssr-manifest.json");
-const { renderToString } = require("vue/server-renderer");
-const { render } = require("../../dist/home/node/index.server.js");
-const { render: renderMobile } = require("../../dist/mobile/node/entry-server.js");
 
-const adminPath = path.join(
-  __dirname,
-  "../../dist/admin",
-  "node",
-  adminManifest["index.js"]
-);
-const createAdminApp = require(adminPath).default;
+const adminManifest = require("../../dist/admin/client/ssr-manifest.json");
+const { render: renderAdmin } = require("../../dist/admin/node/entry-server.js");
+
+const homeManifest = require("../../dist/home/client/ssr-manifest.json");
+const { render } = require("../../dist/home/node/index.server.js");
+
+const mobileManifest = require("../../dist/mobile/client/ssr-manifest.json");
+const { render: renderMobile } = require("../../dist/mobile/node/entry-server.js");
 
 export function useStatic(app: express.Application) {
   app.use(
@@ -71,15 +66,14 @@ export function useRouter(app: express.Application) {
   });
 
   app.get("/admin/*", async (req, res) => {
-    const { app, router } = createAdminApp();
+    const [appHtml, preloadLinks] = await renderAdmin(
+      req.originalUrl.replace("/admin/", "/"),
+      adminManifest
+    );
 
-    await router.push(req.url);
-    await router.isReady();
-
-    const appContent = await renderToString(app);
     const html = adminTemplate
-      .toString()
-      .replace('<div id="app">', `<div id="app">${appContent}`);
+      .replace(`<!--preload-links-->`, preloadLinks)
+      .replace(`<!--ssr-outlet-->`, appHtml);
 
     res.status(200).set({ "Content-Type": "text/html" }).end(html);
   });
